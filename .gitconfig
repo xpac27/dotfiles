@@ -1,0 +1,36 @@
+[user]
+  name = Vincent Cogne
+  email = vincent.cogne@dailymotion.com
+
+[core]
+	editor = vi
+
+[rerere]
+  enabled = false
+
+[alias]
+  br = branch -v
+  ba = branch -va
+  cm = commit -v
+  co = checkout
+  st = status
+  ru = remote update
+  nlog = log --name-status --decorate
+  ls = log --pretty=oneline --abbrev-commit --decorate
+  gr = log --pretty=oneline --abbrev-commit --decorate --graph
+  slog = log --pretty=oneline
+  dlog = log -p
+  ci = commit -v
+  wip = ci -m "WIP"
+  openbug = !/usr/local/bin/dm_openbug.sh
+  closebug = !/usr/local/bin/dm_closebug.sh
+  untracked = !/usr/local/bin/dm_untracked.sh
+  wtf = "!wtfFct() { echo \"content-type: text/html\ncharset: iso-8859-1\nFrom: $(git config user.name) <$(git config user.email)>\nTo: $(git log -n1 --pretty=format:\"%an <%ae>\" $@)\nSubject: WTF?! $(curl -s http://www.webinsult.com | sed -n 's/.*id=\"insult\">\\(.*\\)<\\/.*/\\1/p')\n\n<p style=\"font-family:courier\\;\">$(git show $@ | sed -e 's/\\(.*\\)/\\1<br>/' | sed -e 's/\\(^\\+ .*$\\)/<span style=\"color:#FF0000;\">\\1<\\/span>/' | sed -e 's/\\(^- .*$\\)/<span style=\"color:#00FF00;\">\\1<\\/span>/' | sed -e 's/\\(@@.*\\)/<span style=\"color:#cc6600;\">\\1<\\/span>/' | sed -e 's/\\(^--- .*$\\)/<span style=\"font-weight:bold;\">\\1<\\/span>/' | sed -e 's/\\(^\\+\\+\\+ .*$\\)/<span style=\"font-weight:bold;\">\\1<\\/span>/' | sed -e 's/\\(^index .*$\\)/<span style=\"font-weight:bold;\">\\1<\\/span>/' | sed -e 's/\\(diff .*$\\)/<span style=\"font-weight:bold;\">\\1<\\/span>/')</p>\" | sendmail -t; }; wtfFct"
+
+[color]
+  ui = auto
+
+[merge]
+  summary = true
+
+
