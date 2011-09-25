@@ -1,10 +1,9 @@
 #!/bin/bash
-
 #
 # "borrowed" from Jonathan Palardy (http://github.com/jpalardy/etc_config/tree/master)
 
-        DOTFILES_DIR=~/Github/dotfiles/
-        :wa
+
+DOTFILES_DIR=~/Github/dotfiles/
 
 
 function relink()

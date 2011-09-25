@@ -204,6 +204,9 @@ let Tlist_Show_One_File = 1
 let Tlist_Sort_Type = 'name'
 let Tlist_Ctags_Cmd = "~/bin/ctags"
 
+" pathogen
+call pathogen#infect()
+
 " actionscript language
 let tlist_actionscript_settings = 'actionscript;c:class;f:method;p:property;v:variable'
 
