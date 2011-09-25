@@ -18,24 +18,9 @@ set backspace=indent,eol,start      " let me delete anything in insert mode
 set statusline=[%04l-%04L,%04v]\ %F%m%r%h%w\ %p%%
 set laststatus=2
 
-"colorscheme automation
-"let xterm16_colormap     = 'standard'
-"let xterm16_colormap     = 'softlight'
-"let xterm16_brightness    = 'low'
-
-"colorscheme railscasts
-"colorscheme sheep_green
-"colorscheme scite
-"colorscheme darkbone
-"colorscheme lucius
-"colorscheme jellybeans
-"colorscheme darkburn
-"colorscheme symfony
-"colorscheme darkburn
-"colorscheme slate
 colorscheme ruby
 
-"set ffs=unix             " set folding format to prevent from bad carriage return
+set ffs=unix             " set folding format to prevent from bad carriage return
 set enc=utf-8
 
 set tabpagemax=99
@@ -204,6 +189,10 @@ let g:FuzzyFinderOptions.Base.abbrev_map    = {
 \                  "~/dailymotion/lib/DM/WidgetV3/",
 \                  "~/dailymotion/lib/DM/WidgetV3/**/",
 \              ],
+\              "^LI" : [
+\                  "~/Github/littleWorld/src/",
+\                  "~/Github/littleWorld/src/**/",
+\              ],
 \}
 
 " Taglist
@@ -233,4 +222,6 @@ if !exists("autocommands_loaded")
       au BufNewFile,BufRead *.as set ft=actionscript
       au BufNewFile,BufRead *.json set ft=json
 endif
+
+autocmd VimLeave * :!clear
 
