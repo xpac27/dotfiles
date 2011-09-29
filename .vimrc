@@ -1,7 +1,5 @@
-syntax on               " Coloration syntaxique
 set hlsearch            " Surligne les resultats de recherche
 set nowrap              " Pas de retour a la ligne auto (affichage)
-set t_Co=256            " Specifies that the terminal can support 256 colors
 set showmatch           " Affiche parenthese correspondante
 set number              " affiche les numero de ligne
 set ignorecase          " ignore la case en mode recherch
@@ -12,26 +10,32 @@ set autoread            " detect file changes
 set list                " show invisible char
 set t_Co=256            " Specifies that the terminal can support 256 colors
 set hidden              " Better buffer configuration
+set autoindent          " Indentation automatique
+set smartindent         " Ameliore l'indentation auto
 
-set backspace=indent,eol,start      " let me delete anything in insert mode
+" let me delete anything in insert mode
+set backspace=indent,eol,start
 
+" custom status line
 set statusline=[%04l-%04L,%04v]\ %F%m%r%h%w\ %p%%
 set laststatus=2
 
+syntax enable
 colorscheme ruby
+"set background=dark
+" let g:solarized_termcolors=256 " uncomment if you use a custom terminal color theme
+"colorscheme solarized
 
+" user utf8
 set ffs=unix             " set folding format to prevent from bad carriage return
 set enc=utf-8
 
+" let me tab as much as I want
 set tabpagemax=99
 
 " Scrolling
 set scrolloff=3
 set scrolljump=3
-
-" indent
-set autoindent          " Indentation automatique
-set smartindent         " Ameliore l'indentation auto
 
 " Enable folds
 "set foldenable
@@ -55,7 +59,7 @@ set writebackup
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 
-"set mouse=a
+set mouse=a
 set ww=b,s,<,>
 
 " Visual options
