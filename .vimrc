@@ -7,7 +7,7 @@ set ruler               " show line cursor infos
 set ttyfast             " improve drawing
 set lazyredraw
 set autoread            " detect file changes
-set list                " show invisible char
+"set list                " show invisible char
 set t_Co=256            " Specifies that the terminal can support 256 colors
 set hidden              " Better buffer configuration
 set autoindent          " Indentation automatique
@@ -21,10 +21,10 @@ set statusline=[%04l-%04L,%04v]\ %F%m%r%h%w\ %p%%
 set laststatus=2
 
 syntax enable
-colorscheme ruby
-"set background=dark
+" colorscheme ruby
+set background=dark
 " let g:solarized_termcolors=256 " uncomment if you use a custom terminal color theme
-"colorscheme solarized
+colorscheme solarized
 
 " user utf8
 set ffs=unix             " set folding format to prevent from bad carriage return
@@ -106,9 +106,6 @@ noremap <unique> <Leader>php :!clear && php -l %<CR>
 
 " FuzzyFinder
 noremap <unique> <S-f> :FuzzyFinderFile<CR>
-
-" Neerd Taglist
-"noremap <unique> <Leader>c :TlistToggle<CR>
 
 " Neerd Tree
 noremap <unique> <S-t> :NERDTreeToggle<CR>
@@ -199,18 +196,6 @@ let g:FuzzyFinderOptions.Base.abbrev_map    = {
 \              ],
 \}
 
-" Taglist
-let g:Tlist_Use_Horiz_Window = 0
-let g:Tlist_Use_Right_Window = 1
-let Tlist_Auto_Highlight_Tag = 0
-let Tlist_Auto_Open = 0
-let Tlist_Show_One_File = 1
-let Tlist_Sort_Type = 'name'
-let Tlist_Ctags_Cmd = "~/bin/ctags"
-
-" pathogen
-call pathogen#infect()
-
 " actionscript language
 let tlist_actionscript_settings = 'actionscript;c:class;f:method;p:property;v:variable'
 
@@ -219,16 +204,13 @@ let tlist_actionscript_settings = 'actionscript;c:class;f:method;p:property;v:va
 if !exists("autocommands_loaded")
       let autocommands_loaded = 1
       au BufNewFile,BufRead *.* set expandtab
-      au BufNewFile,BufRead *.php set shiftwidth=4 softtabstop=4 tabstop=4
-      au BufNewFile,BufRead *.html set shiftwidth=4 softtabstop=4 tabstop=4
-      au BufNewFile,BufRead *.css set shiftwidth=4 softtabstop=4 tabstop=2 omnifunc=csscomplete#CompleteCSS
-      au BufNewFile,BufRead *.js set shiftwidth=4 softtabstop=4 tabstop=4
-      au BufNewFile,BufRead *.tpl set shiftwidth=4 softtabstop=4 tabstop=4
-      au BufNewFile,BufRead *.phtml set shiftwidth=2 softtabstop=2 tabstop=2 ft=php " all my .phtml files ARE php
       au BufNewFile,BufRead Makefile set noexpandtab
       au BufNewFile,BufRead *.as set ft=actionscript
       au BufNewFile,BufRead *.json set ft=json
 endif
 
 autocmd VimLeave * :!clear
+
+" pathogen
+call pathogen#infect()
 
