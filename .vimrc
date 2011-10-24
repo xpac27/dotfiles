@@ -21,10 +21,10 @@ set statusline=[%04l-%04L,%04v]\ %F%m%r%h%w\ %p%%
 set laststatus=2
 
 syntax enable
-" colorscheme ruby
 set background=dark
 " let g:solarized_termcolors=256 " uncomment if you use a custom terminal color theme
-colorscheme solarized
+" colorscheme solarized
+colorscheme ruby
 
 " user utf8
 set ffs=unix             " set folding format to prevent from bad carriage return
