@@ -169,8 +169,8 @@ let g:FuzzyFinderOptions.Base.min_length = 4
 let g:FuzzyFinderOptions.File.excluded_path = '\v\~$|\.o$|\.DS_Store$|\.jpg$|\.gif$|\.png$|\.bak$|\.swp$|\.git$|\.svn$|gen'
 let g:FuzzyFinderOptions.Base.abbrev_map    = {
 \              "^PL" : [
-\                  "~/dailymotion/component/dmplayer/src/dmplayer/com/",
-\                  "~/dailymotion/component/dmplayer/src/dmplayer/com/**/",
+\                  "~/dailymotion/component/dmplayer/src/dmplayer/",
+\                  "~/dailymotion/component/dmplayer/src/dmplayer/**/",
 \              ],
 \              "^DM" : [
 \                  "~/dailymotion/lib/*",
