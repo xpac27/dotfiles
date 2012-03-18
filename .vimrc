@@ -31,7 +31,7 @@ set ffs=unix             " set folding format to prevent from bad carriage retur
 set enc=utf-8
 
 " let me tab as much as I want
-set tabpagemax=99
+set tabpagemax=999
 
 " Scrolling
 set scrolloff=3
@@ -193,6 +193,10 @@ let g:FuzzyFinderOptions.Base.abbrev_map    = {
 \              "^LI" : [
 \                  "~/Github/littleWorld/src/",
 \                  "~/Github/littleWorld/src/**/",
+\              ],
+\              "^OP" : [
+\                  "~/Github/openVOD/",
+\                  "~/Github/openVOD/**/",
 \              ],
 \}
 

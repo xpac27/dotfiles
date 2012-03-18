@@ -8,13 +8,13 @@ DOTFILES_DIR=~/Github/dotfiles/
 
 function relink()
 {
-    rm -i -rf $1
-    ln -s $2 $1
+    rm -i -rf "$1"
+    ln -s "$2" "$1"
 }
 
 cd
 
-for I in $(ls -a $DOTFILES_DIR)
+for I in $(ls -a "$DOTFILES_DIR")
 do
     if [[ \
         $I == '.' || \
