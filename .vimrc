@@ -168,28 +168,6 @@ let g:FuzzyFinderOptions.Base.ignore_case = 1
 let g:FuzzyFinderOptions.Base.min_length = 4
 let g:FuzzyFinderOptions.File.excluded_path = '\v\~$|\.o$|\.DS_Store$|\.jpg$|\.gif$|\.png$|\.bak$|\.swp$|\.git$|\.svn$|gen'
 let g:FuzzyFinderOptions.Base.abbrev_map    = {
-\              "^PL" : [
-\                  "~/dailymotion/component/dmplayer/src/dmplayer/",
-\                  "~/dailymotion/component/dmplayer/src/dmplayer/**/",
-\              ],
-\              "^DM" : [
-\                  "~/dailymotion/lib/*",
-\                  "~/dailymotion/lib/*/*",
-\                  "~/dailymotion/lib/DM/Sequence/*",
-\                  "~/dailymotion/lib/DM/Sequence/Layer/*",
-\              ],
-\              "^CSS" : [
-\                  "~/dailymotion/css/",
-\                  "~/dailymotion/css/**/",
-\              ],
-\              "^JS" : [
-\                  "~/dailymotion/js/",
-\                  "~/dailymotion/js/**/",
-\              ],
-\              "^WI" : [
-\                  "~/dailymotion/lib/DM/WidgetV3/",
-\                  "~/dailymotion/lib/DM/WidgetV3/**/",
-\              ],
 \              "^LI" : [
 \                  "~/Github/littleWorld/src/",
 \                  "~/Github/littleWorld/src/**/",
