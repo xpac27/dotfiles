@@ -1,4 +1,6 @@
 export PATH="/Library/Developer/flex_sdk_4.6.0.23201_mpl/bin":$PATH
+export PATH="/Library/Developer/AdobeAIRSDK/bin":$PATH
+export PATH="/usr/local/bin/":$PATH;
 
 alias francoiscogne='ssh francoisxx@ftp.francoiscogne.com'
 alias vincent='ssh vincent@91.121.195.230'
