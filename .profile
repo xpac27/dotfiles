@@ -1,6 +1,6 @@
 export PATH="/Library/Developer/flex_sdk_4.6.0.23201_mpl/bin":$PATH
 export PATH="/Library/Developer/AdobeAIRSDK/bin":$PATH
-export PATH="/usr/local/bin/":$PATH;
+export PATH="/usr/local/bin":$PATH;
 
 alias francoiscogne='ssh francoisxx@ftp.francoiscogne.com'
 alias vincent='ssh vincent@91.121.195.230'
@@ -12,6 +12,10 @@ alias mongostart='mongod run --config /usr/local/Cellar/mongodb/2.0.4-x86_64/mon
 alias mongod_repair='sudo rm -f /var/lib/mongodb/mongod.lock && mongod --repair --dbpath /var/lib/mongodb/'
 
 alias backup='cd /Volumes/HD\ External/Scripts/ && ./backup_kimsuffi.sh && cd -'
+
+if [ -f ~/Github/vis/vis.sh ]; then
+   source ~/Github/vis/vis.sh
+fi
 
 export CLICOLOR=1
 export LSCOLORS=exfxcxdxbxegedabagacad
