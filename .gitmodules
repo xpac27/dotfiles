@@ -40,3 +40,24 @@
 [submodule ".vim/bundle/snipmate"]
 	path = .vim/bundle/snipmate
 	url = git://github.com/msanders/snipmate.vim.git
+[submodule ".vim/bundle/colors-getafe"]
+	path = .vim/bundle/colors-getafe
+	url = git://github.com/larssmit/vim-getafe.git
+[submodule ".vim/bundle/colors-github"]
+	path = .vim/bundle/colors-github
+	url = git://github.com/telamon/vim-color-github.git
+[submodule ".vim/bundle/colors-irblack"]
+	path = .vim/bundle/colors-irblack
+	url = git://github.com/wgibbs/vim-irblack.git
+[submodule ".vim/bundle/color-molokai"]
+	path = .vim/bundle/color-molokai
+	url = git://github.com/vim-scripts/molokai.git
+[submodule ".vim/bundle/colors-zenburn"]
+	path = .vim/bundle/colors-zenburn
+	url = git://github.com/vim-scripts/Zenburn.git
+[submodule ".vim/bundle/colors-solarized"]
+	path = .vim/bundle/colors-solarized
+	url = git://github.com/vim-scripts/Solarized.git
+[submodule ".vim/bundle/colors-darkburn"]
+	path = .vim/bundle/colors-darkburn
+	url = git://github.com/vim-scripts/darkburn.git
