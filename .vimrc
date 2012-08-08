@@ -1,3 +1,4 @@
+set nocompatible        " This must be first, because it changes other options as side effect
 set hlsearch            " Surligne les resultats de recherche
 set nowrap              " Pas de retour a la ligne auto (affichage)
 set showmatch           " Affiche parenthese correspondante
@@ -5,7 +6,7 @@ set number              " affiche les numero de ligne
 set ignorecase          " ignore la case en mode recherch
 set ruler               " show line cursor infos
 set ttyfast             " improve drawing
-set lazyredraw
+set lazyredraw          " do not redraw while running macros
 set autoread            " detect file changes
 "set list                " show invisible char
 set t_Co=256            " Specifies that the terminal can support 256 colors

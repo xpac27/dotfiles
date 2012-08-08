@@ -1,3 +1,36 @@
 [submodule ".vim/bundle/gundo"]
 	path = .vim/bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
+[submodule ".vim/bundle/fugitive"]
+	path = .vim/bundle/fugitive
+	url = git://github.com/tpope/vim-fugitive.git
+[submodule ".vim/bundle/align"]
+	path = .vim/bundle/align
+	url = git://github.com/vim-scripts/Align.git
+[submodule ".vim/bundle/zomwin"]
+	path = .vim/bundle/zomwin
+	url = git://github.com/vim-scripts/ZoomWin.git
+[submodule ".vim/bundle/rails"]
+	path = .vim/bundle/rails
+	url = git://github.com/tpope/vim-rails.git
+[submodule ".vim/bundle/actionscript"]
+	path = .vim/bundle/actionscript
+	url = git://github.com/vim-scripts/ActionScript.git
+[submodule ".vim/bundle/json"]
+	path = .vim/bundle/json
+	url = git://github.com/vim-scripts/JSON.vim.git
+[submodule ".vim/bundle/nerdtree"]
+	path = .vim/bundle/nerdtree
+	url = git://github.com/scrooloose/nerdtree.git
+[submodule ".vim/bundle/nerdcommenter"]
+	path = .vim/bundle/nerdcommenter
+	url = git://github.com/scrooloose/nerdcommenter.git
+[submodule ".vim/bundle/fuzzyfinder"]
+	path = .vim/bundle/fuzzyfinder
+	url = git://github.com/vim-scripts/FuzzyFinder.git
+[submodule ".vim/bundle/sessionman"]
+	path = .vim/bundle/sessionman
+	url = git://github.com/vim-scripts/sessionman.vim.git
+[submodule ".vim/bundle/autocorrect"]
+	path = .vim/bundle/autocorrect
+	url = git://github.com/vim-scripts/autocorrect.vim.git
