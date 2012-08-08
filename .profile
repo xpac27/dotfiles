@@ -5,6 +5,7 @@ export PATH="/usr/local/bin":$PATH;
 alias francoiscogne='ssh francoisxx@ftp.francoiscogne.com'
 alias vincent='ssh vincent@91.121.195.230'
 alias zaptele='ssh zaptele@188.165.239.57'
+alias bonplan='ssh alertebo@ssh.cluster006.ovh.net'
 
 alias fl='tail -F ~/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.txt'
 
@@ -15,6 +16,10 @@ alias backup='cd /Volumes/HD\ External/Scripts/ && ./backup_kimsuffi.sh && cd -'
 
 if [ -f ~/Github/vis/vis.sh ]; then
    source ~/Github/vis/vis.sh
+fi
+
+if [ -f ~/.rvm/scripts/rvm ]; then
+    source ~/.rvm/scripts/rvm
 fi
 
 export CLICOLOR=1

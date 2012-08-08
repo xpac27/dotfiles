@@ -3543,7 +3543,7 @@ function! s:BufSyntax()
       endif
       if buffer.type_name() ==# 'model' || buffer.type_name('model-arb')
         syn keyword rubyRailsARMethod default_scope named_scope scope serialize
-        syn keyword rubyRailsARAssociationMethod belongs_to has_one has_many has_and_belongs_to_many composed_of accepts_nested_attributes_for
+        syn keyword rubyRailsARAssociationMethod belongs_to has_one has_many embeds_many embedded_in embeds_one has_and_belongs_to_many composed_of accepts_nested_attributes_for
         syn keyword rubyRailsARCallbackMethod before_create before_destroy before_save before_update before_validation before_validation_on_create before_validation_on_update
         syn keyword rubyRailsARCallbackMethod after_create after_destroy after_save after_update after_validation after_validation_on_create after_validation_on_update
         syn keyword rubyRailsARCallbackMethod around_create around_destroy around_save around_update
