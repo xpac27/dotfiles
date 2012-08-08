@@ -146,34 +146,31 @@ nnoremap <unique> <Leader>[ 8<C-w><
 nnoremap <unique> <Leader>] 8<C-w>>
 
 " Invert line
-map <C-f> ddkkp
-map <C-v> ddp
+"map <C-UP> ddkkp
+"map <C-DOWN> ddp
 
 " Switch window
 map <Tab> <C-w>
+
+" Comment
+map <C-c> ,cc j
 
 " Macro
 map <F2> @a
 
 " FuzzyFinder
-let g:FuzzyFinderOptions = { 'Base':{}, 'Buffer':{}, 'File':{}, 'Dir':{},
-\                        'MruFile':{}, 'MruCmd':{}, 'Bookmark':{},
-\                        'Tag':{}, 'TaggedFile':{},
-\                        'GivenFile':{}, 'GivenDir':{},
-\                        'CallbackFile':{}, 'CallbackItem':{}, }
-let g:FuzzyFinderOptions.Base.ignore_case = 1
-let g:FuzzyFinderOptions.Base.min_length = 4
-let g:FuzzyFinderOptions.File.excluded_path = '\v\~$|\.o$|\.DS_Store$|\.jpg$|\.gif$|\.png$|\.bak$|\.swp$|\.git$|\.svn$|gen'
-let g:FuzzyFinderOptions.Base.abbrev_map    = {
-\              "^LI" : [
-\                  "~/Github/littleWorld/src/",
-\                  "~/Github/littleWorld/src/**/",
-\              ],
-\              "^V" : [
-\                  "~/Github/veoday-site/",
-\                  "~/Github/veoday-site/**/",
-\              ],
-\}
+let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sw[po])$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+let g:fuf_ignoreCase = 1
+let g:fuf_abbrevMap = {
+\   "^li" : [
+\       "~/Github/littleWorld/src/",
+\       "~/Github/littleWorld/src/**/",
+\   ],
+\   "^v" : [
+\       "~/Github/veoday-site/",
+\       "~/Github/veoday-site/**/",
+\   ],
+\ }
 
 " Autocommands
 :augroup my_tab
