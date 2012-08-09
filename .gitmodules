@@ -49,9 +49,6 @@
 [submodule ".vim/bundle/colors-irblack"]
 	path = .vim/bundle/colors-irblack
 	url = git://github.com/wgibbs/vim-irblack.git
-[submodule ".vim/bundle/colors-zenburn"]
-	path = .vim/bundle/colors-zenburn
-	url = git://github.com/vim-scripts/Zenburn.git
 [submodule ".vim/bundle/colors-solarized"]
 	path = .vim/bundle/colors-solarized
 	url = git://github.com/vim-scripts/Solarized.git
