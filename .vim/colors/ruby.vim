@@ -70,7 +70,7 @@ if &t_Co > 255
     " complete menu
     """""""""""""""
 
-    hi Pmenu           ctermfg=244 ctermbg=236
+    hi Pmenu           ctermfg=246 ctermbg=234
     hi PmenuSel        ctermfg=231 ctermbg=240
 
 
@@ -78,16 +78,16 @@ if &t_Co > 255
     " interface
     """""""""""""""
 
-    hi StatusLineNC    ctermfg=233 ctermbg=238
+    hi StatusLineNC    ctermfg=235 ctermbg=238
     hi StatusLine      ctermfg=235 ctermbg=221
-    hi VertSplit       ctermfg=235 ctermbg=234
+    hi VertSplit       ctermfg=235 ctermbg=235
     hi Visual          ctermfg=250 ctermbg=24
     hi WarningMsg      ctermfg=231               cterm=bold
     hi WildMenu        ctermfg=16                cterm=bold
 
     hi Normal          ctermfg=250 ctermbg=16
     hi LineNr          ctermfg=238 ctermbg=233
-    hi NonText         ctermfg=235 ctermbg=16
+    hi NonText         ctermfg=235 ctermbg=233
 
 end
 

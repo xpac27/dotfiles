@@ -158,7 +158,7 @@ map <C-c> ,cc j
 map <F2> @a
 
 " FuzzyFinder
-let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sw[po])$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sassc|sw[po])$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
 let g:fuf_ignoreCase = 1
 let g:fuf_abbrevMap = {
 \   "^li" : [
