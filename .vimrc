@@ -28,11 +28,10 @@ set backspace=indent,eol,start
 set statusline=[%04l-%04L,%04v]\ %F%m%r%h%w\ %p%%
 set laststatus=2
 
-" selected theme for syntax
+" visual
 syntax enable
 set t_Co=256
 set background=dark
-colorscheme ruby
 
 " user utf8
 set ffs=unix
@@ -183,3 +182,7 @@ endif
 
 " pathogen
 call pathogen#infect()
+
+" THEME
+colorscheme getafe
+

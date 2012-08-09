@@ -49,9 +49,6 @@
 [submodule ".vim/bundle/colors-irblack"]
 	path = .vim/bundle/colors-irblack
 	url = git://github.com/wgibbs/vim-irblack.git
-[submodule ".vim/bundle/color-molokai"]
-	path = .vim/bundle/color-molokai
-	url = git://github.com/vim-scripts/molokai.git
 [submodule ".vim/bundle/colors-zenburn"]
 	path = .vim/bundle/colors-zenburn
 	url = git://github.com/vim-scripts/Zenburn.git
@@ -61,3 +58,6 @@
 [submodule ".vim/bundle/colors-darkburn"]
 	path = .vim/bundle/colors-darkburn
 	url = git://github.com/vim-scripts/darkburn.git
+[submodule ".vim/bundle/colors-molokai"]
+	path = .vim/bundle/colors-molokai
+	url = git://github.com/vim-scripts/molokai.git
