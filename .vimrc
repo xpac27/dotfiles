@@ -132,8 +132,8 @@ noremap <unique> <Leader>sl :SessionList<CR>
 noremap <unique> <Leader>so :SessionOpen
 
 " copy past word
-noremap <unique> <Leader>c viw"py
-noremap <unique> <Leader>v viw"pp
+noremap <unique> <Leader>y viw"py
+noremap <unique> <Leader>p viw"pp
 
 " Make
 nnoremap <unique> <Leader>m :!make<CR>
@@ -152,7 +152,7 @@ nnoremap <unique> <Leader>] 8<C-w>>
 map <Tab> <C-w>
 
 " Comment
-map <C-c> ,cc j
+map <C-c> ,c j
 
 " Macro
 map <F2> @a

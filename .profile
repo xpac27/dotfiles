@@ -12,6 +12,9 @@ alias fl='tail -F ~/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.t
 alias mongostart='mongod run --config /usr/local/Cellar/mongodb/2.0.4-x86_64/mongod.conf'
 alias mongod_repair='sudo rm -f /var/lib/mongodb/mongod.lock && mongod --repair --dbpath /var/lib/mongodb/'
 
+alias elasticstart='elasticsearch -f -D es.config=/usr/local/Cellar/elasticsearch/0.19.3/config/elasticsearch.yml'
+alias elasticstop='launchctl unload -wF ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist'
+
 alias backup='cd /Volumes/HD\ External/Scripts/ && ./backup_kimsuffi.sh && cd -'
 
 if [ -f ~/Github/vis/vis.sh ]; then
