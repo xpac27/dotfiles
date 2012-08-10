@@ -30,8 +30,6 @@ set laststatus=2
 
 " visual
 syntax enable
-set t_Co=256
-set background=dark
 
 " user utf8
 set ffs=unix
@@ -184,5 +182,7 @@ endif
 call pathogen#infect()
 
 " THEME
-colorscheme getafe
-
+set t_Co=256
+set background=dark
+colorscheme Tomorrow-Night
+"colorscheme inkpot
