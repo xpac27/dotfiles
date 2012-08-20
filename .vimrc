@@ -97,7 +97,7 @@ ab pu public
 ab st static
 
 " change the mapleader from \ to ,
-let mapleader=","
+"let mapleader=","
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
@@ -176,6 +176,8 @@ if !exists("autocommands_loaded")
      au BufNewFile,BufRead Makefile set noexpandtab
      au BufNewFile,BufRead *.as set ft=actionscript
      au BufNewFile,BufRead *.json set ft=json
+     au BufNewFile,BufRead *.js set softtabstop=4
+     au BufNewFile,BufRead *.js set shiftwidth=4
 endif
 
 " pathogen
