@@ -15,6 +15,8 @@ alias mongod_repair='sudo rm -f /var/lib/mongodb/mongod.lock && mongod --repair 
 alias searchstart='elasticsearch -f -D es.config=/usr/local/Cellar/elasticsearch/0.19.3/config/elasticsearch.yml'
 alias searchstop='launchctl unload -wF ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist'
 
+alias redisstart='redis-server /usr/local/etc/redis.conf'
+
 alias backup='cd /Volumes/HD\ External/Scripts/ && ./backup_kimsuffi.sh && cd -'
 
 if [ -f ~/Github/vis/vis.sh ]; then

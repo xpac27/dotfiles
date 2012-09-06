@@ -13,6 +13,12 @@ set autoindent          " Indentation automatique
 set smartindent         " Ameliore l'indentation auto
 set title               " change the terminal's title
 
+" backup
+set backup
+set writebackup
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+
 " display whitespace
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
@@ -47,7 +53,6 @@ set softtabstop=4       " Largeur d'une tabulation
 set shiftwidth=4        " Largeur de l'indentation
 set expandtab           " Utilise des espaces plutot que les tabulation
 set shiftround          " when at 3 spaces, and I hit > ... go to 4, not 5
-set copyindent          " copy the previous indentation on autoindenting
 
 " Memory
 set history=1000
@@ -84,17 +89,17 @@ function! ToggleActiveMouse()
 endfunction
 
 " Automatic word correction
-ab feild field
-ab flase false
-ab lenght length
-ab toogle toggle
+ia feild field
+ia flase false
+ia lenght length
+ia toogle toggle
 
 " Shortcuts
-ab fu function
-ab pr private
-ab pt protected
-ab pu public
-ab st static
+ia fu function
+ia pr private
+ia pt protected
+ia pu public
+ia st static
 
 " change the mapleader from \ to ,
 "let mapleader=","
@@ -121,7 +126,7 @@ noremap <unique> <S-t> :NERDTreeToggle<CR>
 nnoremap ; :
 
 " turn of search hightlight
-nmap <silent> ,/ :nohlsearch<CR>
+nmap <silent> // :nohlsearch<CR>
 
 " Session
 let sessionman_save_on_exit = 1
@@ -150,7 +155,7 @@ nnoremap <unique> <Leader>] 8<C-w>>
 map <Tab> <C-w>
 
 " Comment
-map <C-c> ,c j
+map <C-c> \c j
 
 " Macro
 map <F2> @a
@@ -174,10 +179,20 @@ let g:fuf_abbrevMap = {
 if !exists("autocommands_loaded")
      let autocommands_loaded = 1
      au BufNewFile,BufRead Makefile set noexpandtab
+
      au BufNewFile,BufRead *.as set ft=actionscript
+     au BufNewFile,BufRead *.as set expandtab
+
      au BufNewFile,BufRead *.json set ft=json
+     au BufNewFile,BufRead *.json set expandtab
+
      au BufNewFile,BufRead *.js set softtabstop=4
      au BufNewFile,BufRead *.js set shiftwidth=4
+
+     au BufNewFile,BufRead *.rb set softtabstop=2
+     au BufNewFile,BufRead *.rb set shiftwidth=2
+
+     au BufNewFile,BufRead *.html.erb set ft=html
 endif
 
 " pathogen
@@ -186,5 +201,6 @@ call pathogen#infect()
 " THEME
 set t_Co=256
 set background=dark
-colorscheme Tomorrow-Night
+"colorscheme Tomorrow-Night
 "colorscheme inkpot
+colorscheme ruby
