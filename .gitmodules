@@ -4,9 +4,6 @@
 [submodule ".vim/bundle/align"]
 	path = .vim/bundle/align
 	url = git://github.com/vim-scripts/Align.git
-[submodule ".vim/bundle/zomwin"]
-	path = .vim/bundle/zomwin
-	url = git://github.com/vim-scripts/ZoomWin.git
 [submodule ".vim/bundle/rails"]
 	path = .vim/bundle/rails
 	url = git://github.com/tpope/vim-rails.git

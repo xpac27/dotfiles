@@ -12,6 +12,7 @@ set hidden              " Better buffer configuration
 set autoindent          " Indentation automatique
 set smartindent         " Ameliore l'indentation auto
 set title               " change the terminal's title
+set noequalalways       " do not auto resize closed and oppened splits
 
 " backup
 set backup
@@ -182,6 +183,8 @@ if !exists("autocommands_loaded")
 
      au BufNewFile,BufRead *.as set ft=actionscript
      au BufNewFile,BufRead *.as set expandtab
+     au BufNewFile,BufRead *.as set softtabstop=4
+     au BufNewFile,BufRead *.as set shiftwidth=4
 
      au BufNewFile,BufRead *.json set ft=json
      au BufNewFile,BufRead *.json set expandtab
@@ -189,10 +192,15 @@ if !exists("autocommands_loaded")
      au BufNewFile,BufRead *.js set softtabstop=4
      au BufNewFile,BufRead *.js set shiftwidth=4
 
+     au BufNewFile,BufRead *.tpl set softtabstop=4
+     au BufNewFile,BufRead *.tpl set shiftwidth=4
+
      au BufNewFile,BufRead *.rb set softtabstop=2
      au BufNewFile,BufRead *.rb set shiftwidth=2
 
      au BufNewFile,BufRead *.html.erb set ft=html
+     au BufNewFile,BufRead *.html.erb set softtabstop=2
+     au BufNewFile,BufRead *.html.erb set shiftwidth=2
 endif
 
 " pathogen
