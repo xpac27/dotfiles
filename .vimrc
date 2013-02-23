@@ -153,6 +153,7 @@ nnoremap <unique> <Leader>] 8<C-w>>
 "map <C-DOWN> ddp
 
 " Switch window
+map <Tab>o :wa<CR>
 map <Tab> <C-w>
 
 " Comment
@@ -162,7 +163,7 @@ map <C-c> \c j
 map <F2> @a
 
 " FuzzyFinder
-let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sassc|sw[po])$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sassc|sw[po])$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|.*[/\\]$'
 let g:fuf_ignoreCase = 1
 let g:fuf_abbrevMap = {
 \   "^li" : [
@@ -170,8 +171,10 @@ let g:fuf_abbrevMap = {
 \       "~/Github/littleWorld/src/**/",
 \   ],
 \   "^v" : [
-\       "~/Github/veoday-site/",
-\       "~/Github/veoday-site/**/",
+\       "~/Github/veoday-site/app",
+\       "~/Github/veoday-site/app/**/",
+\       "~/Github/veoday-site/config",
+\       "~/Github/veoday-site/config/**/",
 \   ],
 \ }
 
@@ -210,5 +213,4 @@ call pathogen#infect()
 set t_Co=256
 set background=dark
 "colorscheme Tomorrow-Night
-"colorscheme inkpot
 colorscheme ruby
