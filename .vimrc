@@ -284,6 +284,7 @@ Bundle "SuperTab"
 Bundle 'godlygeek/tabular'
 Bundle 'sessionman.vim'
 Bundle 'Syntastic'
+Bundle 'scrooloose/nerdtree'
 Bundle "http://github.com/gmarik/vim-visual-star-search.git"
 
 " FuzzyFinder
@@ -297,17 +298,12 @@ vnoremap <LocalLeader>o <C-C>:ZoomWin<CR>
 inoremap <LocalLeader>o <C-O>:ZoomWin<CR>
 noremap <C-W>+o :ZoomWin<CR>
 
-" Ack
-Bundle "ack.vim"
-noremap <LocalLeader># "ayiw:Ack <C-r>a<CR>
-vnoremap <LocalLeader># "ay:Ack <C-r>a<CR>
-
 " tComment
 Bundle "tComment"
 nnoremap // :TComment<CR>
 vnoremap // :TComment<CR>
 
 " Command-T
-Bundle "git://git.wincent.com/command-t.git"
+" Bundle "git://git.wincent.com/command-t.git"
 
 filetype plugin indent on
