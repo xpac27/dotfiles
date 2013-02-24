@@ -1,4 +1,7 @@
 .vim/backup
 .vim/sessions
 .vim/swap
-
+.vim/tags
+.vim/doc/tags
+.vim/bundle/*
+!.vim/bundle/vundle
