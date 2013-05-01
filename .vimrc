@@ -135,8 +135,8 @@ nmap <silent> \/ :nohlsearch<CR>
 
 " Quickly edit/reload the vimrc file
 nnoremap <silent> <LocalLeader>rs :source ~/.vimrc<CR>
-nnoremap <silent> <LocalLeader>rt :tabnew ~/.vim/vimrc<CR>
-nnoremap <silent> <LocalLeader>re :e ~/.vim/vimrc<CR>
+nnoremap <silent> <LocalLeader>rt :tabnew ~/.vimrc<CR>
+nnoremap <silent> <LocalLeader>re :e ~/.vimrc<CR>
 nnoremap <silent> <LocalLeader>rd :e ~/.vim/ <CR>
 
 " Tabs
@@ -154,9 +154,6 @@ nnoremap <silent> <C-J> gEa<CR><ESC>ew
 autocmd FileType php map <F9> :w<CR>:!clear && php -l %<CR>
 autocmd FileType ruby map <F9> :w<CR>:!clear && ruby -c %<CR>
 autocmd FileType javascript map <F9> :w<CR>:!clear && jsl -process %<CR>
-
-" S-T Neerd Tree
-noremap <unique> <S-t> :NERDTreeToggle<CR>
 
 " Session
 let sessionman_save_on_exit = 1
@@ -196,16 +193,25 @@ map <C-c> \c j
 " Macro
 map <F2> @a
 
+" CommandT
+let g:CommandTMaxHeight=10
+let g:CommandTMinHeight=10
+
+" NeerdTree
+noremap <unique> <Leader>r :NERDTreeToggle<CR>
+
+" Syntastic
+let g:syntastic_auto_loc_list=0
+let g:syntastic_mode_map={ 'mode': 'active',
+                     \ 'active_filetypes': [],
+                     \ 'passive_filetypes': ['html', 'xhtml'] }
+
 " FuzzyFinder
-noremap <unique> <S-f> :FufFile<CR>
+noremap <unique> <Leader>f :FufFile<CR>
 let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sassc|sw[po])$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|.*[/\\]$'
 let g:fuf_ignoreCase = 1
 let g:fuf_abbrevMap = {
-\   "^li" : [
-\       "~/Github/littleWorld/src/",
-\       "~/Github/littleWorld/src/**/",
-\   ],
-\   "^v" : [
+\   "^" : [
 \       "~/Github/veoday-site/app",
 \       "~/Github/veoday-site/app/**/",
 \       "~/Github/veoday-site/config",
@@ -222,13 +228,10 @@ au BufRead,BufNewFile {COMMIT_EDITMSG} set ft=gitcommit
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
 
 " Tabular
-let mapleader=','
-if exists(":Tabularize")
-  nmap <Leader>a= :Tabularize /=<CR>
-  vmap <Leader>a= :Tabularize /=<CR>
-  nmap <Leader>a: :Tabularize /:\zs<CR>
-  vmap <Leader>a: :Tabularize /:\zs<CR>
-endif
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:<CR>
+vmap <Leader>a: :Tabularize /:<CR>
 
 " Autocommands
 :augroup my_tab
@@ -250,7 +253,11 @@ if !exists("autocommands_loaded")
      au BufNewFile,BufRead *.tpl set softtabstop=4
      au BufNewFile,BufRead *.tpl set shiftwidth=4
 
-     au BufNewFile,BufRead *.html.erb set ft=html
+     autocmd BufNewFile,BufRead *.html.erb set filetype=html
+
+     " Don't add EOL at the end of files
+     au BufWritePre * :set binary | set noeol
+     au BufWritePost * :set nobinary | set eol
 endif
 
 filetype off
@@ -268,7 +275,7 @@ Bundle "tpope/vim-rails"
 Bundle "tpope/vim-bundler"
 
 " Snippets
-Bundle "http://github.com/gmarik/snipmate.vim.git"
+Bundle "snipMate.vim"
 
 " Syntax highlight
 Bundle "Markdown"
@@ -300,10 +307,14 @@ noremap <C-W>+o :ZoomWin<CR>
 
 " tComment
 Bundle "tComment"
-nnoremap // :TComment<CR>
-vnoremap // :TComment<CR>
+nnoremap // :TComment<CR>j
+vnoremap // :TComment<CR>j
+
+" GUndo
+Bundle "sjl/gundo.vim"
+nnoremap <F5> :GundoToggle<CR>
 
 " Command-T
-" Bundle "git://git.wincent.com/command-t.git"
+Bundle "git://git.wincent.com/command-t.git"
 
 filetype plugin indent on
