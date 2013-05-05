@@ -254,6 +254,7 @@ if !exists("autocommands_loaded")
      au BufNewFile,BufRead *.tpl set shiftwidth=4
 
      autocmd BufNewFile,BufRead *.html.erb set filetype=html
+     autocmd BufNewFile,BufRead *.html.erb set shiftwidth=2
 
      " Don't add EOL at the end of files
      au BufWritePre * :set binary | set noeol
