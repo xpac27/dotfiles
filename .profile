@@ -7,6 +7,7 @@ alias francoiscogne='ssh francoisxx@ftp.francoiscogne.com'
 alias vincent='ssh vincent@91.121.195.230'
 alias zaptele='ssh zaptele@188.165.239.57'
 alias bonplan='ssh alertebo@ssh.cluster006.ovh.net'
+alias attal='ssh root@94.23.49.214'
 
 alias fl='tail -F ~/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.txt'
 

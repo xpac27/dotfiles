@@ -65,22 +65,23 @@ syntax on " enable syntax
 filetype plugin indent on " Automatically detect file types.
 
 " Visual
-set number " Line numbers
-set showmatch " Show matching brackets.
-set matchtime=5 " Bracket blinking.
-set novisualbell " No blinking
-set noerrorbells " No noise.
-set laststatus=2 " Always show status line
-set statusline=[%04l-%04L,%04v]\ %F%m%r%h%w\ %p%% " Custom status line
-set vb t_vb= " disable any beeps or flashes on error
-set ruler " Show ruler
-set showcmd " Display an incomplete command in the lower right corner of the Vim window
-set shortmess=atI " Shortens messages
-set mouse-=a " Disable mouse
-set mousehide " Hide mouse after chars typed
+set number        " Line numbers
+set showmatch     " Show matching brackets.
+set matchtime=5   " Bracket blinking.
+set novisualbell  " No blinking
+set noerrorbells  " No noise.
+set laststatus=2  " Always show status line
+set vb t_vb=      " disable any beeps or flashes on error
+set ruler         " Show ruler
+set showcmd       " Display an incomplete command in the lower right corner of the Vim window
+set mouse-=a      " Disable mouse
+set mousehide     " Hide mouse after chars typed
 set ww=b,s,<,>
 set splitbelow
 set splitright
+
+" Status line
+set statusline=[%04l-%04L,%04v]\ %F%m%r%h%w\ %p%% " Custom status line
 
 " UTF8
 set ffs=unix
@@ -101,16 +102,16 @@ autocmd BufWrite * silent! %s/[\r \t]\+$//
 autocmd BufWrite !Makefile :%s/	/    /g
 
 " Toggle mouse on or off
-map <C-m> :call ToggleActiveMouse()<CR>
-function! ToggleActiveMouse()
-  if &mouse == "a"
-    exe "set mouse="
-      echo "Mouse is off"
-  else
-    exe "set mouse=a"
-    echo "Mouse is on"
-  endif
-endfunction
+" map <C-m> :call ToggleActiveMouse()<CR>
+" function! ToggleActiveMouse()
+"   if &mouse == "a"
+"     exe "set mouse="
+"       echo "Mouse is off"
+"   else
+"     exe "set mouse=a"
+"     echo "Mouse is on"
+"   endif
+" endfunction
 
 " Automatic word correction
 ia feild field
@@ -132,7 +133,6 @@ nnoremap ; :
 " turn of search hightlight
 nmap <silent> \/ :nohlsearch<CR>
 
-
 " Quickly edit/reload the vimrc file
 nnoremap <silent> <LocalLeader>rs :source ~/.vimrc<CR>
 nnoremap <silent> <LocalLeader>rt :tabnew ~/.vimrc<CR>
@@ -149,11 +149,6 @@ nnoremap <silent> <LocalLeader>= YP
 
 " Split line(opposite to S-J joining line)
 nnoremap <silent> <C-J> gEa<CR><ESC>ew
-
-" F9 Check syntax
-autocmd FileType php map <F9> :w<CR>:!clear && php -l %<CR>
-autocmd FileType ruby map <F9> :w<CR>:!clear && ruby -c %<CR>
-autocmd FileType javascript map <F9> :w<CR>:!clear && jsl -process %<CR>
 
 " Session
 let sessionman_save_on_exit = 1
@@ -219,11 +214,6 @@ let g:fuf_abbrevMap = {
 \   ],
 \ }
 
-"Auto commands
-au BufRead,BufNewFile {Gemfile,Rakefile,Capfile,*.rake,config.ru} set ft=ruby
-au BufRead,BufNewFile {*.md,*.mkd,*.markdown} set ft=markdown
-au BufRead,BufNewFile {COMMIT_EDITMSG} set ft=gitcommit
-
 " restore position in file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
 
@@ -234,31 +224,30 @@ nmap <Leader>a: :Tabularize /:<CR>
 vmap <Leader>a: :Tabularize /:<CR>
 
 " Autocommands
-:augroup my_tab
 if !exists("autocommands_loaded")
-     let autocommands_loaded = 1
-     au BufNewFile,BufRead Makefile set noexpandtab
+  let autocommands_loaded = 1
+  au BufNewFile,BufRead Makefile set noexpandtab
 
-     au BufNewFile,BufRead *.as set ft=actionscript
-     au BufNewFile,BufRead *.as set expandtab
-     au BufNewFile,BufRead *.as set softtabstop=4
-     au BufNewFile,BufRead *.as set shiftwidth=4
+  au BufNewFile,BufRead *.as set ft=actionscript
+  au BufNewFile,BufRead *.as set expandtab
+  au BufNewFile,BufRead *.as set softtabstop=4
+  au BufNewFile,BufRead *.as set shiftwidth=4
 
-     au BufNewFile,BufRead *.json set ft=json
-     au BufNewFile,BufRead *.json set expandtab
+  au BufNewFile,BufRead *.json set ft=json
+  au BufNewFile,BufRead *.json set expandtab
 
-     au BufNewFile,BufRead *.js set softtabstop=4
-     au BufNewFile,BufRead *.js set shiftwidth=4
+  au BufNewFile,BufRead *.js set softtabstop=4
+  au BufNewFile,BufRead *.js set shiftwidth=4
 
-     au BufNewFile,BufRead *.tpl set softtabstop=4
-     au BufNewFile,BufRead *.tpl set shiftwidth=4
+  au BufNewFile,BufRead *.tpl set softtabstop=4
+  au BufNewFile,BufRead *.tpl set shiftwidth=4
 
-     autocmd BufNewFile,BufRead *.html.erb set filetype=html
-     autocmd BufNewFile,BufRead *.html.erb set shiftwidth=2
+  au BufRead,BufNewFile {Gemfile,Rakefile,Capfile,*.rake,config.ru} set ft=ruby
+  au BufRead,BufNewFile {*.md,*.mkd,*.markdown} set ft=markdown
+  au BufRead,BufNewFile {COMMIT_EDITMSG} set ft=gitcommit
 
-     " Don't add EOL at the end of files
-     au BufWritePre * :set binary | set noeol
-     au BufWritePost * :set nobinary | set eol
+  autocmd BufNewFile,BufRead *.html.erb set filetype=html
+  autocmd BufNewFile,BufRead *.html.erb set shiftwidth=2
 endif
 
 filetype off
@@ -291,7 +280,7 @@ Bundle "repeat.vim"
 Bundle "SuperTab"
 Bundle 'godlygeek/tabular'
 Bundle 'sessionman.vim'
-Bundle 'Syntastic'
+" Bundle 'Syntastic'
 Bundle 'scrooloose/nerdtree'
 Bundle "http://github.com/gmarik/vim-visual-star-search.git"
 
