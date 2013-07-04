@@ -26,7 +26,7 @@ alias fl='tail -F ~/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.t
 #alias veoday_backup='cd /Volumes/HD\ External/Scripts/ && ./backup_veoday.sh && cd -'
 
 #{{{ Mongodb
-alias mongostart='mongod run --rest --config /usr/local/Cellar/mongodb/2.0.4-x86_64/mongod.conf'
+alias mongostart='mongod run --rest --config /usr/local/Cellar/mongodb/2.4.4-x86_64/mongod.conf'
 alias mongod_repair='sudo rm -f /var/lib/mongodb/mongod.lock && mongod --repair --dbpath /var/lib/mongodb/'
 
 #{{{ Elastic search
@@ -64,3 +64,5 @@ export PATH=/usr/local/heroku/bin:/usr/local/bin:/usr/local/Cellar/ruby/1.9.3-p1
 export LC_CTYPE=en_US.UTF-8
 
 set ttymouse=sgr
+
+eval "$(rbenv init -)"
