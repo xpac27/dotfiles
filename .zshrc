@@ -11,13 +11,12 @@ ZSH_THEME="zen"
 alias francoiscogne='ssh francoisxx@ftp.francoiscogne.com'
 alias vincent='ssh vincent@91.121.195.230'
 alias lina='ssh vincent@192.168.1.25'
-alias mini='ssh vincent@192.168.1.18'
+alias mini='ssh vincent@192.168.1.23'
 alias linda='ssh xpac27@fbx.abernier.name'
 alias zaptele='ssh zaptele@188.165.239.57'
 alias bonplan='ssh alertebo@ssh.cluster006.ovh.net'
 
 #{{{ Rails
-alias tall="testdrb -I test ./test/**/*_test.rb"
 alias rc="pry -r ./config/environment"
 
 #{{{ Logs

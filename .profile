@@ -1,7 +1,7 @@
-export PATH="/Library/Developer/flex_sdk_4.6.0.23201_mpl/bin":$PATH
-export PATH="/Library/Developer/AdobeAIRSDK/bin":$PATH
-export PATH="/usr/local/Cellar/ruby/1.9.3-p125/bin":$PATH;
-export PATH="/usr/local/bin":$PATH;
+export PATH="/Library/Developer/flex_sdk_4.6.0.23201_mpl/bin:$PATH"
+export PATH="/Library/Developer/AdobeAIRSDK/bin:$PATH"
+export PATH="/usr/local/Cellar/ruby/1.9.3-p125/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
 
 alias francoiscogne='ssh francoisxx@ftp.francoiscogne.com'
 alias vincent='ssh vincent@91.121.195.230'
@@ -14,8 +14,7 @@ alias fl='tail -F ~/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.t
 alias mongostart='mongod run --rest --config /usr/local/Cellar/mongodb/2.0.4-x86_64/mongod.conf'
 alias mongod_repair='sudo rm -f /var/lib/mongodb/mongod.lock && mongod --repair --dbpath /var/lib/mongodb/'
 
-alias searchstart='elasticsearch -f -D es.config=/usr/local/Cellar/elasticsearch/0.19.3/config/elasticsearch.yml'
-alias searchstop='launchctl unload -wF ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist'
+alias searchstart='elasticsearch -f -D es.config=/usr/local/opt/elasticsearch/config/elasticsearch.yml'
 
 alias redisstart='redis-server /usr/local/etc/redis.conf'
 

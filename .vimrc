@@ -242,6 +242,12 @@ if !exists("autocommands_loaded")
   au BufNewFile,BufRead *.tpl set softtabstop=4
   au BufNewFile,BufRead *.tpl set shiftwidth=4
 
+  au BufNewFile,BufRead *.cpp set softtabstop=4
+  au BufNewFile,BufRead *.cpp set shiftwidth=4
+
+  au BufNewFile,BufRead *.h set softtabstop=4
+  au BufNewFile,BufRead *.h set shiftwidth=4
+
   au BufRead,BufNewFile {Gemfile,Rakefile,Capfile,*.rake,config.ru} set ft=ruby
   au BufRead,BufNewFile {*.md,*.mkd,*.markdown} set ft=markdown
   au BufRead,BufNewFile {COMMIT_EDITMSG} set ft=gitcommit
@@ -265,7 +271,7 @@ Bundle "tpope/vim-rails"
 Bundle "tpope/vim-bundler"
 
 " Snippets
-Bundle "snipMate.vim"
+" Bundle "snipMate.vim"
 
 " Syntax highlight
 Bundle "Markdown"
@@ -277,7 +283,7 @@ Bundle "ragtag.vim"
 
 " Utilities
 Bundle "repeat.vim"
-Bundle "SuperTab"
+" Bundle "SuperTab"
 Bundle 'godlygeek/tabular'
 Bundle 'sessionman.vim'
 " Bundle 'Syntastic'
@@ -287,6 +293,14 @@ Bundle "http://github.com/gmarik/vim-visual-star-search.git"
 " FuzzyFinder
 Bundle "L9"
 Bundle "FuzzyFinder"
+
+" Rspec
+Bundle 'thoughtbot/vim-rspec'
+map <Leader>d :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+let g:rspec_command = "!zeus rspec {spec}"
 
 " Zoomwin
 Bundle "ZoomWin"
@@ -306,5 +320,7 @@ nnoremap <F5> :GundoToggle<CR>
 
 " Command-T
 Bundle "git://git.wincent.com/command-t.git"
+
+Bundle "yaymukund/vim-rabl"
 
 filetype plugin indent on
