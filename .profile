@@ -6,6 +6,7 @@ export PATH="/usr/local/bin:$PATH"
 alias francoiscogne='ssh francoisxx@ftp.francoiscogne.com'
 alias vincent='ssh vincent@91.121.195.230'
 alias zaptele='ssh zaptele@188.165.239.57'
+alias nodog='ssh zaptele@62.210.137.159'
 alias bonplan='ssh alertebo@ssh.cluster006.ovh.net'
 alias attal='ssh root@94.23.49.214'
 
