@@ -49,6 +49,8 @@ if &t_Co > 255
 
     hi Comment                           ctermfg=59
 
+    hi CursorLine                                       ctermbg=16    cterm=none
+
 
     """""""""""""""
     " ruby
