@@ -1,3 +1,10 @@
+export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="/Library/Developer/flex_sdk_4.6.0.23201_mpl/bin:$PATH"
+export PATH="/Library/Developer/AdobeAIRSDK/bin:$PATH"
+export PATH="/usr/local/Cellar/ruby/1.9.3-p125/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -9,11 +16,11 @@ ZSH_THEME="zen"
 
 #{{{ SSH
 alias francoiscogne='ssh francoisxx@ftp.francoiscogne.com'
-alias vincent='ssh vincent@91.121.195.230'
 alias lina='ssh vincent@192.168.1.25'
 alias mini='ssh vincent@192.168.1.23'
 alias linda='ssh xpac27@fbx.abernier.name'
 alias zaptele='ssh zaptele@188.165.239.57'
+alias nodog='ssh zaptele@62.210.137.159'
 alias bonplan='ssh alertebo@ssh.cluster006.ovh.net'
 
 #{{{ Rails
@@ -30,11 +37,10 @@ alias fl='tail -F ~/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.t
 alias mongod_repair='sudo rm -f /var/lib/mongodb/mongod.lock && mongod --repair --dbpath /var/lib/mongodb/'
 
 #{{{ Elastic search
-alias searchstart='elasticsearch -f -D es.config=/usr/local/Cellar/elasticsearch/0.19.3/config/elasticsearch.yml'
-alias searchstop='launchctl unload -wF ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist'
+alias elasticsearch_start='elasticsearch -f -D es.config=/usr/local/Cellar/elasticsearch/0.19.3/config/elasticsearch.yml'
 
 #{{{ Redis
-alias redisstart='redis-server /usr/local/etc/redis.conf'
+alias redis_start='redis-server /usr/local/etc/redis.conf'
 
 #{{{ VIS
 if [ -f ~/Github/vis/vis.sh ]; then
@@ -58,9 +64,8 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
-export PATH=/usr/local/heroku/bin:/usr/local/bin:/usr/local/Cellar/ruby/1.9.3-p125/bin:/Library/Developer/AdobeAIRSDK/bin:/Library/Developer/flex_sdk_4.6.0.23201_mpl/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/X11/bin
-
 export LC_CTYPE=en_US.UTF-8
 
 set ttymouse=sgr
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

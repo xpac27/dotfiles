@@ -9,7 +9,6 @@ set nobackup            " no backups
 set pastetoggle=<F10>   " toggle between paste and normal: for 'safer' pasting from keyboard
 set timeoutlen=250      " Time to wait after ESC (default causes an annoying delay)
 set tabpagemax=999      " let me tab as much as I want
-set cursorline
 
 " Theme
 set t_Co=256
@@ -323,8 +322,5 @@ nnoremap <F5> :GundoToggle<CR>
 Bundle "git://git.wincent.com/command-t.git"
 
 Bundle "yaymukund/vim-rabl"
-
-Bundle "inside/vim-search-pulse"
-Bundle "vim-scripts/CursorLineCurrentWindow"
 
 filetype plugin indent on
