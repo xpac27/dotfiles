@@ -26,7 +26,11 @@ source $ZSH/oh-my-zsh.sh
 export LC_CTYPE=en_US.UTF-8
 export LANG=en_US.UTF-8
 export EDITOR='vim'
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$PATH"
 
 set ttymouse=sgr
+
+alias rc="pry -r ./config/environment"
+alias fl='tail -F ~/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.txt'
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
