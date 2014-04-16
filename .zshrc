@@ -34,3 +34,5 @@ alias rc="pry -r ./config/environment"
 alias fl='tail -F ~/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.txt'
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+[[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
