@@ -1,0 +1,13 @@
+[ui]
+username = Vincent Cogne <vincent.cogne@king.com>
+editor = vim
+
+[pager]
+pager = LESS='FRX' less
+
+[color]
+mode = auto
+
+[extensions]
+pager =
+color =
