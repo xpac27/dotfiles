@@ -1,6 +1,6 @@
 [user]
-	name = Vincent Cogne
-	email = xpac27@gmail.com
+  name = Vincent Cogne
+  email = xpac27@gmail.com
 
 [core]
   editor = vi
@@ -33,6 +33,5 @@
 [merge]
   summary = true
 
-
 [push]
-	default = simple
+  default = simple
