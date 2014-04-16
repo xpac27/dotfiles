@@ -303,11 +303,11 @@ map <Leader>l :call RunLastSpec()<CR>
 let g:rspec_command = "!zeus rspec {spec}"
 
 " Zoomwin
-Bundle "ZoomWin"
-noremap <LocalLeader>o :ZoomWin<CR>
-vnoremap <LocalLeader>o <C-C>:ZoomWin<CR>
-inoremap <LocalLeader>o <C-O>:ZoomWin<CR>
-noremap <C-W>+o :ZoomWin<CR>
+" Bundle "ZoomWin"
+" noremap <LocalLeader>o :ZoomWin<CR>
+" vnoremap <LocalLeader>o <C-C>:ZoomWin<CR>
+" inoremap <LocalLeader>o <C-O>:ZoomWin<CR>
+" noremap <C-W>+o :ZoomWin<CR>
 
 " tComment
 Bundle "tComment"
