@@ -5,6 +5,7 @@
 [core]
   editor = vi
   quotepath = false
+	excludesfile = /Users/vincent.cogne/.gitignore_global
 
 [rerere]
   enabled = false
@@ -26,6 +27,7 @@
   openbug = !/usr/local/bin/dm_openbug.sh
   closebug = !/usr/local/bin/dm_closebug.sh
   untracked = !/usr/local/bin/dm_untracked.sh
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
 [color]
   ui = auto
@@ -35,3 +37,9 @@
 
 [push]
   default = simple
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

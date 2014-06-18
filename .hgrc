@@ -11,3 +11,9 @@ mode = auto
 [extensions]
 pager =
 color =
+purge =
+eol =
+
+[alias]
+br = branches
+undo = revert --no-backup

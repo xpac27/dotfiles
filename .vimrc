@@ -44,14 +44,6 @@ set wildmenu
 set wildmode=longest,list       " At command line, complete longest common string, then list alternatives.
 set backspace=indent,eol,start  " more powerful backspacing
 
-" Tabs
-set tabstop=2      " Set the default tabstop
-set softtabstop=2
-set shiftwidth=2   " Set the default shift width for indents
-set shiftround     " when at 3 spaces, and I hit > ... go to 4, not 5
-set expandtab      " Make tabs into spaces (set by tabstop)
-set smarttab       " Smarter tab levels
-
 " Indent
 set autoindent
 set cindent
@@ -84,7 +76,7 @@ set splitright
 set statusline=[%04l-%04L,%04v]\ %F%m%r%h%w\ %p%% " Custom status line
 
 " UTF8
-set ffs=unix
+set ffs=unix,dos
 set enc=utf-8
 
 " Scrolling
@@ -96,10 +88,6 @@ set history=1000
 set undolevels=1000
 set maxmem=2000000
 set maxmemtot=2000000
-
-" Supprime les espaces en fin de ligne avant de sauver
-autocmd BufWrite * silent! %s/[\r \t]\+$//
-autocmd BufWrite !Makefile :%s/	/    /g
 
 " Toggle mouse on or off
 " map <C-m> :call ToggleActiveMouse()<CR>
@@ -175,10 +163,6 @@ nnoremap <unique> <C-DOWN> 4<C-w>-
 nnoremap <unique> <C-LEFT> 4<C-w><
 nnoremap <unique> <C-RIGHT> 4<C-w>>
 
-" Invert line
-" map <C-UP> ddkkp
-" map <C-DOWN> ddp
-
 " generate HTML version current buffer using current color scheme
 map <silent> <LocalLeader>2h :runtime! syntax/2html.vim<CR>
 
@@ -198,19 +182,37 @@ noremap <unique> <Leader>r :NERDTreeToggle<CR>
 " Syntastic
 let g:syntastic_auto_loc_list=0
 let g:syntastic_mode_map={ 'mode': 'active',
-                     \ 'active_filetypes': [],
-                     \ 'passive_filetypes': ['html', 'xhtml'] }
+\   'active_filetypes': [],
+\   'passive_filetypes': ['html', 'xhtml'] }
 
 " FuzzyFinder
 noremap <unique> <Leader>f :FufFile<CR>
 let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sassc|sw[po])$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|.*[/\\]$'
 let g:fuf_ignoreCase = 1
 let g:fuf_abbrevMap = {
-\   "^" : [
-\       "~/Github/veoday-site/app",
-\       "~/Github/veoday-site/app/**/",
-\       "~/Github/veoday-site/config",
-\       "~/Github/veoday-site/config/**/",
+\   "^kp" : [
+\       "~/King/kingdom-views-as3/package/src",
+\       "~/King/kingdom-views-as3/package/src/**/",
+\   ],
+\   "^ks" : [
+\       "~/King/kingdom-views-as3/sample/src",
+\       "~/King/kingdom-views-as3/sample/src/**/",
+\   ],
+\   "^kr" : [
+\       "~/King/kingdom-views-as3/resources",
+\       "~/King/kingdom-views-as3/resources/**/",
+\   ],
+\   "^s" : [
+\       "~/King/spaceland/src/com/king/flash/spaceland",
+\       "~/King/spaceland/src/com/king/flash/spaceland/**/",
+\   ],
+\   "^f" : [
+\       "~/King/flatland/src/com/king/flash/flatland",
+\       "~/King/flatland/src/com/king/flash/flatland/**/",
+\   ],
+\   "^p" : [
+\       "~/King/plataforma/trunk/flash/src/com/king/platform",
+\       "~/King/plataforma/trunk/flash/src/com/king/platform/**/",
 \   ],
 \ }
 
@@ -223,104 +225,90 @@ vmap <Leader>a= :Tabularize /=<CR>
 nmap <Leader>a: :Tabularize /:<CR>
 vmap <Leader>a: :Tabularize /:<CR>
 
-" Autocommands
-if !exists("autocommands_loaded")
-  let autocommands_loaded = 1
-  au BufNewFile,BufRead Makefile set noexpandtab
+" ==========================
+" Autocommands filetypes
+" ==========================
 
-  au BufNewFile,BufRead *.as set ft=actionscript
-  au BufNewFile,BufRead *.as set expandtab
-  au BufNewFile,BufRead *.as set softtabstop=4
-  au BufNewFile,BufRead *.as set shiftwidth=4
+function! SetupEnvironment()
 
-  au BufNewFile,BufRead *.json set ft=json
-  au BufNewFile,BufRead *.json set expandtab
+  if expand('%:p') =~ $HOME. "/King"
 
-  au BufNewFile,BufRead *.js set softtabstop=4
-  au BufNewFile,BufRead *.js set shiftwidth=4
+    setlocal tabstop=4
+    setlocal shiftwidth=4
+    setlocal shiftround
+    setlocal noexpandtab
+    " setlocal binary noeol
+    setlocal autoindent
 
-  au BufNewFile,BufRead *.tpl set softtabstop=4
-  au BufNewFile,BufRead *.tpl set shiftwidth=4
+  else
 
-  au BufNewFile,BufRead *.cpp set softtabstop=4
-  au BufNewFile,BufRead *.cpp set shiftwidth=4
+    setlocal expandtab
+    setlocal smarttab
+    setlocal shiftround
+    setlocal autoindent
 
-  au BufNewFile,BufRead *.h set softtabstop=4
-  au BufNewFile,BufRead *.h set shiftwidth=4
+    if &filetype == 'ruby'
+      setlocal softtabstop=2
+      setlocal shiftwidth=2
 
-  au BufRead,BufNewFile {Gemfile,Rakefile,Capfile,*.rake,config.ru} set ft=ruby
-  au BufRead,BufNewFile {*.md,*.mkd,*.markdown} set ft=markdown
-  au BufRead,BufNewFile {COMMIT_EDITMSG} set ft=gitcommit
+    elseif &filetype == 'erb'
+      setlocal softtabstop=2
+      setlocal shiftwidth=2
+      setlocal filetype=html
 
-  autocmd BufNewFile,BufRead *.html.erb set filetype=html
-  autocmd BufNewFile,BufRead *.html.erb set shiftwidth=2
-endif
+    else
+      setlocal softtabstop=4
+      setlocal shiftwidth=4
+    endif
+
+    au BufWrite <buffer> silent! %s/[\r \t]\+$//  " Remove useless tabs at the end of lines
+
+  endif
+
+  if &filetype == 'make'
+    setlocal noexpandtab
+  endif
+
+endfunction
+au BufNewFile,BufRead *.as set ft=actionscript
+au BufNewFile,BufRead *.json set ft=json
+au BufRead,BufNewFile *.md,*.mkd,*.markdown set ft=markdown
+au BufRead,BufNewFile Gemfile,Rakefile,Capfile,*.rake,config.ru set ft=ruby
+au BufRead,BufNewFile * call SetupEnvironment()
 
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-" let Vundle manage Vundle
-Bundle 'gmarik/vundle'
-
-" Editing
-Bundle "http://github.com/rstacruz/sparkup.git", {'rtp': 'vim/'}
-
-" Programming
-Bundle "tpope/vim-rails"
-Bundle "tpope/vim-bundler"
-
-" Snippets
-" Bundle "snipMate.vim"
-
-" Syntax highlight
+Bundle "L9"
 Bundle "Markdown"
 Bundle "JSON.vim"
-Bundle 'inside/actionscript.vim'
-
-" (HT|X)ml tool
+Bundle "snipMate.vim"
 Bundle "ragtag.vim"
-
-" Utilities
-Bundle "repeat.vim"
-" Bundle "SuperTab"
-Bundle 'godlygeek/tabular'
 Bundle 'sessionman.vim'
-" Bundle 'Syntastic'
-Bundle 'scrooloose/nerdtree'
-Bundle "http://github.com/gmarik/vim-visual-star-search.git"
-
-" FuzzyFinder
-Bundle "L9"
+Bundle 'Syntastic'
 Bundle "FuzzyFinder"
-
-" Rspec
+Bundle 'gmarik/vundle'
+Bundle "tpope/vim-rails"
+Bundle "tpope/vim-bundler"
+Bundle 'inside/actionscript.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'godlygeek/tabular'
 Bundle 'thoughtbot/vim-rspec'
+Bundle "yaymukund/vim-rabl"
+Bundle "gmarik/vim-visual-star-search"
+Bundle "wincent/Command-T"
+Bundle "sjl/gundo.vim"
+nnoremap <F5> :GundoToggle<CR>
+Bundle "tComment"
+nnoremap // :TComment<CR>j
+vnoremap // :TComment<CR>j
+Bundle 'Shougo/vimproc.vim'
 map <Leader>d :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 let g:rspec_command = "!zeus rspec {spec}"
-
-" Zoomwin
-" Bundle "ZoomWin"
-" noremap <LocalLeader>o :ZoomWin<CR>
-" vnoremap <LocalLeader>o <C-C>:ZoomWin<CR>
-" inoremap <LocalLeader>o <C-O>:ZoomWin<CR>
-" noremap <C-W>+o :ZoomWin<CR>
-
-" tComment
-Bundle "tComment"
-nnoremap // :TComment<CR>j
-vnoremap // :TComment<CR>j
-
-" GUndo
-Bundle "sjl/gundo.vim"
-nnoremap <F5> :GundoToggle<CR>
-
-" Command-T
-Bundle "git://git.wincent.com/command-t.git"
-
-Bundle "yaymukund/vim-rabl"
+Bundle "http://github.com/rstacruz/sparkup.git", {'rtp': 'vim/'}
 
 filetype plugin indent on

@@ -32,6 +32,8 @@ set ttymouse=sgr
 
 alias rc="pry -r ./config/environment"
 alias fl='tail -F ~/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.txt'
+alias de='ssh -A vincentc@dev4.int.midasplayer.com'
+alias kd='ssh -A kingdom@kingdom.qa.midasplayer.com'
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
