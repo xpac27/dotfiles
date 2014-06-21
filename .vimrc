@@ -13,7 +13,7 @@ set tabpagemax=999      " let me tab as much as I want
 " Theme
 set t_Co=256
 set background=dark
-colorscheme ruby
+colorscheme smyck
 
 " Backup
 set backup
@@ -277,38 +277,40 @@ au BufRead,BufNewFile Gemfile,Rakefile,Capfile,*.rake,config.ru set ft=ruby
 au BufRead,BufNewFile * call SetupEnvironment()
 
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
-Bundle "L9"
-Bundle "Markdown"
-Bundle "JSON.vim"
-Bundle "snipMate.vim"
-Bundle "ragtag.vim"
-Bundle 'sessionman.vim'
-Bundle 'Syntastic'
-Bundle "FuzzyFinder"
-Bundle 'gmarik/vundle'
-Bundle "tpope/vim-rails"
-Bundle "tpope/vim-bundler"
-Bundle 'inside/actionscript.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'godlygeek/tabular'
-Bundle 'thoughtbot/vim-rspec'
-Bundle "yaymukund/vim-rabl"
-Bundle "gmarik/vim-visual-star-search"
-Bundle "wincent/Command-T"
-Bundle "sjl/gundo.vim"
+Plugin 'L9'
+Plugin 'Markdown'
+Plugin 'JSON.vim'
+Plugin 'ragtag.vim'
+Plugin 'sessionman.vim'
+Plugin 'Syntastic'
+Plugin 'FuzzyFinder'
+Plugin 'gmarik/vundle'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-bundler'
+Plugin 'inside/actionscript.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'godlygeek/tabular'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'yaymukund/vim-rabl'
+Plugin 'gmarik/vim-visual-star-search'
+Plugin 'wincent/Command-T'
+Plugin 'bling/vim-airline'
+let g:airline_theme = 'badwolf'
+Plugin 'sjl/gundo.vim'
 nnoremap <F5> :GundoToggle<CR>
-Bundle "tComment"
+Plugin 'tComment'
 nnoremap // :TComment<CR>j
 vnoremap // :TComment<CR>j
-Bundle 'Shougo/vimproc.vim'
+Plugin 'Shougo/vimproc.vim'
 map <Leader>d :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 map <Leader>l :call RunLastSpec()<CR>
-let g:rspec_command = "!zeus rspec {spec}"
-Bundle "http://github.com/rstacruz/sparkup.git", {'rtp': 'vim/'}
+let g:rspec_command = '!zeus rspec {spec}'
+Plugin 'http://github.com/rstacruz/sparkup.git', {'rtp': 'vim/'}
 
+call vundle#end()
 filetype plugin indent on
