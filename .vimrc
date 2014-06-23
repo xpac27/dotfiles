@@ -273,7 +273,7 @@ endfunction
 au BufNewFile,BufRead *.as set ft=actionscript
 au BufNewFile,BufRead *.json set ft=json
 au BufRead,BufNewFile *.md,*.mkd,*.markdown set ft=markdown
-au BufRead,BufNewFile Gemfile,Rakefile,Capfile,*.rake,config.ru set ft=ruby
+au BufRead,BufNewFile Gemfile,Rakefile,Capfile,*.rake,*.rb,*.erb,config.ru set ft=ruby
 au BufRead,BufNewFile * call SetupEnvironment()
 
 filetype off
@@ -287,6 +287,8 @@ Plugin 'ragtag.vim'
 Plugin 'sessionman.vim'
 Plugin 'Syntastic'
 Plugin 'FuzzyFinder'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'AndrewRadev/vim-eco'
 Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-bundler'
