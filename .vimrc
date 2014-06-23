@@ -159,6 +159,9 @@ nnoremap <leader>GD :diffoff!<cr><C-W>h:bd<cr>
 " NerdTree
 noremap <F5> :NERDTreeToggle<CR>
 
+" Emmet
+let g:user_emmet_leader_key = '<leader>,'
+
 " FuzzyFinder
 noremap <F6> :FufFile<CR>
 let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sassc|sw[po])$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|.*[/\\]$'
@@ -207,6 +210,7 @@ Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-ragtag'
 
 Plugin 'elzr/vim-json'
 Plugin 'kchmck/vim-coffee-script'
@@ -221,6 +225,7 @@ Plugin 'vim-scripts/FuzzyFinder'
 Plugin 'vim-scripts/Local-configuration'
 Plugin 'gmarik/vundle'
 Plugin 'gmarik/vim-visual-star-search'
+Plugin 'mattn/emmet-vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'godlygeek/tabular'
