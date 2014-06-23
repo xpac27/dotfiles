@@ -5,57 +5,38 @@ set lazyredraw          " do not redraw while running macros
 set autoread            " detect file changes
 set title               " change the terminal's title
 set noequalalways       " do not auto resize closed and oppened splits
-set nobackup            " no backups
 set pastetoggle=<F10>   " toggle between paste and normal: for 'safer' pasting from keyboard
 set timeoutlen=250      " Time to wait after ESC (default causes an annoying delay)
 set tabpagemax=999      " let me tab as much as I want
-
-" Theme
 set t_Co=256
 set background=dark
 colorscheme ruby
-
-" Backup
 set backup
 set writebackup
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
-
-" Buffer
 set hidden  " The current buffer can be put to the background without writing to disk
-
-" Search
 set hlsearch   " highlight search
 set ignorecase " Do case in sensitive matching with
 set smartcase  " be sensitive when there's a capital letter
 set incsearch  " start searching imediatly
-
-" Formatting
 set fo+=o " Automatically insert the current comment leader after hitting 'o' or 'O' in Normal mode.
 set fo-=r " Do not automatically insert a comment leader after an enter
 set fo-=t " Do no auto-wrap text using textwidth (does not apply to comments)
-
-" Wrapping
 set nowrap
 set textwidth=0 " Don't wrap lines by default
-
-" Wild
 set wildmenu
 set wildmode=longest,list       " At command line, complete longest common string, then list alternatives.
 set backspace=indent,eol,start  " more powerful backspacing
-
 " Indent
 set autoindent
 set cindent
 set cinoptions=:s,ps,ts,cs
 set cinwords=if,else,elsif,when,while,do,for,switch,case
-
 " Syntax
 syntax on " enable syntax
-
 " Files
 filetype plugin indent on " Automatically detect file types.
-
 " Visual
 set number        " Line numbers
 set showmatch     " Show matching brackets.
@@ -71,43 +52,24 @@ set mousehide     " Hide mouse after chars typed
 set ww=b,s,<,>
 set splitbelow
 set splitright
-
 " Status line
 set statusline=[%04l-%04L,%04v]\ %F%m%r%h%w\ %p%% " Custom status line
-
 " UTF8
 set ffs=unix,dos
 set enc=utf-8
-
 " Scrolling
 set scrolloff=3
 set scrolljump=3
-
 " Memory
 set history=1000
 set undolevels=1000
 set maxmem=2000000
 set maxmemtot=2000000
 
-" Toggle mouse on or off
-" map <C-m> :call ToggleActiveMouse()<CR>
-" function! ToggleActiveMouse()
-"   if &mouse == "a"
-"     exe "set mouse="
-"       echo "Mouse is off"
-"   else
-"     exe "set mouse=a"
-"     echo "Mouse is on"
-"   endif
-" endfunction
-
-" Automatic word correction
 ia feild field
 ia flase false
 ia lenght length
 ia toogle toggle
-
-" Shortcuts
 ab fu function
 ab pr private
 ab pt protected
@@ -121,15 +83,14 @@ nnoremap ; :
 " turn of search hightlight
 nmap <silent> \/ :nohlsearch<CR>
 
-" Quickly edit/reload the vimrc file
-nnoremap <silent> <LocalLeader>rs :source ~/.vimrc<CR>
-nnoremap <silent> <LocalLeader>rt :tabnew ~/.vimrc<CR>
-nnoremap <silent> <LocalLeader>re :e ~/.vimrc<CR>
-nnoremap <silent> <LocalLeader>rd :e ~/.vim/ <CR>
+" save file whether in insert or normal mode
+inoremap <leader>s <c-o>:w<cr><esc>
+nnoremap <leader>s :w<cr>
 
 " Tabs
 nnoremap <silent> <LocalLeader>[ :tabprev<CR>
 nnoremap <silent> <LocalLeader>] :tabnext<CR>
+
 
 " Duplication
 vnoremap <silent> <LocalLeader>= yP
@@ -179,6 +140,12 @@ let g:CommandTMinHeight=10
 " NeerdTree
 noremap <unique> <Leader>r :NERDTreeToggle<CR>
 
+" Tabular
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:<CR>
+vmap <Leader>a: :Tabularize /:<CR>
+
 " Syntastic
 let g:syntastic_auto_loc_list=0
 let g:syntastic_mode_map={ 'mode': 'active',
@@ -218,12 +185,6 @@ let g:fuf_abbrevMap = {
 
 " restore position in file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
-
-" Tabular
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>a: :Tabularize /:<CR>
 
 " ==========================
 " Autocommands filetypes
@@ -281,13 +242,14 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle "L9"
-Bundle "Markdown"
-Bundle "JSON.vim"
-Bundle "snipMate.vim"
-Bundle "ragtag.vim"
-Bundle 'sessionman.vim'
-Bundle 'Syntastic'
 Bundle "FuzzyFinder"
+Bundle "elzr/vim-json "
+Bundle "tpope/vim-ragtag"
+Bundle 'vim-scripts/sessionman.vim'
+Bundle "tpope/vim-markdown"
+Bundle "tpope/vim-speeddating"
+Bundle "tpope/vim-endwise"
+Bundle "tpope/vim-afterimage"
 Bundle 'gmarik/vundle'
 Bundle "tpope/vim-rails"
 Bundle "tpope/vim-bundler"
@@ -298,6 +260,9 @@ Bundle 'thoughtbot/vim-rspec'
 Bundle "yaymukund/vim-rabl"
 Bundle "gmarik/vim-visual-star-search"
 Bundle "wincent/Command-T"
+Bundle "rstacruz/sparkup", {'rtp': 'vim/'}
+Bundle 'majutsushi/tagbar'
+map <Leader>g :TagbarToggle()<CR>
 Bundle "sjl/gundo.vim"
 nnoremap <F5> :GundoToggle<CR>
 Bundle "tComment"
@@ -309,6 +274,10 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 let g:rspec_command = "!zeus rspec {spec}"
-Bundle "http://github.com/rstacruz/sparkup.git", {'rtp': 'vim/'}
+Bundle "tpope/vim-fugitive"
+nnoremap <leader>Gg :Ggrep<SPACE>
+nnoremap <leader>Gd :Gdiff<cr>
+" switch back to current file and closes fugitive buffer
+nnoremap <leader>GD :diffoff!<cr><C-W>h:bd<cr>
 
 filetype plugin indent on
