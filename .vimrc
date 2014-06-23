@@ -10,7 +10,8 @@ set timeoutlen=250      " Time to wait after ESC (default causes an annoying del
 set tabpagemax=999      " let me tab as much as I want
 set t_Co=256
 set background=dark
-colorscheme ruby
+colorscheme smyck
+" Backup
 set backup
 set writebackup
 set backupdir=~/.vim/backup//
@@ -52,8 +53,6 @@ set mousehide     " Hide mouse after chars typed
 set ww=b,s,<,>
 set splitbelow
 set splitright
-" Status line
-set statusline=[%04l-%04L,%04v]\ %F%m%r%h%w\ %p%% " Custom status line
 " UTF8
 set ffs=unix,dos
 set enc=utf-8
@@ -79,72 +78,44 @@ ab cl console.log(
 
 " save time
 nnoremap ; :
-
 " turn of search hightlight
 nmap <silent> \/ :nohlsearch<CR>
-
 " save file whether in insert or normal mode
 inoremap <leader>s <c-o>:w<cr><esc>
 nnoremap <leader>s :w<cr>
-
 " Tabs
 nnoremap <silent> <LocalLeader>[ :tabprev<CR>
 nnoremap <silent> <LocalLeader>] :tabnext<CR>
-
-
 " Duplication
 vnoremap <silent> <LocalLeader>= yP
 nnoremap <silent> <LocalLeader>= YP
-
 " Split line(opposite to S-J joining line)
 nnoremap <silent> <C-J> gEa<CR><ESC>ew
-
 " Session
 let sessionman_save_on_exit = 1
 noremap <unique> <Leader>ss :SessionSave<CR>
 noremap <unique> <Leader>sl :SessionList<CR>
 noremap <unique> <Leader>so :SessionOpen
-
 " Copy past word
 noremap <unique> <Leader>y viw"py
 noremap <unique> <Leader>p viw"pp
-
 " Only higlight on #
 nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
-
 " Make
 nnoremap <unique> <Leader>m :!make<CR>
-
 " Switch window
 map <Tab> <C-w>
-
 " Resize window
 nnoremap <unique> <C-UP> 4<C-w>+
 nnoremap <unique> <C-DOWN> 4<C-w>-
 nnoremap <unique> <C-LEFT> 4<C-w><
 nnoremap <unique> <C-RIGHT> 4<C-w>>
-
 " generate HTML version current buffer using current color scheme
 map <silent> <LocalLeader>2h :runtime! syntax/2html.vim<CR>
-
 " Comment
 map <C-c> \c j
-
 " Macro
 map <F2> @a
-
-" CommandT
-let g:CommandTMaxHeight=10
-let g:CommandTMinHeight=10
-
-" NeerdTree
-noremap <unique> <Leader>r :NERDTreeToggle<CR>
-
-" Tabular
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>a: :Tabularize /:<CR>
 
 " Syntastic
 let g:syntastic_auto_loc_list=0
@@ -234,50 +205,54 @@ endfunction
 au BufNewFile,BufRead *.as set ft=actionscript
 au BufNewFile,BufRead *.json set ft=json
 au BufRead,BufNewFile *.md,*.mkd,*.markdown set ft=markdown
-au BufRead,BufNewFile Gemfile,Rakefile,Capfile,*.rake,config.ru set ft=ruby
+au BufRead,BufNewFile Gemfile,Rakefile,Capfile,*.rake,*.rb,*.erb,config.ru set ft=ruby
 au BufRead,BufNewFile * call SetupEnvironment()
 
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
-Bundle "L9"
-Bundle "FuzzyFinder"
-Bundle "elzr/vim-json "
-Bundle "tpope/vim-ragtag"
-Bundle 'vim-scripts/sessionman.vim'
-Bundle "tpope/vim-markdown"
-Bundle "tpope/vim-speeddating"
-Bundle "tpope/vim-endwise"
-Bundle "tpope/vim-afterimage"
-Bundle 'gmarik/vundle'
-Bundle "tpope/vim-rails"
-Bundle "tpope/vim-bundler"
-Bundle 'inside/actionscript.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'godlygeek/tabular'
-Bundle 'thoughtbot/vim-rspec'
-Bundle "yaymukund/vim-rabl"
-Bundle "gmarik/vim-visual-star-search"
-Bundle "wincent/Command-T"
-Bundle "rstacruz/sparkup", {'rtp': 'vim/'}
-Bundle 'majutsushi/tagbar'
-map <Leader>g :TagbarToggle()<CR>
-Bundle "sjl/gundo.vim"
+Plugin 'L9'
+Plugin 'tpope/vim-markdown'
+Plugin 'elzr/vim-json'
+Plugin 'tpope/vim-ragtag'
+Plugin 'tpope/vim-speeddating'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-afterimage'
+Plugin 'vim-scripts/sessionman.vim'
+Plugin 'Syntastic'
+Plugin 'FuzzyFinder'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'AndrewRadev/vim-eco'
+Plugin 'gmarik/vundle'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-bundler'
+Plugin 'inside/actionscript.vim'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'yaymukund/vim-rabl'
+Plugin 'gmarik/vim-visual-star-search'
+Plugin 'scrooloose/nerdtree'
+noremap <unique> <Leader>r :NERDTreeToggle<CR>
+Plugin 'wincent/Command-T'
+let g:CommandTMaxHeight=10
+let g:CommandTMinHeight=10
+Plugin 'bling/vim-airline'
+let g:airline_theme = 'badwolf'
+Plugin 'sjl/gundo.vim'
 nnoremap <F5> :GundoToggle<CR>
-Bundle "tComment"
+Plugin 'tComment'
 nnoremap // :TComment<CR>j
 vnoremap // :TComment<CR>j
-Bundle 'Shougo/vimproc.vim'
-map <Leader>d :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-let g:rspec_command = "!zeus rspec {spec}"
-Bundle "tpope/vim-fugitive"
+Plugin 'godlygeek/tabular'
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:<CR>
+vmap <Leader>a: :Tabularize /:<CR>
+Plugin 'tpope/vim-fugitive'
 nnoremap <leader>Gg :Ggrep<SPACE>
 nnoremap <leader>Gd :Gdiff<cr>
 " switch back to current file and closes fugitive buffer
 nnoremap <leader>GD :diffoff!<cr><C-W>h:bd<cr>
 
+call vundle#end()
 filetype plugin indent on

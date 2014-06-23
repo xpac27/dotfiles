@@ -3,5 +3,5 @@
 .vim/swap
 .vim/tags
 .vim/doc/tags
-.vim/bundle/*
+.vim/bundle/
 !.vim/bundle/vundle
