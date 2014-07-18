@@ -47,12 +47,12 @@ set ruler                      " Show ruler
 set showcmd                    " Display an incomplete command in the lower right corner of the Vim window
 set mouse-=a                   " Disable mouse
 set mousehide                  " Hide mouse after chars typed
-setlocal expandtab " Indent
-setlocal smarttab
-setlocal shiftround
-setlocal autoindent
-setlocal softtabstop=4
-setlocal shiftwidth=4
+set expandtab " Indent
+set smarttab
+set shiftround
+set autoindent
+set softtabstop=4
+set shiftwidth=4
 set autoindent
 set cindent
 set cinoptions=:s,ps,ts,cs
@@ -167,29 +167,15 @@ noremap <F6> :FufFile<CR>
 let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sassc|sw[po])$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|.*[/\\]$'
 let g:fuf_ignoreCase = 1
 let g:fuf_abbrevMap = {
-\   "^kp" : [
-\       "~/King/kingdom-views-as3/package/src",
-\       "~/King/kingdom-views-as3/package/src/**/",
-\   ],
-\   "^ks" : [
-\       "~/King/kingdom-views-as3/sample/src",
-\       "~/King/kingdom-views-as3/sample/src/**/",
-\   ],
-\   "^kr" : [
-\       "~/King/kingdom-views-as3/resources",
-\       "~/King/kingdom-views-as3/resources/**/",
-\   ],
-\   "^s" : [
-\       "~/King/spaceland/src/com/king/flash/spaceland",
-\       "~/King/spaceland/src/com/king/flash/spaceland/**/",
-\   ],
-\   "^f" : [
-\       "~/King/flatland/src/com/king/flash/flatland",
-\       "~/King/flatland/src/com/king/flash/flatland/**/",
-\   ],
-\   "^p" : [
-\       "~/King/plataforma/trunk/flash/src/com/king/platform",
-\       "~/King/plataforma/trunk/flash/src/com/king/platform/**/",
+\   "^" : [
+\       "~/King/kingdom_views/trunk/web/kingdom-views/js/src",
+\       "~/King/kingdom_views/trunk/web/kingdom-views/js/src/**/",
+\       "~/King/kingdom_views/trunk/web/kingdom-views/js/test",
+\       "~/King/kingdom_views/trunk/web/kingdom-views/js/test/**/",
+\       "~/King/kingdom_views/trunk/web/less",
+\       "~/King/kingdom_views/trunk/web/less/**/",
+\       "~/King/kingdom_views/trunk/web/kingdom-views/template",
+\       "~/King/kingdom_views/trunk/web/kingdom-views/template/**/",
 \   ],
 \ }
 
