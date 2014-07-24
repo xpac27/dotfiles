@@ -73,7 +73,7 @@ ab   pr   private
 ab   pt   protected
 ab   pu   public
 ab   st   static
-ab   cl   console.log(
+ab   cl   console.log
 
 " save time
 nnoremap ; :
@@ -170,12 +170,12 @@ let g:fuf_abbrevMap = {
 \   "^" : [
 \       "~/King/kingdom_views/trunk/web/kingdom-views/js/src",
 \       "~/King/kingdom_views/trunk/web/kingdom-views/js/src/**/",
-\       "~/King/kingdom_views/trunk/web/kingdom-views/js/test",
-\       "~/King/kingdom_views/trunk/web/kingdom-views/js/test/**/",
+\       "~/King/kingdom_views/trunk/web/kingdom-views/js/test/spec",
+\       "~/King/kingdom_views/trunk/web/kingdom-views/js/test/spec/**/",
 \       "~/King/kingdom_views/trunk/web/less",
 \       "~/King/kingdom_views/trunk/web/less/**/",
-\       "~/King/kingdom_views/trunk/web/kingdom-views/template",
-\       "~/King/kingdom_views/trunk/web/kingdom-views/template/**/",
+\       "~/King/kingdom_views/trunk/web/kingdom-views/templates",
+\       "~/King/kingdom_views/trunk/web/kingdom-views/templates/**/",
 \   ],
 \ }
 
