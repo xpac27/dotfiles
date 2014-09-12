@@ -128,6 +128,7 @@ map <silent> <LocalLeader>2h :runtime! syntax/2html.vim<CR>
 map <F2> @a
 
 " Syntastic
+let g:syntastic_actionscript_mxmlc_exe = 'fcshctl mxmlc'
 let g:syntastic_auto_loc_list=0
 let g:syntastic_mode_map={ 'mode': 'active',
 \   'active_filetypes': [],

@@ -36,6 +36,11 @@ alias fl='tail -F ~/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.t
 alias de='ssh -A vincentc@dev4.int.midasplayer.com'
 alias kd='ssh -A kingdom@kingdom.qa.midasplayer.com'
 
+alias svnd='svn diff --no-diff-deleted --show-copies-as-adds | colordiff | less'
+alias svnl='svn log | less'
+alias svns='colorsvn status'
+alias svndiff='svn diff --diff-cmd=/Users/vincent.cogne/svndiff.sh'
+
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
