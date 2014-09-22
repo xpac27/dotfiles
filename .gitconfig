@@ -3,7 +3,7 @@
   email = xpac27@gmail.com
 
 [core]
-  editor = vi
+  editor = vim
   quotepath = false
 	excludesfile = /Users/vincent.cogne/.gitignore_global
 
@@ -27,7 +27,7 @@
   openbug = !/usr/local/bin/dm_openbug.sh
   closebug = !/usr/local/bin/dm_closebug.sh
   untracked = !/usr/local/bin/dm_untracked.sh
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
 [color]
   ui = auto

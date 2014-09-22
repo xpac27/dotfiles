@@ -128,11 +128,9 @@ map <silent> <LocalLeader>2h :runtime! syntax/2html.vim<CR>
 map <F2> @a
 
 " Syntastic
-let g:syntastic_actionscript_mxmlc_exe = 'fcshctl mxmlc'
+let g:syntastic_actionscript_mxmlc_exe = 'fcshctl mxmlc -source-path=src '
 let g:syntastic_auto_loc_list=0
-let g:syntastic_mode_map={ 'mode': 'active',
-\   'active_filetypes': [],
-\   'passive_filetypes': ['xhtml'] }
+let g:syntastic_mode_map={ 'mode': 'active', 'passive_filetypes': ['xhtml'] }
 
 " Command-T
 let g:CommandTMaxHeight=10
@@ -169,14 +167,16 @@ let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sassc
 let g:fuf_ignoreCase = 1
 let g:fuf_abbrevMap = {
 \   "^" : [
-\       "~/King/kingdom_views/trunk/web/kingdom-views/js/src",
-\       "~/King/kingdom_views/trunk/web/kingdom-views/js/src/**/",
-\       "~/King/kingdom_views/trunk/web/kingdom-views/js/test/spec",
-\       "~/King/kingdom_views/trunk/web/kingdom-views/js/test/spec/**/",
-\       "~/King/kingdom_views/trunk/web/less",
-\       "~/King/kingdom_views/trunk/web/less/**/",
-\       "~/King/kingdom_views/trunk/web/kingdom-views/templates",
-\       "~/King/kingdom_views/trunk/web/kingdom-views/templates/**/",
+\       "~/King/kingdom-profile/packages/web/js/src",
+\       "~/King/kingdom-profile/packages/web/js/src/**/",
+\       "~/King/kingdom-profile/packages/web/js/test",
+\       "~/King/kingdom-profile/packages/web/js/test/**/",
+\       "~/King/kingdom-profile/packages/web/less",
+\       "~/King/kingdom-profile/packages/web/less/**/",
+\       "~/King/kingdom-profile/packages/web/templates",
+\       "~/King/kingdom-profile/packages/web/templates/**/",
+\       "~/King/kingdom-profile/packages/web",
+\       "~/King/kingdom-profile/packages/web/kingdom",
 \   ],
 \ }
 

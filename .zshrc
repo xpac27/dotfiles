@@ -25,8 +25,9 @@ source $ZSH/oh-my-zsh.sh
 
 export LC_CTYPE=en_US.UTF-8
 export LANG=en_US.UTF-8
-export EDITOR='vim'
+export EDITOR='/usr/local/bin/vim'
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+export JAVA_HOME="$(/usr/libexec/java_home)"
 
 set ttymouse=sgr
 
