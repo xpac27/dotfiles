@@ -138,6 +138,7 @@ let g:CommandTMinHeight=10
 
 " Airline
 let g:airline_theme = 'badwolf'
+let g:airline#extensions#branch#enabled = 0
 
 " T Comment
 nnoremap // :TComment<CR>j
