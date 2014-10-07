@@ -168,16 +168,16 @@ let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sassc
 let g:fuf_ignoreCase = 1
 let g:fuf_abbrevMap = {
 \   "^" : [
-\       "~/King/kingdom-profile/packages/web/js/test",
-\       "~/King/kingdom-profile/packages/web/js/test/**/",
-\       "~/King/kingdom-profile/packages/web/js/src",
-\       "~/King/kingdom-profile/packages/web/js/src/**/",
-\       "~/King/kingdom-profile/packages/web/less",
-\       "~/King/kingdom-profile/packages/web/less/**/",
-\       "~/King/kingdom-profile/packages/web/templates",
-\       "~/King/kingdom-profile/packages/web/templates/**/",
-\       "~/King/kingdom-profile/packages/web",
+\       "~/King/kingdom-profile/packages/web/kingdom/js/test",
+\       "~/King/kingdom-profile/packages/web/kingdom/js/test/**/",
+\       "~/King/kingdom-profile/packages/web/kingdom/js/src",
+\       "~/King/kingdom-profile/packages/web/kingdom/js/src/**/",
+\       "~/King/kingdom-profile/packages/web/kingdom/less",
+\       "~/King/kingdom-profile/packages/web/kingdom/less/**/",
+\       "~/King/kingdom-profile/packages/web/kingdom/templates",
+\       "~/King/kingdom-profile/packages/web/kingdom/templates/**/",
 \       "~/King/kingdom-profile/packages/web/kingdom",
+\       "~/King/kingdom-profile/packages/web",
 \   ],
 \ }
 
