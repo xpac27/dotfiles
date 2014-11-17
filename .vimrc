@@ -168,8 +168,8 @@ let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sassc
 let g:fuf_ignoreCase = 1
 let g:fuf_abbrevMap = {
 \   "^" : [
-\       "~/King/kingdom-profile/packages/web/kingdom/js/test",
-\       "~/King/kingdom-profile/packages/web/kingdom/js/test/**/",
+\       "~/King/kingdom-profile/packages/as3/src",
+\       "~/King/kingdom-profile/packages/as3/src/**/",
 \       "~/King/kingdom-profile/packages/web/kingdom/js/src",
 \       "~/King/kingdom-profile/packages/web/kingdom/js/src/**/",
 \       "~/King/kingdom-profile/packages/web/kingdom/less",

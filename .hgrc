@@ -1,6 +1,10 @@
 [ui]
 username = Vincent Cogne <vincent.cogne@king.com>
 editor = vim
+commitsubrepos = True
+
+[phases]
+checksubrepos = abort
 
 [pager]
 pager = LESS='FRX' less
@@ -13,6 +17,8 @@ pager =
 color =
 purge =
 eol =
+graphlog =
+largefiles =
 
 [alias]
 br = branches
