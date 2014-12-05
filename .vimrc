@@ -51,9 +51,9 @@ set expandtab " Indent
 set smarttab
 set shiftround
 set autoindent
+set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set autoindent
 set cindent
 set cinoptions=:s,ps,ts,cs
 set cinwords=if,else,elsif,when,while,do,for,switch,case
@@ -187,19 +187,36 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "norma
 " force actionscript on as files
 au BufNewFile,BufRead *.as set ft=actionscript
 
+" set zimbu filetype
+au! BufNewFile,BufRead *.zu setf zimbu
+
+" local lvimrc
+function SetLocalOptions(fname)
+    let dirname = fnamemodify(a:fname, ":p:h")
+    while "/" != dirname
+        let lvimrc  = dirname . "/.lvimrc"
+        if filereadable(lvimrc)
+            execute "source " . lvimrc
+            break
+        endif
+        let dirname = fnamemodify(dirname, ":p:h:h")
+    endwhile
+endfunction
+
+" CTAGS
+autocmd FileType actionscript :set tags=as3.tags
+
+au BufNewFile,BufRead * call SetLocalOptions(bufname("%"))
+
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 
 Plugin 'L9'
 
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-markdown'
-Plugin 'tpope/vim-speeddating'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-ragtag'
 
+" Syntaxes
+Plugin 'tpope/vim-markdown'
 Plugin 'elzr/vim-json'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'inside/actionscript.vim'
@@ -207,19 +224,27 @@ Plugin 'yaymukund/vim-rabl'
 Plugin 'AndrewRadev/vim-eco'
 Plugin 'groenewege/vim-less'
 
-Plugin 'vim-scripts/sessionman.vim'
-Plugin 'vim-scripts/tComment'
+" Searching
 Plugin 'vim-scripts/FuzzyFinder'
-Plugin 'vim-scripts/Local-configuration'
-Plugin 'gmarik/vundle'
-Plugin 'gmarik/vim-visual-star-search'
-Plugin 'mattn/emmet-vim'
-Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
-Plugin 'godlygeek/tabular'
 Plugin 'wincent/Command-T'
-Plugin 'bling/vim-airline'
+
+" Big features
+Plugin 'gmarik/vundle'
 Plugin 'sjl/gundo.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-scripts/sessionman.vim'
+Plugin 'scrooloose/syntastic'
+
+" Formating
+Plugin 'tpope/vim-speeddating'
+Plugin 'tpope/vim-endwise'
+Plugin 'vim-scripts/tComment'
+Plugin 'godlygeek/tabular'
+
+" UI
+Plugin 'bling/vim-airline'
+Plugin 'gmarik/vim-visual-star-search'
 
 call vundle#end()
 filetype plugin indent on
