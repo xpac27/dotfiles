@@ -166,20 +166,6 @@ let g:user_emmet_leader_key = '<leader>,'
 noremap <F6> :FufFile<CR>
 let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sassc|sw[po])$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|.*[/\\]$'
 let g:fuf_ignoreCase = 1
-let g:fuf_abbrevMap = {
-\   "^" : [
-\       "~/King/kingdom-profile/packages/as3/src",
-\       "~/King/kingdom-profile/packages/as3/src/**/",
-\       "~/King/kingdom-profile/packages/web/kingdom/js/src",
-\       "~/King/kingdom-profile/packages/web/kingdom/js/src/**/",
-\       "~/King/kingdom-profile/packages/web/kingdom/less",
-\       "~/King/kingdom-profile/packages/web/kingdom/less/**/",
-\       "~/King/kingdom-profile/packages/web/kingdom/templates",
-\       "~/King/kingdom-profile/packages/web/kingdom/templates/**/",
-\       "~/King/kingdom-profile/packages/web/kingdom",
-\       "~/King/kingdom-profile/packages/web",
-\   ],
-\ }
 
 " restore position in file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
@@ -204,7 +190,7 @@ function SetLocalOptions(fname)
 endfunction
 
 " CTAGS
-autocmd FileType actionscript :set tags=as3.tags
+set tags=./tags;/
 
 au BufNewFile,BufRead * call SetLocalOptions(bufname("%"))
 
@@ -214,12 +200,18 @@ call vundle#begin()
 
 Plugin 'L9'
 
+" Big features
+Plugin 'gmarik/vundle'
+Plugin 'sjl/gundo.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-scripts/sessionman.vim'
+Plugin 'scrooloose/syntastic'
 
 " Syntaxes
 Plugin 'tpope/vim-markdown'
 Plugin 'elzr/vim-json'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'inside/actionscript.vim'
+Plugin 'jeroenbourgois/vim-actionscript'
 Plugin 'yaymukund/vim-rabl'
 Plugin 'AndrewRadev/vim-eco'
 Plugin 'groenewege/vim-less'
@@ -228,13 +220,6 @@ Plugin 'groenewege/vim-less'
 Plugin 'vim-scripts/FuzzyFinder'
 Plugin 'scrooloose/nerdtree'
 Plugin 'wincent/Command-T'
-
-" Big features
-Plugin 'gmarik/vundle'
-Plugin 'sjl/gundo.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'vim-scripts/sessionman.vim'
-Plugin 'scrooloose/syntastic'
 
 " Formating
 Plugin 'tpope/vim-speeddating'
