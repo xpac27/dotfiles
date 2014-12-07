@@ -21,6 +21,7 @@ do
         $I == '..' || \
         $I == '.git' || \
         $I == '.gitignore' || \
+        $I == 'taggen.sh' || \
         $I == $(basename $0) ]]
     then
         continue

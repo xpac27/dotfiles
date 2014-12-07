@@ -191,6 +191,18 @@ endfunction
 
 " CTAGS
 set tags=./tags;/
+" set tags+=~/.vim/tags/gl
+" set tags+=~/.vim/tags/sfml
+" set tags+=~/.vim/tags/cpp
+" set tags+=~/.vim/tags/std
+
+" Rip-Rip/clang_complete
+let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/"
+let g:clang_close_preview = 1
+let g:clang_snippets = 1
+let g:clang_snippets_engine = 'clang_complete'
+let g:clang_auto_select = 1
+set completeopt=menuone
 
 au BufNewFile,BufRead * call SetLocalOptions(bufname("%"))
 
