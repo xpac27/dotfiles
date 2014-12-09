@@ -129,8 +129,16 @@ map <F2> @a
 
 " Syntastic
 let g:syntastic_actionscript_mxmlc_exe = 'fcshctl mxmlc -source-path=src '
-let g:syntastic_auto_loc_list=0
 let g:syntastic_mode_map={ 'mode': 'active', 'passive_filetypes': ['xhtml'] }
+let g:syntastic_auto_loc_list=0
+let g:syntastic_cpp_check_header = 1
+let g:syntastic_enable_signs=1
+let g:syntastic_check_on_open=0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_actionscript_checkers = ['mxmlc']
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_ruby_checkers = ['rubylint']
+" let g:syntastic_ruby_checkers = ['rubylint', 'rubocop']
 
 " Command-T
 let g:CommandTMaxHeight=10
