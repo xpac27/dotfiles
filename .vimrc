@@ -135,7 +135,6 @@ let g:syntastic_cpp_check_header = 1
 let g:syntastic_enable_signs=1
 let g:syntastic_check_on_open=0
 let g:syntastic_check_on_wq = 0
-let g:syntastic_actionscript_checkers = ['mxmlc']
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_ruby_checkers = ['rubylint']
 " let g:syntastic_ruby_checkers = ['rubylint', 'rubocop']
