@@ -121,6 +121,16 @@ nnoremap <unique> <C-DOWN> 4<C-w>-
 nnoremap <unique> <C-LEFT> 4<C-w><
 nnoremap <unique> <C-RIGHT> 4<C-w>>
 
+" Giff diff in place
+function! GitDiff_start()
+    exe "silent vnew HEAD:% | execute 'read !git show %' | set ro | windo diffthis | wincmd h | 0"
+endfunction
+function! GitDiff_stop()
+    exe "wincmd h | windo diffoff | wincmd l | q!"
+endfunction
+nmap <leader>gd :call GitDiff_start()<CR>
+nmap <leader>gx :call GitDiff_stop()<CR>
+
 " generate HTML version current buffer using current color scheme
 map <silent> <LocalLeader>2h :runtime! syntax/2html.vim<CR>
 
