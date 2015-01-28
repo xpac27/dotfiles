@@ -214,13 +214,18 @@ set tags=./tags;/
 " set tags+=~/.vim/tags/std
 
 " Rip-Rip/clang_complete
-let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/"
-let g:clang_close_preview = 1
-let g:clang_snippets = 1
-let g:clang_snippets_engine = 'clang_complete'
-let g:clang_auto_select = 1
-let g:clang_use_library = 1
-set completeopt=menuone
+" let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/"
+" let g:clang_close_preview = 1
+" let g:clang_snippets = 1
+" let g:clang_snippets_engine = 'clang_complete'
+" let g:clang_auto_select = 1
+" let g:clang_use_library = 1
+" set completeopt=menuone
+
+" YOU COMPLETE ME
+let g:ycm_collect_identifiers_from_tags_files = 0
+let g:ycm_confirm_extra_conf = 1
+let g:ycm_global_ycm_extra_conf="~/.ycm_extra_conf.py"
 
 au BufNewFile,BufRead * call SetLocalOptions(bufname("%"))
 
@@ -236,6 +241,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/sessionman.vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'valloric/YouCompleteMe'
 
 " Syntaxes
 Plugin 'tpope/vim-markdown'
