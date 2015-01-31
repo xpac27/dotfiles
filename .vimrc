@@ -59,6 +59,10 @@ set cinoptions=:s,ps,ts,cs
 set cinwords=if,else,elsif,when,while,do,for,switch,case
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
+set spell spelllang=en_us
+set complete+=kspell
+
+autocmd BufEnter *.vimrc  set nospell
 
 colorscheme smyck
 syntax on
@@ -139,15 +143,19 @@ map <F2> @a
 
 " Syntastic
 let g:syntastic_actionscript_mxmlc_exe = 'fcshctl mxmlc -source-path=src '
-let g:syntastic_mode_map={ 'mode': 'active', 'passive_filetypes': ['xhtml'] }
 let g:syntastic_auto_loc_list=0
-let g:syntastic_cpp_check_header = 1
 let g:syntastic_enable_signs=1
-let g:syntastic_check_on_open=0
+let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_ruby_checkers = ['rubylint']
-" let g:syntastic_ruby_checkers = ['rubylint', 'rubocop']
+let g:syntastic_error_symbol = 'xx'
+let g:syntastic_warning_symbol = 'vv'
+let g:syntastic_mode_map = {
+    \ 'mode': 'active',
+    \ 'active_filetypes': ['javascript'],
+    \ 'passive_filetypes': ['c', 'cpp', 'java', 'xhtml']
+\ }
 
 " Command-T
 let g:CommandTMaxHeight=10
@@ -175,9 +183,6 @@ nnoremap <leader>GD :diffoff!<cr><C-W>h:bd<cr>
 
 " NerdTree
 noremap <F5> :NERDTreeToggle<CR>
-
-" Emmet
-let g:user_emmet_leader_key = '<leader>,'
 
 " FuzzyFinder
 noremap <F6> :FufFile<CR>
@@ -213,19 +218,18 @@ set tags=./tags;/
 " set tags+=~/.vim/tags/cpp
 " set tags+=~/.vim/tags/std
 
-" Rip-Rip/clang_complete
-" let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/"
-" let g:clang_close_preview = 1
-" let g:clang_snippets = 1
-" let g:clang_snippets_engine = 'clang_complete'
-" let g:clang_auto_select = 1
-" let g:clang_use_library = 1
-" set completeopt=menuone
-
 " YOU COMPLETE ME
-let g:ycm_collect_identifiers_from_tags_files = 0
-let g:ycm_confirm_extra_conf = 1
+" let g:ycm_collect_identifiers_from_tags_files = 0
+" let g:ycm_confirm_extra_conf = 1
 let g:ycm_global_ycm_extra_conf="~/.ycm_extra_conf.py"
+let g:ycm_filetype_blacklist = {'vim' : 1}
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+
+" ULTISNIPS
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 au BufNewFile,BufRead * call SetLocalOptions(bufname("%"))
 
@@ -242,6 +246,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/sessionman.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 " Syntaxes
 Plugin 'tpope/vim-markdown'
@@ -258,7 +264,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'wincent/Command-T'
 
 " Formating
-Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-endwise'
 Plugin 'vim-scripts/tComment'
 Plugin 'godlygeek/tabular'
@@ -269,3 +274,24 @@ Plugin 'gmarik/vim-visual-star-search'
 
 call vundle#end()
 filetype plugin indent on
+
+
+" BACKUP 1 
+" Plugin 'Rip-Rip/clang_complete'
+" Plugin 'terhechte/syntastic'
+" Rip-Rip/clang_complete
+" let g:clang_complete_auto = 1
+" let g:clang_use_library = 1
+" let g:clang_periodic_quickfix = 0
+" let g:clang_close_preview = 1
+" let g:clang_snippets = 1
+" let g:clang_snippets_engine = 'ultisnips'
+" let g:clang_exec =         '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang'
+" let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
+" needed for syntastic (use terhechte/syntastic)
+" let g:syntastic_cpp_config_file = '.clang_complete'
+
+" BACKUP 2 
+" Tag based completion
+" Plugin 'vim-scripts/OmniCppComplete'
+" Plugin 'ervandew/supertab'
