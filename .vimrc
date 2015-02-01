@@ -35,11 +35,13 @@
     Plugin 'vim-scripts/FuzzyFinder'
     Plugin 'scrooloose/nerdtree'
     Plugin 'wincent/Command-T'
+    Plugin 'mileszs/ack.vim'
 
     " Formating
     Plugin 'tpope/vim-endwise'
     Plugin 'vim-scripts/tComment'
     Plugin 'godlygeek/tabular'
+    Plugin 'terryma/vim-multiple-cursors'
 
     " UI
     Plugin 'bling/vim-airline'
@@ -362,9 +364,8 @@
 
     " Fugitive
     " -------------------------------------------------------------------------
-    nnoremap <leader>Gg :Ggrep<SPACE>
-    nnoremap <leader>Gd :Gdiff<cr>
-    nnoremap <leader>GD :diffoff!<cr><C-W>h:bd<cr>
+    nnoremap <leader>gd :Gdiff<cr>
+    nnoremap <leader>gD :diffoff!<cr><C-W>h:bd<cr>
 
     " NERD Tree
     " -------------------------------------------------------------------------
@@ -417,4 +418,4 @@
     " Plugin 'vim-scripts/OmniCppComplete'
     " Plugin 'ervandew/supertab'
 
-" }}}
+
