@@ -63,6 +63,7 @@ set spell spelllang=en_us
 set complete+=kspell
 
 autocmd BufEnter *.vimrc  set nospell
+autocmd BufEnter *.as  set nospell
 
 colorscheme smyck
 syntax on
@@ -145,7 +146,7 @@ map <F2> @a
 let g:syntastic_actionscript_mxmlc_exe = 'fcshctl mxmlc -source-path=src '
 let g:syntastic_auto_loc_list=0
 let g:syntastic_enable_signs=1
-let g:syntastic_check_on_open=1
+let g:syntastic_check_on_open=0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_ruby_checkers = ['rubylint']
