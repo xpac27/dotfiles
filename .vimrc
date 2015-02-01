@@ -1,291 +1,420 @@
-set nocompatible      " This must be first, because it changes other options as side effect
-set ttyfast           " improve drawing
-set lazyredraw        " do not redraw while running macros
-set autoread          " detect file changes
-set title             " change the terminal's title
-set noequalalways     " do not auto resize closed and oppened splits
-set pastetoggle=<F10> " toggle between paste and normal: for 'safer' pasting from keyboard
-set timeoutlen=250    " Time to wait after ESC (default causes an annoying delay)
-set tabpagemax=999    " let me tab as much as I want
-set t_Co=256
-set background=dark
-set backup
-set writebackup
-set hidden      " The current buffer can be put to the background without writing to disk
-set hlsearch    " highlight search
-set ignorecase  " Do case in sensitive matching with
-set smartcase   " be sensitive when there's a capital letter
-set incsearch   " start searching imediatly
-set fo+=o       " Automatically insert the current comment leader after hitting 'o' or 'O' in Normal mode.
-set fo-=r       " Do not automatically insert a comment leader after an enter
-set fo-=t       " Do no auto-wrap text using textwidth (does not apply to comments)
-set textwidth=0 " Don't wrap lines by default
-set nowrap
-set ffs=unix,dos
-set enc=utf-8
-set ww=b,s,<,>
-set history=1000
-set undolevels=1000
-set maxmem=2000000
-set maxmemtot=2000000
-set scrolloff=3
-set scrolljump=3
-set splitbelow
-set splitright
-set wildmenu
-set wildmode=longest,list      " At command line, complete longest common string, then list alternatives.
-set backspace=indent,eol,start " more powerful backspacing
-filetype plugin indent on      " Automatically detect file types.
-set number                     " Line numbers
-set showmatch                  " Show matching brackets.
-set matchtime=5                " Bracket blinking.
-set novisualbell               " No blinking
-set noerrorbells               " No noise.
-set laststatus=2               " Always show status line
-set vb t_vb=                   " disable any beeps or flashes on error
-set ruler                      " Show ruler
-set showcmd                    " Display an incomplete command in the lower right corner of the Vim window
-set mouse-=a                   " Disable mouse
-set mousehide                  " Hide mouse after chars typed
-set expandtab " Indent
-set smarttab
-set shiftround
-set autoindent
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set cindent
-set cinoptions=:s,ps,ts,cs
-set cinwords=if,else,elsif,when,while,do,for,switch,case
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
-set spell spelllang=en_us
-set complete+=kspell
 
-autocmd BufEnter *.vimrc  set nospell
-autocmd BufEnter *.as  set nospell
+" .vimrc
 
-colorscheme smyck
-syntax on
+" BASICS & BUNDLES ------------------------- {{{
 
-ia   feild    field
-ia   flase    false
-ia   lenght   length
-ia   toogle   toggle
+    set nocompatible
+    filetype off
+    filetype plugin indent off
 
-ab   fu   function
-ab   pr   private
-ab   pt   protected
-ab   pu   public
-ab   st   static
-ab   cl   console.log
+    set rtp+=~/.vim/bundle/Vundle.vim/
+    call vundle#begin()
 
-" save time
-nnoremap ; :
+    Plugin 'L9'
 
-" turn of search hightlight
-nmap <silent> \/ :nohlsearch<CR>
+    " Big features
+    Plugin 'gmarik/vundle'
+    Plugin 'sjl/gundo.vim'
+    Plugin 'tpope/vim-fugitive'
+    Plugin 'vim-scripts/sessionman.vim'
+    Plugin 'scrooloose/syntastic'
+    Plugin 'valloric/YouCompleteMe'
+    Plugin 'SirVer/ultisnips'
+    Plugin 'honza/vim-snippets'
 
-" save file whether in insert or normal mode
-inoremap <leader>s <c-o>:w<cr><esc>
-nnoremap <leader>s :w<cr>
+    " Syntaxes
+    Plugin 'tpope/vim-markdown'
+    Plugin 'elzr/vim-json'
+    Plugin 'kchmck/vim-coffee-script'
+    Plugin 'jeroenbourgois/vim-actionscript'
+    Plugin 'yaymukund/vim-rabl'
+    Plugin 'AndrewRadev/vim-eco'
+    Plugin 'groenewege/vim-less'
 
-" Tabs
-nnoremap <silent> <LocalLeader>[ :tabprev<CR>
-nnoremap <silent> <LocalLeader>] :tabnext<CR>
+    " Searching
+    Plugin 'vim-scripts/FuzzyFinder'
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'wincent/Command-T'
 
-" Duplication
-vnoremap <silent> <LocalLeader>= yP
-nnoremap <silent> <LocalLeader>= YP
+    " Formating
+    Plugin 'tpope/vim-endwise'
+    Plugin 'vim-scripts/tComment'
+    Plugin 'godlygeek/tabular'
 
-" Split line (opposite to S-J joining line)
-nnoremap <silent> <C-J> gEa<CR><ESC>ew
+    " UI
+    Plugin 'bling/vim-airline'
+    Plugin 'gmarik/vim-visual-star-search'
 
-" Session
-let sessionman_save_on_exit = 1
-noremap <unique> <Leader>ss :SessionSave<CR>
-noremap <unique> <Leader>sl :SessionList<CR>
-noremap <unique> <Leader>so :SessionOpen
+    call vundle#end()
+    filetype plugin indent on
+    syntax on
 
-" Copy past word
-noremap <unique> <Leader>y viw"py
-noremap <unique> <Leader>p viw"pp
+" }}}
 
-" Only higlight on #
-nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+" AUTOCOMMANDS ----------------------------- {{{
 
-" Make
-nnoremap <unique> <Leader>m :!make<CR>
+    augroup vim_stuff
+        au!
 
-" Switch window
-map <Tab> <C-w>
+        " source local vimrc
+        au BufNewFile,BufRead * call SetLocalOptions(bufname("%"))
 
-" Resize window
-nnoremap <unique> <C-UP> 4<C-w>+
-nnoremap <unique> <C-DOWN> 4<C-w>-
-nnoremap <unique> <C-LEFT> 4<C-w><
-nnoremap <unique> <C-RIGHT> 4<C-w>>
+        " disable spell checking
+        au BufEnter *.vimrc  set nospell
+        au BufEnter *.as  set nospell
 
-" YCM GoTo
-nnoremap <leader>jd :YcmCompleter GoTo<CR>
+        " restore position in file
+        au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
 
-" generate HTML version current buffer using current color scheme
-map <silent> <LocalLeader>2h :runtime! syntax/2html.vim<CR>
+        " force actionscript on as files
+        au BufNewFile,BufRead *.as set ft=actionscript
 
-" Macro
-map <F2> @a
+        " set zimbu filetype
+        au! BufNewFile,BufRead *.zu setf zimbu
 
-" Syntastic
-let g:syntastic_actionscript_mxmlc_exe = 'fcshctl mxmlc -source-path=src '
-let g:syntastic_auto_loc_list=0
-let g:syntastic_enable_signs=1
-let g:syntastic_check_on_open=0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_ruby_checkers = ['rubylint']
-let g:syntastic_error_symbol = 'xx'
-let g:syntastic_warning_symbol = 'vv'
-let g:syntastic_mode_map = {
-    \ 'mode': 'active',
-    \ 'active_filetypes': ['javascript'],
-    \ 'passive_filetypes': ['c', 'cpp', 'java', 'xhtml']
-\ }
+    augroup END
 
-" Command-T
-let g:CommandTMaxHeight=10
-let g:CommandTMinHeight=10
+" }}}
 
-" Airline
-let g:airline_theme = 'badwolf'
-let g:airline#extensions#branch#enabled = 0
+" OPTIONS ---------------------------------- {{{
 
-" T Comment
-nnoremap // :TComment<CR>j
-vnoremap // :TComment<CR>j
+    let html_no_rendering = 1
 
-" Tabularize
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>a: :Tabularize /:<CR>
+    " colors
+    colorscheme smyck
+    set background=dark
 
-" Fugitive
-nnoremap <leader>Gg :Ggrep<SPACE>
-nnoremap <leader>Gd :Gdiff<cr>
-" switch back to current file and closes fugitive buffer
-nnoremap <leader>GD :diffoff!<cr><C-W>h:bd<cr>
+    " rendering options
+    set enc=utf-8
+    set fileformats="unix,dos,mac"
+    set hidden
+    set tags=./tags;/
+    set backspace=indent,eol,start
+    set ttyfast
+    set t_Co=256
+    set lazyredraw
 
-" NerdTree
-noremap <F5> :NERDTreeToggle<CR>
+    " disable any beeps or flashes on error
+    set noerrorbells
+    set novisualbell
+    set vb t_vb=
 
-" FuzzyFinder
-noremap <F6> :FufFile<CR>
-let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sassc|sw[po])$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|.*[/\\]$'
-let g:fuf_ignoreCase = 1
+    " detect file changes
+    set autoread
 
-" restore position in file
-au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
+    " spell
+    set spell spelllang=en_us
 
-" force actionscript on as files
-au BufNewFile,BufRead *.as set ft=actionscript
+    " comments
+    set fo+=o
+    set fo-=r
+    set fo-=t
 
-" set zimbu filetype
-au! BufNewFile,BufRead *.zu setf zimbu
+    " percistancy
+    set sessionoptions+=tabpages,globals
+    set viminfo=!,'100,h,n~/.viminfo
+    set history=1000
+    set undolevels=1000
+    set undofile
+    set undodir=~/.vim/undofiles
+    set undoreload=1000
 
-" local lvimrc
-function SetLocalOptions(fname)
-    let dirname = fnamemodify(a:fname, ":p:h")
-    while "/" != dirname
-        let lvimrc  = dirname . "/.lvimrc"
-        if filereadable(lvimrc)
-            execute "source " . lvimrc
-            break
-        endif
-        let dirname = fnamemodify(dirname, ":p:h:h")
-    endwhile
-endfunction
+    " safety
+    set backup
+    set writebackup
+    set backupdir=~/.vim/backup//
+    set directory=~/.vim/swap//
 
-" CTAGS
-set tags=./tags;/
-" set tags+=~/.vim/tags/gl
-" set tags+=~/.vim/tags/sfml
-" set tags+=~/.vim/tags/cpp
-" set tags+=~/.vim/tags/std
+    " presentation
+    set number
+    set nocursorline
+    set nolist
+    set laststatus=2
+    set ruler
+    set showcmd
+    set mousehide
 
-" YOU COMPLETE ME
-" let g:ycm_collect_identifiers_from_tags_files = 0
-" let g:ycm_confirm_extra_conf = 1
-let g:ycm_global_ycm_extra_conf="~/.ycm_extra_conf.py"
-let g:ycm_filetype_blacklist = {'vim' : 1}
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
+    " wrap
+    set nowrap
+    set textwidth=100
+    set showbreak=..
 
-" ULTISNIPS
-let g:UltiSnipsExpandTrigger="<Tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+    " terminal
+    set title
+    set titlestring=(\ %(%{&ft},\ %)%{&ff}%(,\ %{&fenc}%)\ )
+    set titlelen=100
 
-au BufNewFile,BufRead * call SetLocalOptions(bufname("%"))
+    " mouse
+    set mouse=a
 
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
+    " tabs
+    set tabpagemax=999
+    set showtabline=1
 
-Plugin 'L9'
+    " completion
+    " set complete+=kspell
+    set complete-=i
+    set completeopt=longest,menuone
+    set omnifunc=syntaxcomplete#Complete
 
-" Big features
-Plugin 'gmarik/vundle'
-Plugin 'sjl/gundo.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'vim-scripts/sessionman.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'valloric/YouCompleteMe'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+    " menu
+    set wildmenu
+    set wildmode=longest,list
+    set wildignore=*.o,*.so,*.pyc,*.class,*.fasl,tags
+    set wildignore+=*.swp,*.cache,*.jar,*.bat,*.dat,*.gif
 
-" Syntaxes
-Plugin 'tpope/vim-markdown'
-Plugin 'elzr/vim-json'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'jeroenbourgois/vim-actionscript'
-Plugin 'yaymukund/vim-rabl'
-Plugin 'AndrewRadev/vim-eco'
-Plugin 'groenewege/vim-less'
+    " vim command line
+    set cmdheight=1
+    set report=0
+    set shortmess=IaA
+    set noshowmode
+    set showcmd
 
-" Searching
-Plugin 'vim-scripts/FuzzyFinder'
-Plugin 'scrooloose/nerdtree'
-Plugin 'wincent/Command-T'
+    " window scroll
+    set scrolloff=3
+    set scrolljump=3
 
-" Formating
-Plugin 'tpope/vim-endwise'
-Plugin 'vim-scripts/tComment'
-Plugin 'godlygeek/tabular'
+    " tabs
+    set smarttab
+    set expandtab
+    set softtabstop=4
+    set shiftwidth=4
+    set tabstop=4
+    set shiftround
+    set smartindent
+    " set autoindent
+    " set cindent
+    " set cinoptions=:s,ps,ts,cs
+    " set cinwords=if,else,elsif,when,while,do,for,switch,case
 
-" UI
-Plugin 'bling/vim-airline'
-Plugin 'gmarik/vim-visual-star-search'
+    " splits
+    set splitbelow
+    set splitright
+    set noequalalways
 
-call vundle#end()
-filetype plugin indent on
+    " search
+    set ignorecase
+    set smartcase
+    set showmatch
+    set incsearch
+    set hlsearch
+    set gdefault
+
+    " conveniences
+    set timeoutlen=250    " Time to wait after ESC (default causes an annoying delay)
+    set maxmem=2000000
+    set maxmemtot=2000000
+
+" }}}
+
+" MAPPINGS --------------------------------- {{{
+
+    " F keys
+    map <F2> @a
+    set pastetoggle=<F10>
+
+    " typos
+    ia   feild    field
+    ia   flase    false
+    ia   lenght   length
+    ia   toogle   toggle
+    ia   wiht     with
+    ia   heigth   height
+    ia   retrun   return
+
+    " shortcuts
+    ab   fu   function
+    ab   pr   private
+    ab   pt   protected
+    ab   pu   public
+    ab   st   static
+    ab   cl   console.log
+
+    " save time
+    nnoremap ; :
+    nnoremap q: :q
+
+    " tabs
+    nnoremap <silent> <leader>T :tabedit! <C-R>=expand("#:p")<CR><CR>
+    nnoremap <silent> <leader>Y :tabclose<CR>
+
+    " windows
+    nnoremap <silent> Q :call CloseWindow()<CR>
+    nnoremap <Tab> <C-w>
+    nnoremap <leader>w <C-W>v:b#<CR>
+    nnoremap <leader>W <C-W>s:b#<CR>
+    nnoremap <unique> <C-UP> 4<C-w>+
+    nnoremap <unique> <C-DOWN> 4<C-w>-
+    nnoremap <unique> <C-LEFT> 4<C-w><
+    nnoremap <unique> <C-RIGHT> 4<C-w>>
+
+    " select the current line without indentation
+    nnoremap vv ^vg_
+
+    " don't lose selection after indenting
+    vnoremap < <gv
+    vnoremap > >gv
+
+    " Only higlight on #
+    nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+
+    " keep search matches in the middle of the window
+    nnoremap n nzvzz
+    nnoremap N Nzvzz
+
+    " clear searches
+    nnoremap <silent> <leader><SPACE> :noh<CR>
+
+    " toggle options
+    nnoremap <silent> <leader>on :set number!<CR>
+    nnoremap <silent> <leader>or :set relativenumber!<CR>
+    nnoremap <silent> <leader>ow :set wrap!<CR>
+    nnoremap <silent> <leader>ol :set list!<CR>
+    nnoremap <silent> <leader>os :setl spell!<CR>
+
+    " tabs
+    nnoremap <silent> <LocalLeader>[ :tabprev<CR>
+    nnoremap <silent> <LocalLeader>] :tabnext<CR>
+
+    " duplication
+    nnoremap <silent> <LocalLeader>= YP
+
+    " session
+    let sessionman_save_on_exit = 1
+    noremap <unique> <Leader>ss :SessionSave<CR>
+    noremap <unique> <Leader>sl :SessionList<CR>
+    noremap <unique> <Leader>so :SessionOpen
+
+    " copy/past word
+    noremap <unique> <Leader>y viw"py
+    noremap <unique> <Leader>p viw"pp
+
+    " Make
+    nnoremap <unique> <Leader>m :!make<CR>
+
+    " YCM GoTo
+    nnoremap <leader>d :YcmCompleter GoTo<CR>
 
 
-" BACKUP 1
-" Plugin 'Rip-Rip/clang_complete'
-" Plugin 'terhechte/syntastic'
-" Rip-Rip/clang_complete
-" let g:clang_complete_auto = 1
-" let g:clang_use_library = 1
-" let g:clang_periodic_quickfix = 0
-" let g:clang_close_preview = 1
-" let g:clang_snippets = 1
-" let g:clang_snippets_engine = 'ultisnips'
-" let g:clang_exec =         '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang'
-" let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-" needed for syntastic (use terhechte/syntastic)
-" let g:syntastic_cpp_config_file = '.clang_complete'
 
-" BACKUP 2
-" Tag based completion
-" Plugin 'vim-scripts/OmniCppComplete'
-" Plugin 'ervandew/supertab'
+" }}}
+
+" PLUGINS ---------------------------------- {{{
+
+    " Gundo
+    " -------------------------------------------------------------------------
+    nnoremap <silent> <F3> :silent GundoToggle<CR>
+    inoremap <silent> <F3> <ESC>:silent GundoToggle<CR>a
+
+    " Syntastic
+    " -------------------------------------------------------------------------
+    let g:syntastic_actionscript_mxmlc_exe = 'fcshctl mxmlc -source-path=src '
+    let g:syntastic_auto_loc_list=0
+    let g:syntastic_enable_signs=1
+    let g:syntastic_check_on_open=0
+    let g:syntastic_check_on_wq = 0
+    let g:syntastic_javascript_checkers = ['jshint']
+    let g:syntastic_ruby_checkers = ['rubylint']
+    let g:syntastic_error_symbol = 'xx'
+    let g:syntastic_warning_symbol = 'vv'
+    let g:syntastic_mode_map = {
+        \ 'mode': 'active',
+        \ 'active_filetypes': ['javascript'],
+        \ 'passive_filetypes': ['c', 'cpp', 'java', 'xhtml']
+    \ }
+
+    " Ultisnips
+    " -------------------------------------------------------------------------
+    let g:UltiSnipsExpandTrigger="<Tab>"
+    let g:UltiSnipsJumpForwardTrigger="<c-b>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+    " YouCompleteMe
+    " -------------------------------------------------------------------------
+    " let g:ycm_collect_identifiers_from_tags_files = 0
+    " let g:ycm_confirm_extra_conf = 1
+    let g:ycm_global_ycm_extra_conf="~/.ycm_extra_conf.py"
+    let g:ycm_filetype_blacklist = {'vim' : 1}
+    let g:ycm_key_list_select_completion=[]
+    let g:ycm_key_list_previous_completion=[]
+
+    " Command-T
+    " -------------------------------------------------------------------------
+    let g:CommandTMaxHeight=10
+    let g:CommandTMinHeight=10
+
+    " Airline
+    " -------------------------------------------------------------------------
+    let g:airline_theme = 'badwolf'
+    let g:airline#extensions#branch#enabled = 0
+
+    " T-Comment
+    " -------------------------------------------------------------------------
+    nnoremap // :TComment<CR>j
+    vnoremap // :TComment<CR>j
+
+    " Tabularize
+    " -------------------------------------------------------------------------
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:<CR>
+    vmap <Leader>a: :Tabularize /:<CR>
+
+    " Fugitive
+    " -------------------------------------------------------------------------
+    nnoremap <leader>Gg :Ggrep<SPACE>
+    nnoremap <leader>Gd :Gdiff<cr>
+    nnoremap <leader>GD :diffoff!<cr><C-W>h:bd<cr>
+
+    " NERD Tree
+    " -------------------------------------------------------------------------
+    noremap <F5> :NERDTreeToggle<CR>
+
+    " FuzzyFinder
+    " -------------------------------------------------------------------------
+    noremap <F6> :FufFile<CR>
+    let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sassc|sw[po])$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|.*[/\\]$'
+    let g:fuf_ignoreCase = 1
+
+" }}}
+
+" FUNCTIONS -------------------------------- {{{
+
+    " local lvimrc
+    function SetLocalOptions(fname)
+        let dirname = fnamemodify(a:fname, ":p:h")
+        while "/" != dirname
+            let lvimrc  = dirname . "/.lvimrc"
+            if filereadable(lvimrc)
+                execute "source " . lvimrc
+                break
+            endif
+            let dirname = fnamemodify(dirname, ":p:h:h")
+        endwhile
+    endfunction
+
+" }}}
+
+" BACKUPS -------------------------------- {{{
+
+    " 1
+    " Plugin 'Rip-Rip/clang_complete'
+    " Plugin 'terhechte/syntastic'
+    " Rip-Rip/clang_complete
+    " let g:clang_complete_auto = 1
+    " let g:clang_use_library = 1
+    " let g:clang_periodic_quickfix = 0
+    " let g:clang_close_preview = 1
+    " let g:clang_snippets = 1
+    " let g:clang_snippets_engine = 'ultisnips'
+    " let g:clang_exec =         '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang'
+    " let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
+    " needed for syntastic (use terhechte/syntastic)
+    " let g:syntastic_cpp_config_file = '.clang_complete'
+
+    " 2
+    " Tag based completion
+    " Plugin 'vim-scripts/OmniCppComplete'
+    " Plugin 'ervandew/supertab'
+
+" }}}
