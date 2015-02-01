@@ -61,9 +61,9 @@
         " source local vimrc
         au BufNewFile,BufRead * call SetLocalOptions(bufname("%"))
 
-        " disable spell checking
-        au BufEnter *.vimrc  set nospell
-        au BufEnter *.as  set nospell
+        " enable spell checking
+        " au BufEnter *.cpp  set spell
+        " au BufEnter *.h  set spell
 
         " restore position in file
         au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
@@ -105,12 +105,8 @@
     set autoread
 
     " spell
-    set spell spelllang=en_us
-
-    " comments
-    set fo+=o
-    set fo-=r
-    set fo-=t
+    set spelllang=en_us
+    set nospell
 
     " percistancy
     set sessionoptions+=tabpages,globals
@@ -147,7 +143,7 @@
     set titlelen=100
 
     " mouse
-    set mouse=a
+    set mouse-=a
 
     " tabs
     set tabpagemax=999
@@ -211,9 +207,10 @@
 
 " MAPPINGS --------------------------------- {{{
 
-    " F keys
+    " F1-Help F2-Macro F3-Gundo F5-NERDTree F6-FuzzyFinder F12-Paste
+    map <F1> "zyiw:exe "h ".@z.""<CR>
     map <F2> @a
-    set pastetoggle=<F10>
+    map <F12> :r! pbpaste<CR><Esc>
 
     " typos
     ia   feild    field
@@ -297,8 +294,6 @@
     " YCM GoTo
     nnoremap <leader>d :YcmCompleter GoTo<CR>
 
-
-
 " }}}
 
 " PLUGINS ---------------------------------- {{{
@@ -334,8 +329,7 @@
     " YouCompleteMe
     " -------------------------------------------------------------------------
     " let g:ycm_collect_identifiers_from_tags_files = 0
-    " let g:ycm_confirm_extra_conf = 1
-    let g:ycm_global_ycm_extra_conf="~/.ycm_extra_conf.py"
+    let g:ycm_confirm_extra_conf = 0
     let g:ycm_filetype_blacklist = {'vim' : 1}
     let g:ycm_key_list_select_completion=[]
     let g:ycm_key_list_previous_completion=[]
@@ -377,6 +371,10 @@
     let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sassc|sw[po])$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|.*[/\\]$'
     let g:fuf_ignoreCase = 1
 
+    " PyClewn
+    " -------------------------------------------------------------------------
+    let g:pyclewn_args = '--gdb=async'
+
 " }}}
 
 " FUNCTIONS -------------------------------- {{{
@@ -417,5 +415,4 @@
     " Tag based completion
     " Plugin 'vim-scripts/OmniCppComplete'
     " Plugin 'ervandew/supertab'
-
 
