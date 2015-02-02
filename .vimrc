@@ -164,7 +164,7 @@
     " vim command line
     set cmdheight=1
     set report=0
-    set shortmess=IaA
+    set shortmess=IaAtW
     set noshowmode
     set showcmd
 
