@@ -13,7 +13,7 @@
     Plugin 'L9'
 
     " Big features
-    Plugin 'gmarik/vundle'
+    Plugin 'gmarik/Vundle.vim'
     Plugin 'sjl/gundo.vim'
     Plugin 'tpope/vim-fugitive'
     Plugin 'vim-scripts/sessionman.vim'
