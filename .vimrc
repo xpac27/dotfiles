@@ -134,8 +134,7 @@
 
     " wrap
     set nowrap
-    set textwidth=100
-    set showbreak=..
+    set textwidth=0
 
     " terminal
     set title
