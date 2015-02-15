@@ -42,6 +42,7 @@
     Plugin 'vim-scripts/tComment'
     Plugin 'godlygeek/tabular'
     Plugin 'terryma/vim-multiple-cursors'
+    Plugin 'rhysd/vim-clang-format'
 
     " UI
     Plugin 'bling/vim-airline'
@@ -73,6 +74,10 @@
 
         " set zimbu filetype
         au! BufNewFile,BufRead *.zu setf zimbu
+
+        " map clang-format
+        autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :ClangFormat<CR>
+        autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 
     augroup END
 
@@ -128,9 +133,6 @@
     set nocursorline
     set nolist
     set laststatus=2
-    set ruler
-    set showcmd
-    set mousehide
 
     " wrap
     set nowrap
@@ -163,9 +165,10 @@
     " vim command line
     set cmdheight=1
     set report=0
-    set shortmess=IaAtW
+    set shortmess=IAW
     set noshowmode
-    set showcmd
+    set noruler
+    set mousehide
 
     " window scroll
     set scrolloff=3
@@ -198,9 +201,18 @@
     set gdefault
 
     " conveniences
-    set timeoutlen=250    " Time to wait after ESC (default causes an annoying delay)
+    set timeoutlen=250 
     set maxmem=2000000
     set maxmemtot=2000000
+
+    " popup menu
+    set pumheight=15
+
+    " override popup menu colors
+    hi Pmenu		cterm=none	ctermfg=255	ctermbg=240	guifg=#ffffff	guibg=#585858
+    hi PmenuSel		cterm=none	ctermfg=16	ctermbg=227	guifg=#000000	guibg=#ffff5f
+    hi PmenuSbar	cterm=none	ctermfg=240	ctermbg=240	guibg=#444444
+    hi PmenuThumb	cterm=none	ctermfg=255	ctermbg=255	guifg=#ffffff
 
 " }}}
 
@@ -330,8 +342,8 @@
     " let g:ycm_collect_identifiers_from_tags_files = 0
     let g:ycm_confirm_extra_conf = 0
     let g:ycm_filetype_blacklist = {'vim' : 1}
-    let g:ycm_key_list_select_completion=[]
-    let g:ycm_key_list_previous_completion=[]
+    let g:ycm_key_list_select_completion=['<Down>']
+    let g:ycm_key_list_previous_completion=['<Up>']
 
     " Command-T
     " -------------------------------------------------------------------------
@@ -373,6 +385,15 @@
     " PyClewn
     " -------------------------------------------------------------------------
     let g:pyclewn_args = '--gdb=async'
+
+    " Clang-Format
+    " -------------------------------------------------------------------------
+    let g:clang_format#auto_format_on_insert_leave = 0
+    let g:clang_format#style_options = {
+        \ "Standard" : "C++11",
+        \ "ColumnLimit" : "0",
+        \ "BreakBeforeBraces" : "Allman"
+    \ }
 
 " }}}
 

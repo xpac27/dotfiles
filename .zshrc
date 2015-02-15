@@ -7,7 +7,6 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="zen"
 
-
 # CASE_SENSITIVE="true"
 # DISABLE_AUTO_UPDATE="true"
 # export UPDATE_ZSH_DAYS=13
@@ -23,23 +22,28 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+# Configuration
 export LC_CTYPE=en_US.UTF-8
 export LANG=en_US.UTF-8
-export EDITOR='/usr/local/bin/vim'
+export EDITOR=vi
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 export JAVA_HOME="$(/usr/libexec/java_home)"
 
+# Hide mouse
 set ttymouse=sgr
 
-alias vi="/usr/local/bin/vim"
+# Random shortcuts
 alias rc="pry -r ./config/environment"
 alias fl='tail -F ~/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.txt'
 
+# SVN shortcuts
 alias svnd='svn diff --no-diff-deleted --show-copies-as-adds | colordiff | less'
 alias svnl='svn log | less'
 alias svns='colorsvn status'
 alias svndiff='svn diff --diff-cmd=/Users/vincent.cogne/svndiff.sh'
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# Add RVM to PATH for scripting
+[[ -d "$HOME/.rvm" ]] && PATH=$PATH:$HOME/.rvm/bin
 
-[[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
+# Load the default .profile
+[[ -s "$HOME/.profile" ]] && source "$HOME/.profile"

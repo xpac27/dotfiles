@@ -1,2 +1,3 @@
 --ignore-dir=.ivy-cache
 --ignore-dir=logs
+--type-set=vimrc:match:vimrc,lvimrc
