@@ -36,6 +36,7 @@
     Plugin 'scrooloose/nerdtree'
     Plugin 'wincent/Command-T'
     Plugin 'mileszs/ack.vim'
+    Plugin 'derekwyatt/vim-fswitch'
 
     " Formating
     Plugin 'tpope/vim-endwise'
@@ -78,6 +79,10 @@
         " map clang-format
         autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :ClangFormat<CR>
         autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+
+        " activate FileSwitch on cpp and h files
+        au! BufEnter *.cpp,*.cc let b:fswitchdst = 'h,hpp'  | let b:fswitchlocs = './,../include/,../include/**/'
+        au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../sources/,../../src/,../../sources/'
 
     augroup END
 
@@ -201,7 +206,7 @@
     set gdefault
 
     " conveniences
-    set timeoutlen=250 
+    set timeoutlen=300 
     set maxmem=2000000
     set maxmemtot=2000000
 
@@ -304,6 +309,15 @@
 
     " YCM GoTo
     nnoremap <leader>d :YcmCompleter GoTo<CR>
+
+    " Switch to the file and load it into the window on the right >
+    nmap <silent> <Leader>sr :FSRight<cr>
+    " Switch to the file and load it into a new window split on the right >
+    nmap <silent> <Leader>sR :FSSplitRight<cr>
+    " Switch to the file and load it into the window on the left >
+    nmap <silent> <Leader>sl :FSLeft<cr>
+    " Switch to the file and load it into a new window split on the left >
+    nmap <silent> <Leader>sH :FSSplitLeft<cr>
 
 " }}}
 
