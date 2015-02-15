@@ -405,7 +405,11 @@
     let g:clang_format#auto_format_on_insert_leave = 0
     let g:clang_format#style_options = {
         \ "Standard" : "C++11",
-        \ "ColumnLimit" : "0",
+        \ "ColumnLimit" : 0,
+        \ "AccessModifierOffset" : -4,
+        \ "MaxEmptyLinesToKeep" : 1,
+        \ "AllowShortCaseLabelsOnASingleLine" : "true",
+        \ "NamespaceIndentation" : "All",
         \ "BreakBeforeBraces" : "Allman"
     \ }
 
