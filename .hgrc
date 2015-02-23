@@ -19,6 +19,7 @@ purge =
 eol =
 graphlog =
 largefiles =
+strip = 
 
 [alias]
 br = branches

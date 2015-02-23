@@ -21,6 +21,7 @@
     Plugin 'valloric/YouCompleteMe'
     Plugin 'SirVer/ultisnips'
     Plugin 'honza/vim-snippets'
+    Plugin 'ryanss/vim-hackernews'
 
     " Syntaxes
     Plugin 'tpope/vim-markdown'
@@ -206,7 +207,7 @@
     set gdefault
 
     " conveniences
-    set timeoutlen=300 
+    set timeoutlen=300
     set maxmem=2000000
     set maxmemtot=2000000
 
@@ -286,6 +287,7 @@
     nnoremap <silent> <leader>ow :set wrap!<CR>
     nnoremap <silent> <leader>ol :set list!<CR>
     nnoremap <silent> <leader>os :setl spell!<CR>
+    nnoremap <silent> <leader>od :e ++ff=dos<CR>:setlocal ff=dos<CR>
 
     " tabs
     nnoremap <silent> <LocalLeader>[ :tabprev<CR>
