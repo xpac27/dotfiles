@@ -76,12 +76,8 @@
         " set zimbu filetype
         au! BufNewFile,BufRead *.zu setf zimbu
 
-        " map clang-format
-        autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :ClangFormat<CR>
-        autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
-
         " activate FileSwitch on cpp and h files
-        au! BufEnter *.cpp,*.cc let b:fswitchdst = 'h,hpp'  | let b:fswitchlocs = './,../inc/,../inc/**/,../include/,../include/**/'
+        au! BufEnter *.cpp,*.cc let b:fswitchdst = 'hpp,h'  | let b:fswitchlocs = './,../inc/,../inc/**/,../include/,../include/**/'
         au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../sources/,../../src/,../../sources/'
 
     augroup END
@@ -206,7 +202,7 @@
     set gdefault
 
     " conveniences
-    set timeoutlen=300 
+    set timeoutlen=300
     set maxmem=2000000
     set maxmemtot=2000000
 
@@ -412,8 +408,7 @@
         \ "AccessModifierOffset" : -4,
         \ "MaxEmptyLinesToKeep" : 1,
         \ "AllowShortCaseLabelsOnASingleLine" : "true",
-        \ "NamespaceIndentation" : "All",
-        \ "BreakBeforeBraces" : "Allman"
+        \ "BreakBeforeBraces" : "Linux"
     \ }
 
 " }}}
