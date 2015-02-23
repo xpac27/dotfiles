@@ -82,7 +82,7 @@
         autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 
         " activate FileSwitch on cpp and h files
-        au! BufEnter *.cpp,*.cc let b:fswitchdst = 'h,hpp'  | let b:fswitchlocs = './,../include/,../include/**/'
+        au! BufEnter *.cpp,*.cc let b:fswitchdst = 'h,hpp'  | let b:fswitchlocs = './,../inc/,../inc/**/,../include/,../include/**/'
         au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../sources/,../../src/,../../sources/'
 
     augroup END
@@ -219,6 +219,9 @@
     hi PmenuSel		cterm=none	ctermfg=16	ctermbg=227	guifg=#000000	guibg=#ffff5f
     hi PmenuSbar	cterm=none	ctermfg=240	ctermbg=240	guibg=#444444
     hi PmenuThumb	cterm=none	ctermfg=255	ctermbg=255	guifg=#ffffff
+
+    " override fold bar colors
+    hi Folded       cterm=none  ctermfg=244 ctermbg=233
 
 " }}}
 
