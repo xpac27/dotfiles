@@ -32,6 +32,11 @@
     Plugin 'AndrewRadev/vim-eco'
     Plugin 'groenewege/vim-less'
 
+    " Scheme
+    Plugin 'cdmedia/itg_flat_vim' " sublime
+    Plugin 'jnurmine/Zenburn'
+    Plugin 'jonathanfilip/vim-lucius'
+
     " Searching
     Plugin 'vim-scripts/FuzzyFinder'
     Plugin 'scrooloose/nerdtree'
@@ -90,8 +95,8 @@
     let html_no_rendering = 1
 
     " colors
-    colorscheme smyck
-    set background=dark
+    colorscheme lucius
+    LuciusDarkHighContrast
 
     " rendering options
     set enc=utf-8
@@ -211,13 +216,13 @@
     set pumheight=15
 
     " override popup menu colors
-    hi Pmenu		cterm=none	ctermfg=255	ctermbg=240	guifg=#ffffff	guibg=#585858
-    hi PmenuSel		cterm=none	ctermfg=16	ctermbg=227	guifg=#000000	guibg=#ffff5f
-    hi PmenuSbar	cterm=none	ctermfg=240	ctermbg=240	guibg=#444444
-    hi PmenuThumb	cterm=none	ctermfg=255	ctermbg=255	guifg=#ffffff
+    " hi Pmenu		cterm=none	ctermfg=255	ctermbg=238
+    " hi PmenuSel		cterm=none	ctermfg=16	ctermbg=227
+    " hi PmenuSbar	cterm=none	ctermfg=240	ctermbg=240
+    " hi PmenuThumb	cterm=none	ctermfg=255	ctermbg=255
 
     " override fold bar colors
-    hi Folded       cterm=none  ctermfg=244 ctermbg=233
+    " hi Folded       cterm=none  ctermfg=244 ctermbg=233
 
 " }}}
 
@@ -367,7 +372,7 @@
 
     " Airline
     " -------------------------------------------------------------------------
-    let g:airline_theme = 'badwolf'
+    let g:airline_theme = 'lucius'
     let g:airline#extensions#branch#enabled = 0
 
     " T-Comment
