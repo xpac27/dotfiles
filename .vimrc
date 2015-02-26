@@ -56,7 +56,8 @@
     Plugin 'cdmedia/itg_flat_vim' " sublime
     Plugin 'jnurmine/Zenburn'
     Plugin 'jonathanfilip/vim-lucius'
-    Plugin 'morhetz/gruvbox'
+    Plugin 'zeis/vim-kolor'
+    Plugin 'blerins/flattown'
 
     call vundle#end()
     filetype plugin indent on
@@ -94,8 +95,6 @@
 " }}}
 
 " OPTIONS ---------------------------------- {{{
-
-    let html_no_rendering = 1
 
     " colors
     colorscheme lucius
