@@ -24,3 +24,5 @@ strip =
 [alias]
 br = branches
 undo = revert --no-backup
+__mystatus = status
+st = !hg __mystatus $($HG root) $HG_ARGS

@@ -99,7 +99,7 @@
 
     " rendering options
     set enc=utf-8
-    set fileformats="unix,dos,mac"
+    set fileformats=unix,dos,mac
     set hidden
     set tags=./tags;/
     set backspace=indent,eol,start
