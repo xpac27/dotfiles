@@ -16,12 +16,12 @@
     Plugin 'gmarik/Vundle.vim'
     Plugin 'sjl/gundo.vim'
     Plugin 'tpope/vim-fugitive'
-    Plugin 'vim-scripts/sessionman.vim'
     Plugin 'scrooloose/syntastic'
     Plugin 'valloric/YouCompleteMe'
     Plugin 'SirVer/ultisnips'
     Plugin 'honza/vim-snippets'
     Plugin 'ryanss/vim-hackernews'
+    Plugin 'mhinz/vim-startify'
 
     " Syntaxes
     Plugin 'tpope/vim-markdown'
@@ -31,11 +31,6 @@
     Plugin 'yaymukund/vim-rabl'
     Plugin 'AndrewRadev/vim-eco'
     Plugin 'groenewege/vim-less'
-
-    " Scheme
-    Plugin 'cdmedia/itg_flat_vim' " sublime
-    Plugin 'jnurmine/Zenburn'
-    Plugin 'jonathanfilip/vim-lucius'
 
     " Searching
     Plugin 'vim-scripts/FuzzyFinder'
@@ -54,6 +49,14 @@
     " UI
     Plugin 'bling/vim-airline'
     Plugin 'gmarik/vim-visual-star-search'
+    Plugin 'mhinz/vim-signify'
+    Plugin 'airblade/vim-gitgutter'
+
+    " Scheme
+    Plugin 'cdmedia/itg_flat_vim' " sublime
+    Plugin 'jnurmine/Zenburn'
+    Plugin 'jonathanfilip/vim-lucius'
+    Plugin 'morhetz/gruvbox'
 
     call vundle#end()
     filetype plugin indent on
@@ -96,7 +99,7 @@
 
     " colors
     colorscheme lucius
-    LuciusDarkHighContrast
+    LuciusDark
 
     " rendering options
     set enc=utf-8
@@ -105,7 +108,6 @@
     set tags=./tags;/
     set backspace=indent,eol,start
     set ttyfast
-    set t_Co=256
     set lazyredraw
 
     " disable any beeps or flashes on error
@@ -418,6 +420,39 @@
         \ "BreakBeforeBraces" : "Linux"
     \ }
 
+    " Signify
+    " -------------------------------------------------------------------------
+    let g:signify_vcs_list = [ 'git', 'hg' ]
+    let g:signify_disable_by_default = 1
+
+    " Git-Gutter
+    " -------------------------------------------------------------------------
+    let g:gitgutter_enabled = 1
+    set updatetime=250
+    highlight GitGutterAdd ctermbg=65
+    highlight GitGutterChange ctermbg=101
+    highlight GitGutterDelete ctermbg=95
+
+    " Startify
+    " -------------------------------------------------------------------------
+    let g:startify_files_number = 12
+    let g:startify_session_persistence = 1
+    let g:startify_session_delete_buffers = 1
+    let g:startify_bookmarks = [ '~/.vimrc' ]
+    let g:startify_custom_header = [
+            \ '',
+            \ '',
+            \ '',
+            \ '',
+            \ ]
+    let g:startify_list_order = [
+            \ ['   Recently used files in the current directory:'],
+            \ 'dir',
+            \ ['   Sessions:'],
+            \ 'sessions',
+            \ ['   Bookmarks:'],
+            \ 'bookmarks',
+            \ ]
 " }}}
 
 " FUNCTIONS -------------------------------- {{{
