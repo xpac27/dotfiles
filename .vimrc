@@ -67,7 +67,8 @@
         au!
 
         " source local vimrc
-        au BufNewFile,BufRead * call SetLocalOptions(bufname("%"))
+        " au BufNewFile,BufRead * call SetLocalOptions(bufname("%"))
+        au VimEnter * call SetLocalOptions(bufname("%"))
 
         " enable spell checking
         " au BufEnter *.cpp  set spell
@@ -211,6 +212,9 @@
     set timeoutlen=300
     set maxmem=2000000
     set maxmemtot=2000000
+
+    " ignore files (command-t)
+    set wildignore+=*.o,*.obj,*.pump
 
     " popup menu
     set pumheight=15
@@ -369,6 +373,8 @@
     " -------------------------------------------------------------------------
     let g:CommandTMaxHeight=10
     let g:CommandTMinHeight=10
+    let g:CommandTFileScanner="git"
+    let g:CommandTSmartCase=1
 
     " Airline
     " -------------------------------------------------------------------------
@@ -399,7 +405,7 @@
     " FuzzyFinder
     " -------------------------------------------------------------------------
     noremap <F6> :FufFile<CR>
-    let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sassc|sw[po])$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|.*[/\\]$'
+    let g:fuf_file_exclude = '\v\~$|\.(pump|o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sassc|sw[po])$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|.*[/\\]$'
     let g:fuf_ignoreCase = 1
 
     " PyClewn
