@@ -33,9 +33,9 @@
     Plugin 'groenewege/vim-less'
 
     " Searching
-    Plugin 'vim-scripts/FuzzyFinder'
+    Plugin 'kien/ctrlp.vim'
+    Plugin 'ivan-cukic/vim-ctrlp-switcher'
     Plugin 'scrooloose/nerdtree'
-    Plugin 'wincent/Command-T'
     Plugin 'mileszs/ack.vim'
     Plugin 'derekwyatt/vim-fswitch'
 
@@ -147,7 +147,7 @@
 
     " presentation
     set number
-    set nocursorline
+    set cursorline
     set nolist
     set laststatus=2
 
@@ -176,8 +176,7 @@
     " menu
     set wildmenu
     set wildmode=longest,list
-    set wildignore=*.o,*.so,*.pyc,*.class,*.fasl,tags
-    set wildignore+=*.swp,*.cache,*.jar,*.bat,*.dat,*.gif
+    set wildignore=*.o,*.so,*.pyc,*.class,*.fasl,tags,*/tmp/*,*.swp,*.zip,*.bak,*.orig,*.jpg,*.png,*.gif,DS_Store,*.sassc
 
     " vim command line
     set cmdheight=1
@@ -234,6 +233,8 @@
     " override fold bar colors
     " hi Folded       cterm=none  ctermfg=244 ctermbg=233
 
+    " override cursorline colors
+    hi CursorLine guibg=#2f2e30 cterm=none
 " }}}
 
 " MAPPINGS --------------------------------- {{{
@@ -310,12 +311,6 @@
     " duplication
     nnoremap <silent> <LocalLeader>= YP
 
-    " session
-    let sessionman_save_on_exit = 1
-    noremap <unique> <Leader>ss :SessionSave<CR>
-    noremap <unique> <Leader>sl :SessionList<CR>
-    noremap <unique> <Leader>so :SessionOpen
-
     " copy/past word
     noremap <unique> <Leader>y viw"py
     noremap <unique> <Leader>p viw"pp
@@ -375,14 +370,22 @@
     let g:ycm_key_list_select_completion=['<Down>']
     let g:ycm_key_list_previous_completion=['<Up>']
 
-    " Command-T
+    " CtrlP
     " -------------------------------------------------------------------------
-    let g:CommandTMaxHeight=10
-    let g:CommandTMinHeight=10
+    let g:ctrlpswitcher_mode = 1
+    set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " Linux/MacOSX
+    let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+    let g:ctrlp_user_command = {
+        \ 'types': {
+            \ 1: ['.git', 'cd %s && git ls-files'],
+            \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+            \ },
+        \ 'fallback': 'find %s -type f'
+        \ }
 
     " Airline
     " -------------------------------------------------------------------------
-    let g:airline_theme = 'lucius'
+    let g:airline_theme = 'ubaryd'
     let g:airline#extensions#branch#enabled = 0
 
     " T-Comment
@@ -405,12 +408,6 @@
     " NERD Tree
     " -------------------------------------------------------------------------
     noremap <F5> :NERDTreeToggle<CR>
-
-    " FuzzyFinder
-    " -------------------------------------------------------------------------
-    noremap <F6> :FufFile<CR>
-    let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|orig|jpg|png|gif|DS_Store|sassc|sw[po])$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|.*[/\\]$'
-    let g:fuf_ignoreCase = 1
 
     " PyClewn
     " -------------------------------------------------------------------------
