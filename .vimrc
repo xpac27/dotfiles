@@ -72,7 +72,8 @@
         au!
 
         " source local vimrc
-        au BufNewFile,BufRead * call SetLocalOptions(bufname("%"))
+        " au BufNewFile,BufRead * call SetLocalOptions(bufname("%"))
+        au VimEnter * call SetLocalOptions(bufname("%"))
 
         " enable spell checking
         " au BufEnter *.cpp  set spell
@@ -88,8 +89,8 @@
         au! BufNewFile,BufRead *.zu setf zimbu
 
         " activate FileSwitch on cpp and h files
-        au! BufEnter *.cpp,*.cc let b:fswitchdst = 'hpp,h'  | let b:fswitchlocs = './,../inc/,../inc/**/,../include/,../include/**/'
-        au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../sources/,../../src/,../../sources/'
+        au! BufEnter *.cpp,*.cc let b:fswitchdst = 'hpp,h'  | let b:fswitchlocs = './,../inc/,../inc/**/,../include/,../include/**/,../../include/,../../include/**/'
+        au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../source/,../source/**/,../../source/,../../source/**/'
 
     augroup END
 
@@ -111,7 +112,7 @@
 
     " rendering options
     set enc=utf-8
-    set fileformats="unix,dos,mac"
+    set fileformats=unix,dos,mac
     set hidden
     set tags=./tags;/
     set backspace=indent,eol,start
@@ -220,6 +221,9 @@
     set timeoutlen=300
     set maxmem=2000000
     set maxmemtot=2000000
+
+    " ignore files (command-t)
+    set wildignore+=*.o,*.obj,*.pump
 
     " popup menu
     set pumheight=15
