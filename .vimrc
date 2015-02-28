@@ -53,11 +53,12 @@
     Plugin 'airblade/vim-gitgutter'
 
     " Scheme
-    Plugin 'cdmedia/itg_flat_vim' " sublime
     Plugin 'jnurmine/Zenburn'
     Plugin 'jonathanfilip/vim-lucius'
     Plugin 'zeis/vim-kolor'
-    Plugin 'blerins/flattown'
+    Plugin 'itsthatguy/theme-itg-flat'
+    Plugin 'jeetsukumaran/vim-nefertiti'
+    Plugin 'morhetz/gruvbox'
 
     call vundle#end()
     filetype plugin indent on
@@ -97,8 +98,16 @@
 " OPTIONS ---------------------------------- {{{
 
     " colors
-    colorscheme lucius
-    LuciusDark
+    let &t_8f="\e[38;2;%ld;%ld;%ldm"
+    let &t_8b="\e[48;2;%ld;%ld;%ldm"
+    set guicolors
+    " colorscheme lucius
+    " LuciusDark
+    colorscheme nefertiti
+    " colorscheme itg_flat
+    " colorscheme kolor
+    " colorscheme zenburn
+    " colorscheme gruvbox
 
     " rendering options
     set enc=utf-8
@@ -428,9 +437,9 @@
     " -------------------------------------------------------------------------
     let g:gitgutter_enabled = 1
     set updatetime=250
-    highlight GitGutterAdd ctermbg=65
-    highlight GitGutterChange ctermbg=101
-    highlight GitGutterDelete ctermbg=95
+    " highlight GitGutterAdd ctermbg=65
+    " highlight GitGutterChange ctermbg=101
+    " highlight GitGutterDelete ctermbg=95
 
     " Startify
     " -------------------------------------------------------------------------
