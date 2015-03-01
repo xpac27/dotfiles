@@ -22,6 +22,7 @@
     Plugin 'honza/vim-snippets'
     Plugin 'ryanss/vim-hackernews'
     Plugin 'mhinz/vim-startify'
+    Plugin 'gilligan/vim-lldb'
 
     " Syntaxes
     Plugin 'tpope/vim-markdown'
@@ -34,7 +35,6 @@
 
     " Searching
     Plugin 'kien/ctrlp.vim'
-    Plugin 'ivan-cukic/vim-ctrlp-switcher'
     Plugin 'scrooloose/nerdtree'
     Plugin 'mileszs/ack.vim'
     Plugin 'derekwyatt/vim-fswitch'
@@ -239,6 +239,11 @@
 
     " override cursorline colors
     hi CursorLine guibg=#2f2e30 cterm=none
+
+    hi SpellBad cterm=underline guibg=#990000 guifg=#ffcccc
+    hi YcmErrorSign cterm=none guibg=#990000 guifg=#ffcccc
+    hi SpellCap cterm=underline guibg=#999900 guifg=#ffffcc
+    hi YcmWarningSign cterm=none guibg=#999900 guifg=#ffffcc
 " }}}
 
 " MAPPINGS --------------------------------- {{{
@@ -376,7 +381,6 @@
 
     " CtrlP
     " -------------------------------------------------------------------------
-    let g:ctrlpswitcher_mode = 1
     set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " Linux/MacOSX
     let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
     let g:ctrlp_user_command = {
@@ -391,6 +395,7 @@
     " -------------------------------------------------------------------------
     let g:airline_theme = 'ubaryd'
     let g:airline#extensions#branch#enabled = 0
+    let g:airline_powerline_fonts = 1
 
     " T-Comment
     " -------------------------------------------------------------------------
@@ -447,6 +452,7 @@
     let g:startify_files_number = 12
     let g:startify_session_persistence = 1
     let g:startify_session_delete_buffers = 1
+    let g:startify_change_to_dir = 0
     let g:startify_bookmarks = [ '~/.vimrc' ]
     let g:startify_custom_header = [
             \ '',
