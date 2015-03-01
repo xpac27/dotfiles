@@ -22,7 +22,7 @@
     Plugin 'honza/vim-snippets'
     Plugin 'ryanss/vim-hackernews'
     Plugin 'mhinz/vim-startify'
-    Plugin 'gilligan/vim-lldb'
+    Plugin 'xpac27/vim-lldb'
 
     " Syntaxes
     Plugin 'tpope/vim-markdown'
@@ -443,9 +443,15 @@
     " -------------------------------------------------------------------------
     let g:gitgutter_enabled = 1
     set updatetime=250
-    " highlight GitGutterAdd ctermbg=65
-    " highlight GitGutterChange ctermbg=101
-    " highlight GitGutterDelete ctermbg=95
+
+    " LLDB
+    " -------------------------------------------------------------------------
+    nnoremap <leader>l :Lbreackpoint<cr>
+    nnoremap <leader>p :Lprint<cr>
+    nnoremap <leader>s :Lstepin<cr>
+    nnoremap <leader>n :Lnext<cr>
+    nnoremap <leader>f :Lfinish<cr>
+    nnoremap <leader>c :Lcontinue<cr>
 
     " Startify
     " -------------------------------------------------------------------------
