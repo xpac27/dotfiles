@@ -381,8 +381,6 @@
 
     " CtrlP
     " -------------------------------------------------------------------------
-    set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " Linux/MacOSX
-    let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
     let g:ctrlp_user_command = {
         \ 'types': {
             \ 1: ['.git', 'cd %s && git ls-files'],
@@ -436,8 +434,17 @@
 
     " Signify
     " -------------------------------------------------------------------------
-    let g:signify_vcs_list = [ 'git', 'hg' ]
+    let g:signify_vcs_list = [ 'hg' ]
     let g:signify_disable_by_default = 1
+    let g:signify_sign_add               = '+'
+    let g:signify_sign_delete            = '-'
+    let g:signify_sign_delete_first_line = '-'
+    let g:signify_sign_change            = '~'
+    let g:signify_sign_changedelete      = '~'
+    highlight SignifySignAdd          cterm=none guibg=#363636  guifg=#99ff99
+    highlight SignifySignDelete       cterm=none guibg=#363636  guifg=#ff9999
+    highlight SignifyLineChangeDelete cterm=none guibg=#363636  guifg=#ff9999
+    highlight SignifySignChange       cterm=none guibg=#363636  guifg=#ffff99
 
     " Git-Gutter
     " -------------------------------------------------------------------------
@@ -446,12 +453,12 @@
 
     " LLDB
     " -------------------------------------------------------------------------
-    nnoremap <leader>l :Lbreackpoint<cr>
-    nnoremap <leader>p :Lprint<cr>
-    nnoremap <leader>s :Lstepin<cr>
-    nnoremap <leader>n :Lnext<cr>
-    nnoremap <leader>f :Lfinish<cr>
-    nnoremap <leader>c :Lcontinue<cr>
+    nnoremap <C-l> :Lbreackpoint<cr>
+    nnoremap <C-p> :Lprint<cr>
+    nnoremap <C-s> :Lstepin<cr>
+    nnoremap <C-n> :Lnext<cr>
+    nnoremap <C-f> :Lfinish<cr>
+    nnoremap <C-c> :Lcontinue<cr>
 
     " Startify
     " -------------------------------------------------------------------------
