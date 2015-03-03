@@ -451,15 +451,6 @@
     let g:gitgutter_enabled = 1
     set updatetime=250
 
-    " LLDB
-    " -------------------------------------------------------------------------
-    nnoremap <C-l> :Lbreackpoint<cr>
-    nnoremap <C-p> :Lprint<cr>
-    nnoremap <C-s> :Lstepin<cr>
-    nnoremap <C-n> :Lnext<cr>
-    nnoremap <C-f> :Lfinish<cr>
-    nnoremap <C-c> :Lcontinue<cr>
-
     " Startify
     " -------------------------------------------------------------------------
     let g:startify_files_number = 12
