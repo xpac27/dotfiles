@@ -22,7 +22,10 @@
     Plugin 'honza/vim-snippets'
     Plugin 'ryanss/vim-hackernews'
     Plugin 'mhinz/vim-startify'
+
+    " Debug
     Plugin 'xpac27/vim-lldb'
+    Plugin 'vim-scripts/Conque-GDB'
 
     " Syntaxes
     Plugin 'tpope/vim-markdown'
@@ -70,6 +73,9 @@
 
     augroup vim_stuff
         au!
+
+        " use tabs in Makefile
+        au BufNewFile,BufRead Makefile set noexpandtab
 
         " source local vimrc
         " au BufNewFile,BufRead * call SetLocalOptions(bufname("%"))
@@ -416,10 +422,6 @@
     " -------------------------------------------------------------------------
     noremap <F5> :NERDTreeToggle<CR>
 
-    " PyClewn
-    " -------------------------------------------------------------------------
-    let g:pyclewn_args = '--gdb=async'
-
     " Clang-Format
     " -------------------------------------------------------------------------
     let g:clang_format#auto_format_on_insert_leave = 0
@@ -459,6 +461,19 @@
     nnoremap <C-n> :Lnext<cr>
     nnoremap <C-f> :Lfinish<cr>
     nnoremap <C-c> :Lcontinue<cr>
+
+    " Conque GDB / Term
+    " -------------------------------------------------------------------------
+    let g:ConqueTerm_ReadUnfocused = 1
+    let g:ConqueTerm_Color = 1
+    let g:ConqueTerm_StartMessages = 0
+	let g:ConqueTerm_UnfocusedUpdateTime = 250
+    let g:ConqueTerm_FocusedUpdateTime = 80
+    let g:ConqueTerm_TERM = 'xterm'
+    let g:ConqueGdb_SrcSplit = 'left'
+    let g:ConqueGdb_SaveHistory = 1
+    nnoremap <silent> <Leader>Y :ConqueGdbCommand y<CR>
+    nnoremap <silent> <Leader>N :ConqueGdbCommand n<CR>
 
     " Startify
     " -------------------------------------------------------------------------
