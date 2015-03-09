@@ -48,6 +48,7 @@
     Plugin 'godlygeek/tabular'
     Plugin 'terryma/vim-multiple-cursors'
     Plugin 'rhysd/vim-clang-format'
+    Plugin 'tpope/vim-surround'
 
     " UI
     Plugin 'bling/vim-airline'
