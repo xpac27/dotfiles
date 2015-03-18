@@ -452,6 +452,7 @@
     " Git-Gutter
     " -------------------------------------------------------------------------
     let g:gitgutter_enabled = 1
+    let g:gitgutter_realtime =1
     set updatetime=250
 
     " Conque GDB / Term
