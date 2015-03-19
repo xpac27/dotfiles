@@ -16,6 +16,7 @@
     Plugin 'gmarik/Vundle.vim'
     Plugin 'sjl/gundo.vim'
     Plugin 'tpope/vim-fugitive'
+    Plugin 'ludovicchabant/vim-lawrencium'
     Plugin 'scrooloose/syntastic'
     Plugin 'valloric/YouCompleteMe'
     Plugin 'SirVer/ultisnips'
@@ -247,10 +248,16 @@
     " override cursorline colors
     hi CursorLine guibg=#2f2e30 cterm=none
 
+    " error colors
     hi SpellBad cterm=underline guibg=#990000 guifg=#ffcccc
     hi YcmErrorSign cterm=none guibg=#990000 guifg=#ffcccc
     hi SpellCap cterm=underline guibg=#999900 guifg=#ffffcc
     hi YcmWarningSign cterm=none guibg=#999900 guifg=#ffffcc
+
+    " split color
+    hi vertsplit guifg=#1f1c1c guibg=#1f1c1c
+    hi LineNr guibg=#1f1c1c
+    hi SignColumn guibg=#1f1c1c
 " }}}
 
 " MAPPINGS --------------------------------- {{{
@@ -398,9 +405,11 @@
 
     " Airline
     " -------------------------------------------------------------------------
-    let g:airline_theme = 'ubaryd'
+    let g:airline_theme = 'powerlineish'
     let g:airline#extensions#branch#enabled = 0
+    let g:airline#extensions#tabline#enabled = 1
     let g:airline_powerline_fonts = 1
+    let g:airline#extensions#tabline#left_alt_sep = '|'
 
     " T-Comment
     " -------------------------------------------------------------------------
