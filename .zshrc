@@ -47,3 +47,5 @@ alias svndiff='svn diff --diff-cmd=/Users/vincent.cogne/svndiff.sh'
 
 # Load the default .profile
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
+
+source /Users/vincent.cogne/.iterm2_shell_integration.zsh
