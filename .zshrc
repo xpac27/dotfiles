@@ -47,3 +47,6 @@ alias svndiff='svn diff --diff-cmd=/Users/vincent.cogne/svndiff.sh'
 
 # Load the default .profile
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
+
+# added by travis gem
+[ -f /Users/vinz/.travis/travis.sh ] && source /Users/vinz/.travis/travis.sh
