@@ -97,8 +97,8 @@
         au! BufNewFile,BufRead *.zu setf zimbu
 
         " activate FileSwitch on cpp and h files
-        au! BufEnter *.cpp,*.cc let b:fswitchdst = 'hpp,h'  | let b:fswitchlocs = './,../inc/,../inc/**/,../include/,../include/**/,../../include/,../../include/**/'
-        au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../source/,../source/**/,../../source/,../../source/**/'
+        au! BufEnter *.cpp,*.cc let b:fswitchdst = 'h,hpp'  | let b:fswitchlocs = './,../inc/,../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/'
+        au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
 
     augroup END
 
@@ -387,7 +387,7 @@
 
     " YouCompleteMe
     " -------------------------------------------------------------------------
-    " let g:ycm_collect_identifiers_from_tags_files = 0
+    let g:ycm_collect_identifiers_from_tags_files = 1
     let g:ycm_confirm_extra_conf = 0
     let g:ycm_filetype_blacklist = {'vim' : 1}
     let g:ycm_key_list_select_completion=['<Down>']
