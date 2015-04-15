@@ -474,8 +474,8 @@
     let g:ConqueTerm_TERM = 'xterm'
     let g:ConqueGdb_SrcSplit = 'left'
     let g:ConqueGdb_SaveHistory = 1
-    nnoremap <silent> <Leader>Y :ConqueGdbCommand y<CR>
-    nnoremap <silent> <Leader>N :ConqueGdbCommand n<CR>
+    " nnoremap <silent> <Leader>Y :ConqueGdbCommand y<CR>
+    " nnoremap <silent> <Leader>N :ConqueGdbCommand n<CR>
 
     " Startify
     " -------------------------------------------------------------------------
