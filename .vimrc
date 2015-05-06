@@ -230,9 +230,6 @@
     set maxmem=2000000
     set maxmemtot=2000000
 
-    " ignore files (command-t)
-    set wildignore+=*.o,*.obj,*.pump
-
     " popup menu
     set pumheight=15
 
@@ -379,6 +376,7 @@
     " YouCompleteMe
     " -------------------------------------------------------------------------
     let g:ycm_collect_identifiers_from_tags_files = 1
+    let g:ycm_always_populate_location_list = 1
     let g:ycm_confirm_extra_conf = 0
     let g:ycm_filetype_blacklist = {'vim' : 1}
     let g:ycm_key_list_select_completion=['<Down>']
