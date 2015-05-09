@@ -36,6 +36,7 @@
     Plugin 'yaymukund/vim-rabl'
     Plugin 'AndrewRadev/vim-eco'
     Plugin 'groenewege/vim-less'
+    Plugin 'tikhomirov/vim-glsl'
 
     " Searching
     Plugin 'kien/ctrlp.vim'
