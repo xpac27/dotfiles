@@ -20,7 +20,6 @@ eol =
 graphlog =
 largefiles =
 strip = 
-hggit=
 
 [alias]
 br = branches

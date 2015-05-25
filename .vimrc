@@ -96,6 +96,9 @@
         " set zimbu filetype
         au! BufNewFile,BufRead *.zu setf zimbu
 
+        " save all files when vim looses focus
+        au FocusLost * silent! wa
+
         " activate FileSwitch on cpp and h files
         au! BufEnter *.cpp,*.cc let b:fswitchdst = 'h,hpp'  | let b:fswitchlocs = './,../inc/,../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/'
         au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
@@ -185,7 +188,7 @@
     " menu
     set wildmenu
     set wildmode=longest,list
-    set wildignore=*.o,*.so,*.pyc,*.class,*.fasl,tags,*/tmp/*,*.swp,*.zip,*.bak,*.orig,*.jpg,*.png,*.gif,DS_Store,*.sassc
+    set wildignore=*.o,*.so,*.pyc,*.class,*.fasl,tags,*/tmp/*,*.swp,*.zip,*.bak,*.orig,*.jpg,*.png,*.gif,DS_Store,*.sassc,*.pump
 
     " vim command line
     set cmdheight=1
@@ -229,9 +232,6 @@
     set timeoutlen=300
     set maxmem=2000000
     set maxmemtot=2000000
-
-    " ignore files (command-t)
-    set wildignore+=*.o,*.obj,*.pump
 
     " popup menu
     set pumheight=15
@@ -386,13 +386,13 @@
 
     " CtrlP
     " -------------------------------------------------------------------------
-    let g:ctrlp_user_command = {
-        \ 'types': {
-            \ 1: ['.git', 'cd %s && git ls-files'],
-            \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-            \ },
-        \ 'fallback': 'find %s -type f'
-        \ }
+   let g:ctrlp_user_command = {
+       \ 'types': {
+           \ 1: ['.git', 'cd %s && git ls-files'],
+           \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+		\ },
+		\ 'fallback': 'find %s -type f'
+	\ }
 
     " Airline
     " -------------------------------------------------------------------------
