@@ -36,6 +36,7 @@
     Plugin 'yaymukund/vim-rabl'
     Plugin 'AndrewRadev/vim-eco'
     Plugin 'groenewege/vim-less'
+    Plugin 'tikhomirov/vim-glsl'
 
     " Searching
     Plugin 'kien/ctrlp.vim'
@@ -379,6 +380,7 @@
     " YouCompleteMe
     " -------------------------------------------------------------------------
     let g:ycm_collect_identifiers_from_tags_files = 1
+    let g:ycm_always_populate_location_list = 1
     let g:ycm_confirm_extra_conf = 0
     let g:ycm_filetype_blacklist = {'vim' : 1}
     let g:ycm_key_list_select_completion=['<Down>']
@@ -465,8 +467,8 @@
     let g:ConqueTerm_TERM = 'xterm'
     let g:ConqueGdb_SrcSplit = 'left'
     let g:ConqueGdb_SaveHistory = 1
-    nnoremap <silent> <Leader>Y :ConqueGdbCommand y<CR>
-    nnoremap <silent> <Leader>N :ConqueGdbCommand n<CR>
+    " nnoremap <silent> <Leader>Y :ConqueGdbCommand y<CR>
+    " nnoremap <silent> <Leader>N :ConqueGdbCommand n<CR>
 
     " Startify
     " -------------------------------------------------------------------------
