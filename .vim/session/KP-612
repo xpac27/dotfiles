@@ -15,12 +15,13 @@ let NERDTreeSortHiddenFirst = "1"
 let NERDTreeMinimalUI = "0"
 let NERDTreeMapRefresh = "r"
 let UltiSnipsExpandTrigger = "<Tab>"
+let NERDTreeRespectWildIgnore = "0"
 let NERDTreeAutoDeleteBuffer =  0 
+let ConqueTerm_SendFileKey = "<F10>"
 let ConqueGdb_Print = "<Leader>p"
 let ConqueTerm_SendFunctionKeys =  0 
 let NERDTreeBookmarksFile = "/Users/vincent.cogne/.NERDTreeBookmarks"
 let UltiSnipsJumpForwardTrigger = "<c-b>"
-let ConqueTerm_FastMode =  0 
 let NERDTreeMapToggleHidden = "I"
 let NERDTreeWinSize = "31"
 let NERDTreeMapJumpParent = "p"
@@ -37,12 +38,13 @@ let NERDTreeWinPos = "left"
 let NERDTreeMapMenu = "m"
 let ConqueTerm_ShowBell =  0 
 let NERDTreeStatusline = "%{exists('b:NERDTreeRoot')?b:NERDTreeRoot.path.str():''}"
-let ConqueTerm_Interrupt = "<C-c>"
 let ConqueGdb_SrcSplit = "left"
 let NERDTreeMapHelp = "?"
+let ConqueTerm_FastMode =  0 
 let NERDTreeMapToggleFilters = "f"
 let ConqueGdb_Next = "<Leader>n"
 let NERDTreeAutoCenter = "1"
+let ConqueTerm_Interrupt = "<C-c>"
 let NERDTreeMapJumpPrevSibling = "<C-k>"
 let NERDTreeShowBookmarks = "0"
 let NERDTreeRemoveDirCmd = "rm -rf "
@@ -52,7 +54,7 @@ let ConqueTerm_UnfocusedUpdateTime =  250
 let ConqueTerm_TermLoaded =  1 
 let NERDTreeChDirMode = "0"
 let ConqueGdb_Finish = "<Leader>f"
-let ConqueTerm_CloseOnEnd =  0 
+let ConqueTerm_ExecFileKey = "<F11>"
 let ConqueTerm_InsertCharPre =  0 
 let ConqueTerm_CodePage =  0 
 let NERDTreeAutoCenterThreshold = "3"
@@ -69,13 +71,11 @@ let NERDTreeHighlightCursorline = "1"
 let UltiSnipsEnableSnipMate =  1 
 let NERDTreeMapOpenInTab = "t"
 let ConqueGdb_ToggleBreak = "<Leader>b"
-let ConqueTerm_ExecFileKey = "<F11>"
-let NERDTreeRespectWildIgnore = "0"
+let ConqueTerm_CloseOnEnd =  0 
 let ConqueTerm_InsertOnEnter =  0 
 let NERDTreeMapCWD = "CD"
 let NERDTreeNotificationThreshold = "100"
 let NERDTreeMapPreviewVSplit = "gs"
-let ConqueTerm_ToggleKey = "<F8>"
 let NERDTreeMapJumpRoot = "P"
 let UltiSnipsJumpBackwardTrigger = "<c-z>"
 let ConqueGdb_Run = "<Leader>r"
@@ -83,13 +83,13 @@ let NERDTreeMapChdir = "cd"
 let ConqueTerm_TerminalsString = ""
 let NERDTreeMapToggleZoom = "A"
 let ConqueGdb_Step = "<Leader>s"
-let ConqueGdb_ReadTimeout =  50 
 let NERDTreeMapRefreshRoot = "R"
 let NERDTreeCascadeOpenSingleChildDir = "1"
+let ConqueTerm_ToggleKey = "<F8>"
 let UltiSnipsPythonPath = "/Users/vincent.cogne/Github/dotfiles/.vim/bundle/ultisnips/pythonx"
 let ConqueGdb_Backtrace = "<Leader>t"
 let ConqueTerm_ReadUnfocused =  1 
-let ConqueTerm_SendFileKey = "<F10>"
+let NERDTreeMapJumpLastChild = "J"
 let ConqueTerm_Loaded =  1 
 let NERDTreeMapDeleteBookmark = "D"
 let UltiSnipsListSnippets = "<c-tab>"
@@ -116,27 +116,37 @@ let NERDTreeMapUpdir = "u"
 let ConqueTerm_Syntax = "conque_term"
 let NERDTreeMapUpdirKeepOpen = "U"
 let ConqueTerm_PyVersion =  2 
-let NERDTreeMapJumpLastChild = "J"
 silent only
-cd ~/Github/TinyWorld
+cd ~/King/fictionfactory
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 ~/Github/TinyWorld/app/res/shaders/vertex_shader.vert
-badd +0 app/res/shaders/fragment_shader.frag
+badd +124 kingdom-views/cpp/packages/kingdom-views/source/common/gui/FFProfileCardController.cpp
+badd +8 kingdom-views/cpp/samples/kingdom/kingdomsample/source/common/StarLevelManagerListener.cpp
+badd +1 game-platform/backend-packages/juego/include/juego/kinglevel/FFKingLevelManager.h
+badd +0 game-platform/backend-packages/juego/source/common/juego/kinglevel/FFKingLevelManager.cpp
+badd +9 game-platform/backend-packages/juego/source/common/juego/kinglevel/FFAchievementActionAggregator.cpp
+badd +0 game-platform/backend-packages/juego/source/common/juego/achievement/FFAchievementManager.cpp
 argglobal
 silent! argdel *
-edit ~/Github/TinyWorld/app/res/shaders/vertex_shader.vert
+edit game-platform/backend-packages/juego/source/common/juego/kinglevel/FFAchievementActionAggregator.cpp
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
 1wincmd h
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
 wincmd w
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 90 + 90) / 181)
-exe 'vert 2resize ' . ((&columns * 90 + 90) / 181)
+exe '1resize ' . ((&lines * 34 + 41) / 83)
+exe 'vert 1resize ' . ((&columns * 182 + 182) / 364)
+exe '2resize ' . ((&lines * 45 + 41) / 83)
+exe 'vert 2resize ' . ((&columns * 182 + 182) / 364)
+exe 'vert 3resize ' . ((&columns * 181 + 182) / 364)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -147,34 +157,54 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 17 - ((16 * winheight(0) + 21) / 42)
+let s:l = 22 - ((8 * winheight(0) + 17) / 34)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-17
-normal! 05|
-wincmd w
-argglobal
-edit app/res/shaders/fragment_shader.frag
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let s:l = 6 - ((5 * winheight(0) + 21) / 42)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-6
+22
 normal! 0
 wincmd w
-2wincmd w
-exe 'vert 1resize ' . ((&columns * 90 + 90) / 181)
-exe 'vert 2resize ' . ((&columns * 90 + 90) / 181)
+argglobal
+edit game-platform/backend-packages/juego/source/common/juego/achievement/FFAchievementManager.cpp
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 39 - ((6 * winheight(0) + 22) / 45)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+39
+normal! 071|
+wincmd w
+argglobal
+edit game-platform/backend-packages/juego/source/common/juego/kinglevel/FFKingLevelManager.cpp
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 153 - ((39 * winheight(0) + 40) / 80)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+153
+normal! 09|
+wincmd w
+exe '1resize ' . ((&lines * 34 + 41) / 83)
+exe 'vert 1resize ' . ((&columns * 182 + 182) / 364)
+exe '2resize ' . ((&lines * 45 + 41) / 83)
+exe 'vert 2resize ' . ((&columns * 182 + 182) / 364)
+exe 'vert 3resize ' . ((&columns * 181 + 182) / 364)
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

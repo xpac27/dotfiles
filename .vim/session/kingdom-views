@@ -15,7 +15,9 @@ let NERDTreeSortHiddenFirst = "1"
 let NERDTreeMinimalUI = "0"
 let NERDTreeMapRefresh = "r"
 let UltiSnipsExpandTrigger = "<Tab>"
+let NERDTreeRespectWildIgnore = "0"
 let NERDTreeAutoDeleteBuffer =  0 
+let ConqueTerm_SendFileKey = "<F10>"
 let ConqueGdb_Print = "<Leader>p"
 let ConqueTerm_SendFunctionKeys =  0 
 let NERDTreeBookmarksFile = "/Users/vincent.cogne/.NERDTreeBookmarks"
@@ -70,7 +72,6 @@ let UltiSnipsEnableSnipMate =  1
 let NERDTreeMapOpenInTab = "t"
 let ConqueGdb_ToggleBreak = "<Leader>b"
 let ConqueTerm_ExecFileKey = "<F11>"
-let NERDTreeRespectWildIgnore = "0"
 let ConqueTerm_InsertOnEnter =  0 
 let NERDTreeMapCWD = "CD"
 let NERDTreeNotificationThreshold = "100"
@@ -83,13 +84,12 @@ let NERDTreeMapChdir = "cd"
 let ConqueTerm_TerminalsString = ""
 let NERDTreeMapToggleZoom = "A"
 let ConqueGdb_Step = "<Leader>s"
-let ConqueGdb_ReadTimeout =  50 
 let NERDTreeMapRefreshRoot = "R"
 let NERDTreeCascadeOpenSingleChildDir = "1"
 let UltiSnipsPythonPath = "/Users/vincent.cogne/Github/dotfiles/.vim/bundle/ultisnips/pythonx"
 let ConqueGdb_Backtrace = "<Leader>t"
 let ConqueTerm_ReadUnfocused =  1 
-let ConqueTerm_SendFileKey = "<F10>"
+let NERDTreeMapJumpLastChild = "J"
 let ConqueTerm_Loaded =  1 
 let NERDTreeMapDeleteBookmark = "D"
 let UltiSnipsListSnippets = "<c-tab>"
@@ -116,18 +116,49 @@ let NERDTreeMapUpdir = "u"
 let ConqueTerm_Syntax = "conque_term"
 let NERDTreeMapUpdirKeepOpen = "U"
 let ConqueTerm_PyVersion =  2 
-let NERDTreeMapJumpLastChild = "J"
 silent only
-cd ~/Github/TinyWorld
+cd ~/King/fictionfactory/kingdom-views/cpp/samples/kingdom
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 ~/Github/TinyWorld/app/res/shaders/vertex_shader.vert
-badd +0 app/res/shaders/fragment_shader.frag
+badd +53 ~/King/fictionfactory/kingdom-views/cpp/packages/kingdom-views/source/common/gui/FFProfileCardController.cpp
+badd +68 ~/King/fictionfactory/kingdom-views/cpp/packages/kingdom-views/source/common/gui/FFProfileCardController.h
+badd +25 ~/King/fictionfactory/core/backend-packages/plataforma/include/plataforma/FFCoreUserId.h
+badd +84 ~/King/fictionfactory/core/backend-packages/plataforma-constants/include/plataforma/constants/FFPlataformaKingApp.h
+badd +43 ~/King/fictionfactory/core/packages/web/include/core/FFWebView.h
+badd +1 ~/King/fictionfactory/kingdom-views/cpp/packages/kingdom-views/include/kingdom-views/FFWebView.h
+badd +1 ~/King/fictionfactory/kingdom-views/cpp/packages/kingdom-views/source/common/FFWebView.cpp
+badd +104 ~/King/fictionfactory/core/packages/containers/include/core/FFSmartPointer.h
+badd +5 ~/King/fictionfactory/core/packages/web/include/core/FFIWebViewMessageListener.h
+badd +14 ~/King/fictionfactory/core/packages/math/include/core/FFMatrix4f.h
+badd +13 ~/King/fictionfactory/core/packages/math/include/core/FFVector2i.h
+badd +113 ~/King/fictionfactory/core/packages/logging/include/core/FFLog.h
+badd +25 ~/King/fictionfactory/core/backend-packages/plataforma/include/plataforma/FFIAppSocialUserManagerListener.h
+badd +6 ~/King/fictionfactory/core/backend-packages/juego/include/juego/kinglevel/FFStarLevelActionAggregator.h
+badd +1 ~/King/fictionfactory/core/backend-packages/juego/include/juego/kinglevel/FFStarLevelActionAggregator.cpp
+badd +33 ~/King/fictionfactory/core/backend-packages/juego-api/source/common/juego-api/starlevel/FFAppStarLevelGameRoundApiJsonResponseListener.cpp
+badd +80 ~/King/fictionfactory/kingdom-views/cpp/packages/kingdom-views/source/common/FFKingdomGenericEvent.h
+badd +48 ~/King/fictionfactory/kingdom-views/cpp/packages/kingdom-views/source/common/FFKingdomProfileCardJson.cpp
+badd +28 ~/King/fictionfactory/core/packages/util/include/core/FFStdLib.h
+badd +650 ~/King/fictionfactory/kingdom-views/cpp/packages/kingdom-views/source/common/menu/FFKingdomMenu.cpp
+badd +23 ~/King/fictionfactory/kingdom-views/cpp/packages/kingdom-views/source/common/menu/FFKingdomMenu.h
+badd +56 ~/King/fictionfactory/core/backend-packages/juego/include/juego/achievement/FFAchievement.h
+badd +0 ~/King/fictionfactory/core/backend-packages/juego/include/juego/achievement/FFAchievement.cpp
+badd +0 ~/King/fictionfactory/core/backend-packages/juego/source/common/achievement/FFAchievement.h
+badd +8 ~/King/fictionfactory/core/backend-packages/juego/source/common/juego/achievement/FFAchievement.cpp
+badd +741 kingdomsample/source/common/SampleApp.cpp
+badd +11 ~/King/fictionfactory/core/backend-packages/juego/include/juego/gametrigger/FFIGameTriggerManager.h
+badd +0 ~/King/fictionfactory/core/backend-packages/juego/include/juego/gametrigger/FFIGameTriggerManager.cpp
+badd +0 ~/King/fictionfactory/core/backend-packages/juego/source/common/juego/gametrigger/FFIGameTriggerManager.h
+badd +11 ~/King/fictionfactory/core/backend-packages/juego/source/common/juego/gametrigger/FFGameTriggerManager.cpp
+badd +162 ~/King/fictionfactory/core/backend-packages/juego/source/common/juego/achievement/FFAchievementManager.cpp
+badd +50 ~/King/fictionfactory/core/backend-packages/juego/source/common/juego/kinglevel/FFAchievementActionAggregator.cpp
+badd +14 ~/.profile
 argglobal
 silent! argdel *
-edit ~/Github/TinyWorld/app/res/shaders/vertex_shader.vert
+argadd ~/King/fictionfactory/kingdom-views/cpp/packages/kingdom-views/source/common/gui/FFProfileCardController.cpp
+edit ~/King/fictionfactory/core/backend-packages/juego/include/juego/achievement/FFAchievement.h
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -135,8 +166,8 @@ vsplit
 wincmd w
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 90 + 90) / 181)
-exe 'vert 2resize ' . ((&columns * 90 + 90) / 181)
+exe 'vert 1resize ' . ((&columns * 136 + 182) / 364)
+exe 'vert 2resize ' . ((&columns * 227 + 182) / 364)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -147,15 +178,15 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 17 - ((16 * winheight(0) + 21) / 42)
+let s:l = 127 - ((41 * winheight(0) + 40) / 81)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-17
-normal! 05|
+127
+normal! 023|
 wincmd w
 argglobal
-edit app/res/shaders/fragment_shader.frag
+edit ~/King/fictionfactory/core/backend-packages/juego/source/common/juego/kinglevel/FFAchievementActionAggregator.cpp
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -165,16 +196,16 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 6 - ((5 * winheight(0) + 21) / 42)
+let s:l = 67 - ((57 * winheight(0) + 40) / 81)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-6
+67
 normal! 0
 wincmd w
 2wincmd w
-exe 'vert 1resize ' . ((&columns * 90 + 90) / 181)
-exe 'vert 2resize ' . ((&columns * 90 + 90) / 181)
+exe 'vert 1resize ' . ((&columns * 136 + 182) / 364)
+exe 'vert 2resize ' . ((&columns * 227 + 182) / 364)
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
