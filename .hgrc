@@ -20,6 +20,8 @@ eol =
 graphlog =
 largefiles =
 strip = 
+histedit =
+rebase =
 
 [alias]
 br = branches

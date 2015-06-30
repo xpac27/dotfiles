@@ -123,11 +123,15 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 ~/Github/TinyWorld/app/res/shaders/vertex_shader.vert
-badd +0 app/res/shaders/fragment_shader.frag
+badd +20 app/res/shaders/vertex_shader.vert
+badd +1 app/res/shaders/fragment_shader.frag
+badd +104 app/src/systems/RenderSystem.cpp
+badd +0 app/src/components/Visibility.hpp
+badd +45 ~/Github/TinyWorld/app/src/systems/RenderSystem.hpp
+badd +0 app/res/cube.obj
 argglobal
 silent! argdel *
-edit ~/Github/TinyWorld/app/res/shaders/vertex_shader.vert
+edit app/res/shaders/vertex_shader.vert
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -135,8 +139,8 @@ vsplit
 wincmd w
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 90 + 90) / 181)
-exe 'vert 2resize ' . ((&columns * 90 + 90) / 181)
+exe 'vert 1resize ' . ((&columns * 70 + 182) / 364)
+exe 'vert 2resize ' . ((&columns * 293 + 182) / 364)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -147,12 +151,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 17 - ((16 * winheight(0) + 21) / 42)
+let s:l = 19 - ((18 * winheight(0) + 40) / 80)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-17
-normal! 05|
+19
+normal! 034|
 wincmd w
 argglobal
 edit app/res/shaders/fragment_shader.frag
@@ -165,16 +169,68 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 6 - ((5 * winheight(0) + 21) / 42)
+let s:l = 41 - ((40 * winheight(0) + 40) / 80)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-6
-normal! 0
+41
+normal! 025|
 wincmd w
 2wincmd w
-exe 'vert 1resize ' . ((&columns * 90 + 90) / 181)
-exe 'vert 2resize ' . ((&columns * 90 + 90) / 181)
+exe 'vert 1resize ' . ((&columns * 70 + 182) / 364)
+exe 'vert 2resize ' . ((&columns * 293 + 182) / 364)
+tabedit app/src/systems/RenderSystem.cpp
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+wincmd t
+set winheight=1 winwidth=1
+exe '1resize ' . ((&lines * 42 + 41) / 83)
+exe 'vert 1resize ' . ((&columns * 138 + 182) / 364)
+exe '2resize ' . ((&lines * 42 + 41) / 83)
+exe 'vert 2resize ' . ((&columns * 42 + 182) / 364)
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 104 - ((29 * winheight(0) + 21) / 42)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+104
+normal! 027|
+wincmd w
+argglobal
+edit app/src/components/Visibility.hpp
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 7 - ((6 * winheight(0) + 21) / 42)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+7
+normal! 035|
+wincmd w
+2wincmd w
+exe '1resize ' . ((&lines * 42 + 41) / 83)
+exe 'vert 1resize ' . ((&columns * 138 + 182) / 364)
+exe '2resize ' . ((&lines * 42 + 41) / 83)
+exe 'vert 2resize ' . ((&columns * 42 + 182) / 364)
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

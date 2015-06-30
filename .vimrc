@@ -43,6 +43,7 @@
     Plugin 'scrooloose/nerdtree'
     Plugin 'mileszs/ack.vim'
     Plugin 'derekwyatt/vim-fswitch'
+    Plugin 'easymotion/vim-easymotion'
 
     " Formating
     Plugin 'tpope/vim-endwise'
@@ -382,7 +383,7 @@
     let g:ycm_collect_identifiers_from_tags_files = 1
     let g:ycm_always_populate_location_list = 1
     let g:ycm_confirm_extra_conf = 0
-    let g:ycm_filetype_blacklist = {'vim' : 1}
+    let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
     let g:ycm_key_list_select_completion=['<Down>']
     let g:ycm_key_list_previous_completion=['<Up>']
 
@@ -504,6 +505,22 @@
     nmap <silent> <Leader>sL :FSSplitLeft<cr>
     " Switch to the file and load it in place
     nmap <silent> <Leader>ss :FSHere<cr>
+
+    " EasyMotion
+    " -------------------------------------------------------------------------
+	" Bidirection jump
+	map  / <Plug>(easymotion-sn)
+	omap / <Plug>(easymotion-tn)
+	" Bidirection jump base on 2 chars
+	nmap s <Plug>(easymotion-s2)
+	" Next-Prev
+	map  <C-n> <Plug>(easymotion-next)
+	map  <C-N> <Plug>(easymotion-prev)
+	" Jump to line
+	map <Leader>j <Plug>(easymotion-j)
+	map <Leader>k <Plug>(easymotion-k)
+	" Smart case
+	let g:EasyMotion_smartcase = 1
 
 " }}}
 
