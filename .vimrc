@@ -105,6 +105,9 @@
         au! BufEnter *.cpp,*.cc let b:fswitchdst = 'h,hpp'  | let b:fswitchlocs = './,../inc/,../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/'
         au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
 
+        " Higlight word under cursor
+        au CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+
     augroup END
 
 " }}}
@@ -250,6 +253,7 @@
     " override cursorline colors
     hi CursorLine guibg=#2f2e30 cterm=none
 
+	" to list colors run :so $VIMRUNTIME/syntax/hitest.vim
     " error colors
     hi SpellBad cterm=underline guibg=#990000 guifg=#ffcccc
     hi YcmErrorSign cterm=none guibg=#990000 guifg=#ffcccc
@@ -260,6 +264,11 @@
     hi vertsplit guifg=#1f1c1c guibg=#1f1c1c
     hi LineNr guibg=#1f1c1c
     hi SignColumn guibg=#1f1c1c
+
+    " search
+    hi Search cterm=underline guibg=#2c2824 guifg=#fffdc0
+    hi IncSearch cterm=underline guibg=#403a34 guifg=#fffdc0
+
 " }}}
 
 " MAPPINGS --------------------------------- {{{
@@ -310,15 +319,8 @@
     vnoremap < <gv
     vnoremap > >gv
 
-    " Only higlight on #
-    nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
-
-    " keep search matches in the middle of the window
-    nnoremap n nzvzz
-    nnoremap N Nzvzz
-
     " clear searches
-    nnoremap <silent> <leader><SPACE> :noh<CR>
+    nnoremap <silent> <SPACE> :nohlsearch<CR>
 
     " toggle options
     nnoremap <silent> <leader>on :set number!<CR>
