@@ -295,14 +295,13 @@
     nnoremap <silent> <leader>Y :tabclose<CR>
 
     " windows
-    nnoremap <silent> Q :call CloseWindow()<CR>
-    nnoremap <Tab> <C-w>
-    nnoremap <leader>w <C-W>v:b#<CR>
-    nnoremap <leader>W <C-W>s:b#<CR>
-    nnoremap <unique> <C-UP> 4<C-w>+
-    nnoremap <unique> <C-DOWN> 4<C-w>-
-    nnoremap <unique> <C-LEFT> 4<C-w><
-    nnoremap <unique> <C-RIGHT> 4<C-w>>
+    nmap <Tab> <C-w>
+    nmap <leader>w <C-W>v:b#<CR>
+    nmap <leader>W <C-W>s:b#<CR>
+    nmap <unique> <C-UP> 4<C-w>+
+    nmap <unique> <C-DOWN> 4<C-w>-
+    nmap <unique> <C-LEFT> 4<C-w><
+    nmap <unique> <C-RIGHT> 4<C-w>>
 
     " select the current line without indentation
     nnoremap vv ^vg_
