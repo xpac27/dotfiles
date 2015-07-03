@@ -98,15 +98,13 @@
         " set zimbu filetype
         au! BufNewFile,BufRead *.zu setf zimbu
 
-        " save all files when vim looses focus
-        au FocusLost * silent! wa
-
         " activate FileSwitch on cpp and h files
         au! BufEnter *.cpp,*.cc let b:fswitchdst = 'h,hpp'  | let b:fswitchlocs = './,../inc/,../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/'
         au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
 
         " Higlight word under cursor
         au CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+        au BufLeave * call clearmatches()
 
     augroup END
 
