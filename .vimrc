@@ -82,7 +82,6 @@
         au BufNewFile,BufRead Makefile set noexpandtab
 
         " source local vimrc
-        " au BufNewFile,BufRead * call SetLocalOptions(bufname("%"))
         au VimEnter * call SetLocalOptions(bufname("%"))
 
         " enable spell checking
@@ -92,7 +91,7 @@
         " restore position in file
         au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
 
-        " force actionscript on as files
+        " force actionscript on .as files
         au BufNewFile,BufRead *.as set ft=actionscript
 
         " set zimbu filetype
@@ -105,6 +104,9 @@
         " Higlight word under cursor
         au CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
         au BufLeave * call clearmatches()
+
+        " Auto save
+        au CursorHold * silent wa
 
     augroup END
 
@@ -271,9 +273,11 @@
 
 " MAPPINGS --------------------------------- {{{
 
-    " F1-Help F2-Macro F3-Gundo F5-NERDTree F6-FuzzyFinder F12-Paste
+    " F1-Help F2-Macro F3-Gundo F5-NERDTree F6-Reload F12-Paste
     map <F1> "zyiw:exe "h ".@z.""<CR>
     map <F2> @a
+    map <F5> :NERDTreeToggle<CR>
+    map <F6> :bufdo checktime<CR>
     map <F12> :r! pbpaste<CR><Esc>
 
     " typos
@@ -420,10 +424,6 @@
     " -------------------------------------------------------------------------
     nnoremap <leader>gd :Gdiff<cr>
     nnoremap <leader>gD :diffoff!<cr><C-W>h:bd<cr>
-
-    " NERD Tree
-    " -------------------------------------------------------------------------
-    noremap <F5> :NERDTreeToggle<CR>
 
     " Clang-Format
     " -------------------------------------------------------------------------
