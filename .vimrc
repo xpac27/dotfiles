@@ -55,6 +55,7 @@
 
     " UI
     Plugin 'bling/vim-airline'
+    Plugin 'asenac/vim-airline-loclist'
     Plugin 'gmarik/vim-visual-star-search'
     Plugin 'mhinz/vim-signify'
     Plugin 'airblade/vim-gitgutter'
@@ -107,6 +108,9 @@
 
         " Auto save
         au CursorHold * silent wa
+
+		" Force syntax check when entering the buffer
+		au BufEnter *.cpp,*.hpp,*.h silent YcmForceCompileAndDiagnostics
 
     augroup END
 
@@ -277,7 +281,7 @@
     map <F1> "zyiw:exe "h ".@z.""<CR>
     map <F2> @a
     map <F5> :NERDTreeToggle<CR>
-    map <F6> :bufdo checktime<CR>
+    map <F6> :checktime<CR>
     map <F12> :r! pbpaste<CR><Esc>
 
     " typos
@@ -306,7 +310,7 @@
     nnoremap <silent> <leader>Y :tabclose<CR>
 
     " windows
-    nmap <Tab> <C-w>
+    nmap <leader> <C-w>
     nmap <leader>w <C-W>v:b#<CR>
     nmap <leader>W <C-W>s:b#<CR>
     nmap <unique> <C-UP> 4<C-w>+
@@ -361,7 +365,8 @@
     " Syntastic
     " -------------------------------------------------------------------------
     let g:syntastic_actionscript_mxmlc_exe = 'fcshctl mxmlc -source-path=src '
-    let g:syntastic_auto_loc_list=0
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list=1
     let g:syntastic_enable_signs=1
     let g:syntastic_check_on_open=0
     let g:syntastic_check_on_wq = 0
@@ -455,7 +460,7 @@
     " -------------------------------------------------------------------------
     let g:gitgutter_enabled = 1
     let g:gitgutter_realtime =1
-    set updatetime=250
+    set updatetime=1250
 
     " Conque GDB / Term
     " -------------------------------------------------------------------------
