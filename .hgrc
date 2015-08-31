@@ -19,9 +19,9 @@ purge =
 eol =
 graphlog =
 largefiles =
-strip = 
 histedit =
 rebase =
+shelve = 
 
 [alias]
 br = branches

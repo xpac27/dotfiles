@@ -66,6 +66,7 @@
     Plugin 'zeis/vim-kolor'
     Plugin 'itsthatguy/theme-itg-flat'
     Plugin 'jeetsukumaran/vim-nefertiti'
+    Plugin 'NLKNguyen/papercolor-theme'
     Plugin 'morhetz/gruvbox'
 
     call vundle#end()
@@ -99,8 +100,8 @@
         au! BufNewFile,BufRead *.zu setf zimbu
 
         " activate FileSwitch on cpp and h files
-        au! BufEnter *.cpp,*.cc let b:fswitchdst = 'h,hpp'  | let b:fswitchlocs = './,../inc/,../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/'
-        au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
+        au! BufEnter *.cpp,*.cc let b:fswitchdst = 'h,hpp'  | let b:fswitchlocs = './,../inc/,../../inc/,../inc/**/,../../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/'
+        au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
 
         " Higlight word under cursor
         au CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
@@ -112,6 +113,9 @@
 		" Force syntax check when entering the buffer
 		au BufEnter *.cpp,*.hpp,*.h silent YcmForceCompileAndDiagnostics
 
+        " Make crontab happy
+        au filetype crontab setlocal nobackup nowritebackup
+
     augroup END
 
 " }}}
@@ -122,13 +126,12 @@
     let &t_8f="\e[38;2;%ld;%ld;%ldm"
     let &t_8b="\e[48;2;%ld;%ld;%ldm"
     set guicolors
-    " colorscheme lucius
-    " LuciusDark
-    colorscheme nefertiti
-    " colorscheme itg_flat
-    " colorscheme kolor
-    " colorscheme zenburn
-    " colorscheme gruvbox
+    if 1
+        colorscheme nefertiti
+    else
+        set background=light
+        colorscheme PaperColor
+    endif
 
     " rendering options
     set enc=utf-8
@@ -245,33 +248,27 @@
     " popup menu
     set pumheight=15
 
-    " override popup menu colors
-    " hi Pmenu		cterm=none	ctermfg=255	ctermbg=238
-    " hi PmenuSel		cterm=none	ctermfg=16	ctermbg=227
-    " hi PmenuSbar	cterm=none	ctermfg=240	ctermbg=240
-    " hi PmenuThumb	cterm=none	ctermfg=255	ctermbg=255
+    if 1
+        " override cursorline colors
+        hi CursorLine guibg=#2f2e30 cterm=none
 
-    " override fold bar colors
-    " hi Folded       cterm=none  ctermfg=244 ctermbg=233
+        " to list colors run :so $VIMRUNTIME/syntax/hitest.vim
+        " error colors
+        hi SpellBad cterm=underline guibg=#990000 guifg=#ffcccc
+        hi YcmErrorSign cterm=none guibg=#990000 guifg=#ffcccc
+        hi SpellCap cterm=underline guibg=#999900 guifg=#ffffcc
+        hi YcmWarningSign cterm=none guibg=#999900 guifg=#ffffcc
 
-    " override cursorline colors
-    hi CursorLine guibg=#2f2e30 cterm=none
+        " split color
+        hi vertsplit guifg=#1f1c1c guibg=#1f1c1c
+        hi LineNr guibg=#1f1c1c
+        hi SignColumn guibg=#1f1c1c
 
-	" to list colors run :so $VIMRUNTIME/syntax/hitest.vim
-    " error colors
-    hi SpellBad cterm=underline guibg=#990000 guifg=#ffcccc
-    hi YcmErrorSign cterm=none guibg=#990000 guifg=#ffcccc
-    hi SpellCap cterm=underline guibg=#999900 guifg=#ffffcc
-    hi YcmWarningSign cterm=none guibg=#999900 guifg=#ffffcc
-
-    " split color
-    hi vertsplit guifg=#1f1c1c guibg=#1f1c1c
-    hi LineNr guibg=#1f1c1c
-    hi SignColumn guibg=#1f1c1c
-
-    " search
-    hi Search cterm=underline guibg=#2c2824 guifg=#fffdc0
-    hi IncSearch cterm=underline guibg=#403a34 guifg=#fffdc0
+        " search
+        hi Search cterm=underline guibg=#2c2824 guifg=#fffdc0
+        hi IncSearch cterm=underline guibg=#403a34 guifg=#fffdc0
+    else
+    endif
 
 " }}}
 
@@ -371,13 +368,13 @@
     let g:syntastic_check_on_open=0
     let g:syntastic_check_on_wq = 0
     let g:syntastic_javascript_checkers = ['jshint']
-    let g:syntastic_ruby_checkers = ['rubylint']
+    " let g:syntastic_ruby_checkers = ['rubylint']
     let g:syntastic_error_symbol = 'xx'
     let g:syntastic_warning_symbol = 'vv'
     let g:syntastic_mode_map = {
         \ 'mode': 'active',
         \ 'active_filetypes': ['javascript'],
-        \ 'passive_filetypes': ['c', 'cpp', 'java', 'xhtml']
+        \ 'passive_filetypes': ['c', 'cpp', 'java', 'xhtml', 'sh']
     \ }
 
     " Ultisnips
@@ -407,7 +404,11 @@
 
     " Airline
     " -------------------------------------------------------------------------
-    let g:airline_theme = 'powerlineish'
+    if 1
+        let g:airline_theme = 'powerlineish'
+    else
+        let g:airline_theme = 'sol'
+    endif
     let g:airline#extensions#branch#enabled = 0
     let g:airline#extensions#tabline#enabled = 1
     let g:airline_powerline_fonts = 1
@@ -460,7 +461,7 @@
     " -------------------------------------------------------------------------
     let g:gitgutter_enabled = 1
     let g:gitgutter_realtime =1
-    set updatetime=1250
+    set updatetime=500
 
     " Conque GDB / Term
     " -------------------------------------------------------------------------
