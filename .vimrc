@@ -51,7 +51,6 @@
     Plugin 'godlygeek/tabular'
     Plugin 'terryma/vim-multiple-cursors'
     Plugin 'rhysd/vim-clang-format'
-    Plugin 'tpope/vim-surround'
 
     " UI
     Plugin 'bling/vim-airline'
@@ -396,7 +395,7 @@
     " -------------------------------------------------------------------------
    let g:ctrlp_user_command = {
        \ 'types': {
-           \ 1: ['.git', 'cd %s && git ls-files'],
+           \ 1: ['.git', 'cd %s && git ls-files && git submodule foreach --recursive git ls-files'],
            \ 2: ['.hg', 'hg --cwd %s locate -I .'],
 		\ },
 		\ 'fallback': 'find %s -type f'
