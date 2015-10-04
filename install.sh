@@ -3,7 +3,9 @@
 ## BREW
 ## ---------------------------------------------------------------------------------
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+bew update
 brew install cmake git llvm ack
+brew doctor
 
 ## RVM
 ## ---------------------------------------------------------------------------------
@@ -33,3 +35,24 @@ echo "export PATH=\"$PATH:$HOME/Applications/fcshctl-v0.5.1\"" >> ~/.profile
 echo "# JAVA" >> ~/.profile
 echo "-export JAVA_HOME=\"$(/usr/libexec/java_home)\"" >> ~/.profile
 /usr/libexec/java_home --request
+
+## APACHE
+## ---------------------------------------------------------------------------------
+sudo echo "<Directory "/Users/vinz/Sites/">
+    Options Indexes Multiviews FollowSymLinks
+    AllowOverride AuthConfig Limit
+    Order allow,deny
+    Allow from all
+    Require all granted
+</Directory>" >> vinz.conf
+sudo mv vinz.conf /etc/apache2/users/vinz.conf
+sudo sed -i'' -e '493 s/^#//' /private/etc/apache2/httpd.conf
+sudo sed -i'' -e '166 s/^#//' /private/etc/apache2/httpd.conf
+sudo sed -i'' -e '16 s/^#//' /etc/apache2/extra/httpd-userdir.conf
+launchctl load -w /System/Library/LaunchDaemons/org.apache.httpd.plist
+sudo apachectl start
+chmod go-rwx ~/Sites
+chmod go+x ~/Sites
+sudo chgrp -R _www ~/Sites
+chmod -R go-rwx ~/Sites
+chmod -R g+rx ~/Sites
