@@ -29,6 +29,10 @@ echo "# Flex SDK" >> ~/.profile
 echo "export FLEX_HOME=\"$HOME/Applications/flex_sdk_4.6\"" >> ~/.profile
 echo "export PATH=\"$PATH:$FLEX_HOME/bin\"" >> ~/.profile
 echo "export PATH=\"$PATH:$HOME/Applications/fcshctl-v0.5.1\"" >> ~/.profile
+sudo mkdir "/Library/Application Support/Macromedia"
+sudo echo "ErrorReportingEnable=1
+TraceOutputFileEnable=1" >> mm.cfg
+mv mm.cfg "/Library/Application Support/Macromedia/"
 
 ## APACHE
 ## ---------------------------------------------------------------------------------
