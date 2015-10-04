@@ -110,7 +110,7 @@
         au CursorHold * silent wa
 
 		" Force syntax check when entering the buffer
-		au BufEnter *.cpp,*.hpp,*.h silent YcmForceCompileAndDiagnostics
+		au BufWinEnter *.cpp,*.hpp,*.h silent YcmForceCompileAndDiagnostics
 
         " Make crontab happy
         au filetype crontab setlocal nobackup nowritebackup

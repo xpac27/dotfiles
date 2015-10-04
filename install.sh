@@ -11,14 +11,25 @@ brew doctor
 ## ---------------------------------------------------------------------------------
 curl -sSL https://get.rvm.io | bash -s stable --ruby
 
+## Python
+## ---------------------------------------------------------------------------------
+sudo easy_install pip
+
 ## ZSH
 ## ---------------------------------------------------------------------------------
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
+## Hack Font
+## ---------------------------------------------------------------------------------
+curl -LO https://github.com/chrissimpkins/Hack/releases/download/v2.015/Hack-v2_015-ttf.zip
+unzip Hack-v2_015-ttf.zip -d .
+mv Hack-* /Users/vinz/Library/Fonts
+pip install --user powerline-status
+
 ## FLEX SDK
 ## ---------------------------------------------------------------------------------
-cur -O "http://download.macromedia.com/pub/flex/sdk/flex_sdk_4.6.zip"
-cur -O "http://hasseg.org/stuff/fcshctl/fcshctl-v0.5.1.zip"
+curl -LO "http://download.macromedia.com/pub/flex/sdk/flex_sdk_4.6.zip"
+curl -LO "http://hasseg.org/stuff/fcshctl/fcshctl-v0.5.1.zip"
 unzip flex_sdk_4.6.zip -d ~/Applications/
 unzip fcshctl-v0.5.1.zip -d ~/Applications/
 rm flex_sdk_4.6.zip
