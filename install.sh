@@ -30,12 +30,6 @@ echo "export FLEX_HOME=\"$HOME/Applications/flex_sdk_4.6\"" >> ~/.profile
 echo "export PATH=\"$PATH:$FLEX_HOME/bin\"" >> ~/.profile
 echo "export PATH=\"$PATH:$HOME/Applications/fcshctl-v0.5.1\"" >> ~/.profile
 
-## JAVA
-## ---------------------------------------------------------------------------------
-echo "# JAVA" >> ~/.profile
-echo "-export JAVA_HOME=\"$(/usr/libexec/java_home)\"" >> ~/.profile
-/usr/libexec/java_home --request
-
 ## APACHE
 ## ---------------------------------------------------------------------------------
 sudo echo "<Directory "/Users/vinz/Sites/">
@@ -56,3 +50,9 @@ chmod go+x ~/Sites
 sudo chgrp -R _www ~/Sites
 chmod -R go-rwx ~/Sites
 chmod -R g+rx ~/Sites
+
+## JAVA
+## ---------------------------------------------------------------------------------
+echo "# JAVA" >> ~/.profile
+echo "-export JAVA_HOME=\"$(/usr/libexec/java_home)\"" >> ~/.profile
+/usr/libexec/java_home --request
