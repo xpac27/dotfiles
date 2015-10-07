@@ -1,1 +1,1 @@
-dashboard -layout !registers !memory !assembly source threads stack expressions history
+dashboard -layout !registers !memory !assembly !threads source stack expressions history
