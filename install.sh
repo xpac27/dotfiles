@@ -19,6 +19,11 @@ sudo easy_install pip
 ## ---------------------------------------------------------------------------------
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
+## LLVM
+## ---------------------------------------------------------------------------------
+echo "# LLVM" >> ~/.profile
+echo "export PATH=\"$PATH:/usr/local/Cellar/llvm/3.6.2/bin/\"" >> ~/.profile
+
 ## Hack Font
 ## ---------------------------------------------------------------------------------
 curl -LO https://github.com/chrissimpkins/Hack/releases/download/v2.015/Hack-v2_015-ttf.zip

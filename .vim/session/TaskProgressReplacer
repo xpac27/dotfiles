@@ -1,0 +1,335 @@
+let SessionLoad = 1
+if &cp | set nocp | endif
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+let v:this_session=expand("<sfile>:p")
+let NERDTreeMapPreviewSplit = "gi"
+let NERDTreeMapCloseChildren = "X"
+let ConqueGdb_GdbExe = ""
+let NERDTreeMapOpenInTabSilent = "T"
+let ConqueTerm_EscKey = "<Esc>"
+let UltiSnipsUsePythonVersion = "<tab>"
+let NERDTreeMapCloseDir = "x"
+let ConqueTerm_Color =  1 
+let ConqueTerm_Version =  230 
+let NERDTreeSortHiddenFirst = "1"
+let NERDTreeMinimalUI = "0"
+let NERDTreeMapRefresh = "r"
+let UltiSnipsExpandTrigger = "<Tab>"
+let NERDTreeAutoDeleteBuffer =  0 
+let ConqueGdb_Print = "<Leader>p"
+let ConqueTerm_SendFunctionKeys =  0 
+let NERDTreeBookmarksFile = "/Users/vincent.cogne/.NERDTreeBookmarks"
+let UltiSnipsJumpForwardTrigger = "<c-b>"
+let ConqueTerm_FastMode =  0 
+let NERDTreeMapToggleHidden = "I"
+let NERDTreeWinSize = "31"
+let NERDTreeMapJumpParent = "p"
+let ConqueGdb_Continue = "<Leader>c"
+let UltiSnipsRemoveSelectModeMappings =  1 
+let ConqueGdb_Disable =  0 
+let NERDTreeMapPreview = "go"
+let ConqueTerm_PyExe = ""
+let NERDTreeDirArrows = "1"
+let ConqueTerm_ColorMode = ""
+let NERDTreeMapActivateNode = "o"
+let NERDTreeQuitOnOpen = "0"
+let NERDTreeWinPos = "left"
+let NERDTreeMapMenu = "m"
+let ConqueTerm_ShowBell =  0 
+let NERDTreeStatusline = "%{exists('b:NERDTreeRoot')?b:NERDTreeRoot.path.str():''}"
+let ConqueTerm_Interrupt = "<C-c>"
+let ConqueGdb_SrcSplit = "left"
+let NERDTreeMapHelp = "?"
+let NERDTreeMapToggleFilters = "f"
+let ConqueGdb_Next = "<Leader>n"
+let NERDTreeAutoCenter = "1"
+let NERDTreeMapJumpPrevSibling = "<C-k>"
+let NERDTreeShowBookmarks = "0"
+let NERDTreeRemoveDirCmd = "rm -rf "
+let ConqueGdb_Leader = "<Leader>"
+let NERDTreeMouseMode = "1"
+let ConqueTerm_UnfocusedUpdateTime =  250 
+let ConqueTerm_TermLoaded =  1 
+let NERDTreeChDirMode = "0"
+let ConqueGdb_Finish = "<Leader>f"
+let ConqueTerm_CloseOnEnd =  0 
+let ConqueTerm_InsertCharPre =  0 
+let ConqueTerm_CodePage =  0 
+let NERDTreeAutoCenterThreshold = "3"
+let NERDTreeShowFiles = "1"
+let NERDTreeMapOpenVSplit = "s"
+let NERDTreeMapOpenSplit = "i"
+let ConqueTerm_StartMessages =  0 
+let NERDTreeCaseSensitiveSort = "0"
+let NERDTreeHijackNetrw = "1"
+let NERDTreeShowLineNumbers = "0"
+let NERDTreeShowHidden = "0"
+let NERDTreeBookmarksSort = "1"
+let NERDTreeHighlightCursorline = "1"
+let UltiSnipsEnableSnipMate =  1 
+let NERDTreeMapOpenInTab = "t"
+let ConqueGdb_ToggleBreak = "<Leader>b"
+let ConqueTerm_ExecFileKey = "<F11>"
+let NERDTreeRespectWildIgnore = "0"
+let ConqueTerm_InsertOnEnter =  0 
+let NERDTreeMapCWD = "CD"
+let NERDTreeNotificationThreshold = "100"
+let NERDTreeMapPreviewVSplit = "gs"
+let ConqueTerm_ToggleKey = "<F8>"
+let NERDTreeMapJumpRoot = "P"
+let UltiSnipsJumpBackwardTrigger = "<c-z>"
+let ConqueGdb_Run = "<Leader>r"
+let NERDTreeMapChdir = "cd"
+let ConqueTerm_TerminalsString = ""
+let NERDTreeMapToggleZoom = "A"
+let ConqueGdb_Step = "<Leader>s"
+let ConqueGdb_ReadTimeout =  50 
+let NERDTreeMapRefreshRoot = "R"
+let NERDTreeCascadeOpenSingleChildDir = "1"
+let UltiSnipsPythonPath = "/Users/vincent.cogne/Github/dotfiles/.vim/bundle/ultisnips/pythonx"
+let ConqueGdb_Backtrace = "<Leader>t"
+let ConqueTerm_ReadUnfocused =  1 
+let ConqueTerm_SendFileKey = "<F10>"
+let ConqueTerm_Loaded =  1 
+let NERDTreeMapDeleteBookmark = "D"
+let UltiSnipsListSnippets = "<c-tab>"
+let NERDTreeMapJumpNextSibling = "<C-j>"
+let UltiSnipsEditSplit = "normal"
+let NERDTreeCopyCmd = "cp -r "
+let ConqueTerm_SendVisKey = "<F9>"
+let NERDTreeMapQuit = "q"
+let NERDTreeMapChangeRoot = "C"
+let ConqueTerm_SessionSupport =  0 
+let NERDTreeSortDirs = "1"
+let ConqueTerm_TERM = "xterm"
+let NERDTreeMapToggleFiles = "F"
+let ConqueTerm_CWInsert =  0 
+let ConqueTerm_Idx =  0 
+let ConqueTerm_PromptRegex = "^\\w\\+@[0-9A-Za-z_.-]\\+:[0-9A-Za-z_./\\~,:-]\\+\\$"
+let NERDTreeMapOpenExpl = "e"
+let NERDTreeMapJumpFirstChild = "K"
+let ConqueGdb_SaveHistory =  1 
+let NERDTreeMapOpenRecursively = "O"
+let NERDTreeMapToggleBookmarks = "B"
+let ConqueTerm_FocusedUpdateTime =  80 
+let NERDTreeMapUpdir = "u"
+let ConqueTerm_Syntax = "conque_term"
+let NERDTreeMapUpdirKeepOpen = "U"
+let ConqueTerm_PyVersion =  2 
+let NERDTreeMapJumpLastChild = "J"
+silent only
+cd ~/King/kingdomviews-sample/externals/game-platform
+if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
+  let s:wipebuf = bufnr('%')
+endif
+set shortmess=aoO
+badd +13 backend-packages/juego/include/juego/achievement/taskprogress/FFEvent.h
+badd +10 backend-packages/juego/include/juego/achievement/taskprogress/Replacer.h
+badd +25 backend-packages/juego/source/common/juego/achievement/taskprogress/Replacer.cpp
+badd +72 backend-packages/juego/source/common/juego/achievement/FFAchievementTriggerAggregator.cpp
+badd +6 backend-packages/juego/include/juego/achievement/FFAchievementTriggerAggregator.h
+badd +43 backend-packages/juego/tests/source/common/AchievementTriggerAggregatorTest.cpp
+badd +28 backend-packages/juego/tests/source/common/TaskProgressReplacerTest.cpp
+badd +111 backend-packages/juego/tests/source/common/AchievementHelper.hpp
+badd +482 backend-packages/juego/source/common/juego/achievement/FFAchievementManager.cpp
+badd +1 backend-packages/juego-api/include/juego-api/achievement/FFAppAchievementDataDto.h
+badd +0 ng/kingdomviews-sample/externals/game-platform/backend-packages/juego-api/include/juego-api/achievement/FFAppAchievementDataDto.h
+badd +12 backend-packages/juego-api/include/juego-api/achievement/FFAppTaskDataDto.h
+badd +42 backend-packages/juego-api/source/common/juego-api/achievement/FFAppAchievementDataDto.cpp
+badd +19 backend-packages/juego-api/source/common/juego-api/achievement/FFAppTaskDataDto.cpp
+badd +0 backend-packages/plataforma-constants/include/plataforma/constants/FFPlataformaGameTriggerType.h
+badd +111 backend-packages/juego/include/juego/achievement/FFAchievement.h
+badd +0 backend-packages/juego/include/juego/achievement/taskprogress/ReplacementAggregator.h
+badd +0 backend-packages/juego/source/common/juego/achievement/taskprogress/ReplacementAggregator.cpp
+argglobal
+silent! argdel *
+edit backend-packages/juego/source/common/juego/achievement/taskprogress/ReplacementAggregator.cpp
+set splitbelow splitright
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+wincmd w
+wincmd t
+set winheight=1 winwidth=1
+exe '1resize ' . ((&lines * 59 + 41) / 83)
+exe 'vert 1resize ' . ((&columns * 181 + 182) / 364)
+exe '2resize ' . ((&lines * 59 + 41) / 83)
+exe 'vert 2resize ' . ((&columns * 182 + 182) / 364)
+exe '3resize ' . ((&lines * 20 + 41) / 83)
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 24 - ((23 * winheight(0) + 29) / 59)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+24
+normal! 0
+wincmd w
+argglobal
+edit backend-packages/juego/include/juego/achievement/taskprogress/ReplacementAggregator.h
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 9 - ((8 * winheight(0) + 29) / 59)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+9
+normal! 027|
+wincmd w
+argglobal
+edit backend-packages/juego/include/juego/achievement/taskprogress/FFEvent.h
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 13 - ((3 * winheight(0) + 10) / 20)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+13
+normal! 027|
+wincmd w
+exe '1resize ' . ((&lines * 59 + 41) / 83)
+exe 'vert 1resize ' . ((&columns * 181 + 182) / 364)
+exe '2resize ' . ((&lines * 59 + 41) / 83)
+exe 'vert 2resize ' . ((&columns * 182 + 182) / 364)
+exe '3resize ' . ((&lines * 20 + 41) / 83)
+tabedit backend-packages/juego/tests/source/common/TaskProgressReplacerTest.cpp
+set splitbelow splitright
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
+wincmd w
+wincmd t
+set winheight=1 winwidth=1
+exe '1resize ' . ((&lines * 63 + 41) / 83)
+exe 'vert 1resize ' . ((&columns * 204 + 182) / 364)
+exe '2resize ' . ((&lines * 55 + 41) / 83)
+exe 'vert 2resize ' . ((&columns * 159 + 182) / 364)
+exe '3resize ' . ((&lines * 7 + 41) / 83)
+exe 'vert 3resize ' . ((&columns * 159 + 182) / 364)
+exe '4resize ' . ((&lines * 16 + 41) / 83)
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 23 - ((22 * winheight(0) + 31) / 63)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+23
+normal! 0
+wincmd w
+argglobal
+edit backend-packages/juego/tests/source/common/AchievementHelper.hpp
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 67 - ((27 * winheight(0) + 27) / 55)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+67
+normal! 061|
+wincmd w
+argglobal
+edit backend-packages/plataforma-constants/include/plataforma/constants/FFPlataformaGameTriggerType.h
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 10 - ((3 * winheight(0) + 3) / 7)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+10
+normal! 037|
+wincmd w
+argglobal
+edit backend-packages/juego-api/include/juego-api/achievement/FFAppAchievementDataDto.h
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 24 - ((10 * winheight(0) + 8) / 16)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+24
+normal! 05|
+wincmd w
+exe '1resize ' . ((&lines * 63 + 41) / 83)
+exe 'vert 1resize ' . ((&columns * 204 + 182) / 364)
+exe '2resize ' . ((&lines * 55 + 41) / 83)
+exe 'vert 2resize ' . ((&columns * 159 + 182) / 364)
+exe '3resize ' . ((&lines * 7 + 41) / 83)
+exe 'vert 3resize ' . ((&columns * 159 + 182) / 364)
+exe '4resize ' . ((&lines * 16 + 41) / 83)
+tabnext 1
+if exists('s:wipebuf')
+  silent exe 'bwipe ' . s:wipebuf
+endif
+unlet! s:wipebuf
+set winheight=1 winwidth=20 shortmess=IAWc
+let s:sx = expand("<sfile>:p:r")."x.vim"
+if file_readable(s:sx)
+  exe "source " . fnameescape(s:sx)
+endif
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+unlet SessionLoad
+" vim: set ft=vim :
