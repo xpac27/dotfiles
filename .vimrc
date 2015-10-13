@@ -372,7 +372,7 @@
     let g:syntastic_warning_symbol = 'vv'
     let g:syntastic_mode_map = {
         \ 'mode': 'active',
-        \ 'active_filetypes': ['javascript'],
+        \ 'active_filetypes': ['javascript', 'actionscript'],
         \ 'passive_filetypes': ['c', 'cpp', 'java', 'xhtml', 'sh']
     \ }
 
