@@ -1,0 +1,481 @@
+let SessionLoad = 1
+if &cp | set nocp | endif
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+let v:this_session=expand("<sfile>:p")
+let NERDTreeMapPreviewSplit = "gi"
+let NERDTreeMapCloseChildren = "X"
+let ConqueGdb_GdbExe = ""
+let EasyMotion_off_screen_search =  1 
+let NERDTreeMapOpenInTabSilent = "T"
+let ConqueTerm_EscKey = "<Esc>"
+let UltiSnipsUsePythonVersion = "<tab>"
+let NERDTreeMapCloseDir = "x"
+let ConqueTerm_Color =  1 
+let EasyMotion_hl_move = "EasyMotionMoveHL"
+let ConqueTerm_Version =  230 
+let NERDTreeSortHiddenFirst = "1"
+let NERDTreeMinimalUI = "0"
+let NERDTreeMapRefresh = "r"
+let UltiSnipsExpandTrigger = "<Tab>"
+let EasyMotion_use_migemo =  0 
+let NERDTreeAutoDeleteBuffer =  0 
+let EasyMotion_smartcase =  1 
+let ConqueGdb_Print = "<Leader>p"
+let ConqueTerm_SendFunctionKeys =  0 
+let NERDTreeBookmarksFile = "/Users/vincent.cogne/.NERDTreeBookmarks"
+let UltiSnipsJumpForwardTrigger = "<c-b>"
+let NERDTreeMapToggleHidden = "I"
+let NERDTreeWinSize = "31"
+let NERDTreeMapJumpParent = "p"
+let ConqueGdb_Continue = "<Leader>c"
+let EasyMotion_use_upper =  0 
+let UltiSnipsRemoveSelectModeMappings =  1 
+let EasyMotion_keys = "asdghklqwertyuiopzxcvbnmfj;"
+let ConqueGdb_Disable =  0 
+let EasyMotion_hl_group_target = "EasyMotionTarget"
+let NERDTreeMapPreview = "go"
+let EasyMotion_do_mapping =  1 
+let ConqueTerm_PyExe = ""
+let NERDTreeDirArrows = "1"
+let ConqueTerm_ColorMode = ""
+let NERDTreeMapActivateNode = "o"
+let NERDTreeQuitOnOpen = "0"
+let EasyMotion_hl_inc_search = "EasyMotionIncSearch"
+let NERDTreeWinPos = "left"
+let EasyMotion_disable_two_key_combo =  0 
+let NERDTreeMapMenu = "m"
+let ConqueTerm_ShowBell =  0 
+let EasyMotion_space_jump_first =  0 
+let NERDTreeStatusline = "%{exists('b:NERDTreeRoot')?b:NERDTreeRoot.path.str():''}"
+let EasyMotion_use_regexp =  1 
+let ConqueGdb_SrcSplit = "left"
+let NERDTreeMapHelp = "?"
+let EasyMotion_move_highlight =  1 
+let ConqueTerm_FastMode =  0 
+let NERDTreeMapToggleFilters = "f"
+let ConqueGdb_Next = "<Leader>n"
+let NERDTreeAutoCenter = "1"
+let ConqueTerm_Interrupt = "<C-c>"
+let NERDTreeMapJumpPrevSibling = "<C-k>"
+let NERDTreeShowBookmarks = "0"
+let NERDTreeRemoveDirCmd = "rm -rf "
+let ConqueGdb_Leader = "<Leader>"
+let NERDTreeMouseMode = "1"
+let EasyMotion_show_prompt =  1 
+let ConqueTerm_UnfocusedUpdateTime =  250 
+let EasyMotion_add_search_history =  1 
+let ConqueTerm_TermLoaded =  1 
+let NERDTreeChDirMode = "0"
+let ConqueGdb_Finish = "<Leader>f"
+let EasyMotion_do_shade =  1 
+let ConqueTerm_ExecFileKey = "<F11>"
+let ConqueTerm_InsertCharPre =  0 
+let ConqueTerm_CodePage =  0 
+let EasyMotion_grouping =  1 
+let NERDTreeAutoCenterThreshold = "3"
+let NERDTreeShowFiles = "1"
+let NERDTreeMapOpenVSplit = "s"
+let EasyMotion_enter_jump_first =  0 
+let NERDTreeMapOpenSplit = "i"
+let ConqueTerm_StartMessages =  0 
+let EasyMotion_skipfoldedline =  1 
+let NERDTreeCaseSensitiveSort = "0"
+let NERDTreeHijackNetrw = "1"
+let NERDTreeShowLineNumbers = "0"
+let NERDTreeShowHidden = "0"
+let NERDTreeBookmarksSort = "1"
+let NERDTreeHighlightCursorline = "1"
+let UltiSnipsEnableSnipMate =  1 
+let EasyMotion_prompt = "Search for {n} character(s): "
+let NERDTreeMapOpenInTab = "t"
+let ConqueGdb_ToggleBreak = "<Leader>b"
+let EasyMotion_re_line_anywhere = "\\v(<.|^$)|(.>|^$)|(\\l)\\zs(\\u)|(_\\zs.)|(#\\zs.)"
+let ConqueTerm_CloseOnEnd =  0 
+let NERDTreeRespectWildIgnore = "0"
+let ConqueTerm_InsertOnEnter =  0 
+let EasyMotion_re_anywhere = "\\v(<.|^$)|(.>|^$)|(\\l)\\zs(\\u)|(_\\zs.)|(#\\zs.)"
+let NERDTreeMapCWD = "CD"
+let NERDTreeNotificationThreshold = "100"
+let NERDTreeMapPreviewVSplit = "gs"
+let NERDTreeMapJumpRoot = "P"
+let UltiSnipsJumpBackwardTrigger = "<c-z>"
+let EasyMotion_hl2_first_group_target = "EasyMotionTarget2First"
+let ConqueGdb_Run = "<Leader>r"
+let NERDTreeMapChdir = "cd"
+let ConqueTerm_TerminalsString = ""
+let NERDTreeMapToggleZoom = "A"
+let ConqueGdb_Step = "<Leader>s"
+let ConqueGdb_ReadTimeout =  50 
+let NERDTreeMapRefreshRoot = "R"
+let EasyMotion_cursor_highlight =  1 
+let SessionLoad =  1 
+let EasyMotion_loaded =  1 
+let NERDTreeCascadeOpenSingleChildDir = "1"
+let ConqueTerm_ToggleKey = "<F8>"
+let EasyMotion_hl2_second_group_target = "EasyMotionTarget2Second"
+let UltiSnipsPythonPath = "/Users/vincent.cogne/Github/dotfiles/.vim/bundle/ultisnips/pythonx"
+let ConqueGdb_Backtrace = "<Leader>t"
+let EasyMotion_startofline =  1 
+let ConqueTerm_ReadUnfocused =  1 
+let ConqueTerm_SendFileKey = "<F10>"
+let ConqueTerm_Loaded =  1 
+let NERDTreeMapDeleteBookmark = "D"
+let UltiSnipsListSnippets = "<c-tab>"
+let NERDTreeMapJumpNextSibling = "<C-j>"
+let EasyMotion_inc_highlight =  1 
+let UltiSnipsEditSplit = "normal"
+let NERDTreeCopyCmd = "cp -r "
+let ConqueTerm_SendVisKey = "<F9>"
+let NERDTreeMapQuit = "q"
+let NERDTreeMapChangeRoot = "C"
+let ConqueTerm_SessionSupport =  0 
+let NERDTreeSortDirs = "1"
+let ConqueTerm_TERM = "xterm"
+let NERDTreeMapToggleFiles = "F"
+let ConqueTerm_CWInsert =  0 
+let ConqueTerm_Idx =  0 
+let EasyMotion_force_csapprox =  0 
+let ConqueTerm_PromptRegex = "^\\w\\+@[0-9A-Za-z_.-]\\+:[0-9A-Za-z_./\\~,:-]\\+\\$"
+let EasyMotion_hl_inc_cursor = "EasyMotionIncCursor"
+let NERDTreeMapOpenExpl = "e"
+let NERDTreeMapJumpFirstChild = "K"
+let ConqueGdb_SaveHistory =  1 
+let EasyMotion_hl_group_shade = "EasyMotionShade"
+let NERDTreeMapOpenRecursively = "O"
+let EasyMotion_ignore_exception =  0 
+let NERDTreeMapToggleBookmarks = "B"
+let ConqueTerm_FocusedUpdateTime =  80 
+let NERDTreeMapUpdir = "u"
+let ConqueTerm_Syntax = "conque_term"
+let NERDTreeMapUpdirKeepOpen = "U"
+let EasyMotion_landing_highlight =  0 
+let ConqueTerm_PyVersion =  2 
+let NERDTreeMapJumpLastChild = "J"
+silent only
+cd ~/King/papapearsagamobile
+if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
+  let s:wipebuf = bufnr('%')
+endif
+set shortmess=aoO
+badd +338 papapearsaga/source/common/entities/papa/component/PapaLogic.cpp
+badd +1 ~/Downloads/robot2.vox
+badd +161 ~/King/papapearsagamobile/papapearsaga/include/constants/PPSSubtypesConstants.h
+badd +13 papapearsaga/source/common/entities/obstacles/component/ObstacleLogic.cpp
+badd +13 engine/fictionfactory/game-platform/backend-packages/juego/source/common/juego/gametrigger/FFGameTriggers.cpp
+badd +11 ~/King/papapearsagamobile/engine/fictionfactory/game-platform/backend-packages/juego/include/juego/gametrigger/FFGameTriggers.h
+badd +23 papapearsaga/source/common/entities/papa/PapaEntity.cpp
+badd +3 ~/King/papapearsagamobile/papapearsaga/include/entities/papa/component/PapaLogic.h
+badd +562 papapearsaga/source/common/PPSApplication.cpp
+badd +1 ~/King/papapearsagamobile/papapearsaga/include/entities/papa/PapaEntity.h
+badd +7 papapearsaga/source/common/entities/kingdom/KingdomViewsEntity.cpp
+badd +67 papapearsaga/source/common/scenes/popups/FacebookConnect/FacebookConnectInfoLogic.cpp
+badd +23 ~/King/papapearsagamobile/papapearsaga/include/scenes/popups/FacebookConnect/FacebookConnectInfoLogic.h
+badd +25 ~/King/papapearsagamobile/engine/kraken/packages/engine-cpp/include/Logic/Implementation/ComponentLogic.h
+badd +190 ~/King/papapearsagamobile/engine/kraken/packages/engine-cpp/include/Framework/Implementation/Component.h
+badd +1 ~/King/papapearsagamobile/engine/kraken/packages/engine-cpp/source/common/Framework/Implementation/Component.cpp
+badd +9 ~/King/papapearsagamobile/papapearsaga/include/scenes/game/Tracking/CustomEventTrackingApi.h
+badd +52 ~/King/papapearsagamobile/papapearsaga/source/common/scenes/game/Tracking/CustomEventTrackingApi.cpp
+badd +28 ~/King/papapearsagamobile/papapearsaga/include/scenes/game/Tutorial/TutorialManagerComponent.h
+badd +12 ~/King/papapearsagamobile/papapearsaga/source/common/scenes/game/Tutorial/TutorialManagerComponent.cpp
+badd +67 ~/King/papapearsagamobile/papapearsaga/include/scenes/Tutorial/TutorialConfig.h
+badd +1 papapearsaga/source/common/scenes/Tutorial/TutorialManager.cpp
+badd +40 ~/King/papapearsagamobile/engine/kraken/packages/engine-cpp/include/Logic/IComponentLogic.h
+badd +8 ~/King/papapearsagamobile/engine/fictionfactory/game-platform/backend-packages/juego/include/juego/gametrigger/FFIGameTriggers.h
+badd +312 ~/King/papapearsagamobile/engine/fictionfactory/game-platform/backend-packages/plataforma-constants/include/plataforma/constants/FFPlataformaGameTriggerType.h
+badd +53 ~/King/papapearsagamobile/papapearsaga/include/entities/obstacles/component/ObstacleLogic.h
+badd +5 papapearsaga/source/common/scenes/game/Tasks/VeggiesTask.cpp
+badd +194 papapearsaga/source/common/scenes/game/component/PowerupSpawner.cpp
+badd +145 papapearsaga/include/PPSApplication.h
+badd +60 papapearsaga/include/scenes/game/GameScene.h
+badd +21 papapearsaga/include/scenes/map/MapScene.h
+badd +28 papapearsaga/include/scenes/SceneChange.h
+badd +92 papapearsaga/include/loading/LevelHeader.h
+badd +9 papapearsaga/include/scenes/game/component/GameSceneLogic.h
+badd +17 ~/King/papapearsagamobile/papapearsaga/source/common/scenes/game/component/GameSceneLogic.cpp
+badd +55 papapearsaga/include/scenes/game/Tasks/TaskManager.h
+badd +15 ~/King/papapearsagamobile/papapearsaga/include/common/GameTriggers.h
+badd +0 ~/King/papapearsagamobile/papapearsaga/source/common/common/GameTriggers.cpp
+argglobal
+silent! argdel *
+argadd papapearsaga/source/common/entities/papa/component/PapaLogic.cpp
+edit papapearsaga/source/common/entities/papa/component/PapaLogic.cpp
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+wincmd _ | wincmd |
+vsplit
+2wincmd h
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
+wincmd w
+wincmd w
+wincmd t
+set winheight=1 winwidth=1
+exe '1resize ' . ((&lines * 31 + 42) / 84)
+exe 'vert 1resize ' . ((&columns * 180 + 182) / 364)
+exe '2resize ' . ((&lines * 49 + 42) / 84)
+exe 'vert 2resize ' . ((&columns * 180 + 182) / 364)
+exe 'vert 3resize ' . ((&columns * 181 + 182) / 364)
+exe 'vert 4resize ' . ((&columns * 1 + 182) / 364)
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 17 - ((16 * winheight(0) + 15) / 31)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+17
+normal! 0
+wincmd w
+argglobal
+edit papapearsaga/source/common/entities/papa/component/PapaLogic.cpp
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 670 - ((22 * winheight(0) + 24) / 49)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+670
+normal! 0
+wincmd w
+argglobal
+edit papapearsaga/source/common/entities/papa/component/PapaLogic.cpp
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 19 - ((18 * winheight(0) + 40) / 81)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+19
+normal! 028|
+wincmd w
+argglobal
+edit papapearsaga/source/common/entities/papa/component/PapaLogic.cpp
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 611 - ((80 * winheight(0) + 40) / 81)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+611
+normal! 0
+wincmd w
+exe '1resize ' . ((&lines * 31 + 42) / 84)
+exe 'vert 1resize ' . ((&columns * 180 + 182) / 364)
+exe '2resize ' . ((&lines * 49 + 42) / 84)
+exe 'vert 2resize ' . ((&columns * 180 + 182) / 364)
+exe 'vert 3resize ' . ((&columns * 181 + 182) / 364)
+exe 'vert 4resize ' . ((&columns * 1 + 182) / 364)
+tabedit ~/King/papapearsagamobile/papapearsaga/source/common/scenes/game/component/GameSceneLogic.cpp
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
+wincmd w
+wincmd t
+set winheight=1 winwidth=1
+exe '1resize ' . ((&lines * 40 + 42) / 84)
+exe 'vert 1resize ' . ((&columns * 181 + 182) / 364)
+exe '2resize ' . ((&lines * 40 + 42) / 84)
+exe 'vert 2resize ' . ((&columns * 181 + 182) / 364)
+exe 'vert 3resize ' . ((&columns * 182 + 182) / 364)
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 573 - ((21 * winheight(0) + 20) / 40)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+573
+normal! 022|
+wincmd w
+argglobal
+edit ~/King/papapearsagamobile/papapearsaga/source/common/scenes/game/component/GameSceneLogic.cpp
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 9 - ((8 * winheight(0) + 20) / 40)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+9
+normal! 0
+wincmd w
+argglobal
+edit ~/King/papapearsagamobile/papapearsaga/source/common/scenes/game/component/GameSceneLogic.cpp
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 483 - ((41 * winheight(0) + 40) / 81)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+483
+normal! 09|
+wincmd w
+exe '1resize ' . ((&lines * 40 + 42) / 84)
+exe 'vert 1resize ' . ((&columns * 181 + 182) / 364)
+exe '2resize ' . ((&lines * 40 + 42) / 84)
+exe 'vert 2resize ' . ((&columns * 181 + 182) / 364)
+exe 'vert 3resize ' . ((&columns * 182 + 182) / 364)
+tabedit ~/King/papapearsagamobile/papapearsaga/include/common/GameTriggers.h
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+wincmd t
+set winheight=1 winwidth=1
+exe 'vert 1resize ' . ((&columns * 181 + 182) / 364)
+exe 'vert 2resize ' . ((&columns * 182 + 182) / 364)
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 11 - ((10 * winheight(0) + 40) / 81)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+11
+normal! 05|
+wincmd w
+argglobal
+edit ~/King/papapearsagamobile/papapearsaga/source/common/common/GameTriggers.cpp
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 16 - ((15 * winheight(0) + 40) / 81)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+16
+normal! 05|
+wincmd w
+exe 'vert 1resize ' . ((&columns * 181 + 182) / 364)
+exe 'vert 2resize ' . ((&columns * 182 + 182) / 364)
+tabedit papapearsaga/source/common/scenes/game/Tasks/VeggiesTask.cpp
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+wincmd t
+set winheight=1 winwidth=1
+exe 'vert 1resize ' . ((&columns * 181 + 182) / 364)
+exe 'vert 2resize ' . ((&columns * 182 + 182) / 364)
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 1 - ((0 * winheight(0) + 40) / 81)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 0
+wincmd w
+argglobal
+edit papapearsaga/source/common/scenes/game/Tasks/VeggiesTask.cpp
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 1 - ((0 * winheight(0) + 40) / 81)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 0
+wincmd w
+exe 'vert 1resize ' . ((&columns * 181 + 182) / 364)
+exe 'vert 2resize ' . ((&columns * 182 + 182) / 364)
+tabnext 1
+if exists('s:wipebuf')
+  silent exe 'bwipe ' . s:wipebuf
+endif
+unlet! s:wipebuf
+set winheight=1 winwidth=1 shortmess=aoO
+let s:sx = expand("<sfile>:p:r")."x.vim"
+if file_readable(s:sx)
+  exe "source " . fnameescape(s:sx)
+endif
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+unlet SessionLoad
+" vim: set ft=vim :

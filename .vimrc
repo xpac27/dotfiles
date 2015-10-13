@@ -25,7 +25,6 @@
     Plugin 'mhinz/vim-startify'
 
     " Debug
-    Plugin 'xpac27/vim-lldb'
     Plugin 'vim-scripts/Conque-GDB'
 
     " Syntaxes
