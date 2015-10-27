@@ -4,7 +4,7 @@
 ## ---------------------------------------------------------------------------------
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 bew update
-brew install cmake git llvm ack
+brew install cmake git ack
 brew doctor
 
 ## RVM
@@ -21,8 +21,10 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 
 ## LLVM
 ## ---------------------------------------------------------------------------------
+brew install llvm --with-clang
 echo "# LLVM" >> ~/.profile
-echo "export PATH=\"$PATH:/usr/local/Cellar/llvm/3.6.2/bin/\"" >> ~/.profile
+echo "export PATH=\"\$PATH:/usr/local/opt/llvm/bin/\"" >> ~/.profile
+echo "export PATH=\"\$PATH:/usr/local/opt/llvm/share/clang/tools/scan-build\"" >> ~/.profile
 
 ## Hack Font
 ## ---------------------------------------------------------------------------------
@@ -43,8 +45,8 @@ sed -i'' -e '46,48 s/^/#/' ~/Applications/flex_sdk_4.6/bin/mxmlc
 sed -i'' -e '46,48 s/^/#/' ~/Applications/flex_sdk_4.6/bin/fcsh
 echo "# Flex SDK" >> ~/.profile
 echo "export FLEX_HOME=\"$HOME/Applications/flex_sdk_4.6\"" >> ~/.profile
-echo "export PATH=\"$PATH:$FLEX_HOME/bin\"" >> ~/.profile
-echo "export PATH=\"$PATH:$HOME/Applications/fcshctl-v0.5.1\"" >> ~/.profile
+echo "export PATH=\"\$PATH:$FLEX_HOME/bin\"" >> ~/.profile
+echo "export PATH=\"\$PATH:$HOME/Applications/fcshctl-v0.5.1\"" >> ~/.profile
 sudo mkdir "/Library/Application Support/Macromedia"
 sudo echo "ErrorReportingEnable=1
 TraceOutputFileEnable=1" >> mm.cfg

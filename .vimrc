@@ -114,6 +114,9 @@
         " Make crontab happy
         au filetype crontab setlocal nobackup nowritebackup
 
+        " source local vimrc
+        au VimEnter * silent GitGutterAll
+
     augroup END
 
 " }}}
