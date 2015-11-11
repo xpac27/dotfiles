@@ -1,25 +1,16 @@
-# INSTALL TOOLS
+# ==== REQUIRED
 
-## OH MY ZSH
-## ---------------------------------------------------------------------------------
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+echo "Make sure you installed the command line tools: https://developer.apple.com/downloads/"
+read nothing
 
 ## BREW
 ## ---------------------------------------------------------------------------------
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-bew update
-brew install cmake git ack
+brew update
+brew install cmake git ack entr
 brew doctor
 
-## RVM
-## ---------------------------------------------------------------------------------
-curl -sSL https://get.rvm.io | bash -s stable --ruby
-
-## Python
-## ---------------------------------------------------------------------------------
-sudo easy_install pip
-
-## ZSH
+## OH MY ZSH
 ## ---------------------------------------------------------------------------------
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
@@ -30,12 +21,24 @@ echo "# LLVM" >> ~/.profile
 echo "export PATH=\"\$PATH:/usr/local/opt/llvm/bin/\"" >> ~/.profile
 echo "export PATH=\"\$PATH:/usr/local/opt/llvm/share/clang/tools/scan-build\"" >> ~/.profile
 
+## Python
+## ---------------------------------------------------------------------------------
+sudo easy_install pip
+
 ## Hack Font
 ## ---------------------------------------------------------------------------------
 curl -LO https://github.com/chrissimpkins/Hack/releases/download/v2.015/Hack-v2_015-ttf.zip
 unzip Hack-v2_015-ttf.zip -d .
 mv Hack-* /Users/vinz/Library/Fonts
 pip install --user powerline-status
+
+
+# ==== OPTIONAL
+
+## RVM
+## ---------------------------------------------------------------------------------
+curl -sSL https://get.rvm.io | bash -s stable --ruby
+rvm install 2.1.1
 
 ## FLEX SDK
 ## ---------------------------------------------------------------------------------
