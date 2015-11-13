@@ -1,5 +1,6 @@
 .vim/backup
 .vim/sessions
+.vim/session
 .vim/swap
 .vim/tags
 .vim/doc/tags
