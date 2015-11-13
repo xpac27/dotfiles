@@ -16,16 +16,12 @@
     Plugin 'gmarik/Vundle.vim'
     Plugin 'sjl/gundo.vim'
     Plugin 'tpope/vim-fugitive'
-    Plugin 'ludovicchabant/vim-lawrencium'
     Plugin 'scrooloose/syntastic'
     Plugin 'valloric/YouCompleteMe'
     Plugin 'SirVer/ultisnips'
     Plugin 'honza/vim-snippets'
     Plugin 'ryanss/vim-hackernews'
     Plugin 'mhinz/vim-startify'
-
-    " Debug
-    Plugin 'vim-scripts/Conque-GDB'
 
     " Syntaxes
     Plugin 'tpope/vim-markdown'
@@ -36,6 +32,7 @@
     Plugin 'AndrewRadev/vim-eco'
     Plugin 'groenewege/vim-less'
     Plugin 'tikhomirov/vim-glsl'
+    Plugin 'dart-lang/dart-vim-plugin'
 
     " Searching
     Plugin 'kien/ctrlp.vim'
@@ -55,7 +52,6 @@
     Plugin 'bling/vim-airline'
     Plugin 'asenac/vim-airline-loclist'
     Plugin 'gmarik/vim-visual-star-search'
-    Plugin 'mhinz/vim-signify'
     Plugin 'airblade/vim-gitgutter'
 
     " Scheme
@@ -102,8 +98,8 @@
         au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
 
         " Higlight word under cursor
-        au CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
-        au BufLeave * call clearmatches()
+        au CursorMoved *.cc,*.cpp,*.h,*.hpp exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+        au BufLeave *.cc,*.cpp,*.h,*.hpp call clearmatches()
 
         " Auto save
         au CursorHold * silent wa
@@ -460,19 +456,6 @@
     let g:gitgutter_enabled = 1
     let g:gitgutter_realtime =1
     set updatetime=500
-
-    " Conque GDB / Term
-    " -------------------------------------------------------------------------
-    let g:ConqueTerm_ReadUnfocused = 1
-    let g:ConqueTerm_Color = 1
-    let g:ConqueTerm_StartMessages = 0
-	let g:ConqueTerm_UnfocusedUpdateTime = 250
-    let g:ConqueTerm_FocusedUpdateTime = 80
-    let g:ConqueTerm_TERM = 'xterm'
-    let g:ConqueGdb_SrcSplit = 'left'
-    let g:ConqueGdb_SaveHistory = 1
-    " nnoremap <silent> <Leader>Y :ConqueGdbCommand y<CR>
-    " nnoremap <silent> <Leader>N :ConqueGdbCommand n<CR>
 
     " Startify
     " -------------------------------------------------------------------------

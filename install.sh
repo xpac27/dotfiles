@@ -22,7 +22,7 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 ## LLVM
 ## ---------------------------------------------------------------------------------
 echo "# LLVM" >> ~/.profile
-echo "export PATH=\"$PATH:/usr/local/Cellar/llvm/3.6.2/bin/\"" >> ~/.profile
+echo "export PATH=\"$PATH:/usr/local/opt/llvm/bin/\"" >> ~/.profile
 
 ## Hack Font
 ## ---------------------------------------------------------------------------------
@@ -74,5 +74,5 @@ chmod -R g+rx ~/Sites
 ## JAVA
 ## ---------------------------------------------------------------------------------
 echo "# JAVA" >> ~/.profile
-echo "-export JAVA_HOME=\"$(/usr/libexec/java_home)\"" >> ~/.profile
+echo "export JAVA_HOME=\"$(/usr/libexec/java_home)\"" >> ~/.profile
 /usr/libexec/java_home --request
