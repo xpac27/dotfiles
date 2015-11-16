@@ -106,7 +106,7 @@
         au BufLeave * call clearmatches()
 
         " Auto save
-        au CursorHold * silent wa
+        au CursorHold * nested silent wa
 
 		" Force syntax check when entering the buffer
 		au BufWinEnter *.cpp,*.hpp,*.h silent YcmForceCompileAndDiagnostics
@@ -367,7 +367,7 @@
     let g:syntastic_auto_loc_list=1
     let g:syntastic_enable_signs=1
     let g:syntastic_check_on_open=0
-    let g:syntastic_check_on_wq = 0
+    let g:syntastic_check_on_wq = 1
     let g:syntastic_javascript_checkers = ['jshint']
     " let g:syntastic_ruby_checkers = ['rubylint']
     let g:syntastic_error_symbol = 'xx'
