@@ -16,16 +16,13 @@
     Plugin 'gmarik/Vundle.vim'
     Plugin 'sjl/gundo.vim'
     Plugin 'tpope/vim-fugitive'
-    Plugin 'ludovicchabant/vim-lawrencium'
     Plugin 'scrooloose/syntastic'
     Plugin 'valloric/YouCompleteMe'
     Plugin 'SirVer/ultisnips'
     Plugin 'honza/vim-snippets'
     Plugin 'ryanss/vim-hackernews'
     Plugin 'mhinz/vim-startify'
-
-    " Debug
-    Plugin 'vim-scripts/Conque-GDB'
+    Plugin 'junegunn/goyo.vim'
 
     " Syntaxes
     Plugin 'tpope/vim-markdown'
@@ -36,6 +33,7 @@
     Plugin 'AndrewRadev/vim-eco'
     Plugin 'groenewege/vim-less'
     Plugin 'tikhomirov/vim-glsl'
+    Plugin 'dart-lang/dart-vim-plugin'
 
     " Searching
     Plugin 'kien/ctrlp.vim'
@@ -55,7 +53,6 @@
     Plugin 'bling/vim-airline'
     Plugin 'asenac/vim-airline-loclist'
     Plugin 'gmarik/vim-visual-star-search'
-    Plugin 'mhinz/vim-signify'
     Plugin 'airblade/vim-gitgutter'
 
     " Scheme
@@ -83,6 +80,7 @@
 
         " source local vimrc
         au VimEnter * call SetLocalOptions(bufname("%"))
+        au VimEnter * call ExtendColors()
 
         " enable spell checking
         " au BufEnter *.cpp  set spell
@@ -102,8 +100,8 @@
         au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
 
         " Higlight word under cursor
-        au CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
-        au BufLeave * call clearmatches()
+        au CursorMoved *.cc,*.cpp,*.h,*.hpp exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+        au BufLeave *.cc,*.cpp,*.h,*.hpp call clearmatches()
 
         " Auto save
         au CursorHold * nested silent wa
@@ -127,12 +125,7 @@
     let &t_8f="\e[38;2;%ld;%ld;%ldm"
     let &t_8b="\e[48;2;%ld;%ld;%ldm"
     set guicolors
-    if 1
-        colorscheme nefertiti
-    else
-        set background=light
-        colorscheme PaperColor
-    endif
+    colorscheme nefertiti
 
     " rendering options
     set enc=utf-8
@@ -249,28 +242,6 @@
     " popup menu
     set pumheight=15
 
-    if 1
-        " override cursorline colors
-        hi CursorLine guibg=#2f2e30 cterm=none
-
-        " to list colors run :so $VIMRUNTIME/syntax/hitest.vim
-        " error colors
-        hi SpellBad cterm=underline guibg=#990000 guifg=#ffcccc
-        hi YcmErrorSign cterm=none guibg=#990000 guifg=#ffcccc
-        hi SpellCap cterm=underline guibg=#999900 guifg=#ffffcc
-        hi YcmWarningSign cterm=none guibg=#999900 guifg=#ffffcc
-
-        " split color
-        hi vertsplit guifg=#1f1c1c guibg=#1f1c1c
-        hi LineNr guibg=#1f1c1c
-        hi SignColumn guibg=#1f1c1c
-
-        " search
-        hi Search cterm=underline guibg=#2c2824 guifg=#fffdc0
-        hi IncSearch cterm=underline guibg=#403a34 guifg=#fffdc0
-    else
-    endif
-
 " }}}
 
 " MAPPINGS --------------------------------- {{{
@@ -279,7 +250,7 @@
     map <F1> "zyiw:exe "h ".@z.""<CR>
     map <F2> @a
     map <F5> :NERDTreeToggle<CR>
-    map <F6> :checktime<CR>
+    map <F6> :Goyo<CR>
     map <F12> :r! pbpaste<CR><Esc>
 
     " typos
@@ -405,11 +376,7 @@
 
     " Airline
     " -------------------------------------------------------------------------
-    if 1
-        let g:airline_theme = 'powerlineish'
-    else
-        let g:airline_theme = 'sol'
-    endif
+    let g:airline_theme = 'powerlineish'
     let g:airline#extensions#branch#enabled = 0
     let g:airline#extensions#tabline#enabled = 1
     let g:airline_powerline_fonts = 1
@@ -464,19 +431,6 @@
     let g:gitgutter_realtime =1
     set updatetime=500
 
-    " Conque GDB / Term
-    " -------------------------------------------------------------------------
-    let g:ConqueTerm_ReadUnfocused = 1
-    let g:ConqueTerm_Color = 1
-    let g:ConqueTerm_StartMessages = 0
-	let g:ConqueTerm_UnfocusedUpdateTime = 250
-    let g:ConqueTerm_FocusedUpdateTime = 80
-    let g:ConqueTerm_TERM = 'xterm'
-    let g:ConqueGdb_SrcSplit = 'left'
-    let g:ConqueGdb_SaveHistory = 1
-    " nnoremap <silent> <Leader>Y :ConqueGdbCommand y<CR>
-    " nnoremap <silent> <Leader>N :ConqueGdbCommand n<CR>
-
     " Startify
     " -------------------------------------------------------------------------
     let g:startify_files_number = 12
@@ -528,6 +482,26 @@
 	" Smart case
 	let g:EasyMotion_smartcase = 1
 
+    " Goyo
+    " -------------------------------------------------------------------------
+    let g:goyo_width = 120
+    function! s:goyo_enter()
+        set noshowmode
+        set noshowcmd
+        set scrolloff=999
+        hi vertsplit guibg=#2c2824
+        hi StatusLine guibg=#2c2824
+        hi StatusLineNC guibg=#2c2824
+    endfunction
+    function! s:goyo_leave()
+        set showmode
+        set showcmd
+        set scrolloff=3
+        call ExtendColors()
+    endfunction
+    autocmd! User GoyoEnter nested call <SID>goyo_enter()
+    autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
 " }}}
 
 " FUNCTIONS -------------------------------- {{{
@@ -545,27 +519,25 @@
         endwhile
     endfunction
 
+    function ExtendColors()
+        " override cursorline colors
+        hi CursorLine guibg=#2f2e30 cterm=none
+
+        " to list colors run :so $VIMRUNTIME/syntax/hitest.vim
+        " error colors
+        hi SpellBad cterm=underline guibg=#990000 guifg=#ffcccc
+        hi YcmErrorSign cterm=none guibg=#990000 guifg=#ffcccc
+        hi SpellCap cterm=underline guibg=#999900 guifg=#ffffcc
+        hi YcmWarningSign cterm=none guibg=#999900 guifg=#ffffcc
+
+        " split color
+        hi vertsplit guifg=#1f1c1c guibg=#1f1c1c
+        hi LineNr guibg=#1f1c1c
+        hi SignColumn guibg=#1f1c1c
+
+        " search
+        hi Search cterm=underline guibg=#2c2824 guifg=#fffdc0
+        hi IncSearch cterm=underline guibg=#403a34 guifg=#fffdc0
+    endfunction
+
 " }}}
-
-" BACKUPS -------------------------------- {{{
-
-    " 1
-    " Plugin 'Rip-Rip/clang_complete'
-    " Plugin 'terhechte/syntastic'
-    " Rip-Rip/clang_complete
-    " let g:clang_complete_auto = 1
-    " let g:clang_use_library = 1
-    " let g:clang_periodic_quickfix = 0
-    " let g:clang_close_preview = 1
-    " let g:clang_snippets = 1
-    " let g:clang_snippets_engine = 'ultisnips'
-    " let g:clang_exec =         '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang'
-    " let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-    " needed for syntastic (use terhechte/syntastic)
-    " let g:syntastic_cpp_config_file = '.clang_complete'
-
-    " 2
-    " Tag based completion
-    " Plugin 'vim-scripts/OmniCppComplete'
-    " Plugin 'ervandew/supertab'
-
