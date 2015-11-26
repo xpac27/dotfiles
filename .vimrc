@@ -205,8 +205,8 @@
     set mousehide
 
     " window scroll
-    set scrolloff=3
-    set scrolljump=3
+    set scrolloff=5
+    set scrolljump=5
 
     " tabs
     set smarttab
@@ -488,7 +488,6 @@
     function! s:goyo_enter()
         set noshowmode
         set noshowcmd
-        set scrolloff=999
         hi vertsplit guibg=#2c2824
         hi StatusLine guibg=#2c2824
         hi StatusLineNC guibg=#2c2824
@@ -496,7 +495,6 @@
     function! s:goyo_leave()
         set showmode
         set showcmd
-        set scrolloff=3
         call ExtendColors()
     endfunction
     autocmd! User GoyoEnter nested call <SID>goyo_enter()
