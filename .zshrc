@@ -28,18 +28,33 @@ export LANG=en_US.UTF-8
 export EDITOR=vi
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
+# Make FZF use AG
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 # Hide mouse
 set ttymouse=sgr
 
 # Random shortcuts
 alias rc="pry -r ./config/environment"
 alias fl='tail -F ~/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.txt'
+alias v='vim -p $(fzf -m)'
 
 # SVN shortcuts
 alias svnd='svn diff --no-diff-deleted --show-copies-as-adds | colordiff | less'
 alias svnl='svn log | less'
 alias svns='colorsvn status'
 alias svndiff='svn diff --diff-cmd=/Users/vincent.cogne/svndiff.sh'
+
+# FZF Git commit browser
+fshow() {
+  git log --graph --color=always \
+    --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --toggle-sort=\` \
+    --bind "ctrl-m:execute:
+      echo '{}' | grep -o '[a-f0-9]\{7\}' | head -1 |
+      xargs -I % sh -c 'git show --color=always % | less -R'"
+}
 
 # Add RVM to PATH for scripting
 [[ -d "$HOME/.rvm" ]] && PATH=$PATH:$HOME/.rvm/bin
@@ -49,3 +64,4 @@ alias svndiff='svn diff --diff-cmd=/Users/vincent.cogne/svndiff.sh'
 
 # added by travis gem
 [ -f /Users/vinz/.travis/travis.sh ] && source /Users/vinz/.travis/travis.sh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

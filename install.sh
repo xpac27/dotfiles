@@ -7,7 +7,7 @@ read nothing
 ## ---------------------------------------------------------------------------------
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
-brew install cmake git ack entr
+brew install cmake git ack entr fzf ag
 brew doctor
 
 ## OH MY ZSH
