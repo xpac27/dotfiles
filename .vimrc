@@ -488,7 +488,6 @@
     function! s:goyo_enter()
         set noshowmode
         set noshowcmd
-        set scrolloff=999
         hi vertsplit guibg=#2c2824
         hi StatusLine guibg=#2c2824
         hi StatusLineNC guibg=#2c2824
@@ -496,7 +495,6 @@
     function! s:goyo_leave()
         set showmode
         set showcmd
-        set scrolloff=3
         call ExtendColors()
     endfunction
     autocmd! User GoyoEnter nested call <SID>goyo_enter()
@@ -529,6 +527,12 @@
         hi YcmErrorSign cterm=none guibg=#990000 guifg=#ffcccc
         hi SpellCap cterm=underline guibg=#999900 guifg=#ffffcc
         hi YcmWarningSign cterm=none guibg=#999900 guifg=#ffffcc
+
+        " git gutter
+        hi GitGutterAdd guibg=#1f1c1c guifg=#66ff66
+        hi GitGutterChange guibg=#1f1c1c guifg=#ffff66
+        hi GitGutterDelete guibg=#1f1c1c guifg=#ff6666
+        hi GitGutterChangeDelete guibg=#1f1c1c guifg=#ff6666
 
         " split color
         hi vertsplit guifg=#1f1c1c guibg=#1f1c1c
