@@ -36,7 +36,6 @@
     Plugin 'dart-lang/dart-vim-plugin'
 
     " Searching
-    Plugin 'kien/ctrlp.vim'
     Plugin 'scrooloose/nerdtree'
     Plugin 'mileszs/ack.vim'
     Plugin 'derekwyatt/vim-fswitch'
@@ -105,9 +104,6 @@
 
         " Auto save
         au CursorHold * nested silent wa
-
-		" Force syntax check when entering the buffer
-		au BufWinEnter *.cpp,*.hpp,*.h silent YcmForceCompileAndDiagnostics
 
         " Make crontab happy
         au filetype crontab setlocal nobackup nowritebackup
@@ -205,8 +201,8 @@
     set mousehide
 
     " window scroll
-    set scrolloff=3
-    set scrolljump=3
+    set scrolloff=5
+    set scrolljump=5
 
     " tabs
     set smarttab
@@ -242,6 +238,9 @@
     " popup menu
     set pumheight=15
 
+    " FZF
+    set rtp+=/usr/local/opt/fzf
+
 " }}}
 
 " MAPPINGS --------------------------------- {{{
@@ -252,6 +251,9 @@
     map <F5> :NERDTreeToggle<CR>
     map <F6> :Goyo<CR>
     map <F12> :r! pbpaste<CR><Esc>
+
+    " FZF
+    nnoremap <C-f> :FZF<CR>
 
     " typos
     ia   feild    field
@@ -296,6 +298,9 @@
 
     " clear searches
     nnoremap <silent> <SPACE> :nohlsearch<CR>
+
+    " check syntaxt
+    nnoremap <silent> <SPACE><SPACE> :YcmForceCompileAndDiagnostics<CR><CR>
 
     " toggle options
     nnoremap <silent> <leader>on :set number!<CR>
@@ -363,16 +368,6 @@
     let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
     let g:ycm_key_list_select_completion=['<Down>']
     let g:ycm_key_list_previous_completion=['<Up>']
-
-    " CtrlP
-    " -------------------------------------------------------------------------
-   let g:ctrlp_user_command = {
-       \ 'types': {
-           \ 1: ['.git', 'cd %s && git ls-files && git submodule foreach --recursive git ls-files'],
-           \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-		\ },
-		\ 'fallback': 'find %s -type f'
-	\ }
 
     " Airline
     " -------------------------------------------------------------------------
