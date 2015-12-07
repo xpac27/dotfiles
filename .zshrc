@@ -46,6 +46,10 @@ alias svnl='svn log | less'
 alias svns='colorsvn status'
 alias svndiff='svn diff --diff-cmd=/Users/vincent.cogne/svndiff.sh'
 
+# Copy paste
+alias cc='pbcopy'
+alias pp='pbpaste'
+
 # FZF Git commit browser
 fshow() {
   git log --graph --color=always \
