@@ -389,11 +389,6 @@
     nmap <Leader>a: :Tabularize /:<CR>
     vmap <Leader>a: :Tabularize /:<CR>
 
-    " Fugitive
-    " -------------------------------------------------------------------------
-    nnoremap <leader>gd :Gdiff<cr>
-    nnoremap <leader>gD :diffoff!<cr><C-W>h:bd<cr>
-
     " Clang-Format
     " -------------------------------------------------------------------------
     let g:clang_format#auto_format_on_insert_leave = 0
