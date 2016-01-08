@@ -103,7 +103,7 @@
         au BufLeave *.cc,*.cpp,*.h,*.hpp call clearmatches()
 
         " Auto save
-        au CursorHold * silent wa
+        au CursorHold * nested silent wa
 
         " Make crontab happy
         au filetype crontab setlocal nobackup nowritebackup
@@ -343,7 +343,7 @@
     let g:syntastic_auto_loc_list=1
     let g:syntastic_enable_signs=1
     let g:syntastic_check_on_open=0
-    let g:syntastic_check_on_wq = 0
+    let g:syntastic_check_on_wq = 1
     let g:syntastic_javascript_checkers = ['jshint']
     " let g:syntastic_ruby_checkers = ['rubylint']
     let g:syntastic_error_symbol = 'xx'
@@ -518,6 +518,12 @@
         hi YcmErrorSign cterm=none guibg=#990000 guifg=#ffcccc
         hi SpellCap cterm=underline guibg=#999900 guifg=#ffffcc
         hi YcmWarningSign cterm=none guibg=#999900 guifg=#ffffcc
+
+        " git gutter
+        hi GitGutterAdd guibg=#1f1c1c guifg=#66ff66
+        hi GitGutterChange guibg=#1f1c1c guifg=#ffff66
+        hi GitGutterDelete guibg=#1f1c1c guifg=#ff6666
+        hi GitGutterChangeDelete guibg=#1f1c1c guifg=#ff6666
 
         " split color
         hi vertsplit guifg=#1f1c1c guibg=#1f1c1c
