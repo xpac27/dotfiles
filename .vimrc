@@ -417,6 +417,7 @@
 
     " Git-Gutter
     " -------------------------------------------------------------------------
+    let g:gitgutter_override_sign_column_highlight = 0
     let g:gitgutter_enabled = 1
     let g:gitgutter_realtime =1
     set updatetime=500
@@ -526,6 +527,12 @@
         " search
         hi Search cterm=underline guibg=#2c2824 guifg=#fffdc0
         hi IncSearch cterm=underline guibg=#403a34 guifg=#fffdc0
+
+        " gitgutter
+        hi GitGutterAdd guibg=#1f1f1f guifg=#006600
+        hi GitGutterChange guibg=#1f1f1f guifg=#666600
+        hi GitGutterChangeDelete guibg=#1f1f1f guifg=#666600
+        hi GitGutterDelete guibg=#1f1f1f guifg=#660000
     endfunction
 
 " }}}
