@@ -526,7 +526,7 @@
         hi GitGutterChangeDelete guibg=#1f1c1c guifg=#ff6666
 
         " split color
-        hi vertsplit guifg=#1f1c1c guibg=#1f1c1c
+        hi VertSplit guibg=#121212 guifg=#121212
         hi LineNr guibg=#1f1c1c
         hi SignColumn guibg=#1f1c1c
 
