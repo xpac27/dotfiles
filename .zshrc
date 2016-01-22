@@ -46,6 +46,10 @@ alias svnl='svn log | less'
 alias svns='colorsvn status'
 alias svndiff='svn diff --diff-cmd=/Users/vincent.cogne/svndiff.sh'
 
+# Ctags
+alias ctags-refresh="rm -f ./.git/tags && find '$(pwd)' \( -name '*.c' -or -name '*.h' -or -name '*.cpp' -or -name '*.hpp' \) -exec ctags --append=yes -f ./.git/tags {} \;"
+
+
 # Copy paste
 alias cc='pbcopy'
 alias pp='pbpaste'

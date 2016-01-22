@@ -23,6 +23,9 @@
     Plugin 'ryanss/vim-hackernews'
     Plugin 'mhinz/vim-startify'
     Plugin 'junegunn/goyo.vim'
+    Plugin 'majutsushi/tagbar'
+    Plugin 'xolox/vim-easytags'
+    Plugin 'xolox/vim-misc'
 
     " Syntaxes
     Plugin 'tpope/vim-markdown'
@@ -47,6 +50,7 @@
     Plugin 'godlygeek/tabular'
     Plugin 'terryma/vim-multiple-cursors'
     Plugin 'rhysd/vim-clang-format'
+    Plugin 'editorconfig/editorconfig-vim'
 
     " UI
     Plugin 'bling/vim-airline'
@@ -340,18 +344,19 @@
     " -------------------------------------------------------------------------
     let g:syntastic_actionscript_mxmlc_exe = 'fcshctl mxmlc -source-path=src '
     let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list=1
-    let g:syntastic_enable_signs=1
-    let g:syntastic_check_on_open=0
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_enable_signs = 1
+    let g:syntastic_check_on_open = 0
     let g:syntastic_check_on_wq = 1
     let g:syntastic_javascript_checkers = ['jshint']
     " let g:syntastic_ruby_checkers = ['rubylint']
+    let g:syntastic_cpp_checkers = ['cppcheck']
     let g:syntastic_error_symbol = 'xx'
     let g:syntastic_warning_symbol = 'vv'
     let g:syntastic_mode_map = {
         \ 'mode': 'active',
-        \ 'active_filetypes': ['javascript', 'actionscript'],
-        \ 'passive_filetypes': ['c', 'cpp', 'java', 'xhtml', 'sh']
+        \ 'active_filetypes': ['cpp, ''javascript', 'actionscript'],
+        \ 'passive_filetypes': ['c', 'java', 'xhtml', 'sh']
     \ }
 
     " Ultisnips
@@ -490,6 +495,13 @@
     endfunction
     autocmd! User GoyoEnter nested call <SID>goyo_enter()
     autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+    " East Tags
+    " -------------------------------------------------------------------------
+    let g:easytags_async = 1
+    let g:easytags_dynamic_files = 1
+    let g:easytags_by_filetype = 1
+    let g:easytags_auto_highlight = 0
 
 " }}}
 

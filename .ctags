@@ -2,12 +2,17 @@
 --tag-relative=yes
 --exclude=.git
 --exclude=*.min.js
+--exclude=*.json
+--exclude=*.css
 
+--c++-kinds=+p
+--fields=+liaS
+--extra=+qf
 
+--tag-relative=no
 
 --langdef=actionscript
 --langmap=actionscript:.as
-
 --regex-actionscript=/^[ \t]*[(protected|private|public|static)( \t)]*package[ \t]*([A-Za-z0-9_.]+)[ \t]*/\1/p,package/
 --regex-actionscript=/^[ \t]*[(protected|private| public|static) ( \t)]*function[ \t]+([A-Za-z0-9_]+)[ \t]*\(/\1/f, function, functions/
 --regex-actionscript=/^[ \t]*[(public) ( \t)]*function[ \t]+(set|get) [ \t]+([A-Za-z0-9_]+)[ \t]*\(/\1 \2/p,property, properties/
@@ -28,7 +33,6 @@
 --regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[\t]*.+([,;=]|$)/\5/,variable/
 --regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*[\t]*([,;]|$)/\5/,variable/
 --regex-js=/function[ \t]+([A-Za-z0-9_$]+)[ \t]*\([^)]*\)/\1/,function/
-
 --regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*\{/\2/,object/
 --regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*function[ \t]*\(/\2/,function/
 --regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*\[/\2/,array/
