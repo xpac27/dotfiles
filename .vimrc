@@ -245,6 +245,17 @@
     " FZF
     set rtp+=/usr/local/opt/fzf
 
+    " cscope
+    set cst
+    set csto=1
+    set cspc=2
+    set nocsverb
+    if filereadable(".git/cscope.out")
+        cs add .git/cscope.out
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
+
 " }}}
 
 " MAPPINGS --------------------------------- {{{
@@ -330,6 +341,8 @@
 
     " YCM GoTo
     nnoremap <leader>d :YcmCompleter GoTo<CR>
+
+    nmap <leader>] :cs find s <C-R>=expand("<cword>")<CR><CR>
 
 " }}}
 
@@ -552,6 +565,9 @@
         hi GitGutterChange guibg=#1f1f1f guifg=#666600
         hi GitGutterChangeDelete guibg=#1f1f1f guifg=#666600
         hi GitGutterDelete guibg=#1f1f1f guifg=#660000
+
+        " cscope list
+        hi ModeMsg guibg=#2c2924 guifg=#996643
     endfunction
 
 " }}}

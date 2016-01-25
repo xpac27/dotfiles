@@ -7,7 +7,7 @@ read nothing
 ## ---------------------------------------------------------------------------------
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
-brew install cmake git ack entr fzf ag
+brew install cmake git ack entr fzf ag cscope
 brew tap universal-ctags/universal-ctags
 brew install --HEAD universal-ctags
 brew doctor
