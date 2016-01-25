@@ -20,7 +20,7 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 ## ---------------------------------------------------------------------------------
 brew install llvm --with-clang
 echo "# LLVM" >> ~/.profile
-echo "export PATH=\"\$PATH:/usr/local/opt/llvm/bin/\"" >> ~/.profile
+echo "export PATH=\"\$PATH:/usr/local/opt/llvm/bin\"" >> ~/.profile
 echo "export PATH=\"\$PATH:/usr/local/opt/llvm/share/clang/tools/scan-build\"" >> ~/.profile
 
 ## Python
