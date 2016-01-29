@@ -26,6 +26,7 @@
     Plugin 'majutsushi/tagbar'
     Plugin 'xolox/vim-easytags'
     Plugin 'xolox/vim-misc'
+    Plugin 'tpope/vim-dispatch'
 
     " Syntaxes
     Plugin 'tpope/vim-markdown'
@@ -57,6 +58,7 @@
     Plugin 'asenac/vim-airline-loclist'
     Plugin 'gmarik/vim-visual-star-search'
     Plugin 'airblade/vim-gitgutter'
+    Plugin 'breuckelen/vim-resize'
 
     " Scheme
     Plugin 'jnurmine/Zenburn'
@@ -291,19 +293,6 @@
     nnoremap ; :
     nnoremap q: :q
 
-    " tabs
-    nnoremap <silent> <leader>T :tabedit! <C-R>=expand("#:p")<CR><CR>
-    nnoremap <silent> <leader>Y :tabclose<CR>
-
-    " windows
-    nmap <leader> <C-w>
-    nmap <leader>w <C-W>v:b#<CR>
-    nmap <leader>W <C-W>s:b#<CR>
-    nmap <unique> <C-UP> 4<C-w>+
-    nmap <unique> <C-DOWN> 4<C-w>-
-    nmap <unique> <C-LEFT> 4<C-w><
-    nmap <unique> <C-RIGHT> 4<C-w>>
-
     " select the current line without indentation
     nnoremap vv ^vg_
 
@@ -342,7 +331,17 @@
     " YCM GoTo
     nnoremap <leader>d :YcmCompleter GoTo<CR>
 
-    nmap <leader>] :cs find s <C-R>=expand("<cword>")<CR><CR>
+    " Cscope
+    nmap <C-}> :cs find s <C-R>=expand("<cword>")<CR><CR>
+
+    " Only higlight on #
+    nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+
+	" Resize windows
+	nmap <unique> <UP> 4<C-w>+
+	nmap <unique> <DOWN> 4<C-w>-
+	nmap <unique> <LEFT> 4<C-w><
+	nmap <unique> <RIGHT> 4<C-w>>
 
 " }}}
 
@@ -380,7 +379,7 @@
 
     " YouCompleteMe
     " -------------------------------------------------------------------------
-    let g:ycm_collect_identifiers_from_tags_files = 1
+    let g:ycm_collect_identifiers_from_tags_files = 0
     let g:ycm_always_populate_location_list = 1
     let g:ycm_confirm_extra_conf = 0
     let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
@@ -397,8 +396,8 @@
 
     " T-Comment
     " -------------------------------------------------------------------------
-    nnoremap // :TComment<CR>j
-    vnoremap // :TComment<CR>j
+    nnoremap <C-/> :TComment<CR>j
+    vnoremap <C-/> :TComment<CR>j
 
     " Tabularize
     " -------------------------------------------------------------------------
@@ -514,6 +513,7 @@
     let g:easytags_async = 1
     let g:easytags_dynamic_files = 1
     let g:easytags_by_filetype = 1
+	let g:easytags_include_members = 1
     let g:easytags_auto_highlight = 0
 
 " }}}
