@@ -515,6 +515,7 @@
     let g:easytags_by_filetype = 1
 	let g:easytags_include_members = 1
     let g:easytags_auto_highlight = 0
+    let g:easytags_syntax_keyword = 'always'
 
 " }}}
 
