@@ -34,6 +34,28 @@ unzip Hack-v2_015-ttf.zip -d .
 mv Hack-* /Users/vinz/Library/Fonts
 pip install --user powerline-status
 
+## Vim with 24-bit colors
+## ---------------------------------------------------------------------------------
+hg clone https://bitbucket.org/ZyX_I/vim /tmp/vim
+cd /tmp/vim/src
+./configure \
+  --enable-gui=no \
+  --without-x \
+  --enable-multibyte \
+  --with-tlib=ncurses \
+  --enable-cscope \
+  --with-features=huge \
+  --disable-nls \
+  --enable-perlinterp \
+  --enable-pythoninterp \
+  --enable-rubyinterp \
+  --enable-termtruecolor && make
+sudo make install
+cd -
+echo "# Vim" >> ~/.profile
+echo "alias vim=\"/usr/local/bin/vim\"" >> ~/.profile
+echo "alias vi=\"/usr/local/bin/vim\"" >> ~/.profile
+
 
 # ==== OPTIONAL
 
