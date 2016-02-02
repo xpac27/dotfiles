@@ -510,7 +510,7 @@
 
     " East Tags
     " -------------------------------------------------------------------------
-    let g:easytags_async = 1
+    let g:easytags_async = 0
     let g:easytags_dynamic_files = 1
     let g:easytags_by_filetype = 1
 	let g:easytags_include_members = 1
