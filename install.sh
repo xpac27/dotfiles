@@ -1,7 +1,8 @@
 # ==== REQUIRED
 
-echo "Make sure you installed the command line tools: https://developer.apple.com/downloads/"
-read nothing
+## Command Line Tools
+## ---------------------------------------------------------------------------------
+xcode-select --install
 
 ## BREW
 ## ---------------------------------------------------------------------------------
