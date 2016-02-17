@@ -375,9 +375,11 @@
 
     " Ultisnips
     " -------------------------------------------------------------------------
-    let g:UltiSnipsExpandTrigger="<Tab>"
-    let g:UltiSnipsJumpForwardTrigger="<c-b>"
-    let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+    let g:UltiSnipsExpandTrigger = "<Tab>"
+    let g:UltiSnipsListSnippets = "<C-Tab>"
+    let g:UltiSnipsJumpForwardTrigger = "<C-j>"
+    let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
+    inoremap <c-x><c-k> <c-x><c-k>
 
     " YouCompleteMe
     " -------------------------------------------------------------------------
@@ -457,16 +459,8 @@
 
     " FSwitch
     " -------------------------------------------------------------------------
-    " Switch to the file and load it into the window on the right >
-    nmap <silent> <Leader>sr :FSRight<cr>
-    " Switch to the file and load it into a new window split on the right >
-    nmap <silent> <Leader>sR :FSSplitRight<cr>
-    " Switch to the file and load it into the window on the left >
-    nmap <silent> <Leader>sl :FSLeft<cr>
-    " Switch to the file and load it into a new window split on the left >
-    nmap <silent> <Leader>sL :FSSplitLeft<cr>
     " Switch to the file and load it in place
-    nmap <silent> <Leader>ss :FSHere<cr>
+    nmap <silent> <Leader>s  :FSHere<cr>
 
     " EasyMotion
     " -------------------------------------------------------------------------
