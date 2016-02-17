@@ -56,6 +56,8 @@ cd -
 echo "# Vim" >> ~/.profile
 echo "alias vim=\"/usr/local/bin/vim\"" >> ~/.profile
 echo "alias vi=\"/usr/local/bin/vim\"" >> ~/.profile
+mkdir ~/.vim/swap
+mkdir ~/.vim/backup
 
 
 # ==== OPTIONAL
