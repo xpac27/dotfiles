@@ -19,15 +19,9 @@
   ru = remote update
   nlog = log --name-status --decorate
   ls = log --pretty=oneline --abbrev-commit --decorate
-  gr = log --pretty=oneline --abbrev-commit --decorate --graph
-  slog = log --pretty=oneline
-  dlog = log -p
   ci = commit -v
-  wip = ci -m "WIP"
-  openbug = !/usr/local/bin/dm_openbug.sh
-  closebug = !/usr/local/bin/dm_closebug.sh
-  untracked = !/usr/local/bin/dm_untracked.sh
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  unstage = reset HEAD --
 
 [color]
   ui = auto

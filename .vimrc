@@ -27,6 +27,7 @@
     Plugin 'xolox/vim-easytags'
     Plugin 'xolox/vim-misc'
     Plugin 'tpope/vim-dispatch'
+    Plugin 'ervandew/supertab'
 
     " Syntaxes
     Plugin 'tpope/vim-markdown'
@@ -41,7 +42,7 @@
 
     " Searching
     Plugin 'scrooloose/nerdtree'
-    Plugin 'mileszs/ack.vim'
+    Plugin 'rking/ag.vim'
     Plugin 'derekwyatt/vim-fswitch'
     Plugin 'easymotion/vim-easymotion'
 
@@ -54,8 +55,6 @@
     Plugin 'editorconfig/editorconfig-vim'
 
     " UI
-    Plugin 'bling/vim-airline'
-    Plugin 'asenac/vim-airline-loclist'
     Plugin 'gmarik/vim-visual-star-search'
     Plugin 'airblade/vim-gitgutter'
     Plugin 'breuckelen/vim-resize'
@@ -258,6 +257,9 @@
         cs add $CSCOPE_DB
     endif
 
+    " statusline
+    set statusline=%f\ %r%m%=%l/%L\ -\ %P
+
 " }}}
 
 " MAPPINGS --------------------------------- {{{
@@ -373,9 +375,11 @@
 
     " Ultisnips
     " -------------------------------------------------------------------------
-    let g:UltiSnipsExpandTrigger="<Tab>"
-    let g:UltiSnipsJumpForwardTrigger="<c-b>"
-    let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+    let g:UltiSnipsExpandTrigger = "<Tab>"
+    let g:UltiSnipsListSnippets = "<C-Tab>"
+    let g:UltiSnipsJumpForwardTrigger = "<C-j>"
+    let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
+    inoremap <c-x><c-k> <c-x><c-k>
 
     " YouCompleteMe
     " -------------------------------------------------------------------------
@@ -386,18 +390,10 @@
     let g:ycm_key_list_select_completion=['<Down>']
     let g:ycm_key_list_previous_completion=['<Up>']
 
-    " Airline
-    " -------------------------------------------------------------------------
-    let g:airline_theme = 'powerlineish'
-    let g:airline#extensions#branch#enabled = 0
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline_powerline_fonts = 1
-    let g:airline#extensions#tabline#left_alt_sep = '|'
-
     " T-Comment
     " -------------------------------------------------------------------------
-    nnoremap <C-/> :TComment<CR>j
-    vnoremap <C-/> :TComment<CR>j
+    nnoremap <C-c> :TComment<CR>j
+    vnoremap <C-c> :TComment<CR>j
 
     " Tabularize
     " -------------------------------------------------------------------------
@@ -463,16 +459,8 @@
 
     " FSwitch
     " -------------------------------------------------------------------------
-    " Switch to the file and load it into the window on the right >
-    nmap <silent> <Leader>sr :FSRight<cr>
-    " Switch to the file and load it into a new window split on the right >
-    nmap <silent> <Leader>sR :FSSplitRight<cr>
-    " Switch to the file and load it into the window on the left >
-    nmap <silent> <Leader>sl :FSLeft<cr>
-    " Switch to the file and load it into a new window split on the left >
-    nmap <silent> <Leader>sL :FSSplitLeft<cr>
     " Switch to the file and load it in place
-    nmap <silent> <Leader>ss :FSHere<cr>
+    nmap <silent> <Leader>s  :FSHere<cr>
 
     " EasyMotion
     " -------------------------------------------------------------------------

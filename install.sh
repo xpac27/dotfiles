@@ -1,7 +1,8 @@
 # ==== REQUIRED
 
-echo "Make sure you installed the command line tools: https://developer.apple.com/downloads/"
-read nothing
+## Command Line Tools
+## ---------------------------------------------------------------------------------
+xcode-select --install
 
 ## BREW
 ## ---------------------------------------------------------------------------------
@@ -60,6 +61,8 @@ cd -
 echo "# Vim" >> ~/.profile
 echo "alias vim=\"/usr/local/bin/vim\"" >> ~/.profile
 echo "alias vi=\"/usr/local/bin/vim\"" >> ~/.profile
+mkdir ~/.vim/swap
+mkdir ~/.vim/backup
 
 
 # ==== OPTIONAL
