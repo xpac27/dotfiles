@@ -49,10 +49,19 @@ alias svndiff='svn diff --diff-cmd=/Users/vincent.cogne/svndiff.sh'
 # Ctags
 alias ctags-refresh='rm -f ./.git/tags && find `pwd` \( -name "*.c" -or -name "*.h" -or -name "*.cpp" -or -name "*.hpp" \) -exec ctags --append=yes -f ./.git/tags {} \;'
 
-
 # Copy paste
 alias cc='pbcopy'
 alias pp='pbpaste'
+
+# Awesome Git aliases
+alias gs='git status'
+alias ga='git add'
+alias gd='git diff'
+alias gds='git diff --staged'
+alias gc='git commit'
+alias go='git checkout'
+alias gpr='git pull --rebase'
+alias gsu='git submodule update --recursive --init'
 
 # FZF Git commit browser
 fshow() {

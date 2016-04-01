@@ -126,7 +126,9 @@
     let &t_8f="\e[38;2;%ld;%ld;%ldm"
     let &t_8b="\e[48;2;%ld;%ld;%ldm"
     set guicolors
-    colorscheme nefertiti
+    set background=dark
+    let g:gruvbox_italic=0
+    colorscheme gruvbox
 
     " rendering options
     set enc=utf-8
@@ -365,8 +367,8 @@
     let g:syntastic_javascript_checkers = ['jshint']
     " let g:syntastic_ruby_checkers = ['rubylint']
     let g:syntastic_cpp_checkers = ['cppcheck']
-    let g:syntastic_error_symbol = 'xx'
-    let g:syntastic_warning_symbol = 'vv'
+    let g:syntastic_error_symbol = '✗'
+    let g:syntastic_warning_symbol = '∆'
     let g:syntastic_mode_map = {
         \ 'mode': 'active',
         \ 'active_filetypes': ['cpp, ''javascript', 'actionscript'],
@@ -433,6 +435,9 @@
     let g:gitgutter_override_sign_column_highlight = 0
     let g:gitgutter_enabled = 1
     let g:gitgutter_realtime =1
+    let g:gitgutter_sign_added = '▎'
+    let g:gitgutter_sign_modified = '▎'
+    let g:gitgutter_sign_removed= '▎'
     set updatetime=500
 
     " Startify
@@ -498,7 +503,8 @@
 
     " East Tags
     " -------------------------------------------------------------------------
-    let g:easytags_async = 0
+	let g:easytags_always_enabled = 0
+    let g:easytags_async = 1
     let g:easytags_dynamic_files = 1
     let g:easytags_by_filetype = 1
 	let g:easytags_include_members = 1
@@ -523,6 +529,7 @@
     endfunction
 
     function ExtendColors()
+        return
         " override cursorline colors
         hi CursorLine guibg=#2f2e30 cterm=none
 
