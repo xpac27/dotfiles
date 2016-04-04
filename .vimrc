@@ -39,6 +39,7 @@
     Plugin 'groenewege/vim-less'
     Plugin 'tikhomirov/vim-glsl'
     Plugin 'dart-lang/dart-vim-plugin'
+    " Plugin 'octol/vim-cpp-enhanced-highlight'
 
     " Searching
     Plugin 'scrooloose/nerdtree'
@@ -53,6 +54,8 @@
     Plugin 'terryma/vim-multiple-cursors'
     Plugin 'rhysd/vim-clang-format'
     Plugin 'editorconfig/editorconfig-vim'
+    " Plugin 'ihacklog/HiCursorWords'
+    " Plugin 'abudden/taghighlight-automirror' " run :UpdateTypesFile
 
     " UI
     Plugin 'gmarik/vim-visual-star-search'
@@ -84,7 +87,6 @@
 
         " source local vimrc
         au VimEnter * call SetLocalOptions(bufname("%"))
-        au VimEnter * call ExtendColors()
 
         " enable spell checking
         " au BufEnter *.cpp  set spell
@@ -102,10 +104,6 @@
         " activate FileSwitch on cpp and h files
         au! BufEnter *.cpp,*.cc let b:fswitchdst = 'h,hpp'  | let b:fswitchlocs = './,../inc/,../../inc/,../inc/**/,../../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/'
         au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
-
-        " Higlight word under cursor
-        au CursorMoved *.cc,*.cpp,*.h,*.hpp exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
-        au BufLeave *.cc,*.cpp,*.h,*.hpp call clearmatches()
 
         " Auto save
         au CursorHold * nested silent wa
@@ -134,7 +132,7 @@
     set enc=utf-8
     set fileformats=unix,dos,mac
     set hidden
-    set tags=./tags;/
+    set tags=./tags
     set backspace=indent,eol,start
     set ttyfast
     set lazyredraw
@@ -438,7 +436,8 @@
     let g:gitgutter_sign_added = '▎'
     let g:gitgutter_sign_modified = '▎'
     let g:gitgutter_sign_removed= '▎'
-    set updatetime=500
+    let g:gitgutter_sign_modified_removed= ':'
+    set updatetime=400
 
     " Startify
     " -------------------------------------------------------------------------
@@ -489,14 +488,15 @@
     function! s:goyo_enter()
         set noshowmode
         set noshowcmd
-        hi vertsplit guibg=#2c2824
-        hi StatusLine guibg=#2c2824
-        hi StatusLineNC guibg=#2c2824
+        hi VertSplit guibg=#282828
+        hi CursorLine guibg=#282828
+        hi StatusLine guibg=#282828
+        hi StatusLineNC guibg=#282828
+
     endfunction
     function! s:goyo_leave()
         set showmode
         set showcmd
-        call ExtendColors()
     endfunction
     autocmd! User GoyoEnter nested call <SID>goyo_enter()
     autocmd! User GoyoLeave nested call <SID>goyo_leave()
@@ -504,12 +504,8 @@
     " East Tags
     " -------------------------------------------------------------------------
 	let g:easytags_always_enabled = 0
-    let g:easytags_async = 1
     let g:easytags_dynamic_files = 1
-    let g:easytags_by_filetype = 1
 	let g:easytags_include_members = 1
-    let g:easytags_auto_highlight = 0
-    let g:easytags_syntax_keyword = 'always'
 
 " }}}
 
@@ -526,43 +522,6 @@
             endif
             let dirname = fnamemodify(dirname, ":p:h:h")
         endwhile
-    endfunction
-
-    function ExtendColors()
-        return
-        " override cursorline colors
-        hi CursorLine guibg=#2f2e30 cterm=none
-
-        " to list colors run :so $VIMRUNTIME/syntax/hitest.vim
-        " error colors
-        hi SpellBad cterm=underline guibg=#990000 guifg=#ffcccc
-        hi YcmErrorSign cterm=none guibg=#990000 guifg=#ffcccc
-        hi SpellCap cterm=underline guibg=#999900 guifg=#ffffcc
-        hi YcmWarningSign cterm=none guibg=#999900 guifg=#ffffcc
-
-        " git gutter
-        hi GitGutterAdd guibg=#1f1c1c guifg=#66ff66
-        hi GitGutterChange guibg=#1f1c1c guifg=#ffff66
-        hi GitGutterDelete guibg=#1f1c1c guifg=#ff6666
-        hi GitGutterChangeDelete guibg=#1f1c1c guifg=#ff6666
-
-        " split color
-        hi VertSplit guibg=#121212 guifg=#121212
-        hi LineNr guibg=#1f1c1c
-        hi SignColumn guibg=#1f1c1c
-
-        " search
-        hi Search cterm=underline guibg=#2c2824 guifg=#fffdc0
-        hi IncSearch cterm=underline guibg=#403a34 guifg=#fffdc0
-
-        " gitgutter
-        hi GitGutterAdd guibg=#1f1f1f guifg=#006600
-        hi GitGutterChange guibg=#1f1f1f guifg=#666600
-        hi GitGutterChangeDelete guibg=#1f1f1f guifg=#666600
-        hi GitGutterDelete guibg=#1f1f1f guifg=#660000
-
-        " cscope list
-        hi ModeMsg guibg=#2c2924 guifg=#996643
     endfunction
 
 " }}}
