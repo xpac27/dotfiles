@@ -111,9 +111,6 @@
         " Make crontab happy
         au filetype crontab setlocal nobackup nowritebackup
 
-        " source local vimrc
-        au VimEnter * silent GitGutterAll
-
     augroup END
 
 " }}}
@@ -126,6 +123,7 @@
     set guicolors
     set background=dark
     let g:gruvbox_italic=0
+    hi VertSplit guifg=#504a45
     colorscheme gruvbox
 
     " rendering options
@@ -282,6 +280,8 @@
     ia   wiht     with
     ia   heigth   height
     ia   retrun   return
+    ia   jeugo    juego
+    ia   Jeugo    Juego
 
     " shortcuts
     ab   fu   function
@@ -306,7 +306,7 @@
     nnoremap <silent> <SPACE> :nohlsearch<CR>
 
     " check syntaxt
-    nnoremap <silent> <SPACE><SPACE> :YcmForceCompileAndDiagnostics<CR><CR>
+    nnoremap <silent> <SPACE><SPACE> :YcmForceCompileAndDiagnostics<CR><CR>:GitGutterAll<CR>
 
     " toggle options
     nnoremap <silent> <leader>on :set number!<CR>
