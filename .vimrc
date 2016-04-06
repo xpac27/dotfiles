@@ -24,9 +24,6 @@
     Plugin 'mhinz/vim-startify'
     Plugin 'junegunn/goyo.vim'
     Plugin 'majutsushi/tagbar'
-    Plugin 'xolox/vim-easytags'
-    Plugin 'xolox/vim-misc'
-    Plugin 'tpope/vim-dispatch'
     Plugin 'ervandew/supertab'
 
     " Syntaxes
@@ -46,6 +43,7 @@
     Plugin 'rking/ag.vim'
     Plugin 'derekwyatt/vim-fswitch'
     Plugin 'easymotion/vim-easymotion'
+    Plugin 'chazy/cscope_maps'
 
     " Formating
     Plugin 'tpope/vim-endwise'
@@ -193,7 +191,7 @@
     " menu
     set wildmenu
     set wildmode=longest,list
-    set wildignore=*.o,*.so,*.pyc,*.class,*.fasl,tags,*/tmp/*,*.swp,*.zip,*.bak,*.orig,*.jpg,*.png,*.gif,DS_Store,*.sassc,*.pump
+    set wildignore=*.o,*.so,*.pyc,*.class,*.fasl,*/tmp/*,*.swp,*.zip,*.bak,*.orig,*.jpg,*.png,*.gif,DS_Store,*.sassc,*.pump
 
     " vim command line
     set cmdheight=1
@@ -334,7 +332,7 @@
     nnoremap <leader>d :YcmCompleter GoTo<CR>
 
     " Cscope
-    nmap <C-}> :cs find s <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-]> :cs find s <C-R>=expand("<cword>")<CR><CR>
 
     " Only higlight on #
     nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
@@ -500,12 +498,6 @@
     endfunction
     autocmd! User GoyoEnter nested call <SID>goyo_enter()
     autocmd! User GoyoLeave nested call <SID>goyo_leave()
-
-    " East Tags
-    " -------------------------------------------------------------------------
-	let g:easytags_always_enabled = 0
-    let g:easytags_dynamic_files = 1
-	let g:easytags_include_members = 1
 
 " }}}
 
