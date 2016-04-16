@@ -121,8 +121,8 @@
     set guicolors
     set background=dark
     let g:gruvbox_italic=0
-    hi VertSplit guifg=#504a45
     colorscheme gruvbox
+    hi VertSplit guifg=#504a45
 
     " rendering options
     set enc=utf-8
