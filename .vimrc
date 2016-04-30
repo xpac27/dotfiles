@@ -14,7 +14,7 @@
 
     " Big features
     Plugin 'gmarik/Vundle.vim'
-    Plugin 'sjl/gundo.vim'
+    Plugin 'mbbill/undotree'
     Plugin 'tpope/vim-fugitive'
     Plugin 'scrooloose/syntastic'
     Plugin 'valloric/YouCompleteMe'
@@ -109,6 +109,10 @@
         " Make crontab happy
         au filetype crontab setlocal nobackup nowritebackup
 
+		" Line number
+		au InsertEnter * set norelativenumber
+		au InsertLeave * set relativenumber
+
     augroup END
 
 " }}}
@@ -162,6 +166,7 @@
 
     " presentation
     set number
+	set relativenumber
     set cursorline
     set nolist
     set laststatus=2
@@ -260,7 +265,7 @@
 
 " MAPPINGS --------------------------------- {{{
 
-    " F1-Help F2-Macro F3-Gundo F5-NERDTree F6-Reload F12-Paste
+    " F1-Help F2-Macro F3-UndoTree F5-NERDTree F6-Reload F12-Paste
     map <F1> "zyiw:exe "h ".@z.""<CR>
     map <F2> @a
     map <F5> :NERDTreeToggle<CR>
@@ -288,6 +293,12 @@
     ab   pu   public
     ab   st   static
     ab   cl   console.log
+
+	" Don't move around in insert mode
+	inoremap <up> <nop>
+	inoremap <down> <nop>
+	inoremap <left> <nop>
+	inoremap <right> <nop>
 
     " save time
     nnoremap ; :
@@ -347,10 +358,10 @@
 
 " PLUGINS ---------------------------------- {{{
 
-    " Gundo
+    " UndoTree
     " -------------------------------------------------------------------------
-    nnoremap <silent> <F3> :silent GundoToggle<CR>
-    inoremap <silent> <F3> <ESC>:silent GundoToggle<CR>a
+    nnoremap <silent> <F3> :silent UndotreeToggle<CR>
+    inoremap <silent> <F3> <ESC>:silent UndotreeToggle<CR>
 
     " Syntastic
     " -------------------------------------------------------------------------
@@ -471,9 +482,6 @@
 	omap / <Plug>(easymotion-tn)
 	" Bidirection jump base on 2 chars
 	nmap s <Plug>(easymotion-s2)
-	" Next-Prev
-	map  <C-n> <Plug>(easymotion-next)
-	map  <C-N> <Plug>(easymotion-prev)
 	" Jump to line
 	map <Leader>j <Plug>(easymotion-j)
 	map <Leader>k <Plug>(easymotion-k)
