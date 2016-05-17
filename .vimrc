@@ -1,78 +1,66 @@
 
-" .vimrc
+" Automatic installation of vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
 
 " BASICS & BUNDLES ------------------------- {{{
 
-    set nocompatible
-    filetype off
-    filetype plugin indent off
-
-    set rtp+=~/.vim/bundle/Vundle.vim/
-    call vundle#begin()
-
-    Plugin 'L9'
+    call plug#begin('~/.vim/plugged')
 
     " Big features
-    Plugin 'gmarik/Vundle.vim'
-    Plugin 'mbbill/undotree'
-    Plugin 'tpope/vim-fugitive'
-    Plugin 'scrooloose/syntastic'
-    Plugin 'valloric/YouCompleteMe'
-    Plugin 'SirVer/ultisnips'
-    Plugin 'honza/vim-snippets'
-    Plugin 'ryanss/vim-hackernews'
-    Plugin 'mhinz/vim-startify'
-    Plugin 'junegunn/goyo.vim'
-    Plugin 'majutsushi/tagbar'
-    Plugin 'ervandew/supertab'
-    Plugin 'junegunn/fzf.vim'
+    Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+    Plug 'tpope/vim-fugitive'
+    Plug 'scrooloose/syntastic'
+    Plug 'valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+    Plug 'mhinz/vim-startify'
+    Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+    Plug 'majutsushi/tagbar', { 'on': 'TagbarOpen' }
+    Plug 'ervandew/supertab'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
 
     " Syntaxes
-    Plugin 'tpope/vim-markdown'
-    Plugin 'elzr/vim-json'
-    Plugin 'kchmck/vim-coffee-script'
-    Plugin 'jeroenbourgois/vim-actionscript'
-    Plugin 'yaymukund/vim-rabl'
-    Plugin 'AndrewRadev/vim-eco'
-    Plugin 'groenewege/vim-less'
-    Plugin 'tikhomirov/vim-glsl'
-    Plugin 'dart-lang/dart-vim-plugin'
-    " Plugin 'octol/vim-cpp-enhanced-highlight'
+    Plug 'tpope/vim-markdown'
+    Plug 'elzr/vim-json'
+    Plug 'kchmck/vim-coffee-script'
+    Plug 'jeroenbourgois/vim-actionscript'
+    Plug 'yaymukund/vim-rabl'
+    Plug 'groenewege/vim-less'
+    Plug 'tikhomirov/vim-glsl'
+    " Plug 'octol/vim-cpp-enhanced-highlight'
 
     " Searching
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'rking/ag.vim'
-    Plugin 'derekwyatt/vim-fswitch'
-    Plugin 'easymotion/vim-easymotion'
-    Plugin 'chazy/cscope_maps'
+    Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+    Plug 'derekwyatt/vim-fswitch'
+    Plug 'easymotion/vim-easymotion'
+    Plug 'chazy/cscope_maps'
 
     " Formating
-    Plugin 'tpope/vim-endwise'
-    Plugin 'vim-scripts/tComment'
-    Plugin 'godlygeek/tabular'
-    Plugin 'terryma/vim-multiple-cursors'
-    Plugin 'rhysd/vim-clang-format'
-    Plugin 'editorconfig/editorconfig-vim'
-    " Plugin 'ihacklog/HiCursorWords'
-    " Plugin 'abudden/taghighlight-automirror' " run :UpdateTypesFile
+    Plug 'tpope/vim-endwise'
+    Plug 'vim-scripts/tComment'
+    Plug 'godlygeek/tabular', { 'on': 'Tabularize'}
+    Plug 'terryma/vim-multiple-cursors'
+    Plug 'rhysd/vim-clang-format', { 'on': 'ClangFormat'}
+    Plug 'editorconfig/editorconfig-vim'
+    " Plug 'abudden/taghighlight-automirror' " run :UpdateTypesFile
 
     " UI
-    Plugin 'gmarik/vim-visual-star-search'
-    Plugin 'airblade/vim-gitgutter'
-    Plugin 'breuckelen/vim-resize'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'breuckelen/vim-resize'
 
     " Scheme
-    Plugin 'jnurmine/Zenburn'
-    Plugin 'jonathanfilip/vim-lucius'
-    Plugin 'zeis/vim-kolor'
-    Plugin 'itsthatguy/theme-itg-flat'
-    Plugin 'jeetsukumaran/vim-nefertiti'
-    Plugin 'NLKNguyen/papercolor-theme'
-    Plugin 'morhetz/gruvbox'
+    Plug 'jnurmine/Zenburn'
+    Plug 'jonathanfilip/vim-lucius'
+    Plug 'zeis/vim-kolor'
+    Plug 'itsthatguy/theme-itg-flat'
+    Plug 'jeetsukumaran/vim-nefertiti'
+    Plug 'morhetz/gruvbox'
 
-    call vundle#end()
-    filetype plugin indent on
-    syntax on
+    call plug#end()
 
 " }}}
 
@@ -88,8 +76,7 @@
         au VimEnter * call SetLocalOptions(bufname("%"))
 
         " enable spell checking
-        " au BufEnter *.cpp  set spell
-        " au BufEnter *.h  set spell
+        au BufEnter *.cpp,*.h,*.hpp,*.md  set spell
 
         " restore position in file
         au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
@@ -105,7 +92,7 @@
         au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
 
         " Auto save
-        au CursorHold *.cpp,*cc,*.h,*.hpp nested silent wa
+        au CursorHold *.cpp,*.h,*.hpp nested silent wa
 
         " Make crontab happy
         au filetype crontab setlocal nobackup nowritebackup
@@ -119,6 +106,8 @@
 " }}}
 
 " OPTIONS ---------------------------------- {{{
+
+    set nocompatible
 
     " colors
     let &t_8f="\e[38;2;%ld;%ld;%ldm"
