@@ -24,10 +24,10 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 
 ## LLVM
 ## ---------------------------------------------------------------------------------
-brew install llvm --with-clang
+brew install homebrew/versions/llvm38
 echo "# LLVM" >> ~/.profile
-echo "export PATH=\"\$PATH:/usr/local/opt/llvm/bin\"" >> ~/.profile
-echo "export PATH=\"\$PATH:/usr/local/opt/llvm/share/clang/tools/scan-build\"" >> ~/.profile
+echo "export PATH=\"\$PATH:/usr/local/opt/llvm38/bin\"" >> ~/.profile
+echo "export PATH=\"\$PATH:/usr/local/opt/llvm38/share/clang/tools/scan-build\"" >> ~/.profile
 
 ## Python
 ## ---------------------------------------------------------------------------------

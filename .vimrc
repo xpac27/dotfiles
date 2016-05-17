@@ -25,6 +25,7 @@
     Plugin 'junegunn/goyo.vim'
     Plugin 'majutsushi/tagbar'
     Plugin 'ervandew/supertab'
+    Plugin 'junegunn/fzf.vim'
 
     " Syntaxes
     Plugin 'tpope/vim-markdown'
@@ -104,7 +105,7 @@
         au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
 
         " Auto save
-        au CursorHold * nested silent wa
+        au CursorHold *.cpp,*cc,*.h,*.hpp nested silent wa
 
         " Make crontab happy
         au filetype crontab setlocal nobackup nowritebackup
@@ -271,9 +272,6 @@
     map <F5> :NERDTreeToggle<CR>
     map <F6> :Goyo<CR>
     map <F12> :r! pbpaste<CR><Esc>
-
-    " FZF
-    nnoremap <C-f> :FZF<CR>
 
     " typos
     ia   feild    field
