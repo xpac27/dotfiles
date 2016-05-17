@@ -108,6 +108,7 @@ endif
 " OPTIONS ---------------------------------- {{{
 
     set nocompatible
+    set path=.,,/usr/local/include,/usr/include
 
     " colors
     let &t_8f="\e[38;2;%ld;%ld;%ldm"
