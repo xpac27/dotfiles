@@ -8,7 +8,7 @@ xcode-select --install
 ## ---------------------------------------------------------------------------------
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
-brew install cmake git ack entr fzf ag cscope imagemagick gifsicle gs
+brew install cmake git mercurial ack entr fzf ag cscope imagemagick gifsicle gs
 brew install ffmpeg --with-fdk-aac --with-x265 --with-libvorbis
 brew tap universal-ctags/universal-ctags
 brew install --HEAD universal-ctags
@@ -42,7 +42,7 @@ pip install --user powerline-status
 
 ## Vim with 24-bit colors
 ## ---------------------------------------------------------------------------------
-hg clone https://bitbucket.org/ZyX_I/vim /tmp/vim
+git clone git@github.com:vim/vim.git /tmp/vim
 cd /tmp/vim/src
 ./configure \
   --enable-gui=no \
@@ -54,8 +54,7 @@ cd /tmp/vim/src
   --disable-nls \
   --enable-perlinterp \
   --enable-pythoninterp \
-  --enable-rubyinterp \
-  --enable-termtruecolor && make
+  --enable-rubyinterp && make
 sudo make install
 cd -
 echo "# Vim" >> ~/.profile
