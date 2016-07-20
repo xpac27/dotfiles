@@ -1,45 +1,56 @@
 [user]
-  name = Vincent Cogne
-  email = xpac27@gmail.com
+    name = Vincent Cogne
+    email = xpac27@gmail.com
 
 [core]
-  editor = vim
-  quotepath = false
-  excludesfile = /Users/vincent.cogne/.gitignore_global
+    editor = vim
+    quotepath = false
+    excludesfile = /Users/vincent.cogne/.gitignore_global
 
 [rerere]
-  enabled = false
+    enabled = false
 
 [alias]
-  br = branch -vv
-  ba = branch -va
-  cm = commit -v
-  co = checkout
-  st = status
-  ru = remote update
-  nlog = log --name-status --decorate
-  ls = log --pretty=oneline --abbrev-commit --decorate
-  ci = commit -v
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  unstage = reset HEAD --
+    br = branch -vv
+    ba = branch -va
+    cm = commit -v
+    co = checkout
+    st = status
+    ru = remote update
+    nlog = log --name-status --decorate
+    ls = log --pretty=oneline --abbrev-commit --decorate
+    ci = commit -v
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    unstage = reset HEAD --
 
 [color]
-  ui = auto
+    ui = auto
 
 [merge]
-  summary = true
+    summary = true
 
 [push]
-  default = simple
+    default = simple
 
 [diff]
-  tool = vimdiff
+    tool = vimdiff
+    compactionHeuristic = true
 
 [difftool]
-  prompt = false
+    prompt = false
+
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
+
 [status]
-	submoduleSummary = false
+    submoduleSummary = false
+
+[submodule]
+    fetchJobs = 4
+
+[pager]
+    diff = /usr/local/Cellar/git/2.9.0/share/git-core/contrib/diff-highlight/diff-highlight | less
+    log = /usr/local/Cellar/git/2.9.0/share/git-core/contrib/diff-highlight/diff-highlight | less
+    show = /usr/local/Cellar/git/2.9.0/share/git-core/contrib/diff-highlight/diff-highlight | less

@@ -61,7 +61,7 @@ alias gds='git diff --staged'
 alias gc='git commit'
 alias go='git checkout'
 alias gpr='git pull --rebase'
-alias gsu='git submodule update --recursive --init'
+alias gsu='git submodule update --recursive --init --jobs=4'
 
 # FZF Git commit browser
 fshow() {
@@ -72,6 +72,9 @@ fshow() {
       echo '{}' | grep -o '[a-f0-9]\{7\}' | head -1 |
       xargs -I % sh -c 'git show --color=always % | less -R'"
 }
+
+# Direnv
+eval "$(direnv hook zsh)"
 
 # Add RVM to PATH for scripting
 [[ -d "$HOME/.rvm" ]] && PATH=$PATH:$HOME/.rvm/bin

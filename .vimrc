@@ -1,4 +1,3 @@
-
 " Automatic installation of vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -44,7 +43,7 @@ endif
     Plug 'vim-scripts/tComment'
     Plug 'godlygeek/tabular', { 'on': 'Tabularize'}
     Plug 'terryma/vim-multiple-cursors'
-    Plug 'rhysd/vim-clang-format', { 'on': 'ClangFormat'}
+    Plug 'rhysd/vim-clang-format'
     Plug 'editorconfig/editorconfig-vim'
     " Plug 'abudden/taghighlight-automirror' " run :UpdateTypesFile
 
@@ -64,48 +63,9 @@ endif
 
 " }}}
 
-" AUTOCOMMANDS ----------------------------- {{{
-
-    augroup vim_stuff
-        au!
-
-        " use tabs in Makefile
-        au BufNewFile,BufRead Makefile set noexpandtab
-
-        " source local vimrc
-        au VimEnter * call SetLocalOptions(bufname("%"))
-
-        " enable spell checking
-        au BufEnter *.cpp,*.h,*.hpp,*.md  set spell
-
-        " restore position in file
-        au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
-
-        " force actionscript on .as files
-        au BufNewFile,BufRead *.as set ft=actionscript
-
-        " set zimbu filetype
-        au! BufNewFile,BufRead *.zu setf zimbu
-
-        " activate FileSwitch on cpp and h files
-        au! BufEnter *.cpp,*.cc let b:fswitchdst = 'h,hpp'  | let b:fswitchlocs = '../inc/,../../inc/,../inc/**/,../../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/,./'
-        au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = '../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/,./'
-
-        " Auto save
-        au CursorHold *.cpp,*.h,*.hpp nested silent wa
-
-        " Make crontab happy
-        au filetype crontab setlocal nobackup nowritebackup
-
-		" Line number
-		au InsertEnter * set norelativenumber
-		au InsertLeave * set relativenumber
-
-    augroup END
-
-" }}}
-
 " OPTIONS ---------------------------------- {{{
+
+    filetype on
 
     set nocompatible
     set path=.,,/usr/local/include,/usr/include
@@ -250,6 +210,60 @@ endif
     " statusline
     set statusline=%f\ %r%m%=%l/%L\ -\ %P
 
+    " Clang compiler error format
+    set errorformat+=%f:%l:%c:\ %t:\ %m
+    set errorformat+=%f(%l\\\,%c):%m
+    set errorformat+=\ %f(%l\\\,%c):%m
+    set errorformat+=%f:%l\\\,%c:%m
+    set errorformat+=\ %f:%l\\\,%c:%m
+    set errorformat+=%f:%l:%m
+    set errorformat+=\ %f:%l:%m
+
+" }}}
+
+" AUTOCOMMANDS ----------------------------- {{{
+
+    augroup vim_stuff
+        au!
+
+        " use tabs in Makefile
+        au BufNewFile,BufRead Makefile set noexpandtab
+
+        " source local vimrc
+        " au VimEnter * call SetLocalOptions(bufname("%"))
+
+        " enable spell checking
+        au BufEnter *.cpp,*.h,*.hpp,*.md  set spell
+
+        " restore position in file
+        au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
+
+        " force actionscript on .as files
+        au BufNewFile,BufRead *.as set ft=actionscript
+
+        " set zimbu filetype
+        au! BufNewFile,BufRead *.zu setf zimbu
+
+        " activate FileSwitch on cpp and h files
+        au! BufEnter *.cpp,*.cc let b:fswitchdst = 'h,hpp'  | let b:fswitchlocs = '../inc/,../../inc/,../inc/**/,../../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/,./'
+        au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = '../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/,./'
+
+        " Auto save
+        au CursorHold *.cpp,*.h,*.hpp nested silent wa
+
+        " Make crontab happy
+        au filetype crontab setlocal nobackup nowritebackup
+
+		" Line number
+		au InsertEnter * set norelativenumber
+		au InsertLeave * set relativenumber
+
+        " Auto open quickfix on make
+        au QuickFixCmdPost [^l]* nested cwindow
+        au QuickFixCmdPost    l* nested lwindow
+
+    augroup END
+
 " }}}
 
 " MAPPINGS --------------------------------- {{{
@@ -298,10 +312,7 @@ endif
     vnoremap > >gv
 
     " clear searches
-    nnoremap <silent> <SPACE> :nohlsearch<CR>
-
-    " check syntaxt
-    nnoremap <silent> <SPACE><SPACE> :YcmForceCompileAndDiagnostics<CR><CR>:GitGutterAll<CR>
+    nnoremap <ESC><ESC> :nohlsearch<CR>
 
     " toggle options
     nnoremap <silent> <leader>on :set number!<CR>
@@ -339,6 +350,10 @@ endif
 	nmap <unique> <DOWN> 4<C-w>-
 	nmap <unique> <LEFT> 4<C-w><
 	nmap <unique> <RIGHT> 4<C-w>>
+
+    " Compile
+    map <Leader>m :make<CR><CR><CR>
+    map <Leader>t :make test<CR><CR><CR>
 
 " }}}
 
@@ -386,6 +401,7 @@ endif
     let g:ycm_key_list_select_completion=['<Down>']
     let g:ycm_key_list_previous_completion=['<Up>']
     map <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
+    nnoremap <silent> <SPACE> :YcmForceCompileAndDiagnostics<CR><CR>:GitGutterAll<CR>
 
     " T-Comment
     " -------------------------------------------------------------------------
@@ -402,14 +418,9 @@ endif
     " Clang-Format
     " -------------------------------------------------------------------------
     let g:clang_format#auto_format_on_insert_leave = 0
-    let g:clang_format#style_options = {
-        \ "Standard" : "C++11",
-        \ "ColumnLimit" : 0,
-        \ "AccessModifierOffset" : -4,
-        \ "MaxEmptyLinesToKeep" : 1,
-        \ "AllowShortCaseLabelsOnASingleLine" : "true",
-        \ "BreakBeforeBraces" : "Linux"
-    \ }
+    let g:clang_format#auto_format = 0
+    let g:clang_format#detect_style_file = 1
+    autocmd FileType cpp nmap <SPACE><SPACE> :ClangFormat<CR>
 
     " Signify
     " -------------------------------------------------------------------------
@@ -478,7 +489,7 @@ endif
 
     " Goyo
     " -------------------------------------------------------------------------
-    let g:goyo_width = 120
+    let g:goyo_width = 160
     function! s:goyo_enter()
         set noshowmode
         set noshowcmd
@@ -486,6 +497,8 @@ endif
         hi CursorLine guibg=#282828
         hi StatusLine guibg=#282828
         hi StatusLineNC guibg=#282828
+        hi SyntasticError guibg=#282828
+        hi SyntasticWarning guibg=#282828
 
     endfunction
     function! s:goyo_leave()
@@ -512,4 +525,5 @@ endif
         endwhile
     endfunction
 
+    call SetLocalOptions(bufname("%"))
 " }}}
