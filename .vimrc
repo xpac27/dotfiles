@@ -499,6 +499,10 @@ endif
         hi StatusLineNC guibg=#282828
         hi SyntasticError guibg=#282828
         hi SyntasticWarning guibg=#282828
+        hi GitGutterAdd guibg=#282828 guifg=#282828
+        hi GitGutterChange guibg=#282828 guifg=#282828
+        hi GitGutterDelete guibg=#282828 guifg=#282828
+        hi GitGutterChangeDelete guibg=#282828 guifg=#282828
 
     endfunction
     function! s:goyo_leave()
