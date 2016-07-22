@@ -333,9 +333,6 @@ endif
     noremap <unique> <Leader>y viw"py
     noremap <unique> <Leader>p viw"pp
 
-    " Make
-    nnoremap <unique> <Leader>m :!make<CR>
-
     " YCM GoTo
     nnoremap <leader>d :YcmCompleter GoTo<CR>
 
@@ -352,7 +349,7 @@ endif
 	nmap <unique> <RIGHT> 4<C-w>>
 
     " Compile
-    map <Leader>m :make<CR><CR><CR>
+    map <Leader>m :make compile<CR><CR><CR>
     map <Leader>t :make test<CR><CR><CR>
 
 " }}}
