@@ -398,6 +398,7 @@ endif
     let g:ycm_key_list_select_completion=['<Down>']
     let g:ycm_key_list_previous_completion=['<Up>']
     map <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
+    map <silent> <Leader>g :YcmCompleter GetType
     nnoremap <silent> <SPACE> :YcmForceCompileAndDiagnostics<CR><CR>:GitGutterAll<CR>
 
     " T-Comment
