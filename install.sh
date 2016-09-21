@@ -8,7 +8,7 @@ xcode-select --install
 ## ---------------------------------------------------------------------------------
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
-brew install cmake git mercurial ack entr fzf ag cscope imagemagick gifsicle gs direnv
+brew install cmake git mercurial ack entr fzf ag cscope imagemagick gifsicle gs direnv xctool
 brew install ffmpeg --with-fdk-aac --with-x265 --with-libvorbis
 brew tap universal-ctags/universal-ctags
 brew install --HEAD universal-ctags
