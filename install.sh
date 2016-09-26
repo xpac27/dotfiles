@@ -9,7 +9,7 @@ xcode-select --install
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
 brew tap homebrew/versions
-brew install cmake git mercurial ack entr fzf ag cscope imagemagick gifsicle gs direnv xctool ninja ccache cppcheck glm glfw3
+brew install vim cmake git mercurial ack entr fzf ag cscope imagemagick gifsicle gs direnv xctool ninja ccache cppcheck glm glfw3
 brew install ffmpeg --with-fdk-aac --with-x265 --with-libvorbis
 brew tap universal-ctags/universal-ctags
 brew install --HEAD universal-ctags
@@ -40,29 +40,6 @@ curl -LO https://github.com/chrissimpkins/Hack/releases/download/v2.015/Hack-v2_
 unzip Hack-v2_015-ttf.zip -d .
 mv Hack-* /Users/vinz/Library/Fonts
 pip install --user powerline-status
-
-## Vim with 24-bit colors
-## ---------------------------------------------------------------------------------
-git clone git@github.com:vim/vim.git /tmp/vim
-cd /tmp/vim/src
-./configure \
-  --enable-gui=no \
-  --without-x \
-  --enable-multibyte \
-  --with-tlib=ncurses \
-  --enable-cscope \
-  --with-features=huge \
-  --disable-nls \
-  --enable-perlinterp \
-  --enable-pythoninterp \
-  --enable-rubyinterp && make
-sudo make install
-cd -
-echo "# Vim" >> ~/.profile
-echo "alias vim=\"/usr/local/bin/vim\"" >> ~/.profile
-echo "alias vi=\"/usr/local/bin/vim\"" >> ~/.profile
-mkdir ~/.vim/swap
-mkdir ~/.vim/backup
 
 
 # ==== OPTIONAL
