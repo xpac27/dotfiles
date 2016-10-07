@@ -9,15 +9,11 @@ xcode-select --install
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
 brew tap homebrew/versions
-brew install vim cmake git mercurial ack entr fzf ag cscope imagemagick gifsicle gs direnv xctool ninja ccache cppcheck glm glfw3 lcov clang-format
+brew install vim cmake git mercurial ack entr fzf ag cscope imagemagick gifsicle gs direnv xctool ninja ccache cppcheck glm glfw3 lcov clang-format rbenv
 brew install ffmpeg --with-fdk-aac --with-x265 --with-libvorbis
 brew tap universal-ctags/universal-ctags
 brew install --HEAD universal-ctags
 brew doctor
-
-## GEMS
-## ---------------------------------------------------------------------------------
-gem install screengif
 
 ## OH MY ZSH
 ## ---------------------------------------------------------------------------------
@@ -44,10 +40,16 @@ pip install --user powerline-status
 
 # ==== OPTIONAL
 
-## RVM
+## RBENV
 ## ---------------------------------------------------------------------------------
-curl -sSL https://get.rvm.io | bash -s stable --ruby
-rvm install 2.1.1
+rbenv init
+echo "# rbenv" >> ~/.profile
+echo "eval \"$(rbenv init -)\"" >> ~/.profile
+
+## GEMS
+## ---------------------------------------------------------------------------------
+gem install screengif bundler
+rbenv rehash
 
 ## FLEX SDK
 ## ---------------------------------------------------------------------------------

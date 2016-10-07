@@ -76,8 +76,8 @@ fshow() {
 # Direnv
 eval "$(direnv hook zsh)"
 
-# Add RVM to PATH for scripting
-[[ -d "$HOME/.rvm" ]] && PATH=$PATH:$HOME/.rvm/bin
+# rbenv
+eval "$(rbenv init -)"
 
 # Load the default .profile
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
