@@ -21,6 +21,7 @@ endif
     Plug 'ervandew/supertab'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
+    Plug 'skywind3000/asyncrun.vim'
 
     " Syntaxes
     Plug 'tpope/vim-markdown'
@@ -208,7 +209,7 @@ endif
     endif
 
     " statusline
-    set statusline=%f\ %r%m%=%l/%L\ -\ %P
+    set statusline=%f\ %r%m%=%c:%l/%L\ -\ %P
 
     " Clang compiler error format
     set errorformat+=%f:%l:%c:\ %t:\ %m
@@ -253,10 +254,6 @@ endif
 
         " Make crontab happy
         au filetype crontab setlocal nobackup nowritebackup
-
-		" Line number
-		au InsertEnter * set norelativenumber
-		au InsertLeave * set relativenumber
 
         " Auto open quickfix on make
         au QuickFixCmdPost [^l]* nested cwindow
@@ -349,8 +346,8 @@ endif
 	nmap <unique> <RIGHT> 4<C-w>>
 
     " Compile
-    map <Leader>m :make compile<CR><CR><CR>
-    map <Leader>t :make test<CR><CR><CR>
+    map <Leader>AsyncRun make compile<CR><CR><CR>
+    map <Leader>AsyncRun make test<CR><CR><CR>
 
 " }}}
 
