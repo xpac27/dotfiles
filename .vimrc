@@ -12,7 +12,8 @@ endif
     " Big features
     Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
     Plug 'tpope/vim-fugitive'
-    Plug 'scrooloose/syntastic'
+    " Plug 'scrooloose/syntastic'
+    Plug 'w0rp/ale'
     Plug 'valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
     Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
     Plug 'mhinz/vim-startify'
@@ -83,7 +84,6 @@ endif
     set fileformats=unix,dos,mac
     set hidden
     set tags=./tags
-    set backspace=indent,eol,start
     set ttyfast
     set lazyredraw
 
@@ -190,6 +190,7 @@ endif
     set timeoutlen=300
     set maxmem=2000000
     set maxmemtot=2000000
+    set backspace=indent,eol,start
 
     " popup menu
     set pumheight=15
@@ -209,7 +210,7 @@ endif
     endif
 
     " statusline
-    set statusline=%f\ %r%m%=%c:%l/%L\ -\ %P
+    set statusline=%f\ %r%m%=%{ALEGetStatusLine()}\ -\ %c:%l/%L\ -\ %P
 
     " Clang compiler error format
     set errorformat+=%f:%l:%c:\ %t:\ %m
@@ -358,24 +359,17 @@ endif
     nnoremap <silent> <F3> :silent UndotreeToggle<CR>
     inoremap <silent> <F3> <ESC>:silent UndotreeToggle<CR>
 
-    " Syntastic
+    " Ale
     " -------------------------------------------------------------------------
-    let g:syntastic_actionscript_mxmlc_exe = 'fcshctl mxmlc -source-path=src '
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_enable_signs = 1
-    let g:syntastic_check_on_open = 0
-    let g:syntastic_check_on_wq = 1
-    let g:syntastic_javascript_checkers = ['jshint']
-    " let g:syntastic_ruby_checkers = ['rubylint']
-    let g:syntastic_cpp_checkers = ['cppcheck']
-    let g:syntastic_error_symbol = '✗'
-    let g:syntastic_warning_symbol = '∆'
-    let g:syntastic_mode_map = {
-        \ 'mode': 'active',
-        \ 'active_filetypes': ['cpp, ''javascript', 'actionscript'],
-        \ 'passive_filetypes': ['c', 'java', 'xhtml', 'sh']
-    \ }
+    let g:ale_sign_error = '✗'
+    let g:ale_sign_warning = '∆'
+    let g:ale_echo_cursor = 1
+    let g:ale_statusline_format = ['✗ %d', '∆ %d', '✓ ok']
+    let g:ale_linters = {
+    \   'cpp': ['cppcheck'],
+    \}
+    hi ALEErrorSign guibg=#363636
+    hi ALEWarningSign guibg=#363636
 
     " Ultisnips
     " -------------------------------------------------------------------------
@@ -394,9 +388,13 @@ endif
     let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
     let g:ycm_key_list_select_completion=['<Down>']
     let g:ycm_key_list_previous_completion=['<Up>']
+    let g:ycm_error_symbol = '✗'
+    let g:ycm_warning_symbol = '∆'
+    hi YcmErrorLine guibg=#4f2626
+    hi YcmWarningLine guibg=#4f4f26
     map <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
     map <silent> <Leader>g :YcmCompleter GetType
-    nnoremap <silent> <SPACE> :YcmForceCompileAndDiagnostics<CR><CR>:GitGutterAll<CR>
+    nnoremap <silent> <SPACE> :silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
 
     " T-Comment
     " -------------------------------------------------------------------------
