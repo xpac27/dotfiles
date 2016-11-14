@@ -116,14 +116,14 @@ endif
 
     " presentation
     set number
-	set relativenumber
+    set relativenumber
     set cursorline
     set nolist
     set laststatus=2
 
     " wrap
     set nowrap
-    set textwidth=0
+    set textwidth=99999
 
     " terminal
     set title
@@ -210,7 +210,7 @@ endif
     endif
 
     " statusline
-    set statusline=%f\ %r%m%=%{ALEGetStatusLine()}\ -\ %c:%l/%L\ -\ %P
+    set statusline=%f\ %r%m%=%{ALEGetStatusLine()}\ -\ %P\ -\ %c:%l/%L
 
     " Clang compiler error format
     set errorformat+=%f:%l:%c:\ %t:\ %m
@@ -292,11 +292,11 @@ endif
     ab   st   static
     ab   cl   console.log
 
-	" Don't move around in insert mode
-	inoremap <up> <nop>
-	inoremap <down> <nop>
-	inoremap <left> <nop>
-	inoremap <right> <nop>
+    " Don't move around in insert mode
+    inoremap <up> <nop>
+    inoremap <down> <nop>
+    inoremap <left> <nop>
+    inoremap <right> <nop>
 
     " save time
     nnoremap ; :
@@ -340,11 +340,11 @@ endif
     " Only higlight on #
     nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
-	" Resize windows
-	nmap <unique> <UP> 4<C-w>+
-	nmap <unique> <DOWN> 4<C-w>-
-	nmap <unique> <LEFT> 4<C-w><
-	nmap <unique> <RIGHT> 4<C-w>>
+    " Resize windows
+    nmap <unique> <UP> 4<C-w>+
+    nmap <unique> <DOWN> 4<C-w>-
+    nmap <unique> <LEFT> 4<C-w><
+    nmap <unique> <RIGHT> 4<C-w>>
 
     " Compile
     map <Leader>AsyncRun make compile<CR><CR><CR>
@@ -470,16 +470,16 @@ endif
 
     " EasyMotion
     " -------------------------------------------------------------------------
-	" Bidirection jump
-	map  / <Plug>(easymotion-sn)
-	omap / <Plug>(easymotion-tn)
-	" Bidirection jump base on 2 chars
-	nmap s <Plug>(easymotion-s2)
-	" Jump to line
-	map <Leader>j <Plug>(easymotion-j)
-	map <Leader>k <Plug>(easymotion-k)
-	" Smart case
-	let g:EasyMotion_smartcase = 1
+    " Bidirection jump
+    map  / <Plug>(easymotion-sn)
+    omap / <Plug>(easymotion-tn)
+    " Bidirection jump base on 2 chars
+    nmap s <Plug>(easymotion-s2)
+    " Jump to line
+    map <Leader>j <Plug>(easymotion-j)
+    map <Leader>k <Plug>(easymotion-k)
+    " Smart case
+    let g:EasyMotion_smartcase = 1
 
     " Goyo
     " -------------------------------------------------------------------------
