@@ -32,6 +32,7 @@ endif
     Plug 'yaymukund/vim-rabl'
     Plug 'groenewege/vim-less'
     Plug 'tikhomirov/vim-glsl'
+    Plug 'tpope/vim-haml'
     " Plug 'octol/vim-cpp-enhanced-highlight'
 
     " Searching
@@ -210,7 +211,7 @@ endif
     endif
 
     " statusline
-    set statusline=%f\ %r%m%=%{ALEGetStatusLine()}\ -\ %P\ -\ %c:%l/%L
+    set statusline=%f\ %r%m%=\ %P\ -\ %c:%l/%L
 
     " Clang compiler error format
     set errorformat+=%f:%l:%c:\ %t:\ %m
@@ -347,8 +348,8 @@ endif
     nmap <unique> <RIGHT> 4<C-w>>
 
     " Compile
-    map <Leader>AsyncRun make compile<CR><CR><CR>
-    map <Leader>AsyncRun make test<CR><CR><CR>
+    map <Leader>m :AsyncRun make compile<CR>copen 20<CR>
+    map <Leader>t :AsyncRun make test<CR>copen 20<CR>
 
 " }}}
 
@@ -364,9 +365,16 @@ endif
     let g:ale_sign_error = '✗'
     let g:ale_sign_warning = '∆'
     let g:ale_echo_cursor = 1
-    let g:ale_statusline_format = ['✗ %d', '∆ %d', '✓ ok']
     let g:ale_linters = {
-    \   'cpp': ['cppcheck'],
+    \   'cpp': [],
+    \   'ruby': ['rubocop'],
+    \   'bash': ['shellcheck'],
+    \   'css': ['csslint'],
+    \   'javascript': ['jshint'],
+    \   'sass': ['sass-lint'],
+    \   'coffeescript': ['coffee'],
+    \   'python': ['flake8'],
+    \   'yaml': ['yamllint'],
     \}
     hi ALEErrorSign guibg=#363636
     hi ALEWarningSign guibg=#363636
@@ -505,6 +513,10 @@ endif
     endfunction
     autocmd! User GoyoEnter nested call <SID>goyo_enter()
     autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+    " Asyncrun
+    " -------------------------------------------------------------------------
+    let g:asyncrun_exit='copen 20'
 
 " }}}
 

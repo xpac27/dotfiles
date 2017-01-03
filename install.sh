@@ -9,11 +9,15 @@ xcode-select --install
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
 brew tap homebrew/versions
-brew install vim cmake git mercurial ack entr fzf ag cscope imagemagick gifsicle gs direnv xctool ninja ccache cppcheck glm glfw3 lcov clang-format rbenv
+brew install vim cmake git mercurial ack entr fzf ag cscope imagemagick gifsicle gs direnv xctool ninja ccache cppcheck glm glfw3 lcov clang-format rbenv shellcheck npm
 brew install ffmpeg --with-fdk-aac --with-x265 --with-libvorbis
 brew tap universal-ctags/universal-ctags
 brew install --HEAD universal-ctags
 brew doctor
+
+## NPM
+## ---------------------------------------------------------------------------------
+npm install -g jshint csslint coffee-script sass-lint
 
 ## OH MY ZSH
 ## ---------------------------------------------------------------------------------
@@ -29,13 +33,14 @@ echo "export PATH=\"\$PATH:/usr/local/opt/llvm38/share/clang/tools/scan-build\""
 ## Python
 ## ---------------------------------------------------------------------------------
 sudo easy_install pip
+python -m pip install flake8 yamllint
 
 ## Hack Font
 ## ---------------------------------------------------------------------------------
 curl -LO https://github.com/chrissimpkins/Hack/releases/download/v2.015/Hack-v2_015-ttf.zip
 unzip Hack-v2_015-ttf.zip -d .
 mv Hack-* /Users/vinz/Library/Fonts
-pip install --user powerline-status
+python -m pip install powerline-status
 
 
 # ==== OPTIONAL
@@ -48,7 +53,7 @@ echo "eval \"$(rbenv init -)\"" >> ~/.profile
 
 ## GEMS
 ## ---------------------------------------------------------------------------------
-gem install screengif bundler
+gem install screengif bundler rubocop
 rbenv rehash
 
 ## FLEX SDK
