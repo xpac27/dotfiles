@@ -261,6 +261,9 @@ endif
         au QuickFixCmdPost [^l]* nested cwindow
         au QuickFixCmdPost    l* nested lwindow
 
+        " Automatically remove all trailing whitespace
+        au FileType c,cpp,ruby,javascript,sass,haml autocmd BufWritePre <buffer> %s/\s\+$//e
+
     augroup END
 
 " }}}
