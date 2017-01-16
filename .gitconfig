@@ -2,8 +2,7 @@
     name = Vincent Cogne
     email = xpac27@gmail.com
 
-[core]
-    editor = vim
+[core] editor = vim
     quotepath = false
     excludesfile = /Users/vincent.cogne/.gitignore_global
 
@@ -51,6 +50,6 @@
     fetchJobs = 4
 
 [pager]
-    diff = /usr/local/Cellar/git/2.10.0/share/git-core/contrib/diff-highlight/diff-highlight | less
-    log = /usr/local/Cellar/git/2.10.0/share/git-core/contrib/diff-highlight/diff-highlight | less
-    show = /usr/local/Cellar/git/2.10.0/share/git-core/contrib/diff-highlight/diff-highlight | less
+    diff = diff-highlight | less -r
+    log = diff-highlight | less -r
+    show = diff-highlight | less -r

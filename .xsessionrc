@@ -1,0 +1,8 @@
+#!/bin/bash
+
+feh --bg-scale /home/vinz/Pictures/Wallpapers/ok/galaxy_nebula_blurring_stars_65152_2560x1440.jpg
+
+xset r rate 200 25
+xset b off
+xset s off
+

@@ -26,7 +26,7 @@ source $ZSH/oh-my-zsh.sh
 export LC_CTYPE=en_US.UTF-8
 export LANG=en_US.UTF-8
 export EDITOR=vi
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/home/vinz/bin:$PATH"
 
 # Make FZF use AG
 export FZF_DEFAULT_COMMAND='ag -g ""'
@@ -39,6 +39,11 @@ set ttymouse=sgr
 alias rc="pry -r ./config/environment"
 alias fl='tail -F ~/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.txt'
 alias v='vim -p $(fzf -m)'
+alias vi="vim"
+
+# VPN linux
+alias vpn-start="nmcli --ask con up id IPredator"
+alias vpn-stop="nmcli --ask con down id IPredator"
 
 # SVN shortcuts
 alias svnd='svn diff --no-diff-deleted --show-copies-as-adds | colordiff | less'
@@ -73,11 +78,12 @@ fshow() {
       xargs -I % sh -c 'git show --color=always % | less -R'"
 }
 
-# Direnv
-eval "$(direnv hook zsh)"
-
 # rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# pip
+export PATH=$PATH:/home/$USER/.local/bin/
 
 # Load the default .profile
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
