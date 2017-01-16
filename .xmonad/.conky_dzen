@@ -5,8 +5,4 @@ out_to_x=false,
 update_interval=2
 };
 
-conky.text = [[^fg(\#808080)${if_empty ${exec nmcli c | grep IPredator}}${else}(vpn) ^fg(\#ffffff)- ${endif}^fg(\#808080)$battery ^fg(\#ffffff)- ^fg(\#ebac54)RAM ^fg(\#ffffff)$memperc% ^fg(\#ebac54)SWP ^fg(\#ffffff)$swapperc% ^fg(\#ebac54)CPU ^fg(\#ffffff)${freq_g 1}% ${freq_g 2}% ${freq_g 3}% ${freq_g 4}% ]]
-
-
-
-
+conky.text = [[^fg(\#808080)${if_empty ${exec nmcli c | grep IPredator | grep wlp58s0}}${else}(vpn) ^fg(\#ffffff)- ${endif}^fg(\#808080)$battery ^fg(\#ffffff)- ^fg(\#808080)${time %H:%m} ^fg(\#ffffff)- ^fg(\#ebac54)RAM ^fg(\#ffffff)$memperc% ^fg(\#ebac54)SWP ^fg(\#ffffff)$swapperc% ^fg(\#ebac54)CPU ^fg(\#ffffff)${freq_g 1}% ${freq_g 2}% ${freq_g 3}% ${freq_g 4}% ]]
