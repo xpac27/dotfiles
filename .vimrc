@@ -40,6 +40,7 @@ endif
     Plug 'derekwyatt/vim-fswitch'
     Plug 'easymotion/vim-easymotion'
     Plug 'chazy/cscope_maps'
+    Plug 'mileszs/ack.vim'
 
     " Formating
     Plug 'tpope/vim-endwise'
@@ -521,6 +522,12 @@ endif
     " -------------------------------------------------------------------------
     let g:asyncrun_exit='copen 20'
 
+    " ACK
+    " -------------------------------------------------------------------------
+    if executable('ag')
+      let g:ackprg = 'ag --vimgrep'
+    endif
+    
 " }}}
 
 " FUNCTIONS -------------------------------- {{{
