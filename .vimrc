@@ -238,6 +238,9 @@ endif
         " enable spell checking
         au BufEnter *.cpp,*.h,*.hpp,*.md  set spell
 
+        " better lambda indent
+        au BufEnter *.cpp setlocal cindent cino='j1,(0,ws,Ws'
+
         " restore position in file
         au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
 

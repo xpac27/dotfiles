@@ -209,19 +209,19 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 --
--- myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
---  
---     -- mod-button1, Set the window to floating mode and move by dragging
---     [ ((modMask, button1), (\w -> focus w >> mouseMoveWindow w))
---  
---     -- mod-button2, Raise the window to the top of the stack
---     , ((modMask, button2), (\w -> focus w >> windows W.swapMaster))
---  
---     -- mod-button3, Set the window to floating mode and resize by dragging
---     , ((modMask, button3), (\w -> focus w >> mouseResizeWindow w))
---  
---     -- you may also bind events to the mouse scroll wheel (button4 and button5)
---     ]
+myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
+    [
+    -- mod-button1, Set the window to floating mode and move by dragging
+    --   ((modMask, button1), (\w -> focus w >> mouseMoveWindow w))
+
+    -- mod-button2, Raise the window to the top of the stack
+    -- , ((modMask, button2), (\w -> focus w >> windows W.swapMaster))
+
+    -- mod-button3, Set the window to floating mode and resize by dragging
+    -- , ((modMask, button3), (\w -> focus w >> mouseResizeWindow w))
+
+    -- you may also bind events to the mouse scroll wheel (button4 and button5)
+    ]
  
 ------------------------------------------------------------------------
 -- Layouts:
@@ -237,7 +237,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 myLayout = minimize ( tiled ||| Mirror tiled ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
-     tiled = spacing 4 $ gaps [(U,40), (L,40), (R,40), (D,40)] $ ResizableTall nmaster delta ratio []
+     tiled = spacing 4 $ gaps [(U,40), (L,40), (R,40), (D,20)] $ ResizableTall nmaster delta ratio []
  
      -- The default number of windows in the master pane
      nmaster = 1
