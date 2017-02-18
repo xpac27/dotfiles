@@ -40,6 +40,7 @@ endif
     Plug 'derekwyatt/vim-fswitch'
     Plug 'easymotion/vim-easymotion'
     Plug 'chazy/cscope_maps'
+    Plug 'mileszs/ack.vim'
 
     " Formating
     Plug 'tpope/vim-endwise'
@@ -188,6 +189,7 @@ endif
     set gdefault
 
     " conveniences
+    set updatetime=250
     set timeoutlen=300
     set maxmem=2000000
     set maxmemtot=2000000
@@ -317,7 +319,7 @@ endif
     vnoremap > >gv
 
     " clear searches
-    nnoremap <ESC><ESC> :nohlsearch<CR>
+    nnoremap <ESC> :nohlsearch<CR>
 
     " toggle options
     nnoremap <silent> <leader>on :set number!<CR>
@@ -453,7 +455,6 @@ endif
     let g:gitgutter_sign_modified = '▎'
     let g:gitgutter_sign_removed= '▎'
     let g:gitgutter_sign_modified_removed= '▎'
-    set updatetime=400
 
     " Startify
     " -------------------------------------------------------------------------
@@ -524,6 +525,12 @@ endif
     " -------------------------------------------------------------------------
     let g:asyncrun_exit='copen 20'
 
+    " ACK
+    " -------------------------------------------------------------------------
+    if executable('ag')
+      let g:ackprg = 'ag --vimgrep'
+    endif
+    
 " }}}
 
 " FUNCTIONS -------------------------------- {{{
