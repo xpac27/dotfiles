@@ -1,6 +1,6 @@
 [user]
     name = Vincent Cogne
-    email = xpac27@gmail.com
+    email = banananana@protonmail.com
 
 [core] editor = vim
     quotepath = false
@@ -50,6 +50,6 @@
     fetchJobs = 4
 
 [pager]
-    diff = diff-highlight | less -r
-    log = diff-highlight | less -r
-    show = diff-highlight | less -r
+    diff = /usr/share/git/diff-highlight/diff-highlight | less -r
+    log = /usr/share/git/diff-highlight/diff-highlight | less -r
+    show = /usr/share/git/diff-highlight/diff-highlight | less -r

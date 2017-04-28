@@ -88,9 +88,4 @@ export PATH=$PATH:/home/$USER/.local/bin/
 # Load the default .profile
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
 
-# added by travis gem
-[ -f /Users/vinz/.travis/travis.sh ] && source /Users/vinz/.travis/travis.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# added by travis gem
-[ -f /Users/vincent.cogne/.travis/travis.sh ] && source /Users/vincent.cogne/.travis/travis.sh
