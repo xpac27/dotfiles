@@ -89,3 +89,8 @@ export PATH=$PATH:/home/$USER/.local/bin/
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
+  exec startx
+  sleep 1
+fi

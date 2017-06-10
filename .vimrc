@@ -68,7 +68,6 @@ set tags=./tags
 set enc=utf-8
 set spelllang=en_us
 set fileformats=unix,dos,mac
-set background=dark
 set visualbell t_vb=
 set sessionoptions+=tabpages,globals
 set viminfo=!,'100,h,n~/.viminfo
@@ -155,6 +154,14 @@ set hlsearch
 set gdefault
 set cst
 
+" Tweaks for browsing
+let g:netrw_banner=0        " disable annoying banner
+let g:netrw_browse_split=4  " open in prior window
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+
 " use tabs in Makefile
 au BufNewFile,BufRead Makefile setlocal noexpandtab
 
@@ -171,8 +178,8 @@ au BufNewFile,BufRead *.as set ft=actionscript
 au! BufNewFile,BufRead *.zu setf zimbu
 
 " activate FileSwitch on cpp and h files
-au! BufEnter *.cpp,*.cc let b:fswitchdst = 'h,hpp'  | let b:fswitchlocs = '../inc/,../../inc/,../inc/**/,../../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/,./'
-au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = '../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/,./'
+au! BufEnter *.cpp,*.cc let b:fswitchdst = 'hpp,h'  | let b:fswitchlocs = './,../inc/,../../inc/,../inc/**/,../../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/'
+au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
 
 " Auto save
 au CursorHold *.cpp,*.h,*.hpp,*.rb nested silent wa
@@ -227,7 +234,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " clear searches
-nnoremap <ESC> :nohlsearch<CR>
+nnoremap <ESC><ESC> :nohlsearch<CR>
 
 " toggle options
 nnoremap <silent> <leader>on :set number!<CR>
@@ -264,8 +271,11 @@ map <Leader>t :AsyncRun make test<CR>copen 20<CR>
 " Gruvebox
 " -------------------------------------------------------------------------
 let g:gruvbox_italic=0
+let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_contrast_light="hard"
+let g:gruvbox_vert_split="bg2"
+set background=dark
 colorscheme gruvbox
-hi VertSplit guifg=#504a45 ctermfg=239
 
 " UndoTree
 " -------------------------------------------------------------------------
@@ -332,7 +342,6 @@ vmap <Leader>a: :Tabularize /:<CR>
 let g:clang_format#auto_format_on_insert_leave = 0
 let g:clang_format#auto_format = 0
 let g:clang_format#detect_style_file = 1
-let g:clang_format#code_style = "llvm"
 autocmd FileType cpp nmap <SPACE><SPACE> :ClangFormat<CR>
 
 " Git-Gutter
