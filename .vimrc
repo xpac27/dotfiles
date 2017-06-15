@@ -220,6 +220,9 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
+" Replace word under cursor
+nnoremap <leader>r :%s/\<<C-R><C-W>\>//gc<left><left><left>
+
 " save time
 nnoremap ; :
 nnoremap q: :q
