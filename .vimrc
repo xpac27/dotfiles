@@ -227,6 +227,9 @@ nnoremap <leader>r :%s/\<<C-R><C-W>\>//gc<left><left><left>
 nnoremap ; :
 nnoremap q: :q
 
+" disable hex mode
+nnoremap Q <Nop>
+
 " select the current line without indentation
 nnoremap vv ^vg_
 
