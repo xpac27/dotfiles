@@ -68,6 +68,12 @@ alias go='git checkout'
 alias gpr='git pull --rebase'
 alias gsu='git submodule update --recursive --init --jobs=4'
 
+# Machine
+alias reboot="sudo systemctl reboot now"
+alias poweroff="sudo systemctl poweroff now"
+alias sleep="sudo systemctl suspend"
+alias hibernate="sudo systemctl hybrid-sleep"
+
 # FZF Git commit browser
 fshow() {
   git log --graph --color=always \

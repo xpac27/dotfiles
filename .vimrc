@@ -151,6 +151,7 @@ set incsearch
 set hlsearch
 set gdefault
 set cst
+set undofile
 
 " Tweaks for browsing
 let g:netrw_banner=0        " disable annoying banner
@@ -266,6 +267,10 @@ nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 map <Leader>m :AsyncRun make compile<CR>copen 20<CR>
 map <Leader>t :AsyncRun make test<CR>copen 20<CR>
 
+" FZF
+nmap <C-f> :GitFiles<CR>
+nmap <C-F> :Files<CR>
+
 " Gruvebox
 " -------------------------------------------------------------------------
 let g:gruvbox_italic=0
@@ -313,7 +318,7 @@ let g:ycm_always_populate_location_list = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_echo_current_diagnostic = 1
 let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
-let g:ycm_key_list_select_completion=['<Down>']
+let g:ycm_key_list_select_completion=['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion=['<Up>']
 let g:ycm_error_symbol = '✗'
 let g:ycm_warning_symbol = '∆'
