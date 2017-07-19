@@ -1,5 +1,5 @@
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="zen"
+ZSH_THEME="gitster"
 
 # CASE_SENSITIVE="true"
 # DISABLE_AUTO_UPDATE="true"
@@ -51,14 +51,20 @@ fshow() {
 }
 
 # rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+if [ -d "$HOME/.rbenv/bin" ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
 
 # pip
-export PATH=$PATH:/home/$USER/.local/bin/
+if [ -d "$HOME/.local/bin" ]; then
+  export PATH=$PATH:$HOME/.local/bin/
+fi
 
 # Load the default .profile
-[[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
+if [[ -s "$HOME/.profile" ]]; then
+  source "$HOME/.profile"
+fi
 
 # Autostart X
 if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
