@@ -2,7 +2,8 @@
     name = Vincent Cogne
     email = banananana@protonmail.com
 
-[core] editor = vim
+[core]
+    editor = vim
     quotepath = false
     excludesfile = /Users/vincent.cogne/.gitignore_global
 

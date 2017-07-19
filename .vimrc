@@ -5,48 +5,65 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+
+
+
+" =========================================================================
+" PLUGINS
+" =========================================================================
+
+
 call plug#begin('~/.vim/plugged')
 
+
+" Misc:
+" -------------------------------------------------------------------------
+
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
 Plug 'skywind3000/asyncrun.vim'
-
 Plug 'jamessan/vim-gnupg'
-
 Plug 'mhinz/vim-startify'
-
-Plug 'derekwyatt/vim-fswitch'
-
-Plug 'easymotion/vim-easymotion'
-
-Plug 'mileszs/ack.vim'
-
 Plug 'tpope/vim-endwise'
-
 Plug 'vim-scripts/tComment'
-
-Plug 'terryma/vim-multiple-cursors'
-
 Plug 'rhysd/vim-clang-format'
-
-Plug 'airblade/vim-gitgutter'
-
-Plug 'gcmt/taboo.vim'
-
 Plug 'breuckelen/vim-resize'
-
-Plug 'morhetz/gruvbox'
-
 Plug 'godlygeek/tabular', { 'on': 'Tabularize'}
+
+
+" Search
+" -------------------------------------------------------------------------
 
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'mileszs/ack.vim'
+Plug 'derekwyatt/vim-fswitch'
+Plug 'easymotion/vim-easymotion'
+
+
+" Smart syntax
+" -------------------------------------------------------------------------
 
 Plug 'valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'w0rp/ale'
 
+
+" Interfaces
+" -------------------------------------------------------------------------
+
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarOpen' }
+Plug 'airblade/vim-gitgutter'
+Plug 'gcmt/taboo.vim'
+
+
+" Schemes
+" -------------------------------------------------------------------------
+
+Plug 'morhetz/gruvbox'
+
+
+" Syntaxes
+" -------------------------------------------------------------------------
 
 Plug 'elzr/vim-json'
 Plug 'tpope/vim-markdown'
@@ -58,12 +75,20 @@ Plug 'tikhomirov/vim-glsl'
 Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-haml'
 
-call plug#end()
 
+call plug#end()
 filetype on
 syntax enable
 
-set path=.,,/usr/local/include,/usr/include
+
+
+
+" =========================================================================
+" SETTINGS
+" =========================================================================
+
+
+set path=.,,**,/usr/local/include,/usr/include
 set tags=./tags,.tags,.git/tags
 set enc=utf-8
 set spelllang=en_us
@@ -161,6 +186,14 @@ let g:netrw_liststyle=3     " tree view
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
+
+
+
+" =========================================================================
+" AUTO COMMANDS
+" =========================================================================
+
+
 " use tabs in Makefile
 au BufNewFile,BufRead Makefile setlocal noexpandtab
 
@@ -172,9 +205,6 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "norma
 
 " force actionscript on .as files
 au BufNewFile,BufRead *.as set ft=actionscript
-
-" set zimbu filetype
-au! BufNewFile,BufRead *.zu setf zimbu
 
 " activate FileSwitch on cpp and h files
 au! BufEnter *.cpp,*.cc let b:fswitchdst = 'hpp,h'  | let b:fswitchlocs = './,../inc/,../../inc/,../inc/**/,../../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/'
@@ -192,6 +222,14 @@ au QuickFixCmdPost    l* nested lwindow
 
 " Change default tab settings
 au Filetype ruby,yaml setlocal ts=2 sts=2 sw=2
+
+
+
+
+" =========================================================================
+" MAPPINGS
+" =========================================================================
+
 
 " typos
 ia   feild    field
@@ -212,15 +250,18 @@ ab   pu   public
 ab   st   static
 ab   cl   console.log
 
-" Don't move around in insert mode
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
+" Don't move around with arrows
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
 
 " save time
 nnoremap ; :
 nnoremap q: :q
+
+" disable hex mode
+nnoremap Q <Nop>
 
 " select the current line without indentation
 nnoremap vv ^vg_
@@ -244,12 +285,19 @@ nnoremap <silent> <leader>od :e ++ff=dos<CR>:setlocal ff=dos<CR>
 nnoremap <silent> <LocalLeader>[ :tabprev<CR>
 nnoremap <silent> <LocalLeader>] :tabnext<CR>
 
+" Replace word under cursor
+nnoremap <leader>r :%s/\<<C-R><C-W>\>//gc<left><left><left>
+
 " duplication
-nnoremap <silent> <LocalLeader>= YP
+nnoremap <silent> <LocalLeader>t YP
 
 " copy/past word
 noremap <unique> <Leader>y viw"wy
 noremap <unique> <Leader>p viw"wp
+
+" Compile/test
+map <Leader>m :AsyncRun make compile<CR>copen 20<CR>
+map <Leader>t :AsyncRun make test<CR>copen 20<CR>
 
 " Cscope
 nmap <C-]> :cs find s <C-R>=expand("<cword>")<CR><CR>
@@ -257,9 +305,13 @@ nmap <C-]> :cs find s <C-R>=expand("<cword>")<CR><CR>
 " Only higlight on #
 nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
-" Compile
-map <Leader>m :AsyncRun make compile<CR>copen 20<CR>
-map <Leader>t :AsyncRun make test<CR>copen 20<CR>
+
+
+
+" =========================================================================
+" PLUGINS
+" =========================================================================
+
 
 " FZF
 nmap <C-f> :GitFiles<CR>
@@ -274,10 +326,12 @@ let g:gruvbox_vert_split="bg2"
 set background=dark
 colorscheme gruvbox
 
+
 " UndoTree
 " -------------------------------------------------------------------------
 nnoremap <silent> <F3> :silent UndotreeToggle<CR>
 inoremap <silent> <F3> <ESC>:silent UndotreeToggle<CR>
+
 
 " Ale
 " -------------------------------------------------------------------------
@@ -297,6 +351,7 @@ let g:ale_linters = {
 hi ALEWarningSign ctermbg=214 ctermfg=214
 hi ALEErrorSign ctermbg=167 ctermfg=167
 
+
 " Ultisnips
 " -------------------------------------------------------------------------
 let g:UltiSnipsExpandTrigger = "<Tab>"
@@ -304,6 +359,7 @@ let g:UltiSnipsListSnippets = "<C-Tab>"
 let g:UltiSnipsJumpForwardTrigger = "<C-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
 inoremap <c-x><c-k> <c-x><c-k>
+
 
 " YouCompleteMe
 " -------------------------------------------------------------------------
@@ -323,10 +379,12 @@ nnoremap <silent> <Leader>g :YcmCompleter GetType<CR>
 nnoremap <silent> <leader>d :YcmCompleter GoTo<CR>
 nnoremap <silent> <SPACE> :silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
 
+
 " T-Comment
 " -------------------------------------------------------------------------
 nnoremap <C-c> :TComment<CR>j
 vnoremap <C-c> :TComment<CR>j
+
 
 " Tabularize
 " -------------------------------------------------------------------------
@@ -335,12 +393,14 @@ vmap <Leader>a= :Tabularize /=<CR>
 nmap <Leader>a: :Tabularize /:<CR>
 vmap <Leader>a: :Tabularize /:<CR>
 
+
 " Clang-Format
 " -------------------------------------------------------------------------
 let g:clang_format#auto_format_on_insert_leave = 0
 let g:clang_format#auto_format = 0
 let g:clang_format#detect_style_file = 1
 autocmd FileType cpp nmap <SPACE><SPACE> :%s/\s\+$//e<CR>:set nohlsearch<CR>:ClangFormat<CR>
+
 
 " Git-Gutter
 " -------------------------------------------------------------------------
@@ -351,6 +411,7 @@ let g:gitgutter_sign_added = '+'
 let g:gitgutter_sign_modified = '~'
 let g:gitgutter_sign_removed= '-'
 let g:gitgutter_sign_modified_removed= '-'
+
 
 " Startify
 " -------------------------------------------------------------------------
@@ -374,9 +435,11 @@ let g:startify_list_order = [
         \ 'bookmarks',
         \ ]
 
+
 " FSwitch
 " -------------------------------------------------------------------------
 nmap <silent> <Leader>s  :FSHere<cr>
+
 
 " EasyMotion
 " -------------------------------------------------------------------------
@@ -391,13 +454,16 @@ map <Leader>k <Plug>(easymotion-k)
 " Smart case
 let g:EasyMotion_smartcase = 1
 
+
 " Asyncrun
 " -------------------------------------------------------------------------
 let g:asyncrun_exit='copen 20'
 
+
 " Taboo
 " -------------------------------------------------------------------------
 let g:taboo_tab_format = ' %f%m '
+
 
 " ACK
 " -------------------------------------------------------------------------
@@ -405,7 +471,13 @@ if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 
-" local lvimrc
+
+
+
+" =========================================================================
+" LOCAL VIMRC
+" =========================================================================
+
 function SetLocalOptions(fname)
     let dirname = fnamemodify(a:fname, ":p:h")
     while "/" != dirname
@@ -419,5 +491,3 @@ function SetLocalOptions(fname)
 endfunction
 
 call SetLocalOptions(bufname("%"))
-
-set path+=**
