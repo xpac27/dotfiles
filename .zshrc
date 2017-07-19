@@ -69,8 +69,8 @@ alias gpr='git pull --rebase'
 alias gsu='git submodule update --recursive --init --jobs=4'
 
 # Machine
-alias reboot="sudo systemctl reboot now"
-alias poweroff="sudo systemctl poweroff now"
+alias reboot="sudo systemctl reboot"
+alias poweroff="sudo systemctl poweroff"
 alias sleep="sudo systemctl suspend"
 alias hibernate="sudo systemctl hybrid-sleep"
 
@@ -90,6 +90,19 @@ eval "$(rbenv init -)"
 
 # pip
 export PATH=$PATH:/home/$USER/.local/bin/
+
+# <<< VIM mode
+bindkey -v
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+export KEYTIMEOUT=1
+# >>>
 
 # Load the default .profile
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile"

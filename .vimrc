@@ -64,7 +64,7 @@ filetype on
 syntax enable
 
 set path=.,,/usr/local/include,/usr/include
-set tags=./tags
+set tags=./tags,.tags,.git/tags
 set enc=utf-8
 set spelllang=en_us
 set fileformats=unix,dos,mac
@@ -193,9 +193,6 @@ au QuickFixCmdPost    l* nested lwindow
 " Change default tab settings
 au Filetype ruby,yaml setlocal ts=2 sts=2 sw=2
 
-" Automatically remove all trailing whitespace
-au FileType c,cpp,ruby,yaml,javascript,sass,haml autocmd BufWritePre <buffer> %s/\s\+$//e
-
 " typos
 ia   feild    field
 ia   flase    false
@@ -254,9 +251,6 @@ nnoremap <silent> <LocalLeader>= YP
 noremap <unique> <Leader>y viw"wy
 noremap <unique> <Leader>p viw"wp
 
-" YCM GoTo
-nnoremap <leader>d :YcmCompleter GoTo<CR>
-
 " Cscope
 nmap <C-]> :cs find s <C-R>=expand("<cword>")<CR><CR>
 
@@ -313,7 +307,7 @@ inoremap <c-x><c-k> <c-x><c-k>
 
 " YouCompleteMe
 " -------------------------------------------------------------------------
-let g:ycm_collect_identifiers_from_tags_files = 0
+let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_always_populate_location_list = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_echo_current_diagnostic = 1
@@ -324,8 +318,9 @@ let g:ycm_error_symbol = '✗'
 let g:ycm_warning_symbol = '∆'
 hi YcmErrorLine guibg=#4f2626
 hi YcmWarningLine guibg=#4f4f26
-map <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
-map <silent> <Leader>g :YcmCompleter GetType
+nnoremap <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
+nnoremap <silent> <Leader>g :YcmCompleter GetType<CR>
+nnoremap <silent> <leader>d :YcmCompleter GoTo<CR>
 nnoremap <silent> <SPACE> :silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
 
 " T-Comment
@@ -345,7 +340,7 @@ vmap <Leader>a: :Tabularize /:<CR>
 let g:clang_format#auto_format_on_insert_leave = 0
 let g:clang_format#auto_format = 0
 let g:clang_format#detect_style_file = 1
-autocmd FileType cpp nmap <SPACE><SPACE> :ClangFormat<CR>
+autocmd FileType cpp nmap <SPACE><SPACE> :%s/\s\+$//e<CR>:set nohlsearch<CR>:ClangFormat<CR>
 
 " Git-Gutter
 " -------------------------------------------------------------------------
