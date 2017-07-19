@@ -172,9 +172,6 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "norma
 " force actionscript on .as files
 au BufNewFile,BufRead *.as set ft=actionscript
 
-" set zimbu filetype
-au! BufNewFile,BufRead *.zu setf zimbu
-
 " activate FileSwitch on cpp and h files
 au! BufEnter *.cpp,*.cc let b:fswitchdst = 'hpp,h'  | let b:fswitchlocs = './,../inc/,../../inc/,../inc/**/,../../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/'
 au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
