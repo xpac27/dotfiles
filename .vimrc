@@ -82,7 +82,7 @@ syntax enable
 
 
 set path=.,,**,/usr/local/include,/usr/include
-set tags=./tags
+set tags=./tags,.tags,.git/tags
 set enc=utf-8
 set spelllang=en_us
 set fileformats=unix,dos,mac
@@ -169,6 +169,7 @@ set incsearch
 set hlsearch
 set gdefault
 set cst
+set undofile
 
 " Tweaks for browsing
 let g:netrw_banner=0        " disable annoying banner
@@ -214,9 +215,6 @@ au QuickFixCmdPost    l* nested lwindow
 
 " Change default tab settings
 au Filetype ruby,yaml setlocal ts=2 sts=2 sw=2
-
-" Automatically remove all trailing whitespace
-au FileType c,cpp,ruby,yaml,javascript,sass,haml autocmd BufWritePre <buffer> %s/\s\+$//e
 
 
 
@@ -310,6 +308,10 @@ nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 " =========================================================================
 
 
+" FZF
+nmap <C-f> :GitFiles<CR>
+nmap <C-F> :Files<CR>
+
 " Gruvebox
 " -------------------------------------------------------------------------
 let g:gruvbox_italic=0
@@ -356,20 +358,20 @@ inoremap <c-x><c-k> <c-x><c-k>
 
 " YouCompleteMe
 " -------------------------------------------------------------------------
-let g:ycm_collect_identifiers_from_tags_files = 0
+let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_always_populate_location_list = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_echo_current_diagnostic = 1
 let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
-let g:ycm_key_list_select_completion=['<Down>']
+let g:ycm_key_list_select_completion=['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion=['<Up>']
 let g:ycm_error_symbol = '✗'
 let g:ycm_warning_symbol = '∆'
 hi YcmErrorLine guibg=#4f2626
 hi YcmWarningLine guibg=#4f4f26
-map <silent> <leader>d :YcmCompleter GoTo<CR>
-map <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
-map <silent> <Leader>g :YcmCompleter GetType
+nnoremap <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
+nnoremap <silent> <Leader>g :YcmCompleter GetType<CR>
+nnoremap <silent> <leader>d :YcmCompleter GoTo<CR>
 nnoremap <silent> <SPACE> :silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
 
 
@@ -384,7 +386,7 @@ vnoremap <C-c> :TComment<CR>j
 let g:clang_format#auto_format_on_insert_leave = 0
 let g:clang_format#auto_format = 0
 let g:clang_format#detect_style_file = 1
-autocmd FileType cpp nmap <SPACE><SPACE> :ClangFormat<CR>
+autocmd FileType cpp nmap <SPACE><SPACE> :%s/\s\+$//e<CR>:set nohlsearch<CR>:ClangFormat<CR>
 
 
 " Git-Gutter

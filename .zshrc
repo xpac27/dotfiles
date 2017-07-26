@@ -43,6 +43,12 @@ alias go='git checkout'
 alias gpr='git pull --rebase'
 alias gsu='git submodule update --recursive --init --jobs=4'
 
+# Machine
+alias reboot="sudo systemctl reboot"
+alias poweroff="sudo systemctl poweroff"
+alias sleep="sudo systemctl suspend"
+alias hibernate="sudo systemctl hybrid-sleep"
+
 # FZF Git commit browser
 fshow() {
   git log --graph --color=always \
@@ -63,6 +69,19 @@ fi
 if [ -d "$HOME/.local/bin" ]; then
   export PATH=$PATH:$HOME/.local/bin/
 fi
+
+# <<< VIM mode
+bindkey -v
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+export KEYTIMEOUT=1
+# >>>
 
 # Load the default .profile
 if [[ -s "$HOME/.profile" ]]; then
