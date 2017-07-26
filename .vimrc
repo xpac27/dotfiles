@@ -35,16 +35,9 @@ Plug 'godlygeek/tabular', { 'on': 'Tabularize'}
 
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'mileszs/ack.vim'
+Plug 'mhinz/vim-grepper', { 'on': ['Grepper', 'GrepperGit', 'GrepperAg', '<plug>(GrepperOperator)'] }
 Plug 'derekwyatt/vim-fswitch'
 Plug 'easymotion/vim-easymotion'
-
-
-" Smart syntax
-" -------------------------------------------------------------------------
-
-Plug 'valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
-Plug 'w0rp/ale'
 
 
 " Interfaces
@@ -132,8 +125,8 @@ set errorformat+=%f:%l\\\,%c:%m
 set errorformat+=\ %f:%l\\\,%c:%m
 set errorformat+=%f:%l:%m
 set errorformat+=\ %f:%l:%m
-set csto=1
-set cspc=2
+set csto=0
+set cspc=0
 set nocsverb
 if filereadable(".git/cscope.out")
     cs add .git/cscope.out
@@ -210,7 +203,7 @@ au! BufEnter *.cpp,*.cc let b:fswitchdst = 'hpp,h'  | let b:fswitchlocs = './,..
 au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
 
 " Auto save
-au CursorHold *.cpp,*.h,*.hpp,*.rb nested silent wa
+au CursorHold *.cpp,*.h,*.hpp,*.rb nested silent w
 
 " Make crontab happy
 au filetype crontab setlocal nobackup nowritebackup
@@ -302,7 +295,9 @@ map <Leader>m :AsyncRun make compile<CR>copen 20<CR>
 map <Leader>t :AsyncRun make test<CR>copen 20<CR>
 
 " Cscope
-nmap <C-]> :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>x :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>a :cs find a <C-R>=expand("<cword>")<CR><CR>
 
 " Only higlight on #
 nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
@@ -384,14 +379,6 @@ nnoremap <C-c> :TComment<CR>j
 vnoremap <C-c> :TComment<CR>j
 
 
-" Tabularize
-" -------------------------------------------------------------------------
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>a: :Tabularize /:<CR>
-
-
 " Clang-Format
 " -------------------------------------------------------------------------
 let g:clang_format#auto_format_on_insert_leave = 0
@@ -461,13 +448,6 @@ let g:asyncrun_exit='copen 20'
 " Taboo
 " -------------------------------------------------------------------------
 let g:taboo_tab_format = ' %f%m '
-
-
-" ACK
-" -------------------------------------------------------------------------
-if executable('ag')
-    let g:ackprg = 'ag --vimgrep'
-endif
 
 
 

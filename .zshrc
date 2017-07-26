@@ -23,6 +23,9 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/home/vinz/bin:$PATH"
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+# Fix weird ssh keys errors (like backspace not working)
+export TERM=xterm
+
 # Hide mouse
 set ttymouse=sgr
 
@@ -71,3 +74,5 @@ if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
   exec startx
   sleep 1
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
