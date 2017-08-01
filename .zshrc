@@ -9,7 +9,7 @@ ZSH_THEME="gitster"
 # DISABLE_CORRECTION="true"
 # COMPLETION_WAITING_DOTS="true"
 
-plugins=(git ruby gem)
+plugins=(git ruby gem vim-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -78,6 +78,19 @@ bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
 
 export KEYTIMEOUT=1
+
+# start typing + [Up-Arrow] - fuzzy find history forward
+if [[ "${terminfo[kcuu1]}" != "" ]]; then
+  autoload -U up-line-or-beginning-search
+  zle -N up-line-or-beginning-search
+  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+fi
+# start typing + [Down-Arrow] - fuzzy find history backward
+if [[ "${terminfo[kcud1]}" != "" ]]; then
+  autoload -U down-line-or-beginning-search
+  zle -N down-line-or-beginning-search
+  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+fi
 # >>>
 
 # Load the default .profile
@@ -90,3 +103,4 @@ if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
   exec startx
   sleep 1
 fi
+

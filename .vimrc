@@ -247,8 +247,6 @@ ab   fu   function
 ab   pr   private
 ab   pt   protected
 ab   pu   public
-ab   st   static
-ab   cl   console.log
 
 " Don't move around with arrows
 noremap <up> <nop>
@@ -368,7 +366,7 @@ let g:ycm_always_populate_location_list = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_echo_current_diagnostic = 1
 let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
-let g:ycm_key_list_select_completion=['<TAB>', '<Down>']
+let g:ycm_key_list_select_completion=['<Tab>', '<Down>']
 let g:ycm_key_list_previous_completion=['<Up>']
 let g:ycm_error_symbol = '✗'
 let g:ycm_warning_symbol = '∆'
