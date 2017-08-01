@@ -38,6 +38,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', 'GrepperGit', 'GrepperAg', '<plug>(GrepperOperator)'] }
 Plug 'derekwyatt/vim-fswitch'
 Plug 'easymotion/vim-easymotion'
+Plug 'vim-scripts/CmdlineComplete'
 
 
 " Interfaces
@@ -289,8 +290,8 @@ noremap <unique> <Leader>y viw"wy
 noremap <unique> <Leader>p viw"wp
 
 " Compile/test
-map <Leader>m :AsyncRun make compile<CR>copen 20<CR>
-map <Leader>t :AsyncRun make test<CR>copen 20<CR>
+map <Leader>m :AsyncRun make compile<CR>
+map <Leader>t :AsyncRun make test<CR>
 
 " Cscope
 nmap <leader>x :cs find s <C-R>=expand("<cword>")<CR><CR>
@@ -430,9 +431,6 @@ nmap <silent> <Leader>s  :FSHere<cr>
 
 " EasyMotion
 " -------------------------------------------------------------------------
-" Bidirection jump
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
 " Bidirection jump base on 2 chars
 nmap s <Plug>(easymotion-s2)
 " Jump to line
