@@ -265,6 +265,9 @@ vnoremap > >gv
 " clear searches
 nnoremap <ESC><ESC> :nohlsearch<CR>
 
+" Only higlight on #
+nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+
 " toggle options
 nnoremap <silent> <leader>on :set number!<CR>
 nnoremap <silent> <leader>or :set relativenumber!<CR>
@@ -280,9 +283,6 @@ nnoremap <silent> <LocalLeader>] :tabnext<CR>
 " Replace word under cursor
 nnoremap <leader>r :%s/\<<C-R><C-W>\>//gc<left><left><left>
 
-" duplication
-nnoremap <silent> <LocalLeader>t YP
-
 " copy/past word
 noremap <unique> <Leader>y viw"wy
 noremap <unique> <Leader>p viw"wp
@@ -296,8 +296,13 @@ nmap <leader>x :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>a :cs find a <C-R>=expand("<cword>")<CR><CR>
 
-" Only higlight on #
-nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+" YCM
+nnoremap <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
+nnoremap <silent> <Leader>g :YcmCompleter GetType<CR>
+nnoremap <silent> <leader>d :YcmCompleter GoTo<CR>
+
+" FSwitch
+nmap <silent> <Leader>s  :FSHere<cr>
 
 
 
@@ -307,9 +312,19 @@ nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 " =========================================================================
 
 
+" vim-grepper
+" -------------------------------------------------------------------------
+let g:grepper               = {}
+let g:grepper.tools         = ['git', 'ag', 'rg']
+let g:grepper.jump          = 1
+let g:grepper.simple_prompt = 1
+nmap <C-F> :Grepper -cword<CR>
+
+
 " FZF
+" -------------------------------------------------------------------------
 nmap <C-f> :GitFiles<CR>
-nmap <C-F> :Files<CR>
+
 
 " Gruvebox
 " -------------------------------------------------------------------------
@@ -368,9 +383,6 @@ let g:ycm_error_symbol = '✗'
 let g:ycm_warning_symbol = '∆'
 hi YcmErrorLine guibg=#4f2626
 hi YcmWarningLine guibg=#4f4f26
-nnoremap <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
-nnoremap <silent> <Leader>g :YcmCompleter GetType<CR>
-nnoremap <silent> <leader>d :YcmCompleter GoTo<CR>
 nnoremap <silent> <SPACE> :silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
 
 
@@ -422,19 +434,9 @@ let g:startify_list_order = [
         \ ]
 
 
-" FSwitch
-" -------------------------------------------------------------------------
-nmap <silent> <Leader>s  :FSHere<cr>
-
-
 " EasyMotion
 " -------------------------------------------------------------------------
-" Bidirection jump base on 2 chars
 nmap s <Plug>(easymotion-s2)
-" Jump to line
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-" Smart case
 let g:EasyMotion_smartcase = 1
 
 
