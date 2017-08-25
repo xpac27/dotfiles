@@ -262,6 +262,9 @@ nnoremap vv ^vg_
 vnoremap < <gv
 vnoremap > >gv
 
+" search selected text
+vnoremap // y/<C-R>"<CR>
+
 " clear searches
 nnoremap <ESC><ESC> :nohlsearch<CR>
 
