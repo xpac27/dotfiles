@@ -16,6 +16,12 @@ endif
 call plug#begin('~/.vim/plugged')
 
 
+" Smart syntax
+" -------------------------------------------------------------------------
+Plug 'valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'w0rp/ale'
+
+
 " Misc:
 " -------------------------------------------------------------------------
 
@@ -205,7 +211,7 @@ au! BufEnter *.cpp,*.cc let b:fswitchdst = 'hpp,h'  | let b:fswitchlocs = './,..
 au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
 
 " Auto save
-au CursorHold *.cpp,*.h,*.hpp,*.rb nested silent w
+au CursorHold *.cpp,*.h,*.hpp,*.rb nested silent up
 
 " Make crontab happy
 au filetype crontab setlocal nobackup nowritebackup
@@ -364,7 +370,7 @@ let g:ycm_echo_current_diagnostic = 1
 let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
 let g:ycm_key_list_select_completion=['<Tab>', '<Down>']
 let g:ycm_key_list_previous_completion=['<Up>']
-let g:ycm_error_symbol = '✗'
+let g:ycm_error_symbol = 'x'
 let g:ycm_warning_symbol = '∆'
 hi YcmErrorLine guibg=#4f2626
 hi YcmWarningLine guibg=#4f4f26
