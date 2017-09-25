@@ -324,15 +324,17 @@ nmap <silent> <Leader>s  :FSHere<cr>
 " vim-grepper
 " -------------------------------------------------------------------------
 let g:grepper               = {}
-let g:grepper.tools         = ['git', 'ag', 'rg']
+let g:grepper.tools         = ['git', 'rg']
 let g:grepper.jump          = 1
 let g:grepper.simple_prompt = 1
-nmap <C-F> :Grepper -cword<CR>
+nmap gs  <plug>(GrepperOperator)
+xmap gs  <plug>(GrepperOperator)
+nmap <C-f> :Grepper<CR>
 
 
 " FZF
 " -------------------------------------------------------------------------
-nmap <C-f> :GitFiles<CR>
+nmap <S-f> :GitFiles<CR>
 
 
 " Gruvebox
@@ -457,8 +459,6 @@ let g:asyncrun_exit='copen 20'
 " Taboo
 " -------------------------------------------------------------------------
 let g:taboo_tab_format = ' %f%m '
-
-
 
 
 " =========================================================================

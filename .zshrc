@@ -49,6 +49,9 @@ alias poweroff="sudo systemctl poweroff"
 alias sleep="sudo systemctl suspend"
 alias hibernate="sudo systemctl hybrid-sleep"
 
+# Ripgrep
+alias rg="rg --colors 'match:fg:black' --colors 'match:bg:yellow' --colors 'line:style:bold' --colors 'line:fg:yellow' --colors 'path:fg:green' --colors 'path:style:bold'"
+
 # FZF Git commit browser
 fshow() {
   git log --graph --color=always \
