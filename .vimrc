@@ -54,6 +54,7 @@ Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarOpen' }
 Plug 'airblade/vim-gitgutter'
 Plug 'gcmt/taboo.vim'
+Plug 'scrooloose/nerdtree'
 
 
 " Schemes
@@ -93,6 +94,7 @@ set tags=./tags,.tags,.git/tags
 set enc=utf-8
 set spelllang=en_us
 set fileformats=unix,dos,mac
+set fillchars=vert:┃ 
 set visualbell t_vb=
 set sessionoptions+=tabpages,globals
 set viminfo=!,'100,h,n~/.viminfo
@@ -313,6 +315,21 @@ nnoremap <silent> <leader>d :YcmCompleter GoTo<CR>
 " FSwitch
 nmap <silent> <Leader>s  :FSHere<cr>
 
+" Lije vinegar
+ nnoremap <silent> - :silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
+
+ " Avoid unintentional switches to Ex mode.
+ nmap Q q
+
+ " Not usefull
+ nnoremap K <nop>
+
+ " Repurpose cursor keys
+ nnoremap <silent> <Up> :cprevious<CR>
+ nnoremap <silent> <Down> :cnext<CR>
+ nnoremap <silent> <Left> :cpfile<CR>
+ nnoremap <silent> <Right> :cnfile<CR>
+
 
 
 
@@ -339,12 +356,17 @@ nmap <S-f> :GitFiles<CR>
 
 " Gruvebox
 " -------------------------------------------------------------------------
+" set termguicolors
 let g:gruvbox_italic=0
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 let g:gruvbox_vert_split="bg2"
 set background=dark
 colorscheme gruvbox
+hi LineNr ctermfg=238
+hi VertSplit ctermbg=234 ctermfg=238
+hi SignColumn ctermbg=234
+hi CursorLine ctermbg=236
 
 
 " UndoTree
@@ -368,8 +390,8 @@ let g:ale_linters = {
 \   'coffeescript': ['coffee'],
 \   'yaml': ['yamllint'],
 \}
-hi ALEWarningSign ctermbg=214 ctermfg=214
-hi ALEErrorSign ctermbg=167 ctermfg=167
+hi ALEWarningSign ctermbg=234 ctermfg=214
+hi ALEErrorSign ctermbg=234 ctermfg=167
 
 
 " Ultisnips
@@ -392,8 +414,8 @@ let g:ycm_key_list_select_completion=['<Tab>', '<Down>']
 let g:ycm_key_list_previous_completion=['<Up>']
 let g:ycm_error_symbol = 'x'
 let g:ycm_warning_symbol = '∆'
-hi YcmErrorLine guibg=#4f2626
-hi YcmWarningLine guibg=#4f4f26
+hi YcmErrorSign ctermbg=234 ctermfg=167
+hi YcmWarningSign ctermbg=234 ctermfg=214
 nnoremap <silent> <SPACE> :silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
 
 
@@ -420,6 +442,10 @@ let g:gitgutter_sign_added = '+'
 let g:gitgutter_sign_modified = '~'
 let g:gitgutter_sign_removed= '-'
 let g:gitgutter_sign_modified_removed= '-'
+hi GitGutterAdd ctermbg=234 ctermfg=238
+hi GitGutterDelete ctermbg=234 ctermfg=238
+hi GitGutterChange ctermbg=234 ctermfg=238
+hi GitGutterChangeDelete ctermbg=234 ctermfg=238
 
 
 " Startify
@@ -459,6 +485,18 @@ let g:asyncrun_exit='copen 20'
 " Taboo
 " -------------------------------------------------------------------------
 let g:taboo_tab_format = ' %f%m '
+
+
+
+
+" NERDTree
+" -------------------------------------------------------------------------
+ nnoremap <silent> _ :NERDTreeFind<CR>
+let g:NERDTreeWinSize=40
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeMouseMode=2
+
+
 
 
 " =========================================================================
