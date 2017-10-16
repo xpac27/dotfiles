@@ -55,6 +55,8 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarOpen' }
 Plug 'airblade/vim-gitgutter'
 Plug 'gcmt/taboo.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'itchyny/lightline.vim'
+Plug 'shinchu/lightline-gruvbox.vim'
 
 
 " Schemes
@@ -103,6 +105,7 @@ set undodir=~/.vim/undofiles
 set textwidth=99999
 set tabpagemax=999
 set showtabline=1
+set laststatus=2
 set titlestring=(\ %(%{&ft},\ %)%{&ff}%(,\ %{&fenc}%)\ )
 set titlelen=100
 set mouse-=a
@@ -356,17 +359,25 @@ nmap <S-f> :GitFiles<CR>
 
 " Gruvebox
 " -------------------------------------------------------------------------
-" set termguicolors
+set termguicolors
+" set Vim-specific sequences for RGB colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 let g:gruvbox_italic=0
-let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_invert_selection=0
+let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_contrast_light="hard"
-let g:gruvbox_vert_split="bg2"
+let g:gruvbox_vert_split="bg0"
+let g:gruvbox_sign_column="bg0"
+let g:gruvbox_color_column="bg0"
+let g:gruvbox_vert_split="bg0"
 set background=dark
 colorscheme gruvbox
-hi LineNr ctermfg=238
-hi VertSplit ctermbg=234 ctermfg=238
-hi SignColumn ctermbg=234
-hi CursorLine ctermbg=236
+hi VertSplit guifg=#504945
+" hi LineNr ctermfg=238
+" hi VertSplit ctermbg=234 ctermfg=238
+" hi SignColumn ctermbg=234
+" hi CursorLine ctermbg=236
 
 
 " UndoTree
@@ -396,26 +407,30 @@ hi ALEErrorSign ctermbg=234 ctermfg=167
 
 " Ultisnips
 " -------------------------------------------------------------------------
-let g:UltiSnipsExpandTrigger = "<Tab>"
-let g:UltiSnipsListSnippets = "<C-Tab>"
-let g:UltiSnipsJumpForwardTrigger = "<C-j>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
+" YouCompleteMe and UltiSnips compatibility.
+let g:UltiSnipsExpandTrigger = '<Tab>'
+let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+
+" Prevent UltiSnips from removing our carefully-crafted mappings.
+let g:UltiSnipsMappingsToIgnore = ['autocomplete']
 inoremap <c-x><c-k> <c-x><c-k>
 
 
 " YouCompleteMe
 " -------------------------------------------------------------------------
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_always_populate_location_list = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_echo_current_diagnostic = 1
 let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
-let g:ycm_key_list_select_completion=['<Tab>', '<Down>']
-let g:ycm_key_list_previous_completion=['<Up>']
+let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+let g:ycm_key_list_accept_completion = ['<C-y>']
 let g:ycm_error_symbol = 'x'
 let g:ycm_warning_symbol = '∆'
-hi YcmErrorSign ctermbg=234 ctermfg=167
-hi YcmWarningSign ctermbg=234 ctermfg=214
 nnoremap <silent> <SPACE> :silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
 
 
@@ -438,14 +453,14 @@ autocmd FileType cpp nmap <SPACE><SPACE> :%s/\s\+$//e<CR>:set nohlsearch<CR>:Cla
 let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_enabled = 1
 let g:gitgutter_realtime =1
-let g:gitgutter_sign_added = '+'
-let g:gitgutter_sign_modified = '~'
-let g:gitgutter_sign_removed= '-'
-let g:gitgutter_sign_modified_removed= '-'
-hi GitGutterAdd ctermbg=234 ctermfg=238
-hi GitGutterDelete ctermbg=234 ctermfg=238
-hi GitGutterChange ctermbg=234 ctermfg=238
-hi GitGutterChangeDelete ctermbg=234 ctermfg=238
+let g:gitgutter_sign_added = 'ˡ'
+let g:gitgutter_sign_modified = '˫'
+let g:gitgutter_sign_removed= '˗'
+let g:gitgutter_sign_modified_removed= '˗'
+" hi GitGutterAdd ctermbg=234 ctermfg=238
+" hi GitGutterDelete ctermbg=234 ctermfg=238
+" hi GitGutterChange ctermbg=234 ctermfg=238
+" hi GitGutterChangeDelete ctermbg=234 ctermfg=238
 
 
 " Startify
@@ -487,8 +502,6 @@ let g:asyncrun_exit='copen 20'
 let g:taboo_tab_format = ' %f%m '
 
 
-
-
 " NERDTree
 " -------------------------------------------------------------------------
  nnoremap <silent> _ :NERDTreeFind<CR>
@@ -497,6 +510,24 @@ let g:NERDTreeMinimalUI=1
 let g:NERDTreeMouseMode=2
 
 
+" Lightline
+" -------------------------------------------------------------------------
+let g:lightline = {
+      \ 'colorscheme': 'powerline',
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' },
+      \ 'active': {
+      \   'left': [ [ 'arrow_right', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ],
+      \   'right': [ [ 'percent' ], [ 'lineinfo' ], [ 'filetype' ] ]
+      \ },
+      \ 'inactive': {
+      \   'left': [ [], [ 'readonly', 'relativepath' ] ],
+      \   'right': [ ]
+      \ },
+      \ 'component': {
+      \   'arrow_right': '  '
+      \ },
+\ }
 
 
 " =========================================================================
