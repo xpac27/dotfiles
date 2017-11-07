@@ -533,7 +533,7 @@ let g:lightline = {
 
 " Cscope
 " -------------------------------------------------------------------------
-let g:cscope_silent 1
+let g:cscope_silent = 1
 let g:cscope_open_location = 0
 
 
