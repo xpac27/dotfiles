@@ -16,10 +16,11 @@ endif
 call plug#begin('~/.vim/plugged')
 
 
-" Smart syntax
+" Magic
 " -------------------------------------------------------------------------
 Plug 'valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'w0rp/ale'
+Plug 'brookhong/cscope.vim'
 
 
 " Misc:
@@ -304,11 +305,15 @@ noremap <unique> <Leader>p viw"wp
 " Compile/test
 map <Leader>m :AsyncRun make compile<CR>
 map <Leader>t :AsyncRun make test<CR>
+map <Leader>c :AsyncStop<CR>
+map <Leader>C :AsyncStop!<CR>
 
 " Cscope
 nmap <leader>x :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>a :cs find a <C-R>=expand("<cword>")<CR><CR>
+set cscopequickfix=s-,c-,d-,i-,t-,e-
+
+" Close QuickFix window
+nmap <leader>c :cclose<CR>
 
 " YCM
 nnoremap <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
@@ -325,13 +330,14 @@ nmap <silent> <Leader>s  :FSHere<cr>
  nmap Q q
 
  " Not usefull
- nnoremap K <nop>
+ nmap K <nop>
+ nmap <C-s> <nop>
 
  " Repurpose cursor keys
- nnoremap <silent> <Up> :cprevious<CR>
- nnoremap <silent> <Down> :cnext<CR>
- nnoremap <silent> <Left> :cpfile<CR>
- nnoremap <silent> <Right> :cnfile<CR>
+ nnoremap <silent> <Left> :cnext<CR>
+ nnoremap <silent> <Down> :cprevious<CR>
+"  nnoremap <silent> <Left> :cpfile<CR>
+"  nnoremap <silent> <Right> :cnfile<CR>
 
 
 
@@ -453,10 +459,10 @@ autocmd FileType cpp nmap <SPACE><SPACE> :%s/\s\+$//e<CR>:set nohlsearch<CR>:Cla
 let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_enabled = 1
 let g:gitgutter_realtime =1
-let g:gitgutter_sign_added = 'ˡ'
-let g:gitgutter_sign_modified = '˫'
-let g:gitgutter_sign_removed= '˗'
-let g:gitgutter_sign_modified_removed= '˗'
+let g:gitgutter_sign_added = '·'
+let g:gitgutter_sign_modified = '·'
+let g:gitgutter_sign_removed= '·'
+let g:gitgutter_sign_modified_removed= '·'
 " hi GitGutterAdd ctermbg=234 ctermfg=238
 " hi GitGutterDelete ctermbg=234 ctermfg=238
 " hi GitGutterChange ctermbg=234 ctermfg=238
@@ -492,11 +498,6 @@ nmap s <Plug>(easymotion-s2)
 let g:EasyMotion_smartcase = 1
 
 
-" Asyncrun
-" -------------------------------------------------------------------------
-let g:asyncrun_exit='copen 20'
-
-
 " Taboo
 " -------------------------------------------------------------------------
 let g:taboo_tab_format = ' %f%m '
@@ -528,6 +529,12 @@ let g:lightline = {
       \   'arrow_right': '  '
       \ },
 \ }
+
+
+" Cscope
+" -------------------------------------------------------------------------
+let g:cscope_silent 1
+let g:cscope_open_location = 0
 
 
 " =========================================================================
