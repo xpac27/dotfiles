@@ -18,7 +18,7 @@ call plug#begin('~/.vim/plugged')
 
 " Magic
 " -------------------------------------------------------------------------
-Plug 'valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang' }
 Plug 'w0rp/ale'
 Plug 'brookhong/cscope.vim'
 
@@ -274,9 +274,6 @@ nnoremap vv ^vg_
 vnoremap < <gv
 vnoremap > >gv
 
-" search selected text
-vnoremap // y/<C-R>"<CR>
-
 " clear searches
 nnoremap <ESC><ESC> :nohlsearch<CR>
 
@@ -303,10 +300,10 @@ noremap <unique> <Leader>y viw"wy
 noremap <unique> <Leader>p viw"wp
 
 " Compile/test
-map <Leader>m :AsyncRun make compile<CR>
-map <Leader>t :AsyncRun make test<CR>
-map <Leader>c :AsyncStop<CR>
-map <Leader>C :AsyncStop!<CR>
+map <Leader>m :wa<CR>:AsyncRun make compile<CR>
+map <Leader>t :wa<CR>:AsyncRun make test<CR>
+map <Leader>c :wa<CR>:AsyncStop<CR>
+map <Leader>C :wa<CR>:AsyncStop!<CR>
 
 " Cscope
 nmap <leader>x :cs find s <C-R>=expand("<cword>")<CR><CR>
@@ -332,12 +329,14 @@ nmap <silent> <Leader>s  :FSHere<cr>
  " Not usefull
  nmap K <nop>
  nmap <C-s> <nop>
+ nmap ^S <nop>
 
  " Repurpose cursor keys
- nnoremap <silent> <Left> :cnext<CR>
- nnoremap <silent> <Down> :cprevious<CR>
-"  nnoremap <silent> <Left> :cpfile<CR>
-"  nnoremap <silent> <Right> :cnfile<CR>
+nnoremap <silent> <Up> :cprevious<CR>
+nnoremap <silent> <Down> :cnext<CR>
+nnoremap <silent> <Left> :cpfile<CR>
+nnoremap <silent> <Right> :cnfile<CR>
+
 
 
 
@@ -451,7 +450,7 @@ vnoremap <C-c> :TComment<CR>j
 let g:clang_format#auto_format_on_insert_leave = 0
 let g:clang_format#auto_format = 0
 let g:clang_format#detect_style_file = 1
-autocmd FileType cpp nmap <SPACE><SPACE> :%s/\s\+$//e<CR>:set nohlsearch<CR>:ClangFormat<CR>
+autocmd FileType cpp nmap <SPACE><SPACE> :%s/\s\+$//e<CR>:set nohlsearch<CR>:ClangFormat<CR>zz
 
 
 " Git-Gutter
