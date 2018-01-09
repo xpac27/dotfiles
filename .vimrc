@@ -517,7 +517,7 @@ let g:lightline = {
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' },
       \ 'active': {
-      \   'left': [ [ 'arrow_right', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ],
+      \   'left': [ [ 'arrow_right', 'paste' ], [ 'relativepath', 'modified', 'readonly' ] ],
       \   'right': [ [ 'percent' ], [ 'lineinfo' ], [ 'filetype' ] ]
       \ },
       \ 'inactive': {
