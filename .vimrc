@@ -275,7 +275,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " clear searches
-nnoremap <ESC><ESC> :nohlsearch<CR>
+nnoremap <ESC> :nohlsearch<CR>
 
 " Only higlight on #
 nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
@@ -319,9 +319,6 @@ nnoremap <silent> <leader>d :YcmCompleter GoTo<CR>
 
 " FSwitch
 nmap <silent> <Leader>s  :FSHere<cr>
-
-" Lije vinegar
- nnoremap <silent> - :silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
 
  " Avoid unintentional switches to Ex mode.
  nmap Q q
@@ -383,12 +380,6 @@ hi VertSplit guifg=#504945
 " hi VertSplit ctermbg=234 ctermfg=238
 " hi SignColumn ctermbg=234
 " hi CursorLine ctermbg=236
-
-
-" UndoTree
-" -------------------------------------------------------------------------
-nnoremap <silent> <F3> :silent UndotreeToggle<CR>
-inoremap <silent> <F3> <ESC>:silent UndotreeToggle<CR>
 
 
 " Ale
@@ -530,7 +521,7 @@ let g:lightline = {
 \ }
 
 
-" Cscope
+" Cscope.vim
 " -------------------------------------------------------------------------
 let g:cscope_silent = 1
 let g:cscope_open_location = 0

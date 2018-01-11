@@ -38,10 +38,10 @@ alias gs='git status'
 alias ga='git add'
 alias gd='git diff'
 alias gds='git diff --staged'
-alias gc='git commit'
-alias go='git checkout'
-alias gpr='git pull --rebase'
-alias gsu='git submodule update --recursive --init --jobs=4'
+# alias gc='git commit'
+# alias go='git checkout'
+# alias gpr='git pull --rebase'
+# alias gsu='git submodule update --recursive --init --jobs=4'
 
 # Machine
 alias reboot="sudo systemctl reboot"
