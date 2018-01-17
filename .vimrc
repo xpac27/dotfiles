@@ -27,7 +27,7 @@ Plug 'brookhong/cscope.vim'
 " -------------------------------------------------------------------------
 
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
 Plug 'jamessan/vim-gnupg'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-endwise'
@@ -55,7 +55,7 @@ Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarOpen' }
 Plug 'airblade/vim-gitgutter'
 Plug 'gcmt/taboo.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on' : ['NERDTreeToggle'] }
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 
