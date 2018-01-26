@@ -19,7 +19,6 @@ call plug#begin('~/.vim/plugged')
 " Magic
 " -------------------------------------------------------------------------
 Plug 'valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang' }
-Plug 'w0rp/ale'
 Plug 'brookhong/cscope.vim'
 
 
@@ -33,7 +32,6 @@ Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-endwise'
 Plug 'vim-scripts/tComment'
 Plug 'rhysd/vim-clang-format'
-Plug 'breuckelen/vim-resize'
 Plug 'godlygeek/tabular', { 'on': 'Tabularize'}
 
 
@@ -45,7 +43,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', 'GrepperGit', 'GrepperAg', '<plug>(GrepperOperator)'] }
 Plug 'derekwyatt/vim-fswitch'
 Plug 'easymotion/vim-easymotion'
-Plug 'vim-scripts/CmdlineComplete'
 
 
 " Interfaces
@@ -274,8 +271,8 @@ nnoremap vv ^vg_
 vnoremap < <gv
 vnoremap > >gv
 
-" clear searches
-nnoremap <ESC> :nohlsearch<CR>
+" Clear search
+nnoremap <silent> _ :nohl<CR>
 
 " Only higlight on #
 nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
@@ -380,25 +377,6 @@ hi VertSplit guifg=#504945
 " hi VertSplit ctermbg=234 ctermfg=238
 " hi SignColumn ctermbg=234
 " hi CursorLine ctermbg=236
-
-
-" Ale
-" -------------------------------------------------------------------------
-let g:ale_sign_error = 'X'
-let g:ale_sign_warning = '∆'
-let g:ale_echo_cursor = 1
-let g:ale_linters = {
-\   'cpp': [],
-\   'ruby': ['rubocop'],
-\   'bash': ['shellcheck'],
-\   'css': ['csslint'],
-\   'javascript': ['jshint'],
-\   'sass': ['sass-lint'],
-\   'coffeescript': ['coffee'],
-\   'yaml': ['yamllint'],
-\}
-hi ALEWarningSign ctermbg=234 ctermfg=214
-hi ALEErrorSign ctermbg=234 ctermfg=167
 
 
 " Ultisnips
