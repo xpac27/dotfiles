@@ -297,10 +297,10 @@ noremap <unique> <Leader>y viw"wy
 noremap <unique> <Leader>p viw"wp
 
 " Compile/test
-map <Leader>m :wa<CR>:AsyncRun make compile<CR>
-map <Leader>t :wa<CR>:AsyncRun make test<CR>
-map <Leader>c :wa<CR>:AsyncStop<CR>
-map <Leader>C :wa<CR>:AsyncStop!<CR>
+map <Leader>m :AsyncRun make compile<CR>
+map <Leader>t :AsyncRun make test<CR>
+map <Leader>c :AsyncStop<CR>
+map <Leader>C :AsyncStop!<CR>
 
 " Cscope
 nmap <leader>x :cs find s <C-R>=expand("<cword>")<CR><CR>
@@ -328,9 +328,8 @@ nmap <silent> <Leader>s  :FSHere<cr>
  " Repurpose cursor keys
 nnoremap <silent> <Up> :cprevious<CR>
 nnoremap <silent> <Down> :cnext<CR>
-nnoremap <silent> <Left> :cpfile<CR>
-nnoremap <silent> <Right> :cnfile<CR>
-
+nnoremap <silent> <Left> :lprevious<CR>
+nnoremap <silent> <Right> :lnext<CR>
 
 
 
@@ -397,7 +396,7 @@ inoremap <c-x><c-k> <c-x><c-k>
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_always_populate_location_list = 1
+let g:ycm_always_populate_location_list = 0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_echo_current_diagnostic = 1
 let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
@@ -474,7 +473,6 @@ let g:taboo_tab_format = ' %f%m '
 
 " NERDTree
 " -------------------------------------------------------------------------
- nnoremap <silent> _ :NERDTreeFind<CR>
 let g:NERDTreeWinSize=40
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeMouseMode=2
