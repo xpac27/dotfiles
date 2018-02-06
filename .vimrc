@@ -346,6 +346,7 @@ let g:grepper               = {}
 let g:grepper.tools         = ['git', 'rg']
 let g:grepper.jump          = 1
 let g:grepper.simple_prompt = 1
+let g:grepper.quickfix      = 0
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
 nmap <C-f> :Grepper<CR>
