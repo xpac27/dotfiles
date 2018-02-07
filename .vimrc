@@ -315,7 +315,7 @@ nnoremap <silent> <Leader>g :YcmCompleter GetType<CR>
 nnoremap <silent> <leader>d :YcmCompleter GoTo<CR>
 
 " FSwitch
-nmap <silent> <Leader>s  :FSHere<cr>
+nmap <silent> <Leader>s  :w<CR>:FSHere<cr>
 
  " Avoid unintentional switches to Ex mode.
  nmap Q q
