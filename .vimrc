@@ -18,7 +18,7 @@ call plug#begin('~/.vim/plugged')
 
 " Magic
 " -------------------------------------------------------------------------
-Plug 'valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang' }
+Plug 'valloric/YouCompleteMe', { 'on': 'cpp', 'do': './install.py --clang-completer --system-libclang' }
 Plug 'brookhong/cscope.vim'
 
 
