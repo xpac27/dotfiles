@@ -131,13 +131,13 @@ set backspace=indent,eol,start
 set pumheight=15
 set rtp+=/usr/local/opt/fzf
 set statusline=%f\ %r%m%=\ %P\ -\ %c:%l/%L
-set errorformat+=%f:%l:%c:\ %t:\ %m
-set errorformat+=%f(%l\\\,%c):%m
-set errorformat+=\ %f(%l\\\,%c):%m
-set errorformat+=%f:%l\\\,%c:%m
-set errorformat+=\ %f:%l\\\,%c:%m
-set errorformat+=%f:%l:%m
-set errorformat+=\ %f:%l:%m
+" set errorformat+=%f:%l:%c:\ %t:\ %m
+" set errorformat+=%f(%l\\\,%c):%m
+" set errorformat+=\ %f(%l\\\,%c):%m
+" set errorformat+=%f:%l\\\,%c:%m
+" set errorformat+=\ %f:%l\\\,%c:%m
+" set errorformat+=%f:%l:%m
+" set errorformat+=\ %f:%l:%m
 set csto=0
 set cspc=0
 set nocsverb
@@ -275,7 +275,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " clear searches
-nnoremap <ESC> :nohlsearch<CR>
+nnoremap <ESC><ESC> :nohlsearch<CR>
 
 " Only higlight on #
 nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
@@ -388,6 +388,7 @@ let g:ale_sign_error = 'X'
 let g:ale_sign_warning = '∆'
 let g:ale_echo_cursor = 1
 let g:ale_linters = {
+\   'c': [],
 \   'cpp': [],
 \   'ruby': ['rubocop'],
 \   'bash': ['shellcheck'],
@@ -425,6 +426,7 @@ let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
 let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
 let g:ycm_key_list_accept_completion = ['<C-y>']
+let g:ycm_filetype_whitelist = { 'cpp': 1 }
 let g:ycm_error_symbol = 'x'
 let g:ycm_warning_symbol = '∆'
 nnoremap <silent> <SPACE> :silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
