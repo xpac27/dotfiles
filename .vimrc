@@ -18,8 +18,7 @@ call plug#begin('~/.vim/plugged')
 
 " Magic
 " -------------------------------------------------------------------------
-Plug 'valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang' }
-Plug 'w0rp/ale'
+Plug 'valloric/YouCompleteMe', { 'for': 'cpp', 'do': './install.py --clang-completer --system-libclang' }
 Plug 'brookhong/cscope.vim'
 
 
@@ -27,13 +26,12 @@ Plug 'brookhong/cscope.vim'
 " -------------------------------------------------------------------------
 
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
 Plug 'jamessan/vim-gnupg'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-endwise'
 Plug 'vim-scripts/tComment'
 Plug 'rhysd/vim-clang-format'
-Plug 'breuckelen/vim-resize'
 Plug 'godlygeek/tabular', { 'on': 'Tabularize'}
 
 
@@ -45,7 +43,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', 'GrepperGit', 'GrepperAg', '<plug>(GrepperOperator)'] }
 Plug 'derekwyatt/vim-fswitch'
 Plug 'easymotion/vim-easymotion'
-Plug 'vim-scripts/CmdlineComplete'
 
 
 " Interfaces
@@ -55,7 +52,7 @@ Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarOpen' }
 Plug 'airblade/vim-gitgutter'
 Plug 'gcmt/taboo.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on' : ['NERDTreeToggle'] }
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 
@@ -274,8 +271,8 @@ nnoremap vv ^vg_
 vnoremap < <gv
 vnoremap > >gv
 
-" clear searches
-nnoremap <ESC><ESC> :nohlsearch<CR>
+" Clear search
+nnoremap <silent> _ :nohl<CR>
 
 " Only higlight on #
 nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
@@ -300,10 +297,10 @@ noremap <unique> <Leader>y viw"wy
 noremap <unique> <Leader>p viw"wp
 
 " Compile/test
-map <Leader>m :wa<CR>:AsyncRun make compile<CR>
-map <Leader>t :wa<CR>:AsyncRun make test<CR>
-map <Leader>c :wa<CR>:AsyncStop<CR>
-map <Leader>C :wa<CR>:AsyncStop!<CR>
+map <Leader>m :AsyncRun make compile<CR>
+map <Leader>t :AsyncRun make test<CR>
+map <Leader>c :AsyncStop<CR>
+map <Leader>C :AsyncStop!<CR>
 
 " Cscope
 nmap <leader>x :cs find s <C-R>=expand("<cword>")<CR><CR>
@@ -318,7 +315,7 @@ nnoremap <silent> <Leader>g :YcmCompleter GetType<CR>
 nnoremap <silent> <leader>d :YcmCompleter GoTo<CR>
 
 " FSwitch
-nmap <silent> <Leader>s  :FSHere<cr>
+nmap <silent> <Leader>s  :w<CR>:FSHere<cr>
 
  " Avoid unintentional switches to Ex mode.
  nmap Q q
@@ -331,9 +328,8 @@ nmap <silent> <Leader>s  :FSHere<cr>
  " Repurpose cursor keys
 nnoremap <silent> <Up> :cprevious<CR>
 nnoremap <silent> <Down> :cnext<CR>
-nnoremap <silent> <Left> :cpfile<CR>
-nnoremap <silent> <Right> :cnfile<CR>
-
+nnoremap <silent> <Left> :lprevious<CR>
+nnoremap <silent> <Right> :lnext<CR>
 
 
 
@@ -349,6 +345,7 @@ let g:grepper               = {}
 let g:grepper.tools         = ['git', 'rg']
 let g:grepper.jump          = 1
 let g:grepper.simple_prompt = 1
+let g:grepper.quickfix      = 0
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
 nmap <C-f> :Grepper<CR>
@@ -382,26 +379,6 @@ hi VertSplit guifg=#504945
 " hi CursorLine ctermbg=236
 
 
-" Ale
-" -------------------------------------------------------------------------
-let g:ale_sign_error = 'X'
-let g:ale_sign_warning = '∆'
-let g:ale_echo_cursor = 1
-let g:ale_linters = {
-\   'c': [],
-\   'cpp': [],
-\   'ruby': ['rubocop'],
-\   'bash': ['shellcheck'],
-\   'css': ['csslint'],
-\   'javascript': ['jshint'],
-\   'sass': ['sass-lint'],
-\   'coffeescript': ['coffee'],
-\   'yaml': ['yamllint'],
-\}
-hi ALEWarningSign ctermbg=234 ctermfg=214
-hi ALEErrorSign ctermbg=234 ctermfg=167
-
-
 " Ultisnips
 " -------------------------------------------------------------------------
 " YouCompleteMe and UltiSnips compatibility.
@@ -419,7 +396,7 @@ inoremap <c-x><c-k> <c-x><c-k>
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_always_populate_location_list = 1
+let g:ycm_always_populate_location_list = 0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_echo_current_diagnostic = 1
 let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
@@ -497,7 +474,6 @@ let g:taboo_tab_format = ' %f%m '
 
 " NERDTree
 " -------------------------------------------------------------------------
- nnoremap <silent> _ :NERDTreeFind<CR>
 let g:NERDTreeWinSize=40
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeMouseMode=2
