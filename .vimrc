@@ -32,7 +32,8 @@ Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-endwise'
 Plug 'vim-scripts/tComment'
 Plug 'rhysd/vim-clang-format'
-Plug 'godlygeek/tabular', { 'on': 'Tabularize'}
+Plug 'tpope/vim-eunuch', { 'on' : ['Delete', 'Unlink', 'Move', 'Rename', 'Find'] }
+Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 
 
 " Search
