@@ -28,6 +28,7 @@ Plug 'brookhong/cscope.vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
 Plug 'jamessan/vim-gnupg'
+Plug 'wgurecky/vimSum'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-endwise'
 Plug 'vim-scripts/tComment'
@@ -310,11 +311,6 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-
 " Close QuickFix window
 nmap <leader>c :cclose<CR>
 
-" YCM
-nnoremap <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
-nnoremap <silent> <Leader>g :YcmCompleter GetType<CR>
-nnoremap <silent> <leader>d :YcmCompleter GoTo<CR>
-
 " FSwitch
 nmap <silent> <Leader>s  :w<CR>:FSHere<cr>
 
@@ -407,7 +403,11 @@ let g:ycm_key_list_accept_completion = ['<C-y>']
 let g:ycm_filetype_whitelist = { 'cpp': 1 }
 let g:ycm_error_symbol = 'x'
 let g:ycm_warning_symbol = '∆'
-nnoremap <silent> <SPACE> :silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
+autocmd FileType cpp nnoremap <silent> <SPACE> :silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
+autocmd FileType cpp nnoremap <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
+autocmd FileType cpp nnoremap <silent> <Leader>g :YcmCompleter GetType<CR>
+autocmd FileType cpp nnoremap <silent> <leader>d :YcmCompleter GoTo<CR>
+
 
 
 " T-Comment
