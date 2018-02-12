@@ -345,12 +345,6 @@ let g:grepper.simple_prompt = 1
 let g:grepper.quickfix      = 0
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
-nmap <C-f> :Grepper<CR>
-
-
-" FZF
-" -------------------------------------------------------------------------
-nmap <S-f> :GitFiles<CR>
 
 
 " Gruvebox
