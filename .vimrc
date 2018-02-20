@@ -42,7 +42,6 @@ Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'mhinz/vim-grepper', { 'on': ['Grepper', 'GrepperGit', 'GrepperAg', '<plug>(GrepperOperator)'] }
 Plug 'derekwyatt/vim-fswitch'
 Plug 'easymotion/vim-easymotion'
 
@@ -129,14 +128,6 @@ set maxmemtot=2000000
 set backspace=indent,eol,start
 set pumheight=15
 set rtp+=/usr/local/opt/fzf
-set statusline=%f\ %r%m%=\ %P\ -\ %c:%l/%L
-" set errorformat+=%f:%l:%c:\ %t:\ %m
-" set errorformat+=%f(%l\\\,%c):%m
-" set errorformat+=\ %f(%l\\\,%c):%m
-" set errorformat+=%f:%l\\\,%c:%m
-" set errorformat+=\ %f:%l\\\,%c:%m
-" set errorformat+=%f:%l:%m
-" set errorformat+=\ %f:%l:%m
 set csto=0
 set cspc=0
 set nocsverb
@@ -191,7 +182,10 @@ let g:netrw_liststyle=3     " tree view
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
-
+if executable('rg')
+    set grepprg=rg\ --vimgrep
+    set grepformat=%f:%l:%c:%m
+endif
 
 
 " =========================================================================
@@ -227,8 +221,6 @@ au QuickFixCmdPost    l* nested lwindow
 
 " Change default tab settings
 au Filetype ruby,yaml setlocal ts=2 sts=2 sw=2
-
-
 
 
 " =========================================================================
@@ -336,15 +328,11 @@ nnoremap <silent> <Right> :lnext<CR>
 " =========================================================================
 
 
-" vim-grepper
+" FZF
 " -------------------------------------------------------------------------
-let g:grepper               = {}
-let g:grepper.tools         = ['git', 'rg']
-let g:grepper.jump          = 1
-let g:grepper.simple_prompt = 1
-let g:grepper.quickfix      = 0
-nmap gs  <plug>(GrepperOperator)
-xmap gs  <plug>(GrepperOperator)
+if executable('rg')
+  command! -complete=dir -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.<q-args>, 1, <bang>0)
+endif
 
 
 " Gruvebox
