@@ -9,7 +9,7 @@ ZSH_THEME="gitster"
 # DISABLE_CORRECTION="true"
 # COMPLETION_WAITING_DOTS="true"
 
-plugins=(git ruby gem vim-mode)
+plugins=(ruby gem vim-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -19,9 +19,6 @@ export LANG=en_US.UTF-8
 export EDITOR=vi
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/home/vinz/.local/bin:$PATH"
 
-# Make FZF use AG
-export FZF_DEFAULT_COMMAND='ag -g ""'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Fix weird ssh keys errors (like backspace not working)
 # export TERM=xterm
@@ -51,16 +48,6 @@ alias hibernate="sudo systemctl hybrid-sleep"
 
 # Ripgrep
 alias rg="rg --colors 'match:fg:black' --colors 'match:bg:yellow' --colors 'line:style:bold' --colors 'line:fg:yellow' --colors 'path:fg:green' --colors 'path:style:bold'"
-
-# FZF Git commit browser
-fshow() {
-  git log --graph --color=always \
-    --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-  fzf --ansi --no-sort --reverse --tiebreak=index --toggle-sort=\` \
-    --bind "ctrl-m:execute:
-      echo '{}' | grep -o '[a-f0-9]\{7\}' | head -1 |
-      xargs -I % sh -c 'git show --color=always % | less -R'"
-}
 
 # rbenv
 if [ -d "$HOME/.rbenv/bin" ]; then
@@ -115,7 +102,31 @@ youtube() {
     youtube-dl -q -o- "$1" | ffplay -x 1920 -y 1080 -
 }
 
-# FZF ZSH
+# FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,.tup,node_modules}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+ff() {
+    fzf --color=border:-1 --preview '[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (highlight -O ansi -l {}) 2> /dev/null | head -500' --preview-window right:65%
+}
+
+is_in_git_repo() {
+    git rev-parse HEAD > /dev/null 2>&1
+}
+
+gf() {
+    is_in_git_repo || return
+
+    git -c color.status=always status --short | fzf --color=border:-1 -m --ansi --nth 2..,.. \
+        --preview '(git diff --color=always -- {-1} | sed 1,4d; cat {-1}) | head -500' | cut -c4- | sed 's/.* -> //'
+}
+
+gh() {
+    is_in_git_repo || return
+
+    git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always | fzf --color=border:-1 --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
+        --header 'Press CTRL-S to toggle sort' \
+        --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always | head -'$LINES | grep -o "[a-f0-9]\{7,\}"
+}
+
