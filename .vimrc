@@ -236,8 +236,7 @@ ia   toogle   toggle
 ia   wiht     with
 ia   heigth   height
 ia   retrun   return
-ia   jeugo    juego
-ia   Jeugo    Juego
+ia   being    begin
 
 " shortcuts
 ab   fu   function
