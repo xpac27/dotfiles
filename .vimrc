@@ -333,7 +333,7 @@ endif
 
 " FSwitch
 " -------------------------------------------------------------------------
-nmap <silent> <Leader>s  :w<CR>:FSHere<cr>
+nmap <silent> <Leader>s  :up<CR>:FSHere<cr>
 
 
 " Gruvebox
