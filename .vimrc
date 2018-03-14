@@ -302,9 +302,6 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-
 " Close QuickFix window
 nmap <leader>c :cclose<CR>
 
-" FSwitch
-nmap <silent> <Leader>s  :w<CR>:FSHere<cr>
-
  " Avoid unintentional switches to Ex mode.
  nmap Q q
 
@@ -332,6 +329,11 @@ nnoremap <silent> <Right> :lnext<CR>
 if executable('rg')
   command! -complete=dir -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.<q-args>, 1, <bang>0)
 endif
+
+
+" FSwitch
+" -------------------------------------------------------------------------
+nmap <silent> <Leader>s  :w<CR>:FSHere<cr>
 
 
 " Gruvebox
