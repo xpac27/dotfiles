@@ -18,6 +18,8 @@ export LC_CTYPE=en_US.UTF-8
 export LANG=en_US.UTF-8
 export EDITOR=vi
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/home/vinz/.local/bin:$PATH"
+export HISTSIZE=1000000
+export SAVEHIST=1000000
 
 
 # Fix weird ssh keys errors (like backspace not working)

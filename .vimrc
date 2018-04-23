@@ -91,7 +91,7 @@ syntax enable
 
 
 set path=.,,**,/usr/local/include,/usr/include
-set tags=./tags,.tags,.git/tags
+set tags=./tags,.tags
 set enc=utf-8
 set spelllang=en_us
 set fileformats=unix,dos,mac
@@ -131,8 +131,8 @@ set rtp+=/usr/local/opt/fzf
 set csto=0
 set cspc=0
 set nocsverb
-if filereadable(".git/cscope.out")
-    cs add .git/cscope.out
+if filereadable(".cscope.out")
+    cs add .cscope.out
 elseif $CSCOPE_DB != ""
     cs add $CSCOPE_DB
 endif
@@ -296,8 +296,17 @@ map <Leader>c :AsyncStop<CR>
 map <Leader>C :AsyncStop!<CR>
 
 " Cscope
-nmap <leader>x :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>x :cs find c <C-R>=expand("<cword>")<CR><CR>
 set cscopequickfix=s-,c-,d-,i-,t-,e-
+" c: Find functions calling this function
+" d: Find functions called by this function
+" e: Find this egrep pattern
+" f: Find this file
+" g: Find this definition
+" i: Find files #including this file
+" s: Find this C symbol
+" t: Find this text string
+" EXAMPLE: cs find c <cword>
 
 " Close QuickFix window
 nmap <leader>c :cclose<CR>
@@ -465,8 +474,9 @@ let g:NERDTreeMouseMode=2
 
 " Lightline
 " -------------------------------------------------------------------------
+      " \ 'colorscheme': 'PaperColor_light',
 let g:lightline = {
-      \ 'colorscheme': 'powerline',
+      \ 'colorscheme': 'PaperColor',
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' },
       \ 'active': {
