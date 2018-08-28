@@ -88,11 +88,6 @@ if [[ "${terminfo[kcud1]}" != "" ]]; then
 fi
 # >>>
 
-# Load the default .profile
-if [[ -s "$HOME/.profile" ]]; then
-  source "$HOME/.profile"
-fi
-
 # Autostart X
 if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
   exec startx

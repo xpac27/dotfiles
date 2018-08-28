@@ -19,7 +19,8 @@ call plug#begin('~/.vim/plugged')
 " Magic
 " -------------------------------------------------------------------------
 Plug 'valloric/YouCompleteMe', { 'for': 'cpp', 'do': './install.py --clang-completer --system-libclang' }
-Plug 'brookhong/cscope.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
 
 
 " Misc:
@@ -50,7 +51,6 @@ Plug 'easymotion/vim-easymotion'
 " -------------------------------------------------------------------------
 
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-Plug 'majutsushi/tagbar', { 'on': 'TagbarOpen' }
 Plug 'airblade/vim-gitgutter'
 Plug 'gcmt/taboo.vim'
 Plug 'scrooloose/nerdtree', { 'on' : ['NERDTreeToggle'] }
@@ -83,6 +83,7 @@ filetype on
 syntax enable
 
 
+packadd termdebug
 
 
 " =========================================================================
@@ -131,11 +132,6 @@ set rtp+=/usr/local/opt/fzf
 set csto=0
 set cspc=0
 set nocsverb
-if filereadable(".cscope.out")
-    cs add .cscope.out
-elseif $CSCOPE_DB != ""
-    cs add $CSCOPE_DB
-endif
 
 set nocompatible
 set noswapfile
@@ -295,19 +291,6 @@ map <Leader>t :AsyncRun make test<CR>
 map <Leader>c :AsyncStop<CR>
 map <Leader>C :AsyncStop!<CR>
 
-" Cscope
-nmap <leader>x :cs find c <C-R>=expand("<cword>")<CR><CR>
-set cscopequickfix=s-,c-,d-,i-,t-,e-
-" c: Find functions calling this function
-" d: Find functions called by this function
-" e: Find this egrep pattern
-" f: Find this file
-" g: Find this definition
-" i: Find files #including this file
-" s: Find this C symbol
-" t: Find this text string
-" EXAMPLE: cs find c <cword>
-
 " Close QuickFix window
 nmap <leader>c :cclose<CR>
 
@@ -345,7 +328,7 @@ endif
 nmap <silent> <Leader>s  :up<CR>:FSHere<cr>
 
 
-" Gruvebox
+" Gruvbox
 " -------------------------------------------------------------------------
 set termguicolors
 " set Vim-specific sequences for RGB colors
@@ -362,10 +345,7 @@ let g:gruvbox_vert_split="bg0"
 set background=dark
 colorscheme gruvbox
 hi VertSplit guifg=#504945
-" hi LineNr ctermfg=238
-" hi VertSplit ctermbg=234 ctermfg=238
-" hi SignColumn ctermbg=234
-" hi CursorLine ctermbg=236
+hi Search guifg=#ffffff guibg=#000000
 
 
 " Ultisnips
@@ -384,14 +364,14 @@ inoremap <c-x><c-k> <c-x><c-k>
 " -------------------------------------------------------------------------
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_collect_identifiers_from_tags_files = 0
 let g:ycm_always_populate_location_list = 0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_echo_current_diagnostic = 1
 let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
-let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
-let g:ycm_key_list_accept_completion = ['<C-y>']
+" let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+" let g:ycm_key_list_accept_completion = ['<C-y>']
 let g:ycm_filetype_whitelist = { 'cpp': 1 }
 let g:ycm_error_symbol = 'x'
 let g:ycm_warning_symbol = '∆'
@@ -493,10 +473,18 @@ let g:lightline = {
 \ }
 
 
-" Cscope.vim
+" LSP
 " -------------------------------------------------------------------------
-let g:cscope_silent = 1
-let g:cscope_open_location = 0
+
+if executable('cquery')
+   au User lsp_setup call lsp#register_server({
+      \ 'name': 'cquery',
+      \ 'cmd': {server_info->['cquery']},
+      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+      \ 'initialization_options': { 'cacheDirectory': '/home/vinz/.cache/cquery' },
+      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+      \ })
+endif
 
 
 " =========================================================================
