@@ -169,6 +169,7 @@ set hlsearch
 set gdefault
 set cst
 set undofile
+set wildignorecase
 
 " Tweaks for browsing
 let g:netrw_banner=0        " disable annoying banner
@@ -267,6 +268,7 @@ nnoremap <silent> _ :nohl<CR>
 nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
 " toggle options
+nnoremap <silent> <leader>op :set paste!<CR>
 nnoremap <silent> <leader>on :set number!<CR>
 nnoremap <silent> <leader>or :set relativenumber!<CR>
 nnoremap <silent> <leader>ow :set wrap!<CR>
@@ -287,7 +289,6 @@ noremap <unique> <Leader>p viw"wp
 
 " Compile/test
 map <Leader>m :AsyncRun make compile<CR>
-map <Leader>t :AsyncRun make test<CR>
 map <Leader>c :AsyncStop<CR>
 map <Leader>C :AsyncStop!<CR>
 
@@ -345,7 +346,7 @@ let g:gruvbox_vert_split="bg0"
 set background=dark
 colorscheme gruvbox
 hi VertSplit guifg=#504945
-hi Search guifg=#ffffff guibg=#000000
+hi Search guifg=#666666 guibg=#ffffff
 
 
 " Ultisnips
@@ -378,8 +379,6 @@ let g:ycm_warning_symbol = '∆'
 autocmd FileType cpp nnoremap <silent> <SPACE> :silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
 autocmd FileType cpp nnoremap <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
 autocmd FileType cpp nnoremap <silent> <Leader>g :YcmCompleter GetType<CR>
-autocmd FileType cpp nnoremap <silent> <leader>d :YcmCompleter GoTo<CR>
-
 
 
 " T-Comment
@@ -485,6 +484,10 @@ if executable('cquery')
       \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
       \ })
 endif
+
+autocmd FileType cpp nnoremap <silent> <leader>d :LspDefinition<CR>
+autocmd FileType cpp nnoremap <silent> <leader>f :LspReferences<CR>
+autocmd FileType cpp nnoremap <silent> <leader>t :LspTypeDefinition<CR>
 
 
 " =========================================================================
