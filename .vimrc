@@ -367,7 +367,7 @@ let g:ycm_filetype_whitelist = { 'cpp': 1 }
 let g:ycm_error_symbol = 'x'
 let g:ycm_warning_symbol = '∆'
 autocmd FileType cpp nnoremap <silent> <SPACE> :silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
-autocmd FileType cpp nnoremap <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
+autocmd FileType cpp nnoremap <silent> <Leader>F :YcmCompleter FixIt<CR>:ccl<CR>
 autocmd FileType cpp nnoremap <silent> <Leader>g :YcmCompleter GetType<CR>
 
 
