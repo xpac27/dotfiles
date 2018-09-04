@@ -345,13 +345,9 @@ hi Search guifg=#666666 guibg=#ffffff
 " Ultisnips
 " -------------------------------------------------------------------------
 " YouCompleteMe and UltiSnips compatibility.
-let g:UltiSnipsExpandTrigger = '<Tab>'
-let g:UltiSnipsJumpForwardTrigger = '<Tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
-
-" Prevent UltiSnips from removing our carefully-crafted mappings.
-let g:UltiSnipsMappingsToIgnore = ['autocomplete']
-inoremap <c-x><c-k> <c-x><c-k>
+let g:UltiSnipsExpandTrigger = '<Right>'
+let g:UltiSnipsJumpForwardTrigger = '<Right>'
+let g:UltiSnipsJumpBackwardTrigger = '<Left>'
 
 
 " YouCompleteMe
@@ -362,6 +358,7 @@ let g:ycm_collect_identifiers_from_tags_files = 0
 let g:ycm_always_populate_location_list = 0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_echo_current_diagnostic = 1
+let g:ycm_use_ultisnips_completer = 1
 let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
 " let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
 " let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
