@@ -241,18 +241,8 @@ ab   pr   private
 ab   pt   protected
 ab   pu   public
 
-" Don't move around with arrows
-noremap <up> <nop>
-noremap <down> <nop>
-noremap <left> <nop>
-noremap <right> <nop>
-
 " save time
 nnoremap ; :
-nnoremap q: :q
-
-" disable hex mode
-nnoremap Q <Nop>
 
 " select the current line without indentation
 nnoremap vv ^vg_
@@ -287,7 +277,7 @@ nnoremap <leader>r :%s/\<<C-R><C-W>\>//gc<left><left><left>
 noremap <unique> <Leader>y viw"wy
 noremap <unique> <Leader>p viw"wp
 
-" Compile/test
+" Compile
 map <Leader>m :AsyncRun make compile<CR>
 map <Leader>c :AsyncStop<CR>
 map <Leader>C :AsyncStop!<CR>
@@ -295,13 +285,16 @@ map <Leader>C :AsyncStop!<CR>
 " Close QuickFix window
 nmap <leader>c :cclose<CR>
 
- " Avoid unintentional switches to Ex mode.
- nmap Q q
+" Avoid unintentional switches to Ex mode.
+nmap Q q
 
- " Not usefull
- nmap K <nop>
- nmap <C-s> <nop>
- nmap ^S <nop>
+" Not usefull
+nmap K <nop>
+nmap <C-s> <nop>
+nmap ^S <nop>
+ 
+" disable hex mode
+nnoremap Q <Nop>
 
  " Repurpose cursor keys
 nnoremap <silent> <Up> :cprevious<CR>
