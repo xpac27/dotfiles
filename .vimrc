@@ -169,7 +169,6 @@ set hlsearch
 set gdefault
 set cst
 set undofile
-set wildignorecase
 
 " Tweaks for browsing
 let g:netrw_banner=0        " disable annoying banner
@@ -218,6 +217,12 @@ au QuickFixCmdPost    l* nested lwindow
 
 " Change default tab settings
 au Filetype ruby,yaml setlocal ts=2 sts=2 sw=2
+
+" remove spaces at the end of lines
+au BufWrite *.cpp,*.h,*.hpp silent! %s/[\r \t]\+$//
+
+" Check file for changes
+au CursorHold * :checktime
 
 
 " =========================================================================
@@ -292,9 +297,6 @@ nmap Q q
 nmap K <nop>
 nmap <C-s> <nop>
 nmap ^S <nop>
- 
-" disable hex mode
-nnoremap Q <Nop>
 
  " Repurpose cursor keys
 nnoremap <silent> <Up> :cprevious<CR>
@@ -382,7 +384,7 @@ vnoremap <C-c> :TComment<CR>j
 let g:clang_format#auto_format_on_insert_leave = 0
 let g:clang_format#auto_format = 0
 let g:clang_format#detect_style_file = 1
-autocmd FileType cpp nmap <SPACE><SPACE> :%s/\s\+$//e<CR>:set nohlsearch<CR>:ClangFormat<CR>zz
+autocmd BufWrite *.cpp,*.h,*.hpp ClangFormat
 
 
 " Git-Gutter

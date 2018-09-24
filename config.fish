@@ -16,6 +16,9 @@ set PATH $HOME/.rbenv/bin $PATH
 set PATH $HOME/.rbenv/shims $PATH
 rbenv rehash >/dev/null ^&1
 
+# Aliases
+alias lh='ls -lh'
+
 # Awesome Git aliases
 alias gs='git status'
 alias ga='git add'
