@@ -184,6 +184,8 @@ if executable('rg')
 endif
 
 
+
+
 " =========================================================================
 " AUTO COMMANDS
 " =========================================================================
@@ -223,6 +225,8 @@ au BufWrite *.cpp,*.h,*.hpp silent! %s/[\r \t]\+$//
 
 " Check file for changes
 au CursorHold * :checktime
+
+
 
 
 " =========================================================================
@@ -368,7 +372,7 @@ let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
 let g:ycm_filetype_whitelist = { 'cpp': 1 }
 let g:ycm_error_symbol = 'x'
 let g:ycm_warning_symbol = '∆'
-autocmd FileType cpp nnoremap <silent> <SPACE> :silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
+autocmd FileType cpp nnoremap <silent> <SPACE> :ClangFormat<CR>zz:silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
 autocmd FileType cpp nnoremap <silent> <Leader>F :YcmCompleter FixIt<CR>:ccl<CR>
 autocmd FileType cpp nnoremap <silent> <Leader>g :YcmCompleter GetType<CR>
 
@@ -384,7 +388,6 @@ vnoremap <C-c> :TComment<CR>j
 let g:clang_format#auto_format_on_insert_leave = 0
 let g:clang_format#auto_format = 0
 let g:clang_format#detect_style_file = 1
-autocmd BufWrite *.cpp,*.h,*.hpp ClangFormat
 
 
 " Git-Gutter
@@ -480,6 +483,8 @@ endif
 autocmd FileType cpp nnoremap <silent> <leader>d :LspDefinition<CR>
 autocmd FileType cpp nnoremap <silent> <leader>f :LspReferences<CR>
 autocmd FileType cpp nnoremap <silent> <leader>t :LspTypeDefinition<CR>
+
+
 
 
 " =========================================================================
