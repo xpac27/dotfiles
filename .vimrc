@@ -101,7 +101,9 @@ set visualbell t_vb=
 set sessionoptions+=tabpages,globals
 set viminfo=!,'100,h,n~/.viminfo
 set history=1000
-set undodir=~/.vim/undofiles
+set undodir=~/.cache/vim/undo
+" set backupdir=~/.cache/vim/backup
+" set backupskip+=",*.gpg"
 set textwidth=99999
 set tabpagemax=999
 set showtabline=1
@@ -278,9 +280,6 @@ nnoremap <silent> <leader>od :e ++ff=dos<CR>:setlocal ff=dos<CR>
 " tabs
 nnoremap <silent> <LocalLeader>[ :tabprev<CR>
 nnoremap <silent> <LocalLeader>] :tabnext<CR>
-
-" Replace word under cursor
-nnoremap <leader>r :%s/\<<C-R><C-W>\>//gc<left><left><left>
 
 " copy/past word
 noremap <unique> <Leader>y viw"wy
@@ -481,8 +480,9 @@ if executable('cquery')
 endif
 
 autocmd FileType cpp nnoremap <silent> <leader>d :LspDefinition<CR>
-autocmd FileType cpp nnoremap <silent> <leader>f :LspReferences<CR>
+autocmd FileType cpp nnoremap <silent> <leader>e :LspReferences<CR>
 autocmd FileType cpp nnoremap <silent> <leader>t :LspTypeDefinition<CR>
+autocmd FileType cpp nnoremap <silent> <leader>r :LspRename<CR>
 
 
 
