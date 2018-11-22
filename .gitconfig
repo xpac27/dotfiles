@@ -1,6 +1,7 @@
 [user]
     name = Vincent Cogne
     email = banananana@protonmail.com
+    signingkey = A71BDD0E436F2DA3
 
 [core]
     editor = vim

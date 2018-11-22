@@ -16,9 +16,6 @@ set PATH $HOME/.rbenv/bin $PATH
 set PATH $HOME/.rbenv/shims $PATH
 rbenv rehash >/dev/null ^&1
 
-# Aliases
-alias lh='ls -lh'
-
 # Awesome Git aliases
 alias gs='git status'
 alias ga='git add'
@@ -34,6 +31,13 @@ alias reboot="sudo systemctl reboot"
 alias poweroff="sudo systemctl poweroff"
 alias sleep="sudo systemctl suspend"
 alias hibernate="sudo systemctl hybrid-sleep"
+alias dualmonitor="xrandr --output DP1 --auto --output eDP1 --auto --pos 2560x360"
+
+# Exa
+alias ll="exa -lhG --git"
+alias lt="exa -lhT --git"
+alias lla="exa -lhGa --git"
+alias lta="exa -lhTa --git"
 
 # Ripgrep
 alias rg="rg --colors 'match:fg:black' --colors 'match:bg:yellow' --colors 'line:style:bold' --colors 'line:fg:yellow' --colors 'path:fg:green' --colors 'path:style:bold'"

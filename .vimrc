@@ -174,11 +174,11 @@ set undofile
 
 " Tweaks for browsing
 let g:netrw_banner=0        " disable annoying banner
-let g:netrw_browse_split=4  " open in prior window
-let g:netrw_altv=1          " open splits to the right
-let g:netrw_liststyle=3     " tree view
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+" let g:netrw_browse_split=4  " open in prior window
+" let g:netrw_altv=1          " open splits to the right
+" let g:netrw_liststyle=3     " tree view
+" let g:netrw_list_hide=netrw_gitignore#Hide()
+" let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
 if executable('rg')
     set grepprg=rg\ --vimgrep
@@ -210,7 +210,7 @@ au! BufEnter *.cpp,*.cc let b:fswitchdst = 'hpp,h'  | let b:fswitchlocs = './,..
 au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
 
 " Auto save
-au CursorHold *.cpp,*.h,*.hpp,*.rb nested silent up
+" au CursorHold *.cpp,*.h,*.hpp,*.rb nested silent up
 
 " Make crontab happy
 au filetype crontab setlocal nobackup nowritebackup
@@ -221,9 +221,6 @@ au QuickFixCmdPost    l* nested lwindow
 
 " Change default tab settings
 au Filetype ruby,yaml setlocal ts=2 sts=2 sw=2
-
-" remove spaces at the end of lines
-au BufWrite *.cpp,*.h,*.hpp silent! %s/[\r \t]\+$//
 
 " Check file for changes
 au CursorHold * :checktime
@@ -363,8 +360,11 @@ let g:ycm_collect_identifiers_from_tags_files = 0
 let g:ycm_always_populate_location_list = 0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_echo_current_diagnostic = 1
+let g:ycm_show_diagnostics_ui = 1
 let g:ycm_use_ultisnips_completer = 1
 let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 " let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
 " let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
 " let g:ycm_key_list_accept_completion = ['<C-y>']
@@ -372,7 +372,7 @@ let g:ycm_filetype_whitelist = { 'cpp': 1 }
 let g:ycm_error_symbol = 'x'
 let g:ycm_warning_symbol = '∆'
 autocmd FileType cpp nnoremap <silent> <SPACE> :ClangFormat<CR>zz:silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
-autocmd FileType cpp nnoremap <silent> <Leader>F :YcmCompleter FixIt<CR>:ccl<CR>
+autocmd FileType cpp nnoremap <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
 autocmd FileType cpp nnoremap <silent> <Leader>g :YcmCompleter GetType<CR>
 
 
