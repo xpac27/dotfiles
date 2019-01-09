@@ -14,6 +14,7 @@ end
 # rbenv
 set PATH $HOME/.rbenv/bin $PATH
 set PATH $HOME/.rbenv/shims $PATH
+set PATH $HOME/.cargo/bin $PATH
 rbenv rehash >/dev/null ^&1
 
 # Awesome Git aliases
@@ -34,9 +35,11 @@ alias hibernate="sudo systemctl hybrid-sleep"
 alias dualmonitor="xrandr --output DP1 --auto --output eDP1 --auto --pos 2560x360"
 
 # Exa
-alias ll="exa -lhG --git"
+alias ll="exa -lh --git"
+alias lg="exa -lhG --git"
 alias lt="exa -lhT --git"
-alias lla="exa -lhGa --git"
+alias lla="exa -lha --git"
+alias lga="exa -lhGa --git"
 alias lta="exa -lhTa --git"
 
 # Ripgrep

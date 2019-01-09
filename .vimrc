@@ -18,7 +18,7 @@ call plug#begin('~/.vim/plugged')
 
 " Magic
 " -------------------------------------------------------------------------
-Plug 'valloric/YouCompleteMe', { 'for': 'cpp', 'do': './install.py --clang-completer --system-libclang' }
+Plug 'valloric/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': './install.py --clang-completer --system-libclang' }
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 
@@ -102,8 +102,8 @@ set sessionoptions+=tabpages,globals
 set viminfo=!,'100,h,n~/.viminfo
 set history=1000
 set undodir=~/.cache/vim/undo
-" set backupdir=~/.cache/vim/backup
-" set backupskip+=",*.gpg"
+set backupdir=~/.cache/vim/backup
+set backupskip+=",*.gpg"
 set textwidth=99999
 set tabpagemax=999
 set showtabline=1
@@ -139,8 +139,10 @@ set nocompatible
 set noswapfile
 set noerrorbells
 set novisualbell
-set nobackup
-set nowritebackup
+" set nobackup
+" set nowritebackup
+set backup
+set writebackup
 set nolist
 set nowrap
 set noshowmode
@@ -206,8 +208,10 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "norma
 au BufNewFile,BufRead *.as set ft=actionscript
 
 " activate FileSwitch on cpp and h files
-au! BufEnter *.cpp,*.cc let b:fswitchdst = 'hpp,h'  | let b:fswitchlocs = './,../inc/,../../inc/,../inc/**/,../../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/'
-au! BufEnter *.h,*.hpp  let b:fswitchdst = 'cpp,cc' | let b:fswitchlocs = './,../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
+au! BufEnter *.cpp let b:fswitchdst = 'hpp'  | let b:fswitchlocs = './,../inc/,../../inc/,../inc/**/,../../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/'
+au! BufEnter *.hpp let b:fswitchdst = 'cpp'  | let b:fswitchlocs = './,../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
+au! BufEnter *.c   let b:fswitchdst = 'h'    | let b:fswitchlocs = './,../inc/,../../inc/,../inc/**/,../../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/'
+au! BufEnter *.h   let b:fswitchdst = 'c'    | let b:fswitchlocs = './,../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
 
 " Auto save
 " au CursorHold *.cpp,*.h,*.hpp,*.rb nested silent up
@@ -368,12 +372,12 @@ let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 " let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
 " let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
 " let g:ycm_key_list_accept_completion = ['<C-y>']
-let g:ycm_filetype_whitelist = { 'cpp': 1 }
+let g:ycm_filetype_whitelist = { 'cpp': 1, 'c': 1 }
 let g:ycm_error_symbol = 'x'
 let g:ycm_warning_symbol = '∆'
-autocmd FileType cpp nnoremap <silent> <SPACE> :ClangFormat<CR>zz:silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
-autocmd FileType cpp nnoremap <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
-autocmd FileType cpp nnoremap <silent> <Leader>g :YcmCompleter GetType<CR>
+autocmd FileType c,cpp nnoremap <silent> <SPACE> :ClangFormat<CR>zz:silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
+autocmd FileType c,cpp nnoremap <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
+autocmd FileType c,cpp nnoremap <silent> <Leader>g :YcmCompleter GetType<CR>
 
 
 " T-Comment
@@ -479,10 +483,10 @@ if executable('cquery')
       \ })
 endif
 
-autocmd FileType cpp nnoremap <silent> <leader>d :LspDefinition<CR>
-autocmd FileType cpp nnoremap <silent> <leader>e :LspReferences<CR>
-autocmd FileType cpp nnoremap <silent> <leader>t :LspTypeDefinition<CR>
-autocmd FileType cpp nnoremap <silent> <leader>r :LspRename<CR>
+autocmd FileType c,cpp nnoremap <silent> <leader>d :LspDefinition<CR>
+autocmd FileType c,cpp nnoremap <silent> <leader>e :LspReferences<CR>
+autocmd FileType c,cpp nnoremap <silent> <leader>t :LspTypeDefinition<CR>
+autocmd FileType c,cpp nnoremap <silent> <leader>r :LspRename<CR>
 
 
 
