@@ -365,7 +365,6 @@ let g:ycm_always_populate_location_list = 0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_echo_current_diagnostic = 1
 let g:ycm_show_diagnostics_ui = 1
-let g:ycm_use_ultisnips_completer = 1
 let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
