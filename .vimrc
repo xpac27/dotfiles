@@ -187,6 +187,10 @@ if executable('rg')
     set grepformat=%f:%l:%c:%m
 endif
 
+if &diff
+	set diffopt+=algorithm:patience
+	set diffopt+=indent-heuristic
+end
 
 
 
