@@ -298,6 +298,9 @@ map <Leader>C :AsyncStop!<CR>
 " Close QuickFix window
 nmap <leader>c :cclose<CR>
 
+" Show local search results in the QuifFix window
+nnoremap <leader>/ :vimgrep // %<CR>
+
 " Avoid unintentional switches to Ex mode.
 nmap Q q
 
