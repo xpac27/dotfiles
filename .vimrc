@@ -233,6 +233,9 @@ au Filetype ruby,yaml setlocal ts=2 sts=2 sw=2
 " Check file for changes
 au CursorHold * :checktime
 
+" limit column width for txt files
+au BufNewFile,BufRead *.txt set textwidth=80 | let &colorcolumn=join(range(81,999),",") | let &colorcolumn="80,".join(range(120,999),",")
+
 
 
 
@@ -352,6 +355,7 @@ let g:gruvbox_vert_split="bg0"
 set background=dark
 colorscheme gruvbox
 hi VertSplit guifg=#504945
+hi ColorColumn guibg=#3c3836
 hi Search guifg=#666666 guibg=#ffffff
 
 
