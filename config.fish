@@ -11,6 +11,9 @@ if status is-login
   end
 end
 
+# direnv
+eval (direnv hook fish)
+
 # rbenv
 set PATH $HOME/.rbenv/bin $PATH
 set PATH $HOME/.rbenv/shims $PATH
@@ -28,11 +31,10 @@ alias gds='git diff --staged'
 # alias gsu='git submodule update --recursive --init --jobs=4'
 
 # Machine
-alias reboot="sudo systemctl reboot"
-alias poweroff="sudo systemctl poweroff"
-alias sleep="sudo systemctl suspend"
-alias hibernate="sudo systemctl hybrid-sleep"
-alias dualmonitor="xrandr --output DP1 --auto --output eDP1 --auto --pos 2560x360"
+alias reboot="systemctl reboot"
+alias poweroff="systemctl poweroff"
+alias sleep="systemctl suspend"
+alias hibernate="systemctl hybrid-sleep"
 
 # Exa
 alias ll="exa -lh --git"

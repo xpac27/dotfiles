@@ -20,7 +20,7 @@ call plug#begin('~/.vim/plugged')
 " -------------------------------------------------------------------------
 Plug 'valloric/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': './install.py --clang-completer --system-libclang' }
 Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/vim-lsp', { 'for': ['cpp'] }
 
 
 " Misc:
@@ -33,9 +33,8 @@ Plug 'wgurecky/vimSum'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-endwise'
 Plug 'vim-scripts/tComment'
-Plug 'rhysd/vim-clang-format'
+Plug 'vim-scripts/gtags.vim', { 'for': ['c'] }
 Plug 'tpope/vim-eunuch', { 'on' : ['Delete', 'Unlink', 'Move', 'Rename', 'Find'] }
-Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 
 
 " Search
@@ -43,7 +42,7 @@ Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'derekwyatt/vim-fswitch'
+Plug 'vim-scripts/a.vim'
 Plug 'easymotion/vim-easymotion'
 
 
@@ -69,13 +68,13 @@ Plug 'morhetz/gruvbox'
 
 Plug 'elzr/vim-json'
 Plug 'tpope/vim-markdown'
-Plug 'kchmck/vim-coffee-script'
-Plug 'jeroenbourgois/vim-actionscript'
-Plug 'yaymukund/vim-rabl'
-Plug 'groenewege/vim-less'
+" Plug 'kchmck/vim-coffee-script'
+" Plug 'jeroenbourgois/vim-actionscript'
+" Plug 'yaymukund/vim-rabl'
+" Plug 'groenewege/vim-less'
 Plug 'tikhomirov/vim-glsl'
-Plug 'tpope/vim-cucumber'
-Plug 'tpope/vim-haml'
+" Plug 'tpope/vim-cucumber'
+" Plug 'tpope/vim-haml'
 
 
 call plug#end()
@@ -202,23 +201,8 @@ end
 " use tabs in Makefile
 au BufNewFile,BufRead Makefile setlocal noexpandtab
 
-" better lambda indent
-au BufNewFile,BufRead *.cpp setlocal cindent cino='j1,(0,ws,Ws'
-
 " restore position in file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
-
-" force actionscript on .as files
-au BufNewFile,BufRead *.as set ft=actionscript
-
-" activate FileSwitch on cpp and h files
-au! BufEnter *.cpp let b:fswitchdst = 'hpp'  | let b:fswitchlocs = './,../inc/,../../inc/,../inc/**/,../../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/'
-au! BufEnter *.hpp let b:fswitchdst = 'cpp'  | let b:fswitchlocs = './,../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
-au! BufEnter *.c   let b:fswitchdst = 'h'    | let b:fswitchlocs = './,../inc/,../../inc/,../inc/**/,../../inc/**/,../include/,../include/**/,../../include/,../../include/**/,../../../include/,../../../include/**/,../../../../include/,../../../../include/**/,../../../../../include/,../../../../../include/**/'
-au! BufEnter *.h   let b:fswitchdst = 'c'    | let b:fswitchlocs = './,../src/,../../src/,../src/**/,../../src/**/,../source/,../source/**/,../../source/,../../source/**/,../../../source/,../../../source/**/,../../../../source/,../../../../source/**/,../../../../../source/,../../../../../source/**/'
-
-" Auto save
-" au CursorHold *.cpp,*.h,*.hpp,*.rb nested silent up
 
 " Make crontab happy
 au filetype crontab setlocal nobackup nowritebackup
@@ -227,14 +211,11 @@ au filetype crontab setlocal nobackup nowritebackup
 au QuickFixCmdPost [^l]* nested cwindow
 au QuickFixCmdPost    l* nested lwindow
 
-" Change default tab settings
-au Filetype ruby,yaml setlocal ts=2 sts=2 sw=2
-
 " Check file for changes
 au CursorHold * :checktime
 
-" limit column width for txt files
-au BufNewFile,BufRead *.txt set textwidth=80 | let &colorcolumn=join(range(81,999),",") | let &colorcolumn="80,".join(range(120,999),",")
+" Auto save
+" au CursorHold *.cpp,*.h,*.hpp,*.rb nested silent up
 
 
 
@@ -293,11 +274,6 @@ nnoremap <silent> <LocalLeader>] :tabnext<CR>
 noremap <unique> <Leader>y viw"wy
 noremap <unique> <Leader>p viw"wp
 
-" Compile
-map <Leader>m :AsyncRun make compile<CR>
-map <Leader>c :AsyncStop<CR>
-map <Leader>C :AsyncStop!<CR>
-
 " Close QuickFix window
 nmap <leader>c :cclose<CR>
 
@@ -322,8 +298,15 @@ nnoremap <silent> <Right> :lnext<CR>
 
 
 " =========================================================================
-" PLUGINS
+" COMMANDS
 " =========================================================================
+
+
+" JSON
+" -------------------------------------------------------------------------
+if executable('python')
+    command! JSON :%!python -m json.tool
+endif
 
 
 " FZF
@@ -333,9 +316,10 @@ if executable('rg')
 endif
 
 
-" FSwitch
-" -------------------------------------------------------------------------
-nmap <silent> <Leader>s  :up<CR>:FSHere<cr>
+
+" =========================================================================
+" PLUGINS
+" =========================================================================
 
 
 " Gruvbox
@@ -385,22 +369,12 @@ let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 let g:ycm_filetype_whitelist = { 'cpp': 1, 'c': 1 }
 let g:ycm_error_symbol = 'x'
 let g:ycm_warning_symbol = '∆'
-autocmd FileType c,cpp nnoremap <silent> <SPACE> :ClangFormat<CR>zz:silent YcmForceCompileAndDiagnostics<CR>:GitGutterAll<CR>
-autocmd FileType c,cpp nnoremap <silent> <Leader>f :YcmCompleter FixIt<CR>:ccl<CR>
-autocmd FileType c,cpp nnoremap <silent> <Leader>g :YcmCompleter GetType<CR>
 
 
 " T-Comment
 " -------------------------------------------------------------------------
 nnoremap <C-c> :TComment<CR>j
 vnoremap <C-c> :TComment<CR>j
-
-
-" Clang-Format
-" -------------------------------------------------------------------------
-let g:clang_format#auto_format_on_insert_leave = 0
-let g:clang_format#auto_format = 0
-let g:clang_format#detect_style_file = 1
 
 
 " Git-Gutter
@@ -489,14 +463,9 @@ if executable('cquery')
       \ 'cmd': {server_info->['cquery']},
       \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
       \ 'initialization_options': { 'cacheDirectory': '/home/vinz/.cache/cquery' },
-      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+      \ 'whitelist': ['cpp'],
       \ })
 endif
-
-autocmd FileType c,cpp nnoremap <silent> <leader>d :LspDefinition<CR>
-autocmd FileType c,cpp nnoremap <silent> <leader>e :LspReferences<CR>
-autocmd FileType c,cpp nnoremap <silent> <leader>t :LspTypeDefinition<CR>
-autocmd FileType c,cpp nnoremap <silent> <leader>r :LspRename<CR>
 
 
 

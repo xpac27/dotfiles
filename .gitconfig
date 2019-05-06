@@ -36,6 +36,7 @@
 [diff]
     tool = vimdiff
     compactionHeuristic = true
+	noprefix = true
 
 [difftool]
     prompt = false
