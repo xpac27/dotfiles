@@ -1,0 +1,4 @@
+[Desktop Entry]
+Name=Change keyboard keys repeat rate
+Exec=xset r rate 160 25
+Type=Application
