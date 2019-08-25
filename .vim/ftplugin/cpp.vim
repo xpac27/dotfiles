@@ -21,9 +21,5 @@ setlocal cindent cino='j1,(0,ws,Ws'
 nmap <buffer><silent> <Leader>s :A<CR>
 nmap <buffer><silent> <Leader>f :IH<CR>
 
-" Clang-format
-let g:clang_format#auto_format = 0
-let g:clang_format#auto_format_on_insert_leave = 0
-
 " Compile
 nmap <buffer> <Leader>m :AsyncRun make compile<CR>

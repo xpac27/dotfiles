@@ -5,69 +5,26 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-
-
-
-" =========================================================================
-" PLUGINS
-" =========================================================================
-
-
 call plug#begin('~/.vim/plugged')
 
-
-" Magic
-" -------------------------------------------------------------------------
-" Plug 'valloric/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': './install.py --clang-completer --system-libclang' }
-" Plug 'prabirshrestha/async.vim'
-" Plug 'prabirshrestha/vim-lsp', { 'for': ['cpp'] }
 Plug 'neoclide/coc.nvim', { 'tag': '*', 'do': './install.sh' }
-
-
-" Misc:
-" -------------------------------------------------------------------------
-
-" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'honza/vim-snippets'
 Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
 Plug 'jamessan/vim-gnupg'
 Plug 'wgurecky/vimSum'
 Plug 'mhinz/vim-startify'
-Plug 'vim-scripts/tComment'
-Plug 'vim-scripts/gtags.vim', { 'for': ['c'] }
-Plug 'tpope/vim-eunuch', { 'on' : ['Delete', 'Unlink', 'Move', 'Rename', 'Find'] }
 Plug 'rhysd/vim-clang-format', { 'for': ['c', 'cpp'] } 
-
-
-" Search
-" -------------------------------------------------------------------------
-
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'vim-scripts/a.vim'
 Plug 'easymotion/vim-easymotion'
-
-
-" Interfaces
-" -------------------------------------------------------------------------
-
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'airblade/vim-gitgutter'
 Plug 'gcmt/taboo.vim'
 Plug 'scrooloose/nerdtree', { 'on' : ['NERDTreeToggle'] }
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
-
-
-" Schemes
-" -------------------------------------------------------------------------
-
 Plug 'morhetz/gruvbox'
-
-
-" Syntaxes
-" -------------------------------------------------------------------------
-
 Plug 'elzr/vim-json'
 Plug 'tpope/vim-markdown'
 " Plug 'kchmck/vim-coffee-script'
@@ -77,108 +34,82 @@ Plug 'tpope/vim-markdown'
 Plug 'tikhomirov/vim-glsl'
 " Plug 'tpope/vim-cucumber'
 " Plug 'tpope/vim-haml'
-
+Plug 'dag/vim-fish'
 
 call plug#end()
 filetype on
 syntax enable
 
-
-packadd termdebug
-
-
-" =========================================================================
-" SETTINGS
-" =========================================================================
-
-
-set path=.,,**,/usr/local/include,/usr/include
-set tags=./tags,.tags
-set enc=utf-8
-set spelllang=en_us
-set fileformats=unix,dos,mac
-set fillchars=vert:┃ 
-set visualbell t_vb=
-set sessionoptions+=tabpages,globals
-set viminfo=!,'100,h,n~/.viminfo
-set history=1000
-set undodir=~/.cache/vim/undo
+set autoread
+set backspace=indent,eol,start
+set backup
 set backupdir=~/.cache/vim/backup
 set backupskip+=",*.gpg"
-set textwidth=99999
-set tabpagemax=999
-set showtabline=1
-set laststatus=2
-set titlestring=(\ %(%{&ft},\ %)%{&ff}%(,\ %{&fenc}%)\ )
-set titlelen=100
-set mouse-=a
+set cmdheight=1
 set complete-=i
 set completeopt=longest,menuone
-set omnifunc=syntaxcomplete#Complete
-set wildmode=longest,list
-set wildignore=*.o,*.so,*.pyc,*.class,*.fasl,*/tmp/*,*.swp,*.zip,*.bak,*.orig,*.jpg,*.png,*.gif,DS_Store,*.sassc,*.pump
-set cmdheight=1
-set report=999999
-set shortmess=IAW
-set scrolloff=5
-set scrolljump=5
-set softtabstop=4
-set shiftwidth=4
-set tabstop=4
-set updatetime=250
-set timeoutlen=300
-set maxmem=2000000
-set maxmemtot=2000000
-set backspace=indent,eol,start
-set pumheight=15
-set rtp+=/usr/local/opt/fzf
-set csto=0
-set cspc=0
-set signcolumn=yes
-set nocsverb
-set noswapfile
-set noerrorbells
-set novisualbell
-" set nobackup
-" set nowritebackup
-set backup
-set writebackup
-set nolist
-set nowrap
-set noshowmode
-set noruler
-set noequalalways
-set hidden
-set nolazyredraw
-set autoread
-set number
-set relativenumber
 set cursorline
-set title
-set wildmenu
-set mousehide
-set smarttab
+set enc=utf-8
 set expandtab
+set fileformats=unix,dos,mac
+set fillchars=vert:┃ 
+set gdefault
+set history=1000
+set hlsearch
+set ignorecase
+set incsearch
+set laststatus=2
+set mouse-=a
+set mousehide
+set equalalways
+set noerrorbells
+set nohidden
+set nolazyredraw
+set nolist
+set nomodeline " disabled for security
+set noruler
+set noshowmode
+set noswapfile
+set novisualbell
+set nowrap
+set number
+set path=.,,**,/usr/local/include,/usr/include
+set pumheight=15
+set relativenumber
+set report=999999
+set scrolljump=5
+set scrolloff=5
+set sessionoptions+=tabpages,globals
 set shiftround
+set shiftwidth=4
+set shortmess=IAW
+set showmatch
+set showtabline=1
+set sidescrolloff=5
+set signcolumn=yes
+set smartcase
 set smartindent
+set smarttab
+set softtabstop=4
+set spelllang=en_us
 set splitbelow
 set splitright
-set ignorecase
-set smartcase
-set showmatch
-set incsearch
-set hlsearch
-set gdefault
-set cst
+set tabpagemax=999
+set tabstop=4
+set tags=./tags,.tags
+set textwidth=99999
+set timeoutlen=300
+set title
+set titlelen=100
+set titlestring=(\ %(%{&ft},\ %)%{&ff}%(,\ %{&fenc}%)\ )
+set undodir=~/.cache/vim/undo
 set undofile
-
-" Tweaks for browsing
-let g:netrw_banner=0        " disable annoying banner
-" let g:netrw_browse_split=4  " open in prior window
-" let g:netrw_altv=1          " open splits to the right
-" let g:netrw_liststyle=3     " tree view
-" let g:netrw_list_hide=netrw_gitignore#Hide()
-" let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+set updatetime=300
+set visualbell t_vb=
+set wildignore=*.o,*.so,*.pyc,*.class,*.fasl,*/tmp/*,*.swp,*.zip,*.bak,*.orig,*.jpg,*.png,*.gif,DS_Store,*.sassc,*.pump
+set wildmenu
+set wildmode=longest,list
+set writebackup
 
 if executable('rg')
     set grepprg=rg\ --vimgrep
@@ -190,39 +121,23 @@ if &diff
 	set diffopt+=indent-heuristic
 end
 
-
-
-" =========================================================================
-" AUTO COMMANDS
-" =========================================================================
-
-
-" use tabs in Makefile
-au BufNewFile,BufRead Makefile setlocal noexpandtab
-
-" restore position in file
-au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
-
-" Make crontab happy
-au filetype crontab setlocal nobackup nowritebackup
-
-" Auto open quickfix on make
-au QuickFixCmdPost [^l]* nested cwindow
-au QuickFixCmdPost    l* nested lwindow
+" disable annoying banner
+let g:netrw_banner=0
 
 " Check file for changes
 au CursorHold * :checktime
 
+" use tabs in Makefile
+au BufNewFile,BufRead Makefile setlocal noexpandtab
+
+" Make crontab happy
+au filetype crontab setlocal nobackup nowritebackup
+
+" restore position in file
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
+
 " Auto save
-" au CursorHold *.cpp,*.h,*.hpp,*.rb nested silent up
-
-
-
-
-" =========================================================================
-" MAPPINGS
-" =========================================================================
-
+" au CursorHold *.c,*.h,*.cpp,*.h,*.hpp,*.rb nested silent up
 
 " typos
 ia   feild    field
@@ -243,9 +158,6 @@ ab   pu   public
 " save time
 nnoremap ; :
 
-" select the current line without indentation
-nnoremap vv ^vg_
-
 " don't lose selection after indenting
 vnoremap < <gv
 vnoremap > >gv
@@ -264,20 +176,6 @@ nnoremap <silent> <leader>ow :set wrap!<CR>
 nnoremap <silent> <leader>ol :set list!<CR>
 nnoremap <silent> <leader>os :setl spell!<CR>
 nnoremap <silent> <leader>od :e ++ff=dos<CR>:setlocal ff=dos<CR>
-
-" tabs
-nnoremap <silent> <LocalLeader>[ :tabprev<CR>
-nnoremap <silent> <LocalLeader>] :tabnext<CR>
-
-" copy/past word
-noremap <unique> <Leader>y viw"wy
-noremap <unique> <Leader>p viw"wp
-
-" Close QuickFix window
-nmap <leader>c :cclose<CR>
-
-" Show local search results in the QuifFix window
-nnoremap <leader>/ :vimgrep // %<CR>
 
 " Avoid unintentional switches to Ex mode.
 nmap Q q
@@ -315,6 +213,12 @@ if executable('rg')
 endif
 
 
+" Async MAKE
+" -------------------------------------------------------------------------
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+
+
+
 
 " =========================================================================
 " PLUGINS
@@ -342,38 +246,12 @@ colorscheme gruvbox
 hi CocHighlightText guibg=#665c54
 
 
-" Ultisnips
+" AsyncRun
 " -------------------------------------------------------------------------
-" YouCompleteMe and UltiSnips compatibility.
-" let g:UltiSnipsExpandTrigger = '<Right>'
-" let g:UltiSnipsJumpForwardTrigger = '<Right>'
-" let g:UltiSnipsJumpBackwardTrigger = '<Left>'
-
-
-" YouCompleteMe
-" -------------------------------------------------------------------------
-" let g:ycm_collect_identifiers_from_comments_and_strings = 0
-" let g:ycm_seed_identifiers_with_syntax = 1
-" let g:ycm_collect_identifiers_from_tags_files = 0
-" let g:ycm_always_populate_location_list = 0
-" let g:ycm_confirm_extra_conf = 0
-" let g:ycm_echo_current_diagnostic = 1
-" let g:ycm_show_diagnostics_ui = 1
-" let g:ycm_filetype_blacklist = {'vim' : 1, 'ruby': 1}
-" let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
-" let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
-" " let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
-" " let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
-" " let g:ycm_key_list_accept_completion = ['<C-y>']
-" let g:ycm_filetype_whitelist = { 'cpp': 1, 'c': 1 }
-" let g:ycm_error_symbol = 'x'
-" let g:ycm_warning_symbol = '∆'
-
-
-" T-Comment
-" -------------------------------------------------------------------------
-nnoremap <C-c> :TComment<CR>j
-vnoremap <C-c> :TComment<CR>j
+let g:asyncrun_open = 8
+let g:asyncrun_save = 2
+let g:asyncrun_local = 1
+let g:asyncrun_exit = "if g:asyncrun_code == 0 | cclose | endif"
 
 
 " Git-Gutter
@@ -385,10 +263,6 @@ let g:gitgutter_sign_added = '·'
 let g:gitgutter_sign_modified = '·'
 let g:gitgutter_sign_removed= '·'
 let g:gitgutter_sign_modified_removed= '·'
-" hi GitGutterAdd ctermbg=234 ctermfg=238
-" hi GitGutterDelete ctermbg=234 ctermfg=238
-" hi GitGutterChange ctermbg=234 ctermfg=238
-" hi GitGutterChangeDelete ctermbg=234 ctermfg=238
 
 
 " Startify
@@ -456,28 +330,13 @@ let g:lightline = {
 \ }
 
 
-
-
-" LSP
-" -------------------------------------------------------------------------
-
-if executable('cquery')
-   au User lsp_setup call lsp#register_server({
-      \ 'name': 'cquery',
-      \ 'cmd': {server_info->['cquery']},
-      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      \ 'initialization_options': { 'cacheDirectory': '/home/vinz/.cache/cquery' },
-      \ 'whitelist': ['cpp'],
-      \ })
-endif
-
-
 " Clang Format
 " -------------------------------------------------------------------------
 
 let g:clang_format#detect_style_file = 1
-let g:clang_format#auto_format = 0
-let g:auto_format_on_insert_leave = 0
+let g:clang_format#auto_format = 1
+let g:clang_format#auto_format_on_insert_leave = 0
+let g:clang_format#enable_fallback_style = 0
 
 
 " FZF
@@ -490,16 +349,23 @@ nmap <C-f> :GitFiles<CR>
 " -------------------------------------------------------------------------
 
 let languageservers = {}
-let languageservers['ccls'] = {
-    \ 'command': 'ccls',
+let languageservers['clangd'] = {
+    \ 'command': 'clangd',
+    \ 'args': ['-background-index', '--clang-tidy'],
     \ 'filetypes': ['c', 'cpp'],
-    \ 'rootPatterns': ['.ccls', 'compile_commands.json', '.vim/', '.git/', '.hg/'],
-    \ 'initializationOptions': {
-    \   'cache': {
-    \     'directory': '/home/vinz/.cache/ccls',
-	\ 	}
-	\ }
+    \ 'rootPatterns': ['compile_flags.txt', 'compile_commands.json', '.vim/', '.git/', '.hg/'],
 \ }
+
+" let languageservers['ccls'] = {
+"     \ 'command': 'ccls',
+"     \ 'filetypes': ['c', 'cpp'],
+"     \ 'rootPatterns': ['.ccls', 'compile_commands.json', '.vim/', '.git/', '.hg/'],
+"     \ 'initializationOptions': {
+"     \   'cache': {
+"     \     'directory': '/home/vinz/.cache/ccls',
+" 	\ 	}
+" 	\ }
+" \ }
 
 let g:coc_global_extensions = [
     \ 'coc-json',
@@ -508,7 +374,7 @@ let g:coc_global_extensions = [
 \]
 
 let g:coc_user_config = {
-    \ 'coc.preferences.formatOnSaveFiletypes': ['cpp', 'c'],
+    \ 'coc.preferences.formatOnSaveFiletypes': [],
     \ 'diagnostic.enable': v:true,
     \ 'diagnostic.enableMessage': 'always',
     \ 'languageserver': languageservers,

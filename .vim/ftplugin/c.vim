@@ -14,7 +14,3 @@ let g:alternateRelativeFiles = 1
 " A.vim
 nmap <buffer><silent> <Leader>s :A<CR>
 nmap <buffer><silent> <Leader>f :IH<CR>
-
-" Clang-format
-let g:clang_format#auto_format = 0
-let g:clang_format#auto_format_on_insert_leave = 0
