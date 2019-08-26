@@ -27,6 +27,7 @@ Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'morhetz/gruvbox'
 Plug 'elzr/vim-json'
 Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-commentary'
 " Plug 'kchmck/vim-coffee-script'
 " Plug 'jeroenbourgois/vim-actionscript'
 " Plug 'yaymukund/vim-rabl'
@@ -64,7 +65,7 @@ set mousehide
 set equalalways
 set noerrorbells
 set nohidden
-set nolazyredraw
+set lazyredraw
 set nolist
 set nomodeline " disabled for security
 set noruler
@@ -311,8 +312,8 @@ let g:NERDTreeMouseMode=2
       " \ 'colorscheme': 'PaperColor_light',
 let g:lightline = {
       \ 'colorscheme': 'PaperColor',
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' },
       \ 'active': {
       \   'left': [ [ 'arrow_right', 'paste' ], [ 'relativepath', 'modified', 'readonly', 'cocstatus'] ],
       \   'right': [ [ 'percent' ], [ 'lineinfo' ], [ 'filetype' ] ]
@@ -322,7 +323,6 @@ let g:lightline = {
       \   'right': [ ]
       \ },
       \ 'component': {
-      \   'arrow_right': '  '
       \ },
       \ 'component_function': {
       \   'cocstatus': 'coc#status'
@@ -486,7 +486,7 @@ nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " LOCAL VIMRC
 " =========================================================================
 
-function SetLocalOptions(fname)
+function! SetLocalOptions(fname)
     let dirname = fnamemodify(a:fname, ":p:h")
     while "/" != dirname
         let lvimrc  = dirname . "/.lvimrc"

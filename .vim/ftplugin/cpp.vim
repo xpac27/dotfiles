@@ -18,8 +18,8 @@ setlocal cindent cino='j1,(0,ws,Ws'
 " nmap <buffer><silent> <Leader>g :YcmCompleter GetType<CR>
 
 " A.vim
-nmap <buffer><silent> <Leader>s :A<CR>
-nmap <buffer><silent> <Leader>f :IH<CR>
+nmap <buffer><silent> <Leader>s :w<CR>:A<CR>
+nmap <buffer><silent> <Leader>f :w<CR>:IH<CR>
 
 " Compile
 nmap <buffer> <Leader>m :AsyncRun make compile<CR>

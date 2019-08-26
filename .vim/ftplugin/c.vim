@@ -12,5 +12,5 @@ let g:alternateRelativeFiles = 1
 " nmap <buffer><silent> <Leader>g :YcmCompleter GetType<CR>
 
 " A.vim
-nmap <buffer><silent> <Leader>s :A<CR>
-nmap <buffer><silent> <Leader>f :IH<CR>
+nmap <buffer><silent> <Leader>s :w<CR>:A<CR>
+nmap <buffer><silent> <Leader>f :w<CR>:IH<CR>
