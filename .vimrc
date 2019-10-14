@@ -140,6 +140,9 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "norma
 " Auto save
 " au CursorHold *.c,*.h,*.cpp,*.h,*.hpp,*.rb nested silent up
 
+" Check spelling in markdown files
+au FileType markdown setlocal spell
+
 " typos
 ia   feild    field
 ia   flase    false
