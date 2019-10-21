@@ -99,9 +99,6 @@ youtube() {
     youtube-dl -q -o- "$1" | ffplay -x 1920 -y 1080 -
 }
 
-# TUP
-export CXX="ccache cdcc-clang++"
-
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,.tup,node_modules}/*" 2> /dev/null'

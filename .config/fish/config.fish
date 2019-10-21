@@ -11,6 +11,7 @@ if status is-login
   end
 end
 
+
 # direnv
 eval (direnv hook fish)
 
@@ -46,9 +47,6 @@ alias lta="exa -lhTa --git"
 
 # Ripgrep
 alias rg="rg --colors 'match:fg:black' --colors 'match:bg:yellow' --colors 'line:style:bold' --colors 'line:fg:yellow' --colors 'path:fg:green' --colors 'path:style:bold'"
-
-# TUP
-export CXX="ccache cdcc-clang++"
 
 # Key bindings
 fish_vi_key_bindings

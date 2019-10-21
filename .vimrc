@@ -252,7 +252,7 @@ hi CocHighlightText guibg=#665c54
 
 " AsyncRun
 " -------------------------------------------------------------------------
-let g:asyncrun_open = 8
+let g:asyncrun_open = 12
 let g:asyncrun_save = 2
 let g:asyncrun_local = 1
 let g:asyncrun_exit = "if g:asyncrun_code == 0 | cclose | endif"
@@ -316,10 +316,10 @@ let g:NERDTreeMouseMode=2
 let g:lightline = {
       \ 'colorscheme': 'PaperColor',
       \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '|' },
       \ 'active': {
-      \   'left': [ [ 'arrow_right', 'paste' ], [ 'relativepath', 'modified', 'readonly', 'cocstatus'] ],
-      \   'right': [ [ 'percent' ], [ 'lineinfo' ], [ 'filetype' ] ]
+      \   'left': [ [ 'paste' ], [ 'readonly', 'relativepath', 'modified', 'cocstatus' ] ],
+      \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype', 'fileencoding' ] ]
       \ },
       \ 'inactive': {
       \   'left': [ [], [ 'readonly', 'relativepath' ] ],
@@ -328,7 +328,7 @@ let g:lightline = {
       \ 'component': {
       \ },
       \ 'component_function': {
-      \   'cocstatus': 'coc#status'
+      \   'cocstatus': 'coc#status',
       \ },
 \ }
 
