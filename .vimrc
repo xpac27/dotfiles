@@ -25,17 +25,8 @@ Plug 'scrooloose/nerdtree', { 'on' : ['NERDTreeToggle'] }
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'morhetz/gruvbox'
-Plug 'elzr/vim-json'
-Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-commentary'
-" Plug 'kchmck/vim-coffee-script'
-" Plug 'jeroenbourgois/vim-actionscript'
-" Plug 'yaymukund/vim-rabl'
-" Plug 'groenewege/vim-less'
-Plug 'tikhomirov/vim-glsl'
-" Plug 'tpope/vim-cucumber'
-" Plug 'tpope/vim-haml'
-Plug 'dag/vim-fish'
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 filetype on
@@ -46,6 +37,7 @@ set backspace=indent,eol,start
 set backup
 set backupdir=~/.cache/vim/backup
 set backupskip+=",*.gpg"
+set writebackup
 set cmdheight=1
 set complete-=i
 set completeopt=longest,menuone
@@ -110,7 +102,6 @@ set visualbell t_vb=
 set wildignore=*.o,*.so,*.pyc,*.class,*.fasl,*/tmp/*,*.swp,*.zip,*.bak,*.orig,*.jpg,*.png,*.gif,DS_Store,*.sassc,*.pump
 set wildmenu
 set wildmode=longest,list
-set writebackup
 
 if executable('rg')
     set grepprg=rg\ --vimgrep
