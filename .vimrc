@@ -7,7 +7,8 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'neoclide/coc.nvim', { 'tag': '*', 'do': './install.sh' }
+Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+" Plug 'ycm-core/YouCompleteMe'
 Plug 'honza/vim-snippets'
 Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
 Plug 'jamessan/vim-gnupg'
@@ -19,7 +20,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'vim-scripts/a.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 Plug 'gcmt/taboo.vim'
 Plug 'scrooloose/nerdtree', { 'on' : ['NERDTreeToggle'] }
 Plug 'itchyny/lightline.vim'
@@ -56,7 +57,7 @@ set mouse-=a
 set mousehide
 set equalalways
 set noerrorbells
-set nohidden
+set hidden
 set lazyredraw
 set nolist
 set nomodeline " disabled for security
@@ -345,23 +346,23 @@ let g:NERDSpaceDelims = 1
 " COC
 " -------------------------------------------------------------------------
 let languageservers = {}
-let languageservers['clangd'] = {
-    \ 'command': 'clangd',
-    \ 'args': ['-background-index', '--clang-tidy'],
-    \ 'filetypes': ['c', 'cpp'],
-    \ 'rootPatterns': ['compile_flags.txt', 'compile_commands.json', '.vim/', '.git/', '.hg/'],
-\ }
 
-" let languageservers['ccls'] = {
-"     \ 'command': 'ccls',
+" let languageservers['clangd'] = {
+"     \ 'command': 'clangd',
 "     \ 'filetypes': ['c', 'cpp'],
-"     \ 'rootPatterns': ['.ccls', 'compile_commands.json', '.vim/', '.git/', '.hg/'],
-"     \ 'initializationOptions': {
-"     \   'cache': {
-"     \     'directory': '/home/vinz/.cache/ccls',
-" 	\ 	}
-" 	\ }
+"     \ 'rootPatterns': ['compile_flags.txt', 'compile_commands.json', '.vim/', '.git/', '.hg/'],
 " \ }
+
+let languageservers['ccls'] = {
+    \ 'command': 'ccls',
+    \ 'filetypes': ['c', 'cpp'],
+    \ 'rootPatterns': ['.ccls', 'compile_commands.json', '.vim/', '.git/', '.hg/'],
+    \ 'initializationOptions': {
+    \   'cache': {
+    \     'directory': '/home/vinz/.cache/ccls',
+	\ 	}
+	\ }
+\ }
 
 let g:coc_global_extensions = [
     \ 'coc-json',

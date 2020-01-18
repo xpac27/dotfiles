@@ -127,3 +127,5 @@ gh() {
         --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always | head -'$LINES | grep -o "[a-f0-9]\{7,\}"
 }
 
+
+source /home/vinz/.config/broot/launcher/bash/br
