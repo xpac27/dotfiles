@@ -25,8 +25,8 @@ Plug 'scrooloose/nerdtree', { 'on' : ['NERDTreeToggle'] }
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'morhetz/gruvbox'
-Plug 'tpope/vim-commentary'
 Plug 'sheerun/vim-polyglot'
+Plug 'preservim/nerdcommenter'
 
 call plug#end()
 filetype on
@@ -326,7 +326,6 @@ let g:lightline = {
 
 " Clang Format
 " -------------------------------------------------------------------------
-
 let g:clang_format#detect_style_file = 1
 let g:clang_format#auto_format = 1
 let g:clang_format#auto_format_on_insert_leave = 0
@@ -335,13 +334,16 @@ let g:clang_format#enable_fallback_style = 0
 
 " FZF
 " -------------------------------------------------------------------------
-
 nmap <C-f> :GitFiles<CR>
+
+
+" NERDCommenter
+" -------------------------------------------------------------------------
+let g:NERDSpaceDelims = 1
 
 
 " COC
 " -------------------------------------------------------------------------
-
 let languageservers = {}
 let languageservers['clangd'] = {
     \ 'command': 'clangd',
