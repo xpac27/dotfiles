@@ -8,11 +8,9 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
-" Plug 'ycm-core/YouCompleteMe'
 Plug 'honza/vim-snippets'
 Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
 Plug 'jamessan/vim-gnupg'
-Plug 'wgurecky/vimSum'
 Plug 'mhinz/vim-startify'
 Plug 'rhysd/vim-clang-format', { 'for': ['c', 'cpp'] } 
 Plug 'junegunn/fzf.vim'
@@ -173,10 +171,8 @@ nnoremap <silent> <leader>ol :set list!<CR>
 nnoremap <silent> <leader>os :setl spell!<CR>
 nnoremap <silent> <leader>od :e ++ff=dos<CR>:setlocal ff=dos<CR>
 
-" Avoid unintentional switches to Ex mode.
-nmap Q q
-
 " Not usefull
+nmap Q q
 nmap K <nop>
 nmap <C-s> <nop>
 nmap ^S <nop>
