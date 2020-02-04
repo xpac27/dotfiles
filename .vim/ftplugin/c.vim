@@ -13,4 +13,3 @@ let g:alternateRelativeFiles = 1
 
 " A.vim
 nmap <buffer><silent> <Leader>s :w<CR>:A<CR>
-nmap <buffer><silent> <Leader>f :w<CR>:IH<CR>

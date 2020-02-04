@@ -26,6 +26,8 @@ Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'morhetz/gruvbox'
 Plug 'sheerun/vim-polyglot'
 Plug 'preservim/nerdcommenter'
+"Plug 'liuchengxu/vista.vim'
+Plug 'liuchengxu/vim-clap', { 'do': 'cargo build --release' }
 
 call plug#end()
 filetype on
@@ -41,7 +43,7 @@ set cmdheight=1
 set complete-=i
 set completeopt=longest,menuone
 set cursorline
-set enc=utf-8
+set encoding=UTF-8
 set expandtab
 set fileformats=unix,dos,mac
 set fillchars=vert:┃ 
@@ -331,7 +333,7 @@ let g:clang_format#enable_fallback_style = 0
 
 " FZF
 " -------------------------------------------------------------------------
-nmap <C-f> :GitFiles<CR>
+" nmap <leader>f :GitFiles<CR>
 
 
 " NERDCommenter
@@ -339,26 +341,34 @@ nmap <C-f> :GitFiles<CR>
 let g:NERDSpaceDelims = 1
 
 
+" Clap
+" -------------------------------------------------------------------------
+let g:clap_theme = 'material_design_dark'
+nmap <leader>d :Clap filer<CR>
+nmap <leader>f :Clap gfiles<CR>
+nmap <leader>g :Clap grep<CR>
+
+
 " COC
 " -------------------------------------------------------------------------
 let languageservers = {}
 
-" let languageservers['clangd'] = {
-"     \ 'command': 'clangd',
-"     \ 'filetypes': ['c', 'cpp'],
-"     \ 'rootPatterns': ['compile_flags.txt', 'compile_commands.json', '.vim/', '.git/', '.hg/'],
-" \ }
-
-let languageservers['ccls'] = {
-    \ 'command': 'ccls',
+let languageservers['clangd'] = {
+    \ 'command': 'clangd',
     \ 'filetypes': ['c', 'cpp'],
-    \ 'rootPatterns': ['.ccls', 'compile_commands.json', '.vim/', '.git/', '.hg/'],
-    \ 'initializationOptions': {
-    \   'cache': {
-    \     'directory': '/home/vinz/.cache/ccls',
-	\ 	}
-	\ }
+    \ 'rootPatterns': ['compile_flags.txt', 'compile_commands.json', '.vim/', '.git/', '.hg/'],
 \ }
+
+" let languageservers['ccls'] = {
+    " \ 'command': 'ccls',
+    " \ 'filetypes': ['c', 'cpp'],
+    " \ 'rootPatterns': ['.ccls', 'compile_commands.json', '.vim/', '.git/', '.hg/'],
+    " \ 'initializationOptions': {
+    " \   'cache': {
+    " \     'directory': '/home/vinz/.cache/ccls',
+	" \ 	}
+	" \ }
+" \ }
 
 let g:coc_global_extensions = [
     \ 'coc-json',
@@ -428,8 +438,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>r <Plug>(coc-rename)
 
 " Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -440,11 +450,11 @@ augroup mygroup
 augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+" xmap <leader>a  <Plug>(coc-codeaction-selected)
+" nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
+" nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 
