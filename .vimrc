@@ -8,7 +8,8 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
-Plug 'honza/vim-snippets'
+"Plug 'Valloric/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python3 install.py --clangd-completer' }
+"Plug 'honza/vim-snippets'
 Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
 Plug 'jamessan/vim-gnupg'
 Plug 'mhinz/vim-startify'
@@ -26,8 +27,6 @@ Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'morhetz/gruvbox'
 Plug 'sheerun/vim-polyglot'
 Plug 'preservim/nerdcommenter'
-"Plug 'liuchengxu/vista.vim'
-Plug 'liuchengxu/vim-clap', { 'do': 'cargo build --release' }
 
 call plug#end()
 filetype on
@@ -200,13 +199,6 @@ if executable('python')
 endif
 
 
-" FZF
-" -------------------------------------------------------------------------
-if executable('rg')
-  command! -complete=dir -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.<q-args>, 1, <bang>0)
-endif
-
-
 " Async MAKE
 " -------------------------------------------------------------------------
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
@@ -235,7 +227,7 @@ let g:gruvbox_color_column="bg0"
 set background=dark
 colorscheme gruvbox
 " hi VertSplit guifg=#504945
-" hi ColorColumn guibg=#3c3836
+hi ColorColumn guibg=#1d2021
 " hi Search guifg=#666666 guibg=#ffffff
 hi CocHighlightText guibg=#665c54
 
@@ -304,15 +296,15 @@ let g:NERDTreeMouseMode=2
 " -------------------------------------------------------------------------
       " \ 'colorscheme': 'PaperColor_light',
 let g:lightline = {
-      \ 'colorscheme': 'PaperColor',
+      \ 'colorscheme': 'gruvbox',
       \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '|' },
+      \ 'subseparator': { 'left': '', 'right': '' },
       \ 'active': {
-      \   'left': [ [ 'paste' ], [ 'readonly', 'relativepath', 'modified', 'cocstatus' ] ],
-      \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype', 'fileencoding' ] ]
+      \   'left': [ [ 'readonly', 'relativepath', 'modified', 'cocstatus' ], [ 'paste' ] ],
+      \   'right': [ [],[],[ 'lineinfo', 'percent', 'filetype', 'fileencoding' ], [], [] ]
       \ },
       \ 'inactive': {
-      \   'left': [ [], [ 'readonly', 'relativepath' ] ],
+      \   'left': [ [], [], [ 'readonly', 'relativepath' ] ],
       \   'right': [ ]
       \ },
       \ 'component': {
@@ -321,6 +313,9 @@ let g:lightline = {
       \   'cocstatus': 'coc#status',
       \ },
 \ }
+
+" Use auocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 
 " Clang Format
@@ -333,7 +328,8 @@ let g:clang_format#enable_fallback_style = 0
 
 " FZF
 " -------------------------------------------------------------------------
-" nmap <leader>f :GitFiles<CR>
+nmap <leader>f :GitFiles<CR>
+nmap <leader>d :Rg<CR>
 
 
 " NERDCommenter
@@ -341,12 +337,17 @@ let g:clang_format#enable_fallback_style = 0
 let g:NERDSpaceDelims = 1
 
 
-" Clap
+" YouCompleteMe
 " -------------------------------------------------------------------------
-let g:clap_theme = 'material_design_dark'
-nmap <leader>d :Clap filer<CR>
-nmap <leader>f :Clap gfiles<CR>
-nmap <leader>g :Clap grep<CR>
+" " Let clangd fully control code completion
+" let g:ycm_clangd_uses_ycmd_caching = 0
+" " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
+" let g:ycm_clangd_binary_path = exepath("clangd")
+" " Mappings
+" nmap <leader>d :YcmCompleter GoToDefinition<CR>
+" nmap <leader>D :YcmCompleter GoToDeclaration<CR>
+" nmap <leader>r :YcmCompleter GoToReferences<CR>
+" nmap <leader>R :YcmCompleter RefactorRename 
 
 
 " COC
@@ -356,7 +357,7 @@ let languageservers = {}
 let languageservers['clangd'] = {
     \ 'command': 'clangd',
     \ 'filetypes': ['c', 'cpp'],
-    \ 'rootPatterns': ['compile_flags.txt', 'compile_commands.json', '.vim/', '.git/', '.hg/'],
+    \ 'rootPatterns': ['compile_commands.json', '.vim/', '.git/', '.hg/'],
 \ }
 
 " let languageservers['ccls'] = {
@@ -366,14 +367,14 @@ let languageservers['clangd'] = {
     " \ 'initializationOptions': {
     " \   'cache': {
     " \     'directory': '/home/vinz/.cache/ccls',
-	" \ 	}
-	" \ }
+    " \ 	}
+    " \ }
 " \ }
 
 let g:coc_global_extensions = [
-    \ 'coc-json',
-    \ 'coc-yaml',
-    \ 'coc-snippets',
+  \ 'coc-json',
+  \ 'coc-yaml',
+  \ 'coc-snippets',
 \]
 
 let g:coc_user_config = {
@@ -389,6 +390,9 @@ let g:coc_user_config = {
     \ 'snippets.ultisnips.enable': v:false,
     \ 'snippets.ultisnips.directories': ['/home/vinz/.vim/plugged/vim-snippets/snippets'],
 \ }
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -409,15 +413,15 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
@@ -435,54 +439,20 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
-nmap <leader>r <Plug>(coc-rename)
+nmap <leader>rn <Plug>(coc-rename)
 
-" Remap for format selected region
-" xmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-" xmap <leader>a  <Plug>(coc-codeaction-selected)
-" nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap for do codeAction of current line
-" nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
-
-" Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Using CocList
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands
-" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document
-" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols
-" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Do default action for next item.
-" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 
 
 " =========================================================================
