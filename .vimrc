@@ -297,10 +297,10 @@ let g:NERDTreeMouseMode=2
       " \ 'colorscheme': 'PaperColor_light',
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' },
       \ 'active': {
-      \   'left': [ [ 'readonly', 'relativepath', 'modified', 'cocstatus' ], [ 'paste' ] ],
+      \   'left': [ [ 'relativepath', 'modified', 'cocstatus' ], [ 'readonly', 'paste' ] ],
       \   'right': [ [],[],[ 'lineinfo', 'percent', 'filetype', 'fileencoding' ], [], [] ]
       \ },
       \ 'inactive': {
@@ -308,6 +308,7 @@ let g:lightline = {
       \   'right': [ ]
       \ },
       \ 'component': {
+      \   'arrow_right': '  '
       \ },
       \ 'component_function': {
       \   'cocstatus': 'coc#status',
