@@ -9,7 +9,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 "Plug 'Valloric/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python3 install.py --clangd-completer' }
-"Plug 'honza/vim-snippets'
 Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
 Plug 'jamessan/vim-gnupg'
 Plug 'mhinz/vim-startify'
@@ -297,15 +296,15 @@ let g:NERDTreeMouseMode=2
       " \ 'colorscheme': 'PaperColor_light',
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
-      \ 'separator': { 'left': '', 'right': '' },
+      \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' },
       \ 'active': {
-      \   'left': [ [ 'relativepath', 'modified', 'cocstatus' ], [ 'readonly', 'paste' ] ],
+      \   'left': [ [ 'window_number', 'relativepath', 'modified', 'cocstatus' ], [ 'readonly', 'paste' ] ],
       \   'right': [ [],[],[ 'lineinfo', 'percent', 'filetype', 'fileencoding' ], [], [] ]
       \ },
       \ 'inactive': {
-      \   'left': [ [], [], [ 'readonly', 'relativepath' ] ],
-      \   'right': [ ]
+      \   'left': [ ['window_number' ], [ 'relativepath' ], [ 'readonly' ] ],
+      \   'right': []
       \ },
       \ 'component': {
       \   'arrow_right': '  '
@@ -314,6 +313,10 @@ let g:lightline = {
       \   'cocstatus': 'coc#status',
       \ },
 \ }
+
+function! WindowNumber()
+  return tabpagewinnr(tabpagenr())
+endfunction
 
 " Use auocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
@@ -388,8 +391,6 @@ let g:coc_user_config = {
     \ 'diagnostic.infoSign': '➤',
     \ 'diagnostic.hintSign': '➤',
     \ 'suggest.snippetIndicator': ' ⚡',
-    \ 'snippets.ultisnips.enable': v:false,
-    \ 'snippets.ultisnips.directories': ['/home/vinz/.vim/plugged/vim-snippets/snippets'],
 \ }
 
 " don't give |ins-completion-menu| messages.
