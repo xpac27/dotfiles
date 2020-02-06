@@ -332,9 +332,21 @@ let g:clang_format#enable_fallback_style = 0
 
 " FZF
 " -------------------------------------------------------------------------
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+" CTRL-Q to open in quickfix list
+let g:fzf_action = { 'ctrl-q': function('s:build_quickfix_list') }
+
+" CTRL-A to select all
+command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'options': ['--bind=ctrl-a:select-all']}, <bang>0)
+command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.<q-args>, 1, fzf#vim#with_preview({'options': ['--bind=ctrl-a:select-all']}), <bang>0)
+
 nmap <leader>f :GitFiles<CR>
 nmap <leader>d :Rg<CR>
-
 
 " NERDCommenter
 " -------------------------------------------------------------------------
