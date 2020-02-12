@@ -7,56 +7,63 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
-"Plug 'Valloric/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python3 install.py --clangd-completer' }
-Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
-Plug 'jamessan/vim-gnupg'
-Plug 'mhinz/vim-startify'
-Plug 'rhysd/vim-clang-format', { 'for': ['c', 'cpp'] } 
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'vim-scripts/a.vim'
+if &diff
+else
+	Plug 'dyng/ctrlsf.vim'
+	Plug 'gcmt/taboo.vim'
+	Plug 'jamessan/vim-gnupg'
+	Plug 'junegunn/fzf'
+	Plug 'junegunn/fzf.vim'
+	Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+	Plug 'mhinz/vim-startify'
+	Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+	Plug 'nfvs/vim-perforce'
+	Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
+	Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
+	Plug 'skywind3000/vim-terminal-help'
+	Plug 'vim-scripts/a.vim'
+end
+
 Plug 'easymotion/vim-easymotion'
-Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-" Plug 'airblade/vim-gitgutter'
-Plug 'gcmt/taboo.vim'
-Plug 'scrooloose/nerdtree', { 'on' : ['NERDTreeToggle'] }
 Plug 'itchyny/lightline.vim'
-Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'morhetz/gruvbox'
-Plug 'sheerun/vim-polyglot'
 Plug 'preservim/nerdcommenter'
+Plug 'rhysd/vim-clang-format', { 'for': ['c', 'cpp'] } 
+Plug 'sheerun/vim-polyglot'
+Plug 'shinchu/lightline-gruvbox.vim'
 
 call plug#end()
+
 filetype on
 syntax enable
 
 set autoread
+set background=dark
 set backspace=indent,eol,start
 set backup
 set backupdir=~/.cache/vim/backup
 set backupskip+=",*.gpg"
-set writebackup
 set cmdheight=1
 set complete-=i
 set completeopt=longest,menuone
+set cryptmethod=blowfish2
 set cursorline
 set encoding=UTF-8
+set equalalways
 set expandtab
 set fileformats=unix,dos,mac
 set fillchars=vert:┃ 
 set gdefault
+set hidden
 set history=1000
 set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
+set lazyredraw
 set mouse-=a
 set mousehide
-set equalalways
 set noerrorbells
-set hidden
-set lazyredraw
 set nolist
 set nomodeline " disabled for security
 set noruler
@@ -68,10 +75,8 @@ set number
 set path=.,,**,/usr/local/include,/usr/include
 set pumheight=15
 set relativenumber
-set report=999999
 set scrolljump=5
 set scrolloff=5
-set sessionoptions+=tabpages,globals
 set shiftround
 set shiftwidth=4
 set shortmess=IAW
@@ -88,19 +93,19 @@ set splitbelow
 set splitright
 set tabpagemax=999
 set tabstop=4
+set termguicolors
 set tags=./tags,.tags
 set textwidth=99999
 set timeoutlen=300
-set title
-set titlelen=100
-set titlestring=(\ %(%{&ft},\ %)%{&ff}%(,\ %{&fenc}%)\ )
 set undodir=~/.cache/vim/undo
 set undofile
+set undolevels=1000
+set undoreload=1000
 set updatetime=300
-set visualbell t_vb=
-set wildignore=*.o,*.so,*.pyc,*.class,*.fasl,*/tmp/*,*.swp,*.zip,*.bak,*.orig,*.jpg,*.png,*.gif,DS_Store,*.sassc,*.pump
+set wildignore=*.o,*.so,*.pyc,*.swp,*.orig,DS_Store
 set wildmenu
 set wildmode=longest,list
+set writebackup
 
 if executable('rg')
     set grepprg=rg\ --vimgrep
@@ -127,8 +132,15 @@ au filetype crontab setlocal nobackup nowritebackup
 " restore position in file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
 
+" better lambda indent
+au BufNewFile,BufRead *.cpp setlocal cindent cino='j1,(0,ws,Ws'
+
 " Auto save
 " au CursorHold *.c,*.h,*.cpp,*.h,*.hpp,*.rb nested silent up
+
+" Auto open quickfix on make
+" au QuickFixCmdPost [^l]* nested cwindow
+" au QuickFixCmdPost l* nested lwindow
 
 " Check spelling in markdown files
 au FileType markdown setlocal spell
@@ -141,6 +153,7 @@ ia   toogle   toggle
 ia   wiht     with
 ia   heigth   height
 ia   retrun   return
+ia   easlt    eastl
 ia   being    begin
 
 " shortcuts
@@ -148,6 +161,8 @@ ab   fu   function
 ab   pr   private
 ab   pt   protected
 ab   pu   public
+ab   st   static
+ab   cl   console.log
 
 " save time
 nnoremap ; :
@@ -162,7 +177,7 @@ nnoremap <silent> _ :nohl<CR>
 " Only higlight on #
 nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
-" toggle options
+" Toggle options
 nnoremap <silent> <leader>op :set paste!<CR>
 nnoremap <silent> <leader>on :set number!<CR>
 nnoremap <silent> <leader>or :set relativenumber!<CR>
@@ -177,11 +192,17 @@ nmap K <nop>
 nmap <C-s> <nop>
 nmap ^S <nop>
 
- " Repurpose cursor keys
+" Repurpose cursor keys
 nnoremap <silent> <Up> :cprevious<CR>
 nnoremap <silent> <Down> :cnext<CR>
 nnoremap <silent> <Left> :lprevious<CR>
 nnoremap <silent> <Right> :lnext<CR>
+
+" Replace word under cursor
+nnoremap <leader>r :%s/\<<C-R><C-W>\>//gc<left><left><left>
+
+" Close QuickFix window
+nnoremap <leader>c :cclose<CR>
 
 
 
@@ -212,7 +233,6 @@ command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
 " Gruvbox
 " -------------------------------------------------------------------------
-set termguicolors
 " set Vim-specific sequences for RGB colors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -223,7 +243,6 @@ let g:gruvbox_contrast_light="medium"
 let g:gruvbox_vert_split="bg0"
 let g:gruvbox_sign_column="bg0"
 let g:gruvbox_color_column="bg0"
-set background=dark
 colorscheme gruvbox
 " hi VertSplit guifg=#504945
 hi ColorColumn guibg=#1d2021
@@ -237,17 +256,6 @@ let g:asyncrun_open = 12
 let g:asyncrun_save = 2
 let g:asyncrun_local = 1
 let g:asyncrun_exit = "if g:asyncrun_code == 0 | cclose | endif"
-
-
-" Git-Gutter
-" -------------------------------------------------------------------------
-let g:gitgutter_override_sign_column_highlight = 0
-let g:gitgutter_enabled = 1
-let g:gitgutter_realtime =1
-let g:gitgutter_sign_added = '·'
-let g:gitgutter_sign_modified = '·'
-let g:gitgutter_sign_removed= '·'
-let g:gitgutter_sign_modified_removed= '·'
 
 
 " Startify
@@ -270,7 +278,7 @@ let g:startify_list_order = [
         \ 'sessions',
         \ ['   Bookmarks:'],
         \ 'bookmarks',
-        \ ]
+\ ]
 
 
 " EasyMotion
@@ -311,6 +319,7 @@ let g:lightline = {
       \ },
       \ 'component_function': {
       \   'cocstatus': 'coc#status',
+	  \   'window_number': 'WindowNumber', 
       \ },
 \ }
 
@@ -345,25 +354,35 @@ let g:fzf_action = { 'ctrl-q': function('s:build_quickfix_list') }
 command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'options': ['--bind=ctrl-a:select-all']}, <bang>0)
 command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.<q-args>, 1, fzf#vim#with_preview({'options': ['--bind=ctrl-a:select-all']}), <bang>0)
 
-nmap <leader>f :GitFiles<CR>
-nmap <leader>d :Rg<CR>
+nmap <leader>f :Files<CR>
+nmap <leader>g :Rg 
+
+let g:fzf_tags_command = 'ctags -R --extra=+q'
+
+
+" A
+" -------------------------------------------------------------------------
+let g:alternateRelativeFiles = 1
+nmap <Leader>h :A<CR>
+
 
 " NERDCommenter
 " -------------------------------------------------------------------------
 let g:NERDSpaceDelims = 1
+let g:NERDCustomDelimiters = { 'ddf': { 'left': '//','right': '' } }
 
 
-" YouCompleteMe
+" Perforce
 " -------------------------------------------------------------------------
-" " Let clangd fully control code completion
-" let g:ycm_clangd_uses_ycmd_caching = 0
-" " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
-" let g:ycm_clangd_binary_path = exepath("clangd")
-" " Mappings
-" nmap <leader>d :YcmCompleter GoToDefinition<CR>
-" nmap <leader>D :YcmCompleter GoToDeclaration<CR>
-" nmap <leader>r :YcmCompleter GoToReferences<CR>
-" nmap <leader>R :YcmCompleter RefactorRename 
+let g:perforce_prompt_on_open=0
+let g:perforce_open_on_change=1
+
+
+" CRTLSF
+" -------------------------------------------------------------------------
+let g:ctrlsf_case_sensitive = 'smart'
+let g:ctrlsf_default_root = 'cwd'
+let g:ctrlsf_search_mode = 'async'
 
 
 " COC
@@ -373,7 +392,7 @@ let languageservers = {}
 let languageservers['clangd'] = {
     \ 'command': 'clangd',
     \ 'filetypes': ['c', 'cpp'],
-    \ 'rootPatterns': ['compile_commands.json', '.vim/', '.git/', '.hg/'],
+    \ 'rootPatterns': ['compile_commands.json', '.vim/', '.git/', '.hg/', 'TNT.proj'],
 \ }
 
 " let languageservers['ccls'] = {
@@ -456,7 +475,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>qf <Plug>(coc-fix-current)
 
 " Using CocList
 " Show all diagnostics
@@ -475,14 +494,14 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 
 function! SetLocalOptions(fname)
     let dirname = fnamemodify(a:fname, ":p:h")
-    while "/" != dirname
+    " while "/" != dirname
         let lvimrc  = dirname . "/.lvimrc"
         if filereadable(lvimrc)
             execute "source " . lvimrc
             break
         endif
         let dirname = fnamemodify(dirname, ":p:h:h")
-    endwhile
+    " endwhile
 endfunction
 
 call SetLocalOptions(bufname("%"))
