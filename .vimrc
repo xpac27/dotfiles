@@ -352,7 +352,12 @@ let g:fzf_action = { 'ctrl-q': function('s:build_quickfix_list') }
 
 " CTRL-A to select all
 command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'options': ['--bind=ctrl-a:select-all']}, <bang>0)
-command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.<q-args>, 1, fzf#vim#with_preview({'options': ['--bind=ctrl-a:select-all']}), <bang>0)
+
+if has("unix")
+	command! -bang -nargs=* Rg call fzf#vim#grep('rg --vimgrep --color "always" '.<q-args>, 1, fzf#vim#with_preview({'options': ['--bind=ctrl-a:select-all']}), <bang>0)
+else
+	command! -bang -nargs=* Rg call fzf#vim#grep('rg --vimgrep --color "always" '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\Users\vcogne\preview.py {}', '--preview-window', 'right:50%:noborder']}, <bang>0)
+endif
 
 nmap <leader>f :Files<CR>
 nmap <leader>g :Rg 
