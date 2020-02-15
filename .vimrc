@@ -346,7 +346,7 @@ command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'optio
 command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.<q-args>, 1, fzf#vim#with_preview({'options': ['--bind=ctrl-a:select-all']}), <bang>0)
 
 nmap <leader>f :GitFiles<CR>
-nmap <leader>d :Rg<CR>
+nmap <leader>g :Rg<CR>
 
 " NERDCommenter
 " -------------------------------------------------------------------------
