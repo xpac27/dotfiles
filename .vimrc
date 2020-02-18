@@ -20,7 +20,6 @@ else
 	Plug 'nfvs/vim-perforce'
 	Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
 	Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
-	Plug 'skywind3000/vim-terminal-help'
 	Plug 'vim-scripts/a.vim'
 end
 
@@ -355,6 +354,7 @@ command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'optio
 
 if has("unix")
 	command! -bang -nargs=* Rg call fzf#vim#grep('rg --vimgrep --color "always" '.<q-args>, 1, fzf#vim#with_preview({'options': ['--bind=ctrl-a:select-all']}), <bang>0)
+    " command! -bang -nargs=* Rg call fzf#vim#grep('rg --vimgrep --color "always" '.<q-args>, 1, {'options': ['--preview=cat (echo {} | sed "s/\([^:]\+\)\(.*\)/\1/")', '--bind=ctrl-a:select-all']}, <bang>0)"
 else
 	command! -bang -nargs=* Rg call fzf#vim#grep('rg --vimgrep --color "always" '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\Users\vcogne\preview.py {}', '--preview-window', 'right:50%:noborder']}, <bang>0)
 endif
@@ -369,7 +369,7 @@ let g:fzf_tags_command = 'ctags -R --extra=+q'
 " -------------------------------------------------------------------------
 let g:alternateRelativeFiles = 1
 let g:alternateSearchPath = 'sfr:.,../source,sfr:../../source,sfr:../../src,sfr:../src,sfr:../../include,sfr:../include,sfr:../../inc,sfr:../inc'
-nmap <buffer><silent> <Leader>h :w<CR>:A<CR>
+nmap <Leader>h :A<CR>
 
 
 " NERDCommenter
@@ -504,7 +504,7 @@ function! SetLocalOptions(fname)
         let lvimrc  = dirname . "/.lvimrc"
         if filereadable(lvimrc)
             execute "source " . lvimrc
-            break
+            " break
         endif
         let dirname = fnamemodify(dirname, ":p:h:h")
     " endwhile
