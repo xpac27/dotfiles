@@ -101,7 +101,7 @@ set undofile
 set undolevels=1000
 set undoreload=1000
 set updatetime=300
-set wildignore=*.o,*.so,*.pyc,*.swp,*.orig,DS_Store
+set wildignore=*.o,*.dwo,*.so,*.pyc,*.swp,*.orig,DS_Store
 set wildmenu
 set wildmode=longest,list
 set writebackup
@@ -247,6 +247,7 @@ colorscheme gruvbox
 hi ColorColumn guibg=#1d2021
 " hi Search guifg=#666666 guibg=#ffffff
 hi CocHighlightText guibg=#665c54
+hi Search guibg=#222222 guifg=#d79921
 
 
 " AsyncRun
@@ -353,13 +354,14 @@ let g:fzf_action = { 'ctrl-q': function('s:build_quickfix_list') }
 command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'options': ['--bind=ctrl-a:select-all']}, <bang>0)
 
 if has("unix")
+    nmap <leader>f :GitFiles<CR>
 	command! -bang -nargs=* Rg call fzf#vim#grep('rg --vimgrep --color "always" '.<q-args>, 1, fzf#vim#with_preview({'options': ['--bind=ctrl-a:select-all']}), <bang>0)
     " command! -bang -nargs=* Rg call fzf#vim#grep('rg --vimgrep --color "always" '.<q-args>, 1, {'options': ['--preview=cat (echo {} | sed "s/\([^:]\+\)\(.*\)/\1/")', '--bind=ctrl-a:select-all']}, <bang>0)"
 else
+    nmap <leader>f :Files<CR>
 	command! -bang -nargs=* Rg call fzf#vim#grep('rg --vimgrep --color "always" '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\Users\vcogne\preview.py {}', '--preview-window', 'right:50%:noborder']}, <bang>0)
 endif
 
-nmap <leader>f :Files<CR>
 nmap <leader>g :Rg 
 
 let g:fzf_tags_command = 'ctags -R --extra=+q'
