@@ -20,7 +20,7 @@ else
 	Plug 'nfvs/vim-perforce'
 	Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
 	Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
-	Plug 'vim-scripts/a.vim'
+	Plug 'derekwyatt/vim-fswitch'
 end
 
 Plug 'easymotion/vim-easymotion'
@@ -367,11 +367,9 @@ nmap <leader>g :Rg
 let g:fzf_tags_command = 'ctags -R --extra=+q'
 
 
-" A
+" FSwitch
 " -------------------------------------------------------------------------
-let g:alternateRelativeFiles = 1
-let g:alternateSearchPath = 'sfr:.,../source,sfr:../../source,sfr:../../src,sfr:../src,sfr:../../include,sfr:../include,sfr:../../inc,sfr:../inc'
-nmap <Leader>h :A<CR>
+nmap <Leader>h :FSHere<CR>
 
 
 " NERDCommenter
