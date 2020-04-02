@@ -42,7 +42,7 @@ set backspace=indent,eol,start
 set backup
 set backupdir=~/.cache/vim/backup
 set backupskip+=",*.gpg"
-set cmdheight=1
+set cmdheight=2
 set complete-=i
 set completeopt=longest,menuone
 set cryptmethod=blowfish2
@@ -93,7 +93,7 @@ set splitright
 set tabpagemax=999
 set tabstop=4
 set termguicolors
-set tags=./tags,.tags
+set tags=./tags,.tags,tags
 set textwidth=99999
 set timeoutlen=300
 set undodir=~/.cache/vim/undo
@@ -132,7 +132,7 @@ au filetype crontab setlocal nobackup nowritebackup
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
 
 " better lambda indent
-au BufNewFile,BufRead *.cpp,*.c setlocal cindent cino='j1,(0,ws,Ws'
+au BufNewFile,BufRead *.cpp setlocal cindent cino='j1,(0,ws,Ws'
 
 " Auto save
 " au CursorHold *.c,*.h,*.cpp,*.h,*.hpp,*.rb nested silent up
@@ -142,7 +142,7 @@ au BufNewFile,BufRead *.cpp,*.c setlocal cindent cino='j1,(0,ws,Ws'
 " au QuickFixCmdPost l* nested lwindow
 
 " Check spelling in markdown files
-au FileType markdown setlocal spell
+" au FileType markdown setlocal spell
 
 " typos
 ia   feild    field
@@ -211,6 +211,11 @@ nnoremap <leader>c :cclose<CR>
 " =========================================================================
 
 
+" FSwitch
+" -------------------------------------------------------------------------
+nmap <Leader>h :FSHere<CR>
+
+
 " JSON
 " -------------------------------------------------------------------------
 if executable('python')
@@ -218,10 +223,16 @@ if executable('python')
 endif
 
 
-" Async MAKE
+" Others
 " -------------------------------------------------------------------------
-command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
-
+if has("unix")
+    command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+else
+    command! Compile AsyncRun compile.rb %:p
+    command! CompileProject AsyncRun compile.rb %:p:h
+    command! CompileSolution AsyncRun compile.rb
+    command! RemoveFromMaster AsyncRun -silent compile.rb REMOVE_FROM_MASTER %:p
+endif
 
 
 
@@ -254,7 +265,6 @@ hi Search guibg=#222222 guifg=#d79921
 " -------------------------------------------------------------------------
 let g:asyncrun_open = 12
 let g:asyncrun_save = 2
-let g:asyncrun_local = 1
 let g:asyncrun_exit = "if g:asyncrun_code == 0 | cclose | endif"
 
 
@@ -351,25 +361,24 @@ endfunction
 let g:fzf_action = { 'ctrl-q': function('s:build_quickfix_list') }
 
 " CTRL-A to select all
-command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'options': ['--bind=ctrl-a:select-all']}, <bang>0)
+if has("unix")
+	command! -bang -nargs=? GFiles call fzf#vim#files(<q-args>, {'options': ['--bind=ctrl-a:select-all']}, <bang>0)
+else
+    command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'source': 'rg --files -tcpp -tcsharp -tddf', 'options': ['--bind=ctrl-a:select-all']}, <bang>0)
+endif
 
 if has("unix")
     nmap <leader>f :GitFiles<CR>
-	command! -bang -nargs=* Rg call fzf#vim#grep('rg --vimgrep --color "always" '.<q-args>, 1, fzf#vim#with_preview({'options': ['--bind=ctrl-a:select-all']}), <bang>0)
-    " command! -bang -nargs=* Rg call fzf#vim#grep('rg --vimgrep --color "always" '.<q-args>, 1, {'options': ['--preview=cat (echo {} | sed "s/\([^:]\+\)\(.*\)/\1/")', '--bind=ctrl-a:select-all']}, <bang>0)"
+	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep --color "always" '.<q-args>, 1, fzf#vim#with_preview({'options': ['--bind=ctrl-a:select-all']}), <bang>0)
 else
     nmap <leader>f :Files<CR>
-	command! -bang -nargs=* Rg call fzf#vim#grep('rg --vimgrep --color "always" '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\Users\vcogne\preview.py {}', '--preview-window', 'right:50%:noborder']}, <bang>0)
+	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep --color "always" -tcpp -tcsharp -tddf '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'preview.py {}', '--preview-window', 'right:50%:noborder']}, <bang>0)
 endif
 
-nmap <leader>g :Rg 
+nmap <leader>b :Buffers<CR>
+nmap <leader>g :Find 
 
 let g:fzf_tags_command = 'ctags -R --extra=+q'
-
-
-" FSwitch
-" -------------------------------------------------------------------------
-nmap <Leader>h :FSHere<CR>
 
 
 " NERDCommenter
@@ -391,27 +400,13 @@ let g:ctrlsf_default_root = 'cwd'
 let g:ctrlsf_search_mode = 'async'
 
 
+" Polyglote
+" -------------------------------------------------------------------------
+let g:polyglot_disabled = ['markdown']
+
+
 " COC
 " -------------------------------------------------------------------------
-let languageservers = {}
-
-let languageservers['clangd'] = {
-    \ 'command': 'clangd',
-    \ 'filetypes': ['c', 'cpp'],
-    \ 'rootPatterns': ['compile_commands.json', '.vim/', '.git/', '.hg/', 'TNT.proj'],
-\ }
-
-" let languageservers['ccls'] = {
-    " \ 'command': 'ccls',
-    " \ 'filetypes': ['c', 'cpp'],
-    " \ 'rootPatterns': ['.ccls', 'compile_commands.json', '.vim/', '.git/', '.hg/'],
-    " \ 'initializationOptions': {
-    " \   'cache': {
-    " \     'directory': '/home/vinz/.cache/ccls',
-    " \ 	}
-    " \ }
-" \ }
-
 let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-yaml',
@@ -422,7 +417,6 @@ let g:coc_user_config = {
     \ 'coc.preferences.formatOnSaveFiletypes': [],
     \ 'diagnostic.enable': v:true,
     \ 'diagnostic.enableMessage': 'always',
-    \ 'languageserver': languageservers,
     \ 'diagnostic.errorSign': 'x',
     \ 'diagnostic.warningSign': '∆',
     \ 'diagnostic.infoSign': '➤',
@@ -510,4 +504,8 @@ function! SetLocalOptions(fname)
     " endwhile
 endfunction
 
-call SetLocalOptions(bufname("%"))
+if has("unix")
+    call SetLocalOptions(bufname("%"))
+elseif filereadable(".lvimrc")
+    execute "source .lvimrc"
+endif
