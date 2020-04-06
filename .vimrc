@@ -20,19 +20,20 @@ else
 	Plug 'nfvs/vim-perforce'
 	Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
 	Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
-	Plug 'derekwyatt/vim-fswitch'
+	Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
 end
 
 Plug 'easymotion/vim-easymotion'
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
-Plug 'preservim/nerdcommenter'
+Plug 'tpope/vim-commentary'
 Plug 'rhysd/vim-clang-format', { 'for': ['c', 'cpp'] } 
 Plug 'sheerun/vim-polyglot'
 Plug 'shinchu/lightline-gruvbox.vim'
 
 call plug#end()
 
+autocmd FileType c setl cms=//\ %s
 filetype on
 syntax enable
 
@@ -154,6 +155,7 @@ ia   heigth   height
 ia   retrun   return
 ia   easlt    eastl
 ia   being    begin
+ia   frist    first
 
 " shortcuts
 ab   fu   function
@@ -383,8 +385,7 @@ let g:fzf_tags_command = 'ctags -R --extra=+q'
 
 " NERDCommenter
 " -------------------------------------------------------------------------
-let g:NERDSpaceDelims = 1
-let g:NERDCustomDelimiters = { 'ddf': { 'left': '//','right': '' } }
+autocmd FileType c,cpp,ddf setlocal commentstring=//\ %s
 
 
 " Perforce
