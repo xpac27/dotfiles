@@ -16,10 +16,8 @@ end
 eval (direnv hook fish)
 
 # rbenv
-set PATH $HOME/.rbenv/bin $PATH
-set PATH $HOME/.rbenv/shims $PATH
-set PATH $HOME/.cargo/bin $PATH
-rbenv rehash >/dev/null ^&1
+set -Ux fish_user_paths $HOME/.rbenv/bin $fish_user_paths
+status --is-interactive; and rbenv init - | source
 
 # Awesome Git aliases
 alias gs='git status'
