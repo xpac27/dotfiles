@@ -234,6 +234,7 @@ else
     command! CompileProject AsyncRun compile.rb %:p:h
     command! CompileSolution AsyncRun compile.rb
     command! RemoveFromMaster AsyncRun -silent compile.rb REMOVE_FROM_MASTER %:p
+	command! DicePersistenceTests AsyncRun D:\kingston\dev\TnT\Local\Bin\Win64-Dll\release\Extension.DicePersistence.Test_Win64_release_Dll.exe
 endif
 
 
