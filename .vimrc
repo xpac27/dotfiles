@@ -1,4 +1,4 @@
-" Automatic installation of vim-plug
+
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -16,7 +16,7 @@ else
 	Plug 'junegunn/fzf.vim'
 	Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 	Plug 'mhinz/vim-startify'
-	Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'nfvs/vim-perforce'
 	Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
 	Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
@@ -27,7 +27,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-commentary'
-Plug 'rhysd/vim-clang-format', { 'for': ['c', 'cpp'] } 
 Plug 'sheerun/vim-polyglot'
 Plug 'shinchu/lightline-gruvbox.vim'
 
@@ -40,9 +39,6 @@ syntax enable
 set autoread
 set background=dark
 set backspace=indent,eol,start
-set backup
-set backupdir=~/.cache/vim/backup
-set backupskip+=",*.gpg"
 set cmdheight=2
 set complete-=i
 set completeopt=longest,menuone
@@ -105,7 +101,16 @@ set updatetime=300
 set wildignore=*.o,*.dwo,*.so,*.pyc,*.swp,*.orig,DS_Store
 set wildmenu
 set wildmode=longest,list
-set writebackup
+
+if has("unix")
+    set nobackup
+    set nowritebackup
+else
+    set backup
+    set backupdir=~/.cache/vim/backup
+    set backupskip+=",*.gpg"
+    set writebackup
+endif
 
 if executable('rg')
     set grepprg=rg\ --vimgrep
@@ -344,14 +349,6 @@ endfunction
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 
-" Clang Format
-" -------------------------------------------------------------------------
-let g:clang_format#detect_style_file = 1
-let g:clang_format#auto_format = 1
-let g:clang_format#auto_format_on_insert_leave = 0
-let g:clang_format#enable_fallback_style = 0
-
-
 " FZF
 " -------------------------------------------------------------------------
 function! s:build_quickfix_list(lines)
@@ -387,6 +384,7 @@ let g:fzf_tags_command = 'ctags -R --extra=+q'
 " NERDCommenter
 " -------------------------------------------------------------------------
 autocmd FileType c,cpp,ddf setlocal commentstring=//\ %s
+autocmd FileType tup setlocal commentstring=\"\ %s
 
 
 " Perforce
@@ -415,17 +413,6 @@ let g:coc_global_extensions = [
   \ 'coc-snippets',
 \]
 
-let g:coc_user_config = {
-    \ 'coc.preferences.formatOnSaveFiletypes': [],
-    \ 'diagnostic.enable': v:true,
-    \ 'diagnostic.enableMessage': 'always',
-    \ 'diagnostic.errorSign': 'x',
-    \ 'diagnostic.warningSign': '∆',
-    \ 'diagnostic.infoSign': '➤',
-    \ 'diagnostic.hintSign': '➤',
-    \ 'suggest.snippetIndicator': ' ⚡',
-\ }
-
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
@@ -445,18 +432,22 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Or use `complete_info` if your vim support it, like:
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" Remap keys for gotos
+" GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
@@ -484,6 +475,8 @@ nmap <leader>qf <Plug>(coc-fix-current)
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Find symbol of current document
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.

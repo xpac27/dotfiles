@@ -12,6 +12,9 @@ end
 # direnv
 eval (direnv hook fish)
 
+# local bin
+set PATH $HOME/.local/bin $PATH
+
 # rbenv
 set -Ux fish_user_paths $HOME/.rbenv/bin $fish_user_paths
 status --is-interactive; and rbenv init - | source

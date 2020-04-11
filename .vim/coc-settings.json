@@ -1,0 +1,12 @@
+{
+    "coc.preferences.formatOnSaveFiletypes": ["c", "cpp"],
+    "coc.preferences.formatOnInsertLeave": true,
+    "coc.preferences.formatOnType": true,
+    "diagnostic.enable": true,
+    "diagnostic.enableMessage": "always",
+    "diagnostic.errorSign": "x",
+    "diagnostic.warningSign": "∆",
+    "diagnostic.infoSign": "➤",
+    "diagnostic.hintSign": "➤",
+    "suggest.snippetIndicator": " ⚡"
+}
