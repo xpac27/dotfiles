@@ -411,6 +411,7 @@ let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-yaml',
   \ 'coc-snippets',
+  \ 'coc-markdownlint',
 \]
 
 " don't give |ins-completion-menu| messages.

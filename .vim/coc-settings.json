@@ -1,12 +1,20 @@
 {
     "coc.preferences.formatOnSaveFiletypes": ["c", "cpp"],
     "coc.preferences.formatOnInsertLeave": true,
-    "coc.preferences.formatOnType": true,
+    "coc.preferences.formatOnType": false,
     "diagnostic.enable": true,
     "diagnostic.enableMessage": "always",
     "diagnostic.errorSign": "x",
     "diagnostic.warningSign": "∆",
     "diagnostic.infoSign": "➤",
     "diagnostic.hintSign": "➤",
-    "suggest.snippetIndicator": " ⚡"
+    "suggest.snippetIndicator": " ⚡",
+    "languageserver" : 
+    {
+        "clangd": {
+            "command": "clangd",
+            "filetypes": ["c", "cpp"],
+            "rootPatterns": ["compile_commands.json", ".vim/", ".git/", ".hg/", "TNT.proj"]
+        }
+    }
 }
