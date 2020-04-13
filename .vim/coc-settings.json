@@ -4,17 +4,17 @@
     "coc.preferences.formatOnType": false,
     "diagnostic.enable": true,
     "diagnostic.enableMessage": "always",
-    "diagnostic.errorSign": "x",
-    "diagnostic.warningSign": "∆",
-    "diagnostic.infoSign": "➤",
-    "diagnostic.hintSign": "➤",
+    "diagnostic.infoSign": "😱",
+    "diagnostic.errorSign": "🔥",
+    "diagnostic.warningSign": "🔔",
     "suggest.snippetIndicator": " ⚡",
     "languageserver" : 
     {
         "clangd": {
             "command": "clangd",
             "filetypes": ["c", "cpp"],
-            "rootPatterns": ["compile_commands.json", ".vim/", ".git/", ".hg/", "TNT.proj"]
+            "rootPatterns": ["compile_commands.json", ".vim/", ".git/", ".hg/", "TNT.proj"],
+            "arguments" : ["--all-scopes-completion=false"]
         }
     }
 }

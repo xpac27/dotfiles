@@ -35,7 +35,7 @@ alias gds='git diff --staged'
 # Machine
 alias reboot="systemctl reboot"
 alias poweroff="systemctl poweroff"
-alias sleep="systemctl suspend"
+alias suspend="systemctl suspend"
 alias hibernate="systemctl hybrid-sleep"
 
 # Exa
