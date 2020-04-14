@@ -417,6 +417,7 @@ let g:polyglot_disabled = ['markdown']
 " COC
 " -------------------------------------------------------------------------
 let g:coc_global_extensions = [
+  \ 'coc-git',
   \ 'coc-json',
   \ 'coc-yaml',
   \ 'coc-snippets',

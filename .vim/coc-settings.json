@@ -4,17 +4,27 @@
     "coc.preferences.formatOnType": false,
     "diagnostic.enable": true,
     "diagnostic.enableMessage": "always",
-    "diagnostic.infoSign": "😱",
+    "diagnostic.infoSign": "💡",
     "diagnostic.errorSign": "🔥",
     "diagnostic.warningSign": "🔔",
     "suggest.snippetIndicator": " ⚡",
+    "git.changedSign.text":"░",
+    "git.changeRemovedSign.text": "░",
+    "git.addedSign.text":"▒",
+    "git.removedSign.text":"🗑️",
+    "git.topRemovedSign.text": "🩸",
+    "git.addedSign.hlGroup": "GitGutterAdd",
+    "git.changedSign.hlGroup": "GitGutterChange",
+    "git.removedSign.hlGroup": "GitGutterDelete",
+    "git.topRemovedSign.hlGroup": "GitGutterDelete",
+    "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
     "languageserver" : 
     {
         "clangd": {
+            "args" : ["--all-scopes-completion=false"],
             "command": "clangd",
             "filetypes": ["c", "cpp"],
-            "rootPatterns": ["compile_commands.json", ".vim/", ".git/", ".hg/", "TNT.proj"],
-            "arguments" : ["--all-scopes-completion=false"]
+            "rootPatterns": ["compile_commands.json", ".vim/", ".git/", ".hg/", "TNT.proj"]
         }
     }
 }
