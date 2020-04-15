@@ -398,7 +398,7 @@ let g:fzf_tags_command = 'ctags -R --extra=+q'
 
 " NERDCommenter
 " -------------------------------------------------------------------------
-autocmd FileType c,cpp,ddf setlocal commentstring=//\ %s
+autocmd FileType c,cpp,cs,ddf setlocal commentstring=//\ %s
 autocmd FileType tup setlocal commentstring=\"\ %s
 
 
