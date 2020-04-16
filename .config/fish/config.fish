@@ -15,6 +15,15 @@ eval (direnv hook fish)
 # local bin
 set PATH $HOME/.local/bin $PATH
 
+# ranger
+set RANGER_LOAD_DEFAULT_RC false
+
+# nnn
+alias n='nnn -QAHeo'
+alias ns='nnn -QAHSeo'
+set NNN_COLORS '3333'
+set NNN_PLUG 'o:fzopen;d:fzcd;i:imgview'
+
 # rbenv
 set -Ux fish_user_paths $HOME/.rbenv/bin $fish_user_paths
 status --is-interactive; and rbenv init - | source
@@ -40,9 +49,9 @@ alias hibernate="systemctl hybrid-sleep"
 
 # Exa
 alias ll="exa -lh --git"
+alias la="exa -lha --git"
 alias lg="exa -lhG --git"
 alias lt="exa -lhT --git"
-alias lla="exa -lha --git"
 alias lga="exa -lhGa --git"
 alias lta="exa -lhTa --git"
 
