@@ -17,7 +17,7 @@ source $ZSH/oh-my-zsh.sh
 export LC_CTYPE=en_US.UTF-8
 export LANG=en_US.UTF-8
 export EDITOR=vi
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/home/vinz/.local/bin:$PATH"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/home/vinz/.local/bin:/home/vinz/go/bin:$PATH"
 export HISTSIZE=1000000
 export SAVEHIST=1000000
 
