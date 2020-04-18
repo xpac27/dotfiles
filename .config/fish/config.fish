@@ -61,6 +61,12 @@ alias rg="rg --colors 'match:fg:black' --colors 'match:bg:yellow' --colors 'line
 # Key bindings
 fish_vi_key_bindings
 
+# Gruvbox
+set -l GRUVBOX_SCRIPT ~/.vim/bundle/gruvbox/gruvbox_256palette.sh
+if test -f $GRUVBOX_SCRIPT
+    bash $GRUVBOX_SCRIPT
+end
+
 # FZF
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,.tup,node_modules}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
