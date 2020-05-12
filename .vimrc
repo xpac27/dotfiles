@@ -35,6 +35,7 @@ Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-commentary'
 Plug 'sheerun/vim-polyglot'
 Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 call plug#end()
 
@@ -216,6 +217,9 @@ nnoremap <leader>r :%s/\<<C-R><C-W>\>//gc<left><left><left>
 " Close QuickFix window
 nnoremap <leader>c :cclose<CR>
 
+" Copy filepath
+nmap cp :let @" = expand("%")<cr>
+
 
 
 
@@ -372,33 +376,38 @@ function! s:build_quickfix_list(lines)
   cc
 endfunction
 
+" https://minsw.github.io/fzf-color-picker/
+let fzf_gruvebox = 'fg:#a89984,bg:#282828,hl:#fabd2f,fg+:#fbf1c7,bg+:#282828,hl+:#fabd2f,info:#fbf1c7,prompt:#fb4934,pointer:#fbf1c7,marker:#d3869b,spinner:#fabd2f,header:#8ec07c'
+
 " CTRL-Q to open in quickfix list
 let g:fzf_action = { 'ctrl-q': function('s:build_quickfix_list') }
 
 " CTRL-A to select all
 if has("unix")
-	command! -bang -nargs=? GFiles call fzf#vim#files(<q-args>, {'options': ['--bind=ctrl-a:select-all']}, <bang>0)
+	command! -bang -nargs=? GFiles call fzf#vim#files(<q-args>, {'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvebox]}, <bang>0)
 else
-    command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'source': 'rg --files -tcpp -tcsharp -tddf', 'options': ['--bind=ctrl-a:select-all']}, <bang>0)
+    command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'source': 'rg --files --smart-case -tcpp -tcsharp -tddf -tproto', 'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvebox]}, <bang>0)
 endif
 
 if has("unix")
     nmap <leader>f :GitFiles<CR>
-	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep --color "always" '.<q-args>, 1, fzf#vim#with_preview({'options': ['--bind=ctrl-a:select-all']}), <bang>0)
+	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep --smart-case '.<q-args>, 1, fzf#vim#with_preview({'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvebox]}), <bang>0)
 else
     nmap <leader>f :Files<CR>
-	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep --color "always" -tcpp -tcsharp -tddf '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'preview.py {}', '--preview-window', 'right:50%:noborder']}, <bang>0)
+	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep --smart-case -tcpp -tcsharp -tddf -tproto '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvebox]}, <bang>0)
+	command! -bang -nargs=* -complete=dir FindFiles call fzf#vim#grep('rg --max-count=1 --vimgrep --smart-case -tcpp -tcsharp -tddf -tproto '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvebox]}, <bang>0)
 endif
 
 nmap <leader>b :Buffers<CR>
 nmap <leader>g :Find 
 
 let g:fzf_tags_command = 'ctags -R --extra=+q'
+let g:fzf_layout = { 'down': '~80%' }
 
 
 " NERDCommenter
 " -------------------------------------------------------------------------
-autocmd FileType c,cpp,cs,ddf setlocal commentstring=//\ %s
+autocmd FileType c,cpp,cs,ddf,proto setlocal commentstring=//\ %s
 autocmd FileType tup setlocal commentstring=\"\ %s
 
 
