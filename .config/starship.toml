@@ -23,7 +23,7 @@ cherry_pick = "🍒 PICKING"
 symbol = "🌱 "
 
 [git_status]
-conflicted = "🏳"
+conflicted = "🏳 "
 ahead = "🚀"
 behind = "😰"
 diverged = "😵"

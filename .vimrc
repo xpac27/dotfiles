@@ -1,4 +1,3 @@
-
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -9,7 +8,6 @@ call plug#begin('~/.vim/plugged')
 
 if &diff
 else
-	Plug 'dyng/ctrlsf.vim'
 	Plug 'gcmt/taboo.vim'
 	Plug 'jamessan/vim-gnupg'
 	Plug 'junegunn/fzf'
@@ -17,11 +15,19 @@ else
 	Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 	Plug 'mhinz/vim-startify'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	Plug 'nfvs/vim-perforce'
 	Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
 	Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
 	Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
+
+    if has("unix")
+    else
+        Plug 'nfvs/vim-perforce'
+    endif
 end
+
+if has("unix")
+    Plug 'direnv/direnv.vim'
+endif
 
 Plug 'easymotion/vim-easymotion'
 Plug 'itchyny/lightline.vim'

@@ -6,7 +6,6 @@
 [core]
     editor = vim
     quotepath = false
-    excludesfile = /Users/vincent.cogne/.gitignore_global
 
 [rerere]
     enabled = false
@@ -36,7 +35,7 @@
 [diff]
     tool = vimdiff
     compactionHeuristic = true
-	# noprefix = true
+	noprefix = true
 
 [difftool]
     prompt = false
@@ -53,6 +52,6 @@
     fetchJobs = 4
 
 [pager]
-    diff = /usr/share/git/diff-highlight/diff-highlight | less -r
-    log = /usr/share/git/diff-highlight/diff-highlight | less -r
-    show = /usr/share/git/diff-highlight/diff-highlight | less -r
+    #diff = /usr/share/git/diff-highlight/diff-highlight | less -r
+    #log = /usr/share/git/diff-highlight/diff-highlight | less -r
+    #show = /usr/share/git/diff-highlight/diff-highlight | less -r

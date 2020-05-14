@@ -12,7 +12,7 @@
     "git.changeRemovedSign.text": "🔸",
     "git.addedSign.text":"🔹",
     "git.removedSign.text":"🗑️",
-    "git.topRemovedSign.text": "🩸",
+    "git.topRemovedSign.text": "🗑️",
     "git.addedSign.hlGroup": "GitGutterAdd",
     "git.changedSign.hlGroup": "GitGutterChange",
     "git.removedSign.hlGroup": "GitGutterDelete",
