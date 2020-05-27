@@ -149,6 +149,8 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "norma
 " better lambda indent
 au BufNewFile,BufRead *.cpp setlocal cindent cino='j1,(0,ws,Ws'
 
+au filetype markdown setlocal textwidth=80
+
 " Auto save
 " au CursorHold *.c,*.h,*.cpp,*.h,*.hpp,*.rb nested silent up
 
