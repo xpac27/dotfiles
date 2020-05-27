@@ -14,7 +14,8 @@ else
 	Plug 'junegunn/fzf.vim'
 	Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 	Plug 'mhinz/vim-startify'
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python3 install.py --clangd-completer' }
 	Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
 	Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
 	Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
@@ -36,6 +37,7 @@ Plug 'tpope/vim-commentary'
 Plug 'sheerun/vim-polyglot'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'gregsexton/MatchTag', { 'for': ['html'] }
 
 call plug#end()
 
@@ -429,83 +431,116 @@ let g:ctrlsf_search_mode = 'async'
 let g:polyglot_disabled = ['markdown']
 
 
+" YouCompleteMe
+" -------------------------------------------------------------------------
+
+let g:ycm_clangd_binary_path = '/usr/bin/clangd'
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_filetype_whitelist = {'cpp': 1, 'c': 1}
+let g:ycm_error_symbol = '🔥'
+let g:ycm_warning_symbol = '🔔'
+let g:ycm_enable_diagnostic_highlighting = 1
+let g:ycm_auto_hover = ''
+let g:ycm_always_populate_location_list = 0
+let g:ycm_filepath_completion_use_working_dir = 0
+nmap <silent> gd :YcmCompleter GoTo<CR>
+nmap <silent> gi :YcmCompleter GoToImprecise<CR>
+nmap <silent> gr :YcmCompleter GoToReferences<CR>
+nmap <silent> gt :YcmCompleter GetType<CR>
+nmap <silent> gf :YcmCompleter FixIt<CR>
+nmap <silent> gr :YcmCompleter RefactorRename 
+nmap K <plug>(YCMHover)
+au BufWritePre *.cpp,*.c,*.h,*.hpp :YcmCompleter Format
+
+augroup MyYCMCustom
+    autocmd!
+    autocmd FileType c,cpp let b:ycm_hover = {
+                \ 'command': 'GetDoc',
+                \ 'syntax': &filetype
+                \ }
+augroup END
+
+
 " COC
 " -------------------------------------------------------------------------
-let g:coc_global_extensions = [
-  \ 'coc-git',
-  \ 'coc-json',
-  \ 'coc-yaml',
-  \ 'coc-snippets',
-  \ 'coc-markdownlint',
-\]
+" let g:coc_global_extensions = [
+"   \ 'coc-git',
+"   \ 'coc-json',
+"   \ 'coc-yaml',
+"   \ 'coc-snippets',
+"   \ 'coc-markdownlint',
+" \]
 
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
+" " don't give |ins-completion-menu| messages.
+" set shortmess+=c
 
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" " Use tab for trigger completion with characters ahead and navigate.
+" " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+" " Use <c-space> to trigger completion.
+" inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
+" " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" " position. Coc only does snippet and additional edit on confirm.
+" if exists('*complete_info')
+"   inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+" else
+"   imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" endif
 
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" " Use `[g` and `]g` to navigate diagnostics
+" nmap <silent> [g <Plug>(coc-diagnostic-prev)
+" nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" GoTo code navigation.
-" nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gd :<C-u>call CocActionAsync('jumpDefinition')<CR>
-nmap <silent> gr <Plug>(coc-references)
+" " GoTo code navigation.
+" " nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gd :<C-u>call CocActionAsync('jumpDefinition')<CR>
+" nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" " Use K to show documentation in preview window
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   else
+"     call CocAction('doHover')
+"   endif
+" endfunction
 
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" " Highlight symbol under cursor on CursorHold
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
+" " Remap for rename current word
+" nmap <leader>rn <Plug>(coc-rename)
 
-" Fix autofix problem of current line
-nmap <leader>qf <Plug>(coc-fix-current)
+" " Fix autofix problem of current line
+" nmap <leader>qf <Plug>(coc-fix-current)
 
-" Using CocList
-" Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" " Using CocList
+" " Show all diagnostics
+" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" " Find symbol of current document
+" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" " Search workspace symbols.
+" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" " Do default action for next item.
+" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" " Do default action for previous item.
+" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+
+
+
 
 " =========================================================================
 " LOCAL VIMRC
