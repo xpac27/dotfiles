@@ -20,6 +20,9 @@ else
 	Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
 	Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
 	Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
+    Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c'}
+    Plug 'junegunn/vim-slash'
+    Plug 'junegunn/goyo.vim'
 
     if has("unix")
     else
@@ -192,9 +195,6 @@ vnoremap > >gv
 " Clear search
 nnoremap <silent> _ :nohl<CR>
 
-" Only higlight on #
-nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
-
 " Toggle options
 nnoremap <silent> <leader>op :set paste!<CR>
 nnoremap <silent> <leader>on :set number!<CR>
@@ -288,9 +288,9 @@ let g:gruvbox_improved_warnings=1
 colorscheme gruvbox
 " hi VertSplit guifg=#504945
 " hi Search guifg=#666666 guibg=#ffffff
-hi ColorColumn guibg=#1d2021
-hi CocHighlightText guibg=#665c54
-hi Search guibg=#222222 guifg=#d79921
+" hi ColorColumn guibg=#1d2021
+" hi CocHighlightText guibg=#665c54
+hi Search guibg=#ffffff guifg=#8ec07c
 
 
 " AsyncRun
@@ -434,6 +434,28 @@ let g:ctrlsf_search_mode = 'async'
 let g:polyglot_disabled = ['markdown']
 
 
+" Vimspector
+" -------------------------------------------------------------------------
+let g:vimspector_enable_mappings = 'HUMAN'
+set mouse=a
+set ttymouse=sgr
+
+
+" Goyo
+" -------------------------------------------------------------------------
+
+function! s:goyo_enter()
+    hi! link StatusLine GruvBoxBg0
+    hi! link StatusLineNC GruvBoxBg0
+endfunction
+
+function! s:goyo_leave()
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+
 " YouCompleteMe
 " -------------------------------------------------------------------------
 if has('win64') || has('win32')
@@ -452,21 +474,13 @@ let g:ycm_filepath_completion_use_working_dir = 0
 nmap <silent> gD :YcmCompleter GoTo<CR>
 nmap <silent> gd :YcmCompleter GoToImprecise<CR>
 nmap <silent> gr :YcmCompleter GoToReferences<CR>
-nmap <silent> qf :YcmCompleter FixIt<CR>
+nmap <silent> gf :YcmCompleter FixIt<CR>
 nmap <silent> gR :YcmCompleter RefactorRename 
 nmap K <plug>(YCMHover)
 
-if has("unix") && filereadable('.clang-format')
+if filereadable('.clang-format')
     au BufWritePre *.cpp,*.c,*.h,*.hpp :YcmCompleter Format
-end
-
-augroup MyYCMCustom
-    autocmd!
-    autocmd FileType c,cpp let b:ycm_hover = {
-                \ 'command': 'GetDoc',
-                \ 'syntax': &filetype
-                \ }
-augroup END
+endif
 
 
 " COC

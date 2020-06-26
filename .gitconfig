@@ -55,3 +55,5 @@
     #diff = /usr/share/git/diff-highlight/diff-highlight | less -r
     #log = /usr/share/git/diff-highlight/diff-highlight | less -r
     #show = /usr/share/git/diff-highlight/diff-highlight | less -r
+[pull]
+	rebase = true
