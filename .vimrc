@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 
 if &diff
 else
+	Plug 'dyng/ctrlsf.vim'
 	Plug 'gcmt/taboo.vim'
 	Plug 'jamessan/vim-gnupg'
 	Plug 'junegunn/fzf'
@@ -15,7 +16,7 @@ else
 	Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 	Plug 'mhinz/vim-startify'
 	" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python3 install.py --clangd-completer' }
+    Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
 	Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
 	Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
 	Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
@@ -144,7 +145,7 @@ au BufNewFile,BufRead Makefile setlocal noexpandtab
 au filetype crontab setlocal nobackup nowritebackup
 
 " restore position in file
-au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
+" au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
 
 " better lambda indent
 au BufNewFile,BufRead *.cpp setlocal cindent cino='j1,(0,ws,Ws'
@@ -390,7 +391,7 @@ let g:fzf_action = { 'ctrl-q': function('s:build_quickfix_list') }
 if has("unix")
 	command! -bang -nargs=? GFiles call fzf#vim#files(<q-args>, {'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvebox]}, <bang>0)
 else
-    command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'source': 'rg --files --smart-case -tcpp -tcsharp -tddf -tproto', 'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvebox]}, <bang>0)
+    command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'source': 'rg --files --smart-case -tcpp -tcsharp -tddf -tproto -tbuild -g "Engine/**" -g "DICE/BattlefieldGame/**" -g "DICE/Casablanca/**" -g "DICE/Extensions/**"', 'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvebox]}, <bang>0)
 endif
 
 if has("unix")
@@ -398,8 +399,8 @@ if has("unix")
 	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep --smart-case '.<q-args>, 1, fzf#vim#with_preview({'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvebox]}), <bang>0)
 else
     nmap <leader>f :Files<CR>
-	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep --smart-case -tcpp -tcsharp -tddf -tproto '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvebox]}, <bang>0)
-	command! -bang -nargs=* -complete=dir FindFiles call fzf#vim#grep('rg --max-count=1 --vimgrep --smart-case -tcpp -tcsharp -tddf -tproto '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvebox]}, <bang>0)
+	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep --smart-case -tcpp -tcsharp -tddf -tproto -tbuild -g "Engine/**" -g "DICE/BattlefieldGame/**" -g "DICE/Casablanca/**" -g "DICE/Extensions/**" '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\\Users\\vcogne\\bin\\preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvebox]}, <bang>0)
+	command! -bang -nargs=* -complete=dir FindFiles call fzf#vim#grep('rg --max-count=1 --vimgrep --smart-case -tcpp -tcsharp -tddf -tproto -tbuild -g "Engine/**" -g "DICE/BattlefieldGame/**" -g "DICE/Casablanca/**" -g "DICE/Extensions/**" '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\\Users\\vcogne\\bin\\preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvebox]}, <bang>0)
 endif
 
 nmap <leader>b :Buffers<CR>
@@ -435,8 +436,11 @@ let g:polyglot_disabled = ['markdown']
 
 " YouCompleteMe
 " -------------------------------------------------------------------------
-
-let g:ycm_clangd_binary_path = '/usr/bin/clangd'
+if has('win64') || has('win32')
+    set pythonthreehome=$HOME\\AppData\\Local\\Programs\\Python\\Python38
+    set pythonthreedll=$HOME\\AppData\\Local\\Programs\\Python\\Python38\\python38.dll
+endif
+let g:ycm_clangd_binary_path = 'clangd'
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_filetype_whitelist = {'cpp': 1, 'c': 1}
 let g:ycm_error_symbol = '🔥'
@@ -445,14 +449,16 @@ let g:ycm_enable_diagnostic_highlighting = 1
 let g:ycm_auto_hover = ''
 let g:ycm_always_populate_location_list = 0
 let g:ycm_filepath_completion_use_working_dir = 0
-nmap <silent> gd :YcmCompleter GoTo<CR>
-nmap <silent> gi :YcmCompleter GoToImprecise<CR>
+nmap <silent> gD :YcmCompleter GoTo<CR>
+nmap <silent> gd :YcmCompleter GoToImprecise<CR>
 nmap <silent> gr :YcmCompleter GoToReferences<CR>
-nmap <silent> gt :YcmCompleter GetType<CR>
-nmap <silent> gf :YcmCompleter FixIt<CR>
-nmap <silent> gr :YcmCompleter RefactorRename 
+nmap <silent> qf :YcmCompleter FixIt<CR>
+nmap <silent> gR :YcmCompleter RefactorRename 
 nmap K <plug>(YCMHover)
-au BufWritePre *.cpp,*.c,*.h,*.hpp :YcmCompleter Format
+
+if has("unix") && filereadable('.clang-format')
+    au BufWritePre *.cpp,*.c,*.h,*.hpp :YcmCompleter Format
+end
 
 augroup MyYCMCustom
     autocmd!
