@@ -19,8 +19,8 @@ set PATH $HOME/.local/bin $PATH
 set RANGER_LOAD_DEFAULT_RC false
 
 # nnn
-alias n='nnn -QAHeo'
-alias ns='nnn -QAHSeo'
+alias n='nnn -QAeod'
+alias na='nnn -QAHeod'
 set NNN_COLORS '3333'
 set NNN_PLUG 'o:fzopen;d:fzcd;i:imgview'
 
@@ -45,7 +45,8 @@ alias gds='git diff --staged'
 alias reboot="systemctl reboot"
 alias poweroff="systemctl poweroff"
 alias suspend="systemctl suspend"
-alias hibernate="systemctl hybrid-sleep"
+alias sleep="systemctl hybrid-sleep"
+alias hibernate="systemctl hibernate"
 
 # Exa
 alias ll="exa -lh --git"
@@ -60,6 +61,13 @@ alias rg="rg --colors 'match:fg:black' --colors 'match:bg:yellow' --colors 'line
 
 # Key bindings
 fish_vi_key_bindings
+
+# vim
+if test $theme = "light"
+  alias vim="vim --cmd \"let theme = 'light'\" $argv"
+else
+  alias vim="vim --cmd \"let theme = 'dark'\" $argv"
+end
 
 # Gruvbox
 set -l GRUVBOX_SCRIPT ~/.vim/bundle/gruvbox/gruvbox_256palette.sh
