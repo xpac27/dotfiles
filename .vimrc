@@ -22,7 +22,6 @@ else
 	Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
     Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c'}
     Plug 'junegunn/goyo.vim'
-	Plug 'farmergreg/vim-lastplace'
 
     if has("unix")
     else
@@ -417,7 +416,7 @@ endif
 
 nmap <leader>b :Buffers<CR>
 nmap <leader>g :Find 
-nmap <leader>l :BLines 
+nmap <leader>l :BLines
 
 let g:fzf_tags_command = 'ctags -R --extra=+q'
 let g:fzf_layout = { 'down': '~80%' }
@@ -476,7 +475,6 @@ if has('win64') || has('win32')
     set pythonthreedll=$HOME\\AppData\\Local\\Programs\\Python\\Python38\\python38.dll
 endif
 let g:ycm_clangd_binary_path = 'clangd'
-let g:ycm_clangd_args = ['-j=18']
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_filetype_whitelist = {'cpp': 1, 'c': 1}
 let g:ycm_error_symbol = '🔥'
