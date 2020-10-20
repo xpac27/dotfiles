@@ -38,7 +38,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-commentary'
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'gregsexton/MatchTag', { 'for': ['html'] }
@@ -49,8 +49,15 @@ autocmd FileType c setl cms=//\ %s
 filetype on
 syntax enable
 
+source $VIMRUNTIME/vimrc_example.vim
+
+if exists('theme') && theme == 'light'
+    set background=light
+else
+    set background=dark
+endif
+
 set autoread
-set background=dark
 set backspace=indent,eol,start
 set cmdheight=2
 set complete-=i
@@ -147,13 +154,8 @@ au BufNewFile,BufRead Makefile setlocal noexpandtab
 " Make crontab happy
 au filetype crontab setlocal nobackup nowritebackup
 
-" restore position in file
-" au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g'\"" | endif
-
 " better lambda indent
 au BufNewFile,BufRead *.cpp setlocal cindent cino='j1,(0,ws,Ws'
-
-au filetype markdown setlocal textwidth=80
 
 " Auto save
 " au CursorHold *.c,*.h,*.cpp,*.h,*.hpp,*.rb nested silent up
@@ -385,7 +387,11 @@ function! s:build_quickfix_list(lines)
 endfunction
 
 " https://minsw.github.io/fzf-color-picker/
-let fzf_gruvebox = 'fg:#a89984,bg:#282828,hl:#fabd2f,fg+:#fbf1c7,bg+:#282828,hl+:#fabd2f,info:#fbf1c7,prompt:#fb4934,pointer:#fbf1c7,marker:#d3869b,spinner:#fabd2f,header:#8ec07c'
+if exists('theme') && theme == 'light'
+    let fzf_gruvebox = ''
+else 
+    let fzf_gruvebox = 'fg:#a89984,bg:#282828,hl:#fabd2f,fg+:#fbf1c7,bg+:#282828,hl+:#fabd2f,info:#fbf1c7,prompt:#fb4934,pointer:#fbf1c7,marker:#d3869b,spinner:#fabd2f,header:#8ec07c'
+endif
 
 " CTRL-Q to open in quickfix list
 let g:fzf_action = { 'ctrl-q': function('s:build_quickfix_list') }
