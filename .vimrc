@@ -21,8 +21,8 @@ else
 	Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
 	Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
     Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c'}
-    Plug 'junegunn/vim-slash'
     Plug 'junegunn/goyo.vim'
+	Plug 'farmergreg/vim-lastplace'
 
     if has("unix")
     else
@@ -195,6 +195,9 @@ vnoremap > >gv
 " Clear search
 nnoremap <silent> _ :nohl<CR>
 
+" Only higlight on #
+nnoremap # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+
 " Toggle options
 nnoremap <silent> <leader>op :set paste!<CR>
 nnoremap <silent> <leader>on :set number!<CR>
@@ -223,7 +226,7 @@ nnoremap <leader>r :%s/\<<C-R><C-W>\>//gc<left><left><left>
 nnoremap <leader>c :cclose<CR>
 
 " Copy filepath
-nmap cp :let @" = expand("%")<cr>
+nmap cp :let @+ = expand("%")<cr>
 
 
 
@@ -392,6 +395,7 @@ if has("unix")
 	command! -bang -nargs=? GFiles call fzf#vim#files(<q-args>, {'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvebox]}, <bang>0)
 else
     command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'source': 'rg --files --smart-case -tcpp -tcsharp -tddf -tproto -tbuild -g "Engine/**" -g "DICE/BattlefieldGame/**" -g "DICE/Casablanca/**" -g "DICE/Extensions/**"', 'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvebox]}, <bang>0)
+    command! -bang -nargs=? -complete=dir FilesAll call fzf#vim#files(<q-args>, {'source': 'rg --files --smart-case', 'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvebox]}, <bang>0)
 endif
 
 if has("unix")
@@ -401,10 +405,13 @@ else
     nmap <leader>f :Files<CR>
 	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep --smart-case -tcpp -tcsharp -tddf -tproto -tbuild -g "Engine/**" -g "DICE/BattlefieldGame/**" -g "DICE/Casablanca/**" -g "DICE/Extensions/**" '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\\Users\\vcogne\\bin\\preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvebox]}, <bang>0)
 	command! -bang -nargs=* -complete=dir FindFiles call fzf#vim#grep('rg --max-count=1 --vimgrep --smart-case -tcpp -tcsharp -tddf -tproto -tbuild -g "Engine/**" -g "DICE/BattlefieldGame/**" -g "DICE/Casablanca/**" -g "DICE/Extensions/**" '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\\Users\\vcogne\\bin\\preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvebox]}, <bang>0)
+	command! -bang -nargs=* -complete=dir FindAll call fzf#vim#grep('rg --vimgrep --smart-case '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\\Users\\vcogne\\bin\\preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvebox]}, <bang>0)
+	command! -bang -nargs=* -complete=dir FindAllFiles call fzf#vim#grep('rg --max-count=1 --vimgrep --smart-case '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\\Users\\vcogne\\bin\\preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvebox]}, <bang>0)
 endif
 
 nmap <leader>b :Buffers<CR>
 nmap <leader>g :Find 
+nmap <leader>l :BLines 
 
 let g:fzf_tags_command = 'ctags -R --extra=+q'
 let g:fzf_layout = { 'down': '~80%' }
@@ -463,6 +470,7 @@ if has('win64') || has('win32')
     set pythonthreedll=$HOME\\AppData\\Local\\Programs\\Python\\Python38\\python38.dll
 endif
 let g:ycm_clangd_binary_path = 'clangd'
+let g:ycm_clangd_args = ['-j=18']
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_filetype_whitelist = {'cpp': 1, 'c': 1}
 let g:ycm_error_symbol = '🔥'
@@ -478,10 +486,19 @@ nmap <silent> gf :YcmCompleter FixIt<CR>
 nmap <silent> gR :YcmCompleter RefactorRename 
 nmap K <plug>(YCMHover)
 
-if filereadable('.clang-format')
-    au BufWritePre *.cpp,*.c,*.h,*.hpp :YcmCompleter Format
+if has("unix")
+	if filereadable('.clang-format')
+		au BufWritePre *.cpp,*.c,*.h,*.hpp :YcmCompleter Format
+	endif
 endif
 
+augroup MyYCMCustom
+    autocmd!
+    autocmd FileType c,cpp let b:ycm_hover = {
+                \ 'command': 'GetDoc',
+                \ 'syntax': &filetype
+                \ }
+augroup END
 
 " COC
 " -------------------------------------------------------------------------
