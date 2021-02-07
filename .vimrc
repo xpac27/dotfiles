@@ -22,6 +22,7 @@ else
 	Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
     Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c'}
     Plug 'junegunn/goyo.vim'
+    Plug 'scrooloose/vim-slumlord'
 
     if has("unix")
     else
@@ -37,10 +38,11 @@ Plug 'easymotion/vim-easymotion'
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-commentary'
-" Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'gregsexton/MatchTag', { 'for': ['html'] }
+Plug 'scrooloose/vim-colon-therapy'
 
 call plug#end()
 
@@ -294,7 +296,7 @@ colorscheme gruvbox
 " hi Search guifg=#666666 guibg=#ffffff
 " hi ColorColumn guibg=#1d2021
 hi CocHighlightText guibg=#665c54
-hi Search guibg=#ffffff guifg=#8ec07c
+hi Search guibg=#fbf1c7 guifg=#d79921
 
 
 " AsyncRun
@@ -441,9 +443,9 @@ let g:ctrlsf_default_root = 'cwd'
 let g:ctrlsf_search_mode = 'async'
 
 
-" Polyglote
+" Polyglot
 " -------------------------------------------------------------------------
-let g:polyglot_disabled = ['markdown']
+" let g:polyglot_disabled = ['markdown']
 
 
 " Vimspector
