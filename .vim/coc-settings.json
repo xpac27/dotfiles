@@ -21,7 +21,7 @@
     "languageserver" : 
     {
         "clangd": {
-            "args" : ["--all-scopes-completion=false"],
+            "args" : ["--all-scopes-completion=false", "--fallback-style=none"],
             "command": "clangd",
             "filetypes": ["c", "cpp"],
             "rootPatterns": ["compile_commands.json", ".vim/", ".git/", ".hg/", "TNT.proj"]
