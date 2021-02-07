@@ -14,19 +14,17 @@ eval (direnv hook fish)
 
 # local bin
 set PATH $HOME/.local/bin $PATH
+set PYTHONPATH $HOME/.local $PYTHONPATH 
 
 # ranger
 set RANGER_LOAD_DEFAULT_RC false
 
 # nnn
-alias n='nnn -QAeod'
-alias na='nnn -QAHeod'
-set NNN_COLORS '3333'
-set NNN_PLUG 'o:fzopen;d:fzcd;i:imgview'
-
-# rbenv
-set -Ux fish_user_paths $HOME/.rbenv/bin $fish_user_paths
-status --is-interactive; and rbenv init - | source
+alias n='nnn -QAeoda'
+alias na='nnn -QAHeoda'
+export NNN_COLORS='3333'
+export NNN_PLUG='o:fzopen;d:fzcd;v:imgview;p:preview-tabbed'
+# export NNN_FIFO=/tmp/nnn.fifo
 
 # Rust
 set PATH $HOME/.cargo/bin $PATH
