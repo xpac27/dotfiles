@@ -153,6 +153,10 @@ au CursorHold * :checktime
 " use tabs in Makefile
 au BufNewFile,BufRead Makefile setlocal noexpandtab
 
+" use space in Markdown
+au BufNewFile,BufRead markdown setlocal expandtab
+au BufNewFile,BufRead markdown setlocal shiftwidth=2
+
 " Make crontab happy
 au filetype crontab setlocal nobackup nowritebackup
 
@@ -441,7 +445,7 @@ if has("unix")
 	command! -bang -nargs=? GFiles call fzf#vim#files(<q-args>, {'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvbox]}, <bang>0)
 else
     command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'source': 'rg --files --smart-case -tcpp -tcsharp -tddf -tproto -tbuild -g "Engine/**" -g "DICE/BattlefieldGame/**" -g "DICE/Casablanca/**" -g "DICE/Extensions/**"', 'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvbox]}, <bang>0)
-    command! -bang -nargs=? -complete=dir FilesAll call fzf#vim#files(<q-args>, {'source': 'rg --files --smart-case', 'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvbox]}, <bang>0)
+    command! -bang -nargs=? -complete=dir FilesAll call fzf#vim#files(<q-args>, {'source': 'rg --files --smart-case -tanything', 'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvbox]}, <bang>0)
 endif
 
 if has("unix")
@@ -451,8 +455,8 @@ else
     nmap <leader>f :Files<CR>
 	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep --smart-case -tcpp -tcsharp -tddf -tproto -tbuild -g "Engine/**" -g "DICE/BattlefieldGame/**" -g "DICE/Casablanca/**" -g "DICE/Extensions/**" '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\\Users\\vcogne\\bin\\preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvbox]}, <bang>0)
 	command! -bang -nargs=* -complete=dir FindFiles call fzf#vim#grep('rg --max-count=1 --vimgrep --smart-case -tcpp -tcsharp -tddf -tproto -tbuild -g "Engine/**" -g "DICE/BattlefieldGame/**" -g "DICE/Casablanca/**" -g "DICE/Extensions/**" '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\\Users\\vcogne\\bin\\preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvbox]}, <bang>0)
-	command! -bang -nargs=* -complete=dir FindAll call fzf#vim#grep('rg --vimgrep --smart-case '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\\Users\\vcogne\\bin\\preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvbox]}, <bang>0)
-	command! -bang -nargs=* -complete=dir FindAllFiles call fzf#vim#grep('rg --max-count=1 --vimgrep --smart-case '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\\Users\\vcogne\\bin\\preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvbox]}, <bang>0)
+	command! -bang -nargs=* -complete=dir FindAll call fzf#vim#grep('rg --vimgrep --smart-case -tanything '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\\Users\\vcogne\\bin\\preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvbox]}, <bang>0)
+	command! -bang -nargs=* -complete=dir FindAllFiles call fzf#vim#grep('rg --max-count=1 --vimgrep --smart-case -tanything '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\\Users\\vcogne\\bin\\preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvbox]}, <bang>0)
 endif
 
 nmap <leader>b :Buffers<CR>
@@ -552,7 +556,6 @@ nmap Y :Goyo<CR>
 let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-yaml',
-  \ 'coc-markdownlint',
 \]
 
 " don't give |ins-completion-menu| messages.
