@@ -1,5 +1,5 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["c", "cpp"],
+    "coc.preferences.formatOnSaveFiletypes": [],
     "coc.preferences.formatOnInsertLeave": true,
     "coc.preferences.formatOnType": false,
     "diagnostic.enable": true,
@@ -24,7 +24,7 @@
             "args" : ["--all-scopes-completion=false", "--fallback-style=none"],
             "command": "clangd",
             "filetypes": ["c", "cpp"],
-            "rootPatterns": ["compile_commands.json", ".vim/", ".git/", ".hg/", "TNT.proj"]
+            "rootPatterns": ["compile_commands.json"]
         }
     }
 }
