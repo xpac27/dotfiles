@@ -9,7 +9,6 @@ call plug#begin('~/.vim/plugged')
 if &diff
 else
 	Plug 'dyng/ctrlsf.vim'
-	Plug 'gcmt/taboo.vim'
 	Plug 'jamessan/vim-gnupg'
 	Plug 'junegunn/fzf'
 	Plug 'junegunn/fzf.vim'
@@ -335,11 +334,6 @@ nmap s <Plug>(easymotion-s2)
 let g:EasyMotion_smartcase = 1
 
 
-" Taboo
-" -------------------------------------------------------------------------
-let g:taboo_tab_format = ' %f%m '
-
-
 " NERDTree
 " -------------------------------------------------------------------------
 let g:NERDTreeWinSize=40
@@ -350,7 +344,7 @@ let g:NERDTreeMouseMode=2
 " Lightline
 " -------------------------------------------------------------------------
       " \ 'colorscheme': 'PaperColor_light',
-let g:lightline = {
+let g:lightline.active = {
       \ 'colorscheme': 'gruvbox',
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' },
@@ -370,6 +364,14 @@ let g:lightline = {
 	  \   'window_number': 'WindowNumber', 
       \ },
 \ }
+
+let g:lightline.inactive = {
+    \ 'left': [ [ 'filename' ] ],
+    \ 'right': [ [ 'lineinfo' ],
+    \            [ 'percent' ] ] }
+
+let g:lightline.tabline = {
+    \ 'left': [ [ 'tabs' ] ] }
 
 function! WindowNumber()
   return tabpagewinnr(tabpagenr())
