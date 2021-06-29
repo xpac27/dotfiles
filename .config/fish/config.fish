@@ -19,6 +19,9 @@ set PYTHONPATH $HOME/.local $PYTHONPATH
 # ranger
 set RANGER_LOAD_DEFAULT_RC false
 
+# systemd
+export SYSTEMD_EDITOR='vim'
+
 # nnn
 alias n='nnn -QAeoda'
 alias na='nnn -QAHeoda'
