@@ -41,9 +41,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'gregsexton/MatchTag', { 'for': ['html'] }
-Plug 'scrooloose/vim-colon-therapy'
 Plug 'rhysd/clever-f.vim'
 Plug 'tpope/vim-sleuth'
+Plug 'dkarter/bullets.vim'
 
 call plug#end()
 
@@ -354,6 +354,16 @@ let g:EasyMotion_smartcase = 1
 let g:NERDTreeWinSize=40
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeMouseMode=2
+
+
+" Bullets
+" -------------------------------------------------------------------------
+let g:bullets_enabled_file_types = [
+    \ 'markdown',
+    \ 'text',
+    \ 'gitcommit',
+    \ 'scratch'
+    \]
 
 
 " Clever F
