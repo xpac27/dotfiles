@@ -18,7 +18,6 @@ else
 	Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
 	Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
 	Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
-    " Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c'}
     Plug 'junegunn/goyo.vim'
     " Plug 'scrooloose/vim-slumlord'
     Plug 'MattesGroeger/vim-bookmarks'
@@ -123,6 +122,7 @@ set updatetime=300
 set wildignore=*.o,*.dwo,*.so,*.pyc,*.swp,*.orig,DS_Store
 set wildmenu
 set wildmode=longest,list
+set nofixendofline
 
 if has("unix")
     set nobackup
@@ -444,8 +444,8 @@ let g:fzf_action = { 'ctrl-q': function('s:build_quickfix_list') }
 if has("unix")
 	command! -bang -nargs=? GFiles call fzf#vim#files(<q-args>, {'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvbox]}, <bang>0)
 else
-    command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'source': 'rg --files --smart-case -tcpp -tcsharp -tddf -tproto -tbuild -g "Engine/**" -g "DICE/BattlefieldGame/**" -g "DICE/Casablanca/**" -g "DICE/Extensions/**"', 'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvbox]}, <bang>0)
-    command! -bang -nargs=? -complete=dir FilesAll call fzf#vim#files(<q-args>, {'source': 'rg --files --smart-case -tanything', 'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvbox]}, <bang>0)
+    command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'source': 'rg --files --smart-case -tcpp -tcsharp -tddf -tproto -tbuild ', 'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvebox]}, <bang>0)
+    command! -bang -nargs=? -complete=dir FilesAll call fzf#vim#files(<q-args>, {'source': 'rg --files --smart-case -tanything', 'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvebox]}, <bang>0)
 endif
 
 if has("unix")
@@ -453,18 +453,19 @@ if has("unix")
 	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep --smart-case '.<q-args>, 1, fzf#vim#with_preview({'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvbox]}), <bang>0)
 else
     nmap <leader>f :Files<CR>
-	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep --smart-case -tcpp -tcsharp -tddf -tproto -tbuild -g "Engine/**" -g "DICE/BattlefieldGame/**" -g "DICE/Casablanca/**" -g "DICE/Extensions/**" '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\\Users\\vcogne\\bin\\preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvbox]}, <bang>0)
-	command! -bang -nargs=* -complete=dir FindFiles call fzf#vim#grep('rg --max-count=1 --vimgrep --smart-case -tcpp -tcsharp -tddf -tproto -tbuild -g "Engine/**" -g "DICE/BattlefieldGame/**" -g "DICE/Casablanca/**" -g "DICE/Extensions/**" '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\\Users\\vcogne\\bin\\preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvbox]}, <bang>0)
-	command! -bang -nargs=* -complete=dir FindAll call fzf#vim#grep('rg --vimgrep --smart-case -tanything '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\\Users\\vcogne\\bin\\preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvbox]}, <bang>0)
-	command! -bang -nargs=* -complete=dir FindAllFiles call fzf#vim#grep('rg --max-count=1 --vimgrep --smart-case -tanything '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--preview', 'python C:\\Users\\vcogne\\bin\\preview.py {}', '--preview-window', 'bottom:40%:noborder', '--color', fzf_gruvbox]}, <bang>0)
+	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep --smart-case -tcpp -tcsharp -tddf -tproto -tbuild '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvebox]}, <bang>0)
+	command! -bang -nargs=* -complete=dir FindFiles call fzf#vim#grep('rg --max-count=1 --vimgrep --smart-case -tcpp -tcsharp -tddf -tproto -tbuild '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvebox]}, <bang>0)
+	command! -bang -nargs=* -complete=dir FindAll call fzf#vim#grep('rg --vimgrep --smart-case -tanything '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvebox]}, <bang>0)
+	command! -bang -nargs=* -complete=dir FindAllFiles call fzf#vim#grep('rg --max-count=1 --vimgrep --smart-case -tanything '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all', '--color', fzf_gruvebox]}, <bang>0)
 endif
 
 nmap <leader>b :Buffers<CR>
 nmap <leader>g :Find 
-nmap <leader>l :BLines
+nmap <leader>l :BLines<CR>
 
 let g:fzf_tags_command = 'ctags -R --extra=+q'
-let g:fzf_layout = { 'down': '~80%' }
+let g:fzf_layout = { 'down': '~60%' }
+let g:fzf_preview_window = []
 
 
 " NERDCommenter
@@ -489,13 +490,6 @@ let g:ctrlsf_search_mode = 'async'
 " Polyglot
 " -------------------------------------------------------------------------
 " let g:polyglot_disabled = ['markdown']
-
-
-" Vimspector
-" -------------------------------------------------------------------------
-let g:vimspector_enable_mappings = 'HUMAN'
-set mouse=a
-set ttymouse=sgr
 
 
 " Goyo
