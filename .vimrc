@@ -550,10 +550,8 @@ nmap Y :Goyo<CR>
 " COC
 " -------------------------------------------------------------------------
 let g:coc_global_extensions = [
-  \ 'coc-git',
   \ 'coc-json',
   \ 'coc-yaml',
-  \ 'coc-snippets',
   \ 'coc-markdownlint',
 \]
 
@@ -629,10 +627,6 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Find symbol of current document
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 
 
 
