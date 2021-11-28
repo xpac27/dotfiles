@@ -1,0 +1,4 @@
+[Desktop Entry]
+Name=Disable mouse while typing
+Exec=syndaemon -i 0.3 -K -R -d
+Type=Application
