@@ -1,7 +1,7 @@
 {
     "coc.preferences.formatOnSaveFiletypes": [],
-    "coc.preferences.formatOnInsertLeave": true,
     "coc.preferences.formatOnType": false,
+    "diagnostic.locationlistUpdate": true,
     "diagnostic.enable": true,
     "diagnostic.enableMessage": "always",
     "diagnostic.infoSign": "💡",
