@@ -6,6 +6,17 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'easymotion/vim-easymotion'
+Plug 'itchyny/lightline.vim'
+Plug 'morhetz/gruvbox'
+Plug 'tpope/vim-commentary'
+Plug 'sheerun/vim-polyglot'
+Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'gregsexton/MatchTag', { 'for': ['html'] }
+Plug 'tpope/vim-sleuth'
+Plug 'dkarter/bullets.vim'
+
 if &diff
 else
 	Plug 'jamessan/vim-gnupg'
@@ -19,11 +30,9 @@ else
 	Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
 	Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
     Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
-    " Plug 'scrooloose/vim-slumlord'
     Plug 'MattesGroeger/vim-bookmarks'
 
-    if has("unix")
-    else
+    if has("win32")
         Plug 'nfvs/vim-perforce'
     endif
 end
@@ -32,30 +41,10 @@ if has("unix")
     Plug 'direnv/direnv.vim'
 endif
 
-Plug 'easymotion/vim-easymotion'
-Plug 'itchyny/lightline.vim'
-Plug 'morhetz/gruvbox'
-Plug 'tpope/vim-commentary'
-Plug 'sheerun/vim-polyglot'
-Plug 'shinchu/lightline-gruvbox.vim'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'gregsexton/MatchTag', { 'for': ['html'] }
-Plug 'tpope/vim-sleuth'
-Plug 'dkarter/bullets.vim'
-
 call plug#end()
 
-autocmd FileType c setl cms=//\ %s
 filetype on
 syntax enable
-
-source $VIMRUNTIME/vimrc_example.vim
-
-if exists('theme') && theme == 'light'
-    set background=light
-else
-    set background=dark
-endif
 
 set autoread
 set backspace=indent,eol,start
@@ -114,6 +103,8 @@ set tags=./tags,.tags,tags
 set textwidth=99999
 set timeoutlen=300
 set undodir=~/.cache/vim/undo
+set backupdir=~/.cache/vim/backup
+set backupskip+=",*.gpg"
 set undofile
 set undolevels=1000
 set undoreload=1000
@@ -128,14 +119,18 @@ if has("unix")
     set nowritebackup
 else
     set backup
-    set backupdir=~/.cache/vim/backup
-    set backupskip+=",*.gpg"
     set writebackup
 endif
 
 if executable('rg')
     set grepprg=rg\ --vimgrep
     set grepformat=%f:%l:%c:%m
+endif
+
+if exists('theme') && theme == 'light'
+    set background=light
+else
+    set background=dark
 endif
 
 if &diff
@@ -146,31 +141,14 @@ end
 " disable annoying banner
 let g:netrw_banner=0
 
-" Check file for changes
-au CursorHold * :checktime
+augroup VINZ
+    " Check file for changes
+    au CursorHold * :checktime
 
-" use tabs in Makefile
-au BufNewFile,BufRead Makefile setlocal noexpandtab
-
-" use space in Markdown
-au BufNewFile,BufRead markdown setlocal expandtab
-au BufNewFile,BufRead markdown setlocal shiftwidth=2
-
-" Make crontab happy
-au filetype crontab setlocal nobackup nowritebackup
-
-" better lambda indent
-au BufNewFile,BufRead *.cpp setlocal cindent cino='j1,(0,ws,Ws'
-
-" Auto save
-" au CursorHold *.c,*.h,*.cpp,*.h,*.hpp,*.rb nested silent up
-
-" Auto open quickfix on make
-" au QuickFixCmdPost [^l]* nested cwindow
-" au QuickFixCmdPost l* nested lwindow
-
-" Check spelling in markdown files
-" au FileType markdown setlocal spell
+    " Auto open quickfix on make
+    " au QuickFixCmdPost [^l]* nested cwindow
+    " au QuickFixCmdPost l* nested lwindow
+augroup END
 
 " typos
 ia   feild    field
@@ -192,9 +170,6 @@ ab   pu   public
 ab   st   static
 ab   cl   console.log
 
-" save time
-nnoremap ; :
-
 " don't lose selection after indenting
 vnoremap < <gv
 vnoremap > >gv
@@ -215,10 +190,10 @@ nnoremap <silent> <leader>os :setl spell!<CR>
 nnoremap <silent> <leader>od :e ++ff=dos<CR>:setlocal ff=dos<CR>
 
 " Not usefull
-nmap Q q
-nmap K <nop>
-nmap <C-s> <nop>
-nmap ^S <nop>
+nnoremap Q q
+nnoremap K <nop>
+nnoremap <C-s> <nop>
+nnoremap ^S <nop>
 
 " Repurpose cursor keys
 nnoremap <silent> <Up> :cprevious<CR>
@@ -233,24 +208,14 @@ nnoremap <leader>r :%s/\<<C-R><C-W>\>//gc<left><left><left>
 nnoremap <leader>c :cclose<CR>
 
 " Copy filepath
-nmap cp :let @+ = expand("%")<cr>
-
-
-
-" =========================================================================
-" COMMANDS
-" =========================================================================
-
+nnoremap cp :let @+ = expand("%")<cr>
 
 " JSON
-" -------------------------------------------------------------------------
 if executable('python')
     command! JSON :%!python -m json.tool
 endif
 
-
 " Others
-" -------------------------------------------------------------------------
 if has("unix")
     command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 else

@@ -79,6 +79,12 @@ end
 # FZF
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,.tup,node_modules}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+--color=fg:#a89984,bg:-1,hl:#fabd2f
+--color=fg+:#fbf1c7,bg+:#282828,hl+:#fabd2f
+--color=info:#fbf1c7,prompt:#fb4934,pointer:#fbf1c7
+--color=marker:#d3869b,spinner:#fabd2f,header:#8ec07c'
+# https://minsw.github.io/fzf-color-picker/
 
 # FZF commands
 alias Files="fzf --color=border:-1 --preview '[[ (file --mime {}) =~ binary ]] && echo {} is a binary file ;or (highlight -O ansi -l {}) 2> /dev/null | head -500' --preview-window right:65%"
