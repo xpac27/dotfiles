@@ -205,8 +205,8 @@ nnoremap <silent> <Right> :lnext<CR>
 " Replace word under cursor
 nnoremap <leader>r :%s/\<<C-R><C-W>\>//gc<left><left><left>
 
-" Close QuickFix window
-nnoremap <leader>c :cclose<CR>
+" Close QuickFix and LocationList window
+nnoremap <leader>c :cclose<CR>:lclose<CR>
 
 " Copy filepath
 nnoremap cp :let @+ = expand("%")<cr>

@@ -75,3 +75,5 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Find symbol of current document
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+
+nnoremap <silent> <leader>d  :CocDiagnostics<cr>
