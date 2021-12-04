@@ -46,6 +46,7 @@ call plug#end()
 filetype on
 syntax enable
 
+set exrc
 set autoread
 set backspace=indent,eol,start
 set cmdheight=2
