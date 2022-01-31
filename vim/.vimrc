@@ -16,6 +16,7 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'gregsexton/MatchTag', { 'for': ['html'] }
 Plug 'tpope/vim-sleuth'
 Plug 'dkarter/bullets.vim'
+Plug 'tpope/vim-dispatch'
 
 if &diff
 else
@@ -31,6 +32,7 @@ else
 	Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
     Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
     Plug 'MattesGroeger/vim-bookmarks'
+    Plug 'szw/vim-maximizer'
 
     if has("win32")
         Plug 'nfvs/vim-perforce'
@@ -114,14 +116,8 @@ set wildignore=*.o,*.dwo,*.so,*.pyc,*.swp,*.orig,DS_Store
 set wildmenu
 set wildmode=longest,list
 set nofixendofline
-
-if has("unix")
-    set nobackup
-    set nowritebackup
-else
-    set backup
-    set writebackup
-endif
+set backup
+set writebackup
 
 if executable('rg')
     set grepprg=rg\ --vimgrep
