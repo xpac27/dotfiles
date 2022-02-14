@@ -223,27 +223,3 @@ else
 	command! DicePersistenceTests AsyncRun D:\kingston\dev\TnT\Local\Bin\Win64-Dll\release\Extension.DicePersistence.Test_Win64_release_Dll.exe
 endif
 
-
-
-
-" =========================================================================
-" LOCAL VIMRC
-" =========================================================================
-
-function! SetLocalOptions(fname)
-    let dirname = fnamemodify(a:fname, ":p:h")
-    " while "/" != dirname
-        let lvimrc  = dirname . "/.lvimrc"
-        if filereadable(lvimrc)
-            execute "source " . lvimrc
-            " break
-        endif
-        let dirname = fnamemodify(dirname, ":p:h:h")
-    " endwhile
-endfunction
-
-if has("unix")
-    call SetLocalOptions(bufname("%"))
-elseif filereadable(".lvimrc")
-    execute "source .lvimrc"
-endif
