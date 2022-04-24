@@ -5,7 +5,19 @@
 
 [core]
     editor = vim
+    # pager = delta
     quotepath = false
+
+[interactive]
+    # diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    line-numbers = true
+    side-by-side = true
+
+[merge]
+    conflictstyle = diff3
 
 [rerere]
     enabled = false
@@ -36,6 +48,7 @@
     tool = vimdiff
     compactionHeuristic = true
 	noprefix = true
+    colorMoved = default
 
 [difftool]
     prompt = false
@@ -45,15 +58,8 @@
     smudge = git-lfs smudge %f
     required = true
 
-[status]
-    submoduleSummary = false
-
 [submodule]
     fetchJobs = 4
 
-[pager]
-    #diff = /usr/share/git/diff-highlight/diff-highlight | less -r
-    #log = /usr/share/git/diff-highlight/diff-highlight | less -r
-    #show = /usr/share/git/diff-highlight/diff-highlight | less -r
 [pull]
 	rebase = true

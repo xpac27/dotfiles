@@ -14,25 +14,22 @@ Plug 'sheerun/vim-polyglot'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'gregsexton/MatchTag', { 'for': ['html'] }
-Plug 'tpope/vim-sleuth'
 Plug 'dkarter/bullets.vim'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-abolish'
 
 if &diff
 else
-	Plug 'jamessan/vim-gnupg'
-	Plug 'junegunn/fzf'
-	Plug 'junegunn/fzf.vim'
-	Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-	Plug 'mhinz/vim-startify'
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'jamessan/vim-gnupg'
+    Plug 'junegunn/fzf'
+    Plug 'junegunn/fzf.vim'
+    Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+    Plug 'mhinz/vim-startify'
+    Plug 'neoclide/coc.nvim', { 'branch': 'release', 'for': ['c', 'cpp'] }
     " Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
-	Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
-	Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
-	Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
-    Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
-    Plug 'MattesGroeger/vim-bookmarks'
-    Plug 'szw/vim-maximizer'
+    Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
+    Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
+    Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
 
     if has("win32")
         Plug 'nfvs/vim-perforce'
@@ -91,7 +88,6 @@ set shortmess=IAW
 set showmatch
 set showtabline=1
 set sidescrolloff=5
-set signcolumn=number
 set smartcase
 set smartindent
 set smarttab
@@ -139,6 +135,8 @@ end
 let g:netrw_banner=0
 
 augroup VINZ
+    autocmd!
+
     " Check file for changes
     au CursorHold * :checktime
 
@@ -153,6 +151,7 @@ ia   flase    false
 ia   lenght   length
 ia   toogle   toggle
 ia   wiht     with
+ia   widht    width
 ia   heigth   height
 ia   retrun   return
 ia   easlt    eastl
