@@ -23,7 +23,7 @@
         "clangd": {
             "args" : ["--all-scopes-completion=false", "--fallback-style=none"],
             "command": "clangd",
-            "filetypes": ["c", "cpp"],
+            "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
             "rootPatterns": ["compile_commands.json"]
         }
     }

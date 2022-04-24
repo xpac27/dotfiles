@@ -25,7 +25,7 @@ else
     Plug 'junegunn/fzf.vim'
     Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
     Plug 'mhinz/vim-startify'
-    Plug 'neoclide/coc.nvim', { 'branch': 'release', 'for': ['c', 'cpp'] }
+    Plug 'neoclide/coc.nvim', { 'branch': 'release' }
     " Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
     Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
     Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
