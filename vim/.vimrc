@@ -15,7 +15,6 @@ Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'gregsexton/MatchTag', { 'for': ['html'] }
 Plug 'dkarter/bullets.vim'
-Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-abolish'
 
 if &diff
@@ -30,15 +29,12 @@ else
     Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
     Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
     Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
+    Plug 'farmergreg/vim-lastplace'
 
     if has("win32")
         Plug 'nfvs/vim-perforce'
     endif
 end
-
-if has("unix")
-    Plug 'direnv/direnv.vim'
-endif
 
 call plug#end()
 
