@@ -52,6 +52,7 @@ set cursorline
 set encoding=UTF-8
 set equalalways
 set expandtab
+set formatoptions=cqrt
 set fileformats=unix,dos,mac
 set fillchars=vert:┃ 
 set gdefault
@@ -66,6 +67,9 @@ set mouse-=a
 set mousehide
 set noerrorbells
 set nolist
+set list 
+set listchars=tab:»· 
+set listchars+=trail:· 
 set nomodeline " disabled for security
 set noruler
 set noshowmode
@@ -80,7 +84,7 @@ set scrolljump=5
 set scrolloff=5
 set shiftround
 set shiftwidth=4
-set shortmess=IAW
+set shortmess=at
 set showmatch
 set showtabline=1
 set sidescrolloff=5
@@ -215,6 +219,5 @@ else
     command! CompileProject AsyncRun compile.rb %:p:h
     command! CompileSolution AsyncRun compile.rb
     command! RemoveFromMaster AsyncRun -silent compile.rb REMOVE_FROM_MASTER %:p
-	command! DicePersistenceTests AsyncRun D:\kingston\dev\TnT\Local\Bin\Win64-Dll\release\Extension.DicePersistence.Test_Win64_release_Dll.exe
 endif
 
