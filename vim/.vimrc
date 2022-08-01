@@ -16,6 +16,8 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'gregsexton/MatchTag', { 'for': ['html'] }
 Plug 'dkarter/bullets.vim'
 Plug 'tpope/vim-abolish'
+Plug 'alvan/vim-closetag'
+Plug 'godlygeek/tabular'
 
 if &diff
 else
@@ -26,7 +28,6 @@ else
     Plug 'mhinz/vim-startify'
     Plug 'neoclide/coc.nvim', { 'branch': 'release' }
     " Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
-    Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle'] }
     Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
     Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
     Plug 'farmergreg/vim-lastplace'
@@ -52,7 +53,7 @@ set cursorline
 set encoding=UTF-8
 set equalalways
 set expandtab
-set formatoptions=cqrt
+set formatoptions=vtr
 set fileformats=unix,dos,mac
 set fillchars=vert:┃ 
 set gdefault
@@ -127,12 +128,9 @@ else
 endif
 
 if &diff
-	set diffopt+=algorithm:patience
-	set diffopt+=indent-heuristic
+    set diffopt+=algorithm:patience
+    set diffopt+=indent-heuristic
 end
-
-" disable annoying banner
-let g:netrw_banner=0
 
 augroup VINZ
     autocmd!

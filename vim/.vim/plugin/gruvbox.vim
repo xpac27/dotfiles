@@ -15,8 +15,7 @@ let g:gruvbox_improved_strings=0
 let g:gruvbox_improved_warnings=1
 
 colorscheme gruvbox
-" hi VertSplit guifg=#504945
-" hi Search guifg=#666666 guibg=#ffffff
-" hi ColorColumn guibg=#1d2021
-" hi CocHighlightText guibg=#665c54
-" hi Search guibg=#fbf1c7 guifg=#d79921
+hi Search guifg=#504945 guibg=#fabd2f
+hi CocHighlightText guibg=#504945
+hi StatusLine guibg=#504945
+hi StatusLineNC guibg=#504945

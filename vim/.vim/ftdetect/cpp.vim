@@ -1,1 +1,1 @@
-au BufRead,BufNewFile *.cpp set filetype=cpp
+au BufRead,BufNewFile *.cpp,*.hpp set filetype=cpp

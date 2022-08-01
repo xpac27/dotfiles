@@ -8,16 +8,14 @@
     "diagnostic.errorSign": "🔥",
     "diagnostic.warningSign": "🔔",
     "suggest.snippetIndicator": " ⚡",
-    "git.changedSign.text":"🔘",
-    "git.changeRemovedSign.text": "🔘",
-    "git.addedSign.text":"🔘",
-    "git.removedSign.text":"🔘",
-    "git.topRemovedSign.text": "🔘",
     "git.addedSign.hlGroup": "GitGutterAdd",
     "git.changedSign.hlGroup": "GitGutterChange",
     "git.removedSign.hlGroup": "GitGutterDelete",
     "git.topRemovedSign.hlGroup": "GitGutterDelete",
     "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+    "markdownlint.config": {
+        "line_length": false
+    },
     "languageserver" : 
     {
         "clangd": {

@@ -1,4 +1,3 @@
-      " \ 'colorscheme': 'PaperColor_light',
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ 'separator': { 'left': '', 'right': '' },
