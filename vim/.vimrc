@@ -8,7 +8,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'easymotion/vim-easymotion'
 Plug 'itchyny/lightline.vim'
-Plug 'morhetz/gruvbox'
+" Plug 'morhetz/gruvbox'
+Plug 'sainnhe/gruvbox-material'
 Plug 'tpope/vim-commentary'
 Plug 'sheerun/vim-polyglot'
 Plug 'shinchu/lightline-gruvbox.vim'
@@ -26,8 +27,9 @@ else
     Plug 'junegunn/fzf.vim'
     Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
     Plug 'mhinz/vim-startify'
-    Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-    " Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
+    " Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+    Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
+	Plug 'Valloric/ListToggle'
     Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
     Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
     Plug 'farmergreg/vim-lastplace'
@@ -41,6 +43,10 @@ call plug#end()
 
 filetype on
 syntax enable
+
+" set Vim-specific sequences for RGB colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 set exrc
 set autoread
@@ -197,9 +203,6 @@ nnoremap <silent> <Right> :lnext<CR>
 
 " Replace word under cursor
 nnoremap <leader>r :%s/\<<C-R><C-W>\>//gc<left><left><left>
-
-" Close QuickFix and LocationList window
-nnoremap <leader>c :cclose<CR>:lclose<CR>
 
 " Copy filepath
 nnoremap cp :let @+ = expand("%")<cr>
