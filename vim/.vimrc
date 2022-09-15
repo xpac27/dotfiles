@@ -8,7 +8,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'easymotion/vim-easymotion'
 Plug 'itchyny/lightline.vim'
-" Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 Plug 'sainnhe/gruvbox-material'
 Plug 'tpope/vim-commentary'
 Plug 'sheerun/vim-polyglot'
@@ -29,17 +29,23 @@ else
     Plug 'mhinz/vim-startify'
     " Plug 'neoclide/coc.nvim', { 'branch': 'release' }
     Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
-	Plug 'Valloric/ListToggle'
+    Plug 'Valloric/ListToggle'
     Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
     Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
     Plug 'farmergreg/vim-lastplace'
 
-    if has("win32")
+    if has('win64') || has('win32')
         Plug 'nfvs/vim-perforce'
+        "Plug 'ngemily/vim-vp4'
     endif
 end
 
 call plug#end()
+
+if has('win64') || has('win32')
+    set pythonthreehome=~\AppData\Local\Programs\Python\Python310-32
+    set pythonthreedll=~\AppData\Local\Programs\Python\Python310-32\python310.dll
+endif
 
 filetype on
 syntax enable
@@ -47,6 +53,15 @@ syntax enable
 " set Vim-specific sequences for RGB colors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+if has('win64') || has('win32')
+    set listchars=lead:\:
+    set listchars+=trail:· 
+    set listchars=tab:\ \ 
+else
+    set listchars=tab:»- 
+    set listchars+=trail:· 
+endif
 
 set exrc
 set autoread
@@ -75,8 +90,6 @@ set mousehide
 set noerrorbells
 set nolist
 set list 
-set listchars=tab:»· 
-set listchars+=trail:· 
 set nomodeline " disabled for security
 set noruler
 set noshowmode
@@ -147,6 +160,11 @@ augroup VINZ
     " Auto open quickfix on make
     " au QuickFixCmdPost [^l]* nested cwindow
     " au QuickFixCmdPost l* nested lwindow
+
+    if has('win64') || has('win32')
+        au FileChangedRO * silent! :P4edit
+        au FileChangedShell * echohl WarningMsg | echo "File changed shell." | echohl None
+    endif
 augroup END
 
 " typos

@@ -1,8 +1,3 @@
-" if has('win64') || has('win32')
-"     set pythonthreehome=$HOME\\AppData\\Local\\Programs\\Python\\Python38
-"     set pythonthreedll=$HOME\\AppData\\Local\\Programs\\Python\\Python38\\python38.dll
-" endif
-
 " let g:ycm_clangd_binary_path = 'clangd'
 " let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_filetype_whitelist = {'cpp': 1, 'c': 1}
@@ -18,11 +13,11 @@ let g:ycm_always_populate_location_list = 1
 nmap <silent> gD :YcmCompleter GoTo<CR>
 nmap <silent> gd :YcmCompleter GoToImprecise<CR>
 nmap <silent> gr :YcmCompleter GoToReferences<CR>
-nmap <silent> gc :YcmCompleter GoToCallers<CR>
-nmap <silent> gC :YcmCompleter GoToCallees<CR>
+nmap <silent> gx :YcmCompleter GoToCallers<CR>
+nmap <silent> gX :YcmCompleter GoToCallees<CR>
 nmap <silent> gF :YcmCompleter FixIt<CR>
 nmap <silent> gR :YcmCompleter RefactorRename 
-nmap <silent> gg :YcmDiag<CR>:lwindow<CR>
+nmap <silent> gi :YcmDiag<CR>:lwindow<CR>
 nmap K <plug>(YCMHover)
 
 function! s:CustomizeYcmLocationWindow()

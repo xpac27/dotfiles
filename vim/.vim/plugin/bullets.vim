@@ -4,3 +4,5 @@ let g:bullets_enabled_file_types = [
     \ 'gitcommit',
     \ 'scratch'
     \]
+
+let g:bullets_pad_right = 0
