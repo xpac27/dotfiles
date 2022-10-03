@@ -31,7 +31,6 @@ else
     Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
     Plug 'Valloric/ListToggle'
     Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
-    Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
     Plug 'farmergreg/vim-lastplace'
 
     if has('win64') || has('win32')

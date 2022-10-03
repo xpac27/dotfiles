@@ -2,6 +2,7 @@
 "   \ 'coc-json',
 "   \ 'coc-yaml',
 "   \ 'coc-git',
+"   \ 'coc-clangd',
 "   \ 'coc-markdownlint',
 " \]
 " 
@@ -70,6 +71,9 @@
 "     autocmd FileType c,cpp nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 "     " Show diagnostics
 "     autocmd FileType c,cpp nnoremap <silent> <leader>d  :CocDiagnostics<cr>
+"
+"     " Switch between h and cpp
+"     autocmd FileType c,cpp nnoremap <silent> <leader>h :CocCommand clangd.switchSourceHeader<cr>
 " 
 " augroup END
 " 
