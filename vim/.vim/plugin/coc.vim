@@ -3,7 +3,6 @@ let g:coc_global_extensions = [
   \ 'coc-yaml',
   \ 'coc-git',
   \ 'coc-clangd',
-  \ 'coc-markdownlint',
   \ 'coc-lightbulb',
 \]
 
