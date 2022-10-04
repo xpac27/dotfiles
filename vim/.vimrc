@@ -56,7 +56,7 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 if has('win64') || has('win32')
     set listchars=lead:\:
     set listchars+=trail:· 
-    set listchars=tab:\ \ 
+    set listchars+=tab:\ \ 
 else
     set listchars=tab:»- 
     set listchars+=trail:· 
