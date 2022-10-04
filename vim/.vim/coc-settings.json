@@ -8,6 +8,7 @@
     "diagnostic.errorSign": "🔥",
     "diagnostic.warningSign": "🔔",
     "suggest.snippetIndicator": " ⚡",
+    "suggest.noselect": true,
     "git.addedSign.hlGroup": "GitGutterAdd",
     "git.changedSign.hlGroup": "GitGutterChange",
     "git.removedSign.hlGroup": "GitGutterDelete",
