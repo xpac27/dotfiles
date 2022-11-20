@@ -1,5 +1,5 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": [],
+    "coc.preferences.formatOnSave": false,
     "coc.preferences.formatOnType": false,
     "diagnostic.locationlistUpdate": true,
     "diagnostic.enable": true,
@@ -13,8 +13,5 @@
     "git.changedSign.hlGroup": "GitGutterChange",
     "git.removedSign.hlGroup": "GitGutterDelete",
     "git.topRemovedSign.hlGroup": "GitGutterDelete",
-    "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
-    "markdownlint.config": {
-        "line_length": false
-    }
+    "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete"
 }

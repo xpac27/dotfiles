@@ -28,7 +28,7 @@ else
     Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
     Plug 'mhinz/vim-startify'
     Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-    "Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
+    " Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
     Plug 'Valloric/ListToggle'
     Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
     Plug 'farmergreg/vim-lastplace'
@@ -52,6 +52,10 @@ syntax enable
 " set Vim-specific sequences for RGB colors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+" escape sequences for undercurl
+let &t_Cs = "\e[4:3m"
+let &t_Ce = "\e[4:0m"
 
 if has('win64') || has('win32')
     set listchars=lead:\:
