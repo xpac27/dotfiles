@@ -17,7 +17,7 @@
     side-by-side = true
 
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 
 [rerere]
     enabled = false
@@ -47,7 +47,7 @@
 [diff]
     tool = vimdiff
     compactionHeuristic = true
-	noprefix = true
+    noprefix = true
     colorMoved = default
 
 [difftool]
