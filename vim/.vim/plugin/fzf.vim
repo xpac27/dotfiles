@@ -25,4 +25,4 @@ nnoremap <leader>G :FindFiles
 nnoremap <leader>L :BLines<CR>
 
 let g:fzf_layout = { 'down': '~60%' }
-let g:fzf_preview_window = []
+let g:fzf_preview_window = ['right,40%,<70(up,40%)']
