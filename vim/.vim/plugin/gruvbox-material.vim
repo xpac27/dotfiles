@@ -1,5 +1,6 @@
 let g:gruvbox_material_foreground = 'original'
 let g:gruvbox_material_background = 'medium'
+let g:gruvbox_material_diagnostic_virtual_text = 'colored'
 let g:gruvbox_material_better_performance = 1
 let g:gruvbox_material_enable_bold = 1
 let g:gruvbox_material_enable_italic = 1
