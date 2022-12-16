@@ -7,7 +7,7 @@ let g:gruvbox_material_enable_italic = 1
 let g:gruvbox_material_ui_contrast = 'low'
 let g:gruvbox_material_show_eob = 0
 let g:gruvbox_material_diagnostic_text_highlight = 1
-let g:gruvbox_material_diagnostic_line_highlight = 1
+let g:gruvbox_material_diagnostic_line_highlight = 0
 
 colorscheme gruvbox-material
 let g:lightline = {'colorscheme' : 'gruvbox_material'}

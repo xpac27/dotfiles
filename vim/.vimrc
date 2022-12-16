@@ -9,7 +9,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'easymotion/vim-easymotion'
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
-Plug 'sainnhe/gruvbox-material'
+Plug 'sainnhe/gruvbox-material', { 'frozen': 1 }
 Plug 'tpope/vim-commentary'
 Plug 'sheerun/vim-polyglot'
 Plug 'shinchu/lightline-gruvbox.vim'
