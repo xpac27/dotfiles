@@ -30,7 +30,7 @@ else
     Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
     Plug 'mhinz/vim-startify'
     " Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-    Plug 'ycm-core/YouCompleteMe', { 'frozen': 1, 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
+    Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
     Plug 'Valloric/ListToggle'
     Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
     Plug 'farmergreg/vim-lastplace'
