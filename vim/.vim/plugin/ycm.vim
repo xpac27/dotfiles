@@ -7,7 +7,13 @@ let g:ycm_enable_diagnostic_highlighting = 1
 let g:ycm_auto_hover = ''
 let g:ycm_use_ultisnips_completer = 0
 let g:ycm_show_detailed_diag_in_popup = 1
-" let g:ycm_show_diagnostics_ui = 1
+
+let g:ycm_echo_current_diagnostic = 1
+let g:ycm_update_diagnostics_in_insert_mode = 1
+
+" let g:ycm_echo_current_diagnostic = "virtual-text"
+" let g:ycm_update_diagnostics_in_insert_mode = 0
+
 let g:ycm_always_populate_location_list = 1
 " let g:ycm_filepath_completion_use_working_dir = 0
 nmap <silent> gD :YcmCompleter GoTo<CR>
