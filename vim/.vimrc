@@ -10,6 +10,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
 Plug 'sainnhe/gruvbox-material'
+Plug 'pgdouyon/vim-yin-yang'
+Plug 'metalelf0/base16-black-metal-scheme'
 Plug 'tpope/vim-commentary'
 Plug 'sheerun/vim-polyglot'
 Plug 'shinchu/lightline-gruvbox.vim'
@@ -28,7 +30,7 @@ else
     Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
     Plug 'mhinz/vim-startify'
     " Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-    Plug 'ycm-core/YouCompleteMe', { 'frozen': 1, 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
+    Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
     Plug 'Valloric/ListToggle'
     Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
     Plug 'farmergreg/vim-lastplace'

@@ -1,0 +1,4 @@
+[Desktop Entry]
+Name=Use right alt as compose key to type special characters such as accents
+Exec=setxkbmap -option compose:ralt
+Type=Application
