@@ -19,6 +19,9 @@ set PYTHONPATH $HOME/.local $PYTHONPATH
 # systemd
 export SYSTEMD_EDITOR='vim'
 
+# dracula
+fish_config theme choose "Dracula Official"
+
 # nnn
 alias n='nnn -QAeoda'
 alias na='nnn -QAHeoda'
@@ -60,28 +63,11 @@ alias rg="rg --colors 'match:fg:black' --colors 'match:bg:yellow' --colors 'line
 # Key bindings
 # fish_vi_key_bindings
 
-# vim
-if test $theme = "light"
-  alias vim="vim --cmd \"let theme = 'light'\" $argv"
-else
-  alias vim="vim --cmd \"let theme = 'dark'\" $argv"
-end
-
-# Gruvbox
-set -l GRUVBOX_SCRIPT ~/.vim/bundle/gruvbox/gruvbox_256palette.sh
-if test -f $GRUVBOX_SCRIPT
-    bash $GRUVBOX_SCRIPT
-end
-
 # FZF
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,.tup,node_modules}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
---color=fg:#a89984,bg:-1,hl:#fabd2f
---color=fg+:#fbf1c7,bg+:#282828,hl+:#fabd2f
---color=info:#fbf1c7,prompt:#fb4934,pointer:#fbf1c7
---color=marker:#d3869b,spinner:#fabd2f,header:#8ec07c'
-# https://minsw.github.io/fzf-color-picker/
+# https://draculatheme.com/fzf
+set -Ux FZF_DEFAULT_OPTS "--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4"
 
 # FZF commands
 alias Files="fzf --color=border:-1 --preview '[[ (file --mime {}) =~ binary ]] && echo {} is a binary file ;or (highlight -O ansi -l {}) 2> /dev/null | head -500' --preview-window right:65%"
