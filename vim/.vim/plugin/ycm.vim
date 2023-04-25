@@ -5,8 +5,8 @@ let g:ycm_clangd_binary_path = exepath("clangd")
 
 " let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_filetype_whitelist = {'cpp': 1, 'c': 1}
-let g:ycm_error_symbol = '🔥'
-let g:ycm_warning_symbol = '🔔'
+let g:ycm_error_symbol = '🩸'
+let g:ycm_warning_symbol = '👻'
 let g:ycm_auto_hover = ''
 let g:ycm_use_ultisnips_completer = 0
 let g:ycm_show_detailed_diag_in_popup = 1
@@ -45,6 +45,6 @@ augroup MyYCMCustom
     autocmd!
     autocmd FileType c,cpp let b:ycm_hover = {
                 \ 'command': 'GetDoc',
-                \ 'syntax': &filetype
+                \ 'syntax': &filetype,
                 \ }
 augroup END

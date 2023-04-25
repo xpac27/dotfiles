@@ -8,19 +8,21 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'easymotion/vim-easymotion'
 Plug 'itchyny/lightline.vim'
-Plug 'morhetz/gruvbox'
-Plug 'sainnhe/gruvbox-material'
+" Plug 'morhetz/gruvbox'
+" Plug 'sainnhe/gruvbox-material'
 Plug 'pgdouyon/vim-yin-yang'
 Plug 'metalelf0/base16-black-metal-scheme'
 Plug 'tpope/vim-commentary'
 Plug 'sheerun/vim-polyglot'
-Plug 'shinchu/lightline-gruvbox.vim'
+" Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'gregsexton/MatchTag', { 'for': ['html'] }
 Plug 'dkarter/bullets.vim'
 Plug 'tpope/vim-abolish'
 Plug 'alvan/vim-closetag'
 Plug 'godlygeek/tabular'
+Plug 'skywind3000/vim-terminal-help'
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 if &diff
 else
@@ -29,8 +31,9 @@ else
     Plug 'junegunn/fzf.vim'
     Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
     Plug 'mhinz/vim-startify'
-    " Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+    " Plug 'neoclide/coc.nvim', { for': ['cpp', 'c'], 'branch': 'release' }
     Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
+    " Plug 'jayli/vim-easycomplete', { 'for': ['cpp', 'c'] }
     Plug 'Valloric/ListToggle'
     Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
     Plug 'farmergreg/vim-lastplace'
