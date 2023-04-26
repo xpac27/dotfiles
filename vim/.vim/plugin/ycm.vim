@@ -26,6 +26,9 @@ nmap <silent> gi :YcmDiag<CR>:lwindow<CR>
 nmap <silent> <leader>h :YcmCompleter GoToAlternateFile<CR>
 nmap K <plug>(YCMHover)
 
+" Diag popup
+hi ErrorMsg guibg=#ff5555 guifg=#f8f8f2
+
 function! s:CustomizeYcmLocationWindow()
   " Move the window to the top of the screen.
   wincmd K

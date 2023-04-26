@@ -21,7 +21,6 @@ Plug 'dkarter/bullets.vim'
 Plug 'tpope/vim-abolish'
 Plug 'alvan/vim-closetag'
 Plug 'godlygeek/tabular'
-Plug 'skywind3000/vim-terminal-help'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
 if &diff
@@ -93,7 +92,7 @@ set ignorecase
 set incsearch
 set laststatus=2
 set lazyredraw
-set mouse-=a
+set mouse=a
 set mousehide
 set noerrorbells
 set nolist
