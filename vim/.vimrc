@@ -1,7 +1,9 @@
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
+if has("unix")
+    if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
+    endif
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -45,8 +47,13 @@ end
 call plug#end()
 
 if has('win64') || has('win32')
-    set pythonthreehome=~\AppData\Local\Programs\Python\Python310-32
-    set pythonthreedll=~\AppData\Local\Programs\Python\Python310-32\python310.dll
+    set pythonthreehome=~\AppData\Local\Programs\Python\Python311-32
+    set pythonthreedll=~\AppData\Local\Programs\Python\Python311-32\python311.dll
+
+	" Silence the warning that's emitted first time python3 is run
+	if has('python3')
+		silent! python3 1
+	endif
 endif
 
 filetype on
