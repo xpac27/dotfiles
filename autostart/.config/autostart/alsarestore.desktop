@@ -1,4 +1,0 @@
-[Desktop Entry]
-Name=alsarestore
-Exec=alsactl --file /home/vinz/.config/asound.state restore
-Type=Application

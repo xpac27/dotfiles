@@ -1,4 +1,0 @@
-[Desktop Entry]
-Name=Start compositor
-Exec=xcompmgr -f -I0.056 -O0.06
-Type=Application
