@@ -28,6 +28,7 @@ nmap K <plug>(YCMHover)
 
 " Diag popup
 hi ErrorMsg guibg=#ff5555 guifg=#f8f8f2
+hi BorderColor guifg=#282a36 guifg=NONE
 
 function! s:CustomizeYcmLocationWindow()
   " Move the window to the top of the screen.
@@ -49,5 +50,11 @@ augroup MyYCMCustom
     autocmd FileType c,cpp let b:ycm_hover = {
                 \ 'command': 'GetDoc',
                 \ 'syntax': &filetype,
+                \ 'popup_params': {
+                \     'maxwidth': 80,
+                \     'border': [],
+                \     'borderchars': ['─', '│', '─', '│', '┌', '┐', '┘', '└'],
+                \     'borderhighlight': ['BorderColor'],
+                \   },
                 \ }
 augroup END
