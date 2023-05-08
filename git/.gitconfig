@@ -1,7 +1,5 @@
-[user]
-    name = Vincent Cogne
-    email = banananana@protonmail.com
-    signingkey = A71BDD0E436F2DA3
+[include]
+    path = ~/.gitconfig_vinz
 
 [core]
     editor = vim
@@ -63,5 +61,6 @@
 
 [pull]
     rebase = true
+
 [init]
     defaultBranch = master
