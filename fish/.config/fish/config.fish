@@ -50,12 +50,12 @@ alias poweroff="systemctl poweroff"
 alias hibernate="systemctl hibernate"
 
 # Exa
-alias ll="exa -lh --git"
-alias la="exa -lha --git"
-alias lg="exa -lhG --git"
-alias lt="exa -lhT --git"
-alias lga="exa -lhGa --git"
-alias lta="exa -lhTa --git"
+alias ll="exa -lh --icons --group-directories-first --git-ignore --no-permissions --no-user --git"
+alias lg="exa -lhG --icons --group-directories-first --git-ignore --no-permissions --no-user --git"
+alias lt="exa -lhT --icons --group-directories-first --git-ignore --no-permissions --no-user --git"
+alias la="exa -lha --icons --group-directories-first --git"
+alias lga="exa -lhGa --icons --group-directories-first --git"
+alias lta="exa -lhTa --icons --group-directories-first --git"
 
 # Ripgrep
 alias rg="rg --colors 'match:fg:black' --colors 'match:bg:yellow' --colors 'line:style:bold' --colors 'line:fg:yellow' --colors 'path:fg:green' --colors 'path:style:bold'"

@@ -53,6 +53,14 @@ endif
 filetype on
 syntax enable
 
+" hide files in explore mode
+let g:netrw_list_hide = '\.o$,\.d$,\.a$,\.so$,\.swp$,\.orig$,\.pyc$'
+let g:netrw_liststyle = 3
+let g:netrw_sort_by = "name"
+let g:netrw_sort_sequence = "[\/]$"
+let g:netrw_hide = 1
+let g:netrw_fastbrowse = 0
+
 " set Vim-specific sequences for RGB colors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -135,7 +143,7 @@ set undofile
 set undolevels=1000
 set undoreload=1000
 set updatetime=300
-set wildignore=*.o,*.dwo,*.so,*.pyc,*.swp,*.orig,DS_Store
+set wildignore=*.o,*.d,*.a,*.so,*.pyc,*.swp,*.orig
 set wildmenu
 set wildmode=longest,list
 set nofixendofline
