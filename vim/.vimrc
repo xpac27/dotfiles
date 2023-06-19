@@ -32,7 +32,6 @@ else
     Plug 'mhinz/vim-startify'
     " Plug 'neoclide/coc.nvim', { for': ['cpp', 'c'], 'branch': 'release' }
     Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
-    " Plug 'jayli/vim-easycomplete', { 'for': ['cpp', 'c'] }
     Plug 'Valloric/ListToggle'
     Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
     Plug 'farmergreg/vim-lastplace'

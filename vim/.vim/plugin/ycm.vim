@@ -14,6 +14,7 @@ let g:ycm_echo_current_diagnostic = 1
 let g:ycm_update_diagnostics_in_insert_mode = 1
 let g:ycm_always_populate_location_list = 1
 " let g:ycm_filepath_completion_use_working_dir = 0
+let g:ycm_enable_semantic_highlighting=1
 let g:ycm_log_level = 'critical'
 nmap <silent> gD :YcmCompleter GoTo<CR>
 nmap <silent> gd :YcmCompleter GoToImprecise<CR>
