@@ -29,7 +29,7 @@ nmap K <plug>(YCMHover)
 
 " Diag popup
 hi ErrorMsg guibg=#ff5555 guifg=#f8f8f2
-hi BorderColor guifg=#282a36 guifg=NONE
+hi BorderColor guifg=#44475a guifg=NONE
 
 function! s:CustomizeYcmLocationWindow()
   " Move the window to the top of the screen.
@@ -38,16 +38,9 @@ function! s:CustomizeYcmLocationWindow()
   wincmd p
 endfunction
 
-autocmd User YcmLocationOpened call s:CustomizeYcmLocationWindow()
-
-" if has("unix")
-" 	if filereadable('.clang-format')
-" 		au BufWritePre *.cpp,*.c,*.h,*.hpp :YcmCompleter Format
-" 	endif
-" endif
-
 augroup MyYCMCustom
     autocmd!
+
     autocmd FileType c,cpp let b:ycm_hover = {
                 \ 'command': 'GetDoc',
                 \ 'syntax': &filetype,
@@ -58,4 +51,10 @@ augroup MyYCMCustom
                 \     'borderhighlight': ['BorderColor'],
                 \   },
                 \ }
+
+    autocmd User YcmLocationOpened call s:CustomizeYcmLocationWindow()
+
+    if has("unix") && filereadable('.clang-format')
+        autocmd BufWritePre *.cpp,*.c,*.h,*.hpp :YcmCompleter Format
+    endif
 augroup END
