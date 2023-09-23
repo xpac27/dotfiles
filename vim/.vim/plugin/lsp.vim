@@ -26,6 +26,24 @@ let g:lsp_document_code_action_signs_hint = {'text': '🪓'}
 
 let g:lsp_signature_help_enabled = 1
 
+" Signs
+hi LspWarningText guibg=NONE
+hi LspErrorText guibg=NONE
+hi LspInformationText guibg=NONE
+hi LspHintText guibg=NONE
+
+" Text
+hi link LspWarningHighlight Warning
+hi link LspErrorHighlight Error
+hi link LspInformationHighlight Visual
+hi link LspHintHighlight Visual
+
+" Message
+hi link LspWarningVirtualText WarningMsg
+hi link LspErrorVirtualText ErrorMsg
+hi link LspInformationTextVirtualText Visual
+hi link LspHintVirtualText Visual
+
 function! s:on_lsp_buffer_enabled() abort
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
 
