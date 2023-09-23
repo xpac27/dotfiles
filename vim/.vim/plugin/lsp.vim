@@ -30,14 +30,30 @@ function! s:on_lsp_buffer_enabled() abort
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
 
     nmap <buffer> gd :LspDefinition<CR>
-    nmap <buffer> gn :LspNextDiagnostic<CR>
-    nmap <buffer> gN :LspPreviousDiagnostic<CR>
+    nmap <buffer> gt :LspTypeDefinition<CR>
+
+    nmap <buffer> gS :LspDocumentSymbolSearch<CR>
+    nmap <buffer> gs :LspWorkspaceSymbolSearch<CR>
+
     nmap <buffer> gr :LspReferences<CR>
-    nmap <buffer> gF :LspCodeAction<CR>
-    nmap <buffer> gR :LspRename<CR>
+
+    nmap <buffer> [g :LspPreviousDiagnostic<CR>
+    nmap <buffer> ]g :LspNextDiagnostic<CR>
     nmap <buffer> gi :LspDocumentDiagnostics<CR>
+
+    nmap <buffer> gh :LspTypeHierarchy<CR>
+
+    nmap <buffer> ga :LspCodeAction<CR>
+
     nmap <buffer> K :LspHover<CR>
-    nmap <buffer> <leader>h :LspDocumentSwitchSourceHeader<CR>
+
+    nmap <buffer> <leader> rn :LspRename<CR>
+
+    nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+    nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+
+    nnoremap <buffer> <leader>h :LspDocumentSwitchSourceHeader<CR>
+
 
    if has("unix") && filereadable('.clang-format')
         let g:lsp_format_sync_timeout = 1000
