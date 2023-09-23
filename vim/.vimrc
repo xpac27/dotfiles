@@ -32,8 +32,15 @@ else
     Plug 'junegunn/fzf.vim'
     Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
     Plug 'mhinz/vim-startify'
+
     " Plug 'neoclide/coc.nvim', { for': ['cpp', 'c'], 'branch': 'release' }
-    Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
+    " Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
+
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'mattn/vim-lsp-settings'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
     Plug 'Valloric/ListToggle'
     Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
     Plug 'farmergreg/vim-lastplace'
