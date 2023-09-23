@@ -49,9 +49,6 @@ function! s:on_lsp_buffer_enabled() abort
 
     nmap <buffer> <leader> rn :LspRename<CR>
 
-    nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
-    nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
-
     nnoremap <buffer> <leader>h :LspDocumentSwitchSourceHeader<CR>
 
 
