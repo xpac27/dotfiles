@@ -24,9 +24,11 @@ Plug 'tpope/vim-abolish'
 Plug 'alvan/vim-closetag'
 Plug 'godlygeek/tabular'
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'arcticicestudio/nord-vim'
 
 if &diff
 else
+    Plug 'ap/vim-css-color'
     Plug 'jamessan/vim-gnupg'
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
@@ -52,6 +54,8 @@ else
 end
 
 call plug#end()
+
+colorscheme nord
 
 if has('win64') || has('win32')
     set pythonthreehome=~\AppData\Local\Programs\Python\Python311-32
@@ -83,6 +87,9 @@ let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
 
 if has('win64') || has('win32')
+    if has()
+
+    end
     set listchars=lead:\:
     set listchars+=trail:· 
     set listchars+=tab:\ \ 

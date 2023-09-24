@@ -500,4 +500,4 @@ key_bindings:
   - { key: NumpadEnter,             chars: "\n"                              }
 
 import:
- - ~/.config/alacritty/themes/dracula.yaml
+ - ~/.config/alacritty/themes/nord.yaml
