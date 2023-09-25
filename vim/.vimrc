@@ -12,10 +12,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'itchyny/lightline.vim'
 " Plug 'morhetz/gruvbox'
 " Plug 'sainnhe/gruvbox-material'
-Plug 'pgdouyon/vim-yin-yang'
-Plug 'metalelf0/base16-black-metal-scheme'
 Plug 'tpope/vim-commentary'
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 " Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'gregsexton/MatchTag', { 'for': ['html'] }
@@ -23,6 +21,7 @@ Plug 'dkarter/bullets.vim'
 Plug 'tpope/vim-abolish'
 Plug 'alvan/vim-closetag'
 Plug 'godlygeek/tabular'
+
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'arcticicestudio/nord-vim'
 
@@ -87,9 +86,6 @@ let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
 
 if has('win64') || has('win32')
-    if has()
-
-    end
     set listchars=lead:\:
     set listchars+=trail:· 
     set listchars+=tab:\ \ 
