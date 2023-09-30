@@ -54,8 +54,6 @@ end
 
 call plug#end()
 
-colorscheme nord
-
 if has('win64') || has('win32')
     set pythonthreehome=~\AppData\Local\Programs\Python\Python311-32
     set pythonthreedll=~\AppData\Local\Programs\Python\Python311-32\python311.dll
@@ -68,6 +66,8 @@ endif
 
 filetype on
 syntax enable
+
+colorscheme nord
 
 " hide files in explore mode
 let g:netrw_list_hide = '\.o$,\.d$,\.a$,\.so$,\.swp$,\.orig$,\.pyc$'
