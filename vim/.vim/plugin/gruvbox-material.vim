@@ -8,3 +8,7 @@ let g:gruvbox_material_ui_contrast = 'low'
 let g:gruvbox_material_show_eob = 0
 let g:gruvbox_material_diagnostic_text_highlight = 1
 let g:gruvbox_material_diagnostic_line_highlight = 0
+
+if (g:colors_name == 'gruvbox-material')
+    let g:lightline.colorscheme = 'gruvbox'
+endif

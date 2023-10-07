@@ -4,4 +4,6 @@ if (g:colors_name == 'dracula')
   hi StatusLineNC guibg=#44475a
   hi Error guifg=#ff5555 guibg=NONE cterm=underline
   hi Warning guifg=#f1fa8c guibg=NONE cterm=underline
+
+  let g:lightline.colorscheme = 'dracula'
 endif

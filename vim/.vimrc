@@ -10,8 +10,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'easymotion/vim-easymotion'
 Plug 'itchyny/lightline.vim'
-" Plug 'morhetz/gruvbox'
-" Plug 'sainnhe/gruvbox-material'
 Plug 'tpope/vim-commentary'
 "Plug 'sheerun/vim-polyglot'
 " Plug 'shinchu/lightline-gruvbox.vim'
@@ -22,8 +20,11 @@ Plug 'tpope/vim-abolish'
 Plug 'alvan/vim-closetag'
 Plug 'godlygeek/tabular'
 
+Plug 'morhetz/gruvbox'
+Plug 'sainnhe/gruvbox-material'
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'arcticicestudio/nord-vim'
+Plug 'nordtheme/vim', { 'as': 'nord' }
+Plug 'Lokaltog/vim-monotone'
 
 if &diff
 else

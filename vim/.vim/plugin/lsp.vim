@@ -15,8 +15,8 @@ let g:lsp_diagnostics_float_cursor = 0 " show diags in a popup
 let g:lsp_diagnostics_virtual_text_enabled = 1 " show diags inlined
 let g:lsp_diagnostics_virtual_text_wrap = 'wrap'
 let g:lsp_diagnostics_virtual_text_align = 'after' " 'after' or 'below'
-let g:lsp_diagnostics_signs_error = {'text': '🩸'}
-let g:lsp_diagnostics_signs_warning = {'text': '👻'}
+let g:lsp_diagnostics_signs_error = {'text': '🔥'}
+let g:lsp_diagnostics_signs_warning = {'text' : '🌩️'}
 let g:lsp_diagnostics_signs_information = {'text': 'ℹ️'}
 let g:lsp_diagnostics_signs_hint = {'text': '💡'}
 let g:lsp_diagnostics_signs_insert_mode_enabled = 0 " Please don't bother me while I type
@@ -43,6 +43,8 @@ hi link LspWarningVirtualText WarningMsg
 hi link LspErrorVirtualText ErrorMsg
 hi link LspInformationTextVirtualText Visual
 hi link LspHintVirtualText Visual
+
+highlight link lspReference CurrentWord
 
 function! s:on_lsp_buffer_enabled() abort
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif

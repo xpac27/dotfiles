@@ -16,4 +16,6 @@ if (g:colors_name == 'gruvbox')
   hi CocHighlightText guibg=#504945
   hi StatusLine guibg=#504945
   hi StatusLineNC guibg=#504945
+
+  let g:lightline.colorscheme = 'gruvbox'
 endif
