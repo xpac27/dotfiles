@@ -1,6 +1,6 @@
 let g:lightline = {
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' },
+      \ 'separator': { 'left': '║', 'right': '' },
+      \ 'subseparator': { 'left': '┋', 'right': '│' },
       \ 'active': {
       \   'left': [ [ 'relativepath', 'modified', 'cocstatus' ], [ 'readonly', 'paste' ] ],
       \   'right': [ [],[],[ 'lineinfo', 'percent', 'filetype', 'fileencoding' ], [], [] ]
@@ -8,9 +8,6 @@ let g:lightline = {
       \ 'inactive': {
       \   'left': [ [ 'relativepath', 'modified', 'cocstatus' ], [ 'readonly' ] ],
       \   'right': [ ]
-      \ },
-      \ 'component': {
-      \   'arrow_right': '  '
       \ },
       \ 'component_function': {
       \   'cocstatus': 'coc#status',
@@ -27,3 +24,4 @@ endfunction
 
 " Use auocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+

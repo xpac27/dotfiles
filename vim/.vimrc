@@ -68,7 +68,7 @@ endif
 filetype on
 syntax enable
 
-colorscheme nord
+colorscheme monotone
 
 " hide files in explore mode
 let g:netrw_list_hide = '\.o$,\.d$,\.a$,\.so$,\.swp$,\.orig$,\.pyc$'

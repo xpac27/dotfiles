@@ -20,7 +20,7 @@ set PYTHONPATH $HOME/.local $PYTHONPATH
 export SYSTEMD_EDITOR='vim'
 
 # dracula
-fish_config theme choose "nord"
+# fish_config theme choose "nord"
 
 # nnn
 alias n='nnn -QAeoda'
@@ -66,14 +66,27 @@ alias rg="rg --colors 'match:fg:black' --colors 'match:bg:yellow' --colors 'line
 # FZF
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,.tup,node_modules}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-# https://draculatheme.com/fzf
-# export FZF_DEFAULT_OPTS="--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4"
-# https://github.com/ianchesal/nord-fzf
-export FZF_DEFAULT_OPTS='
-    --color=fg:#e5e9f0,bg:#2E3440,hl:#81a1c1
-    --color=fg+:#e5e9f0,bg+:#2E3440,hl+:#81a1c1
-    --color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac
-    --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b'
+
+# FZF Dracula - https://draculatheme.com/fzf
+# export FZF_DEFAULT_OPTS='
+#     --color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9
+#     --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9
+#     --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6
+#     --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+
+# FZF Nord scheme - https://github.com/ianchesal/nord-fzf
+# export FZF_DEFAULT_OPTS='
+#     --color=fg:#e5e9f0,bg:#2E3440,hl:#81a1c1
+#     --color=fg+:#e5e9f0,bg+:#2E3440,hl+:#81a1c1
+#     --color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac
+#     --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b'
+
+# FZF Monochrome
+# export FZF_DEFAULT_OPTS='
+#   --color=bg:#1a1a1a,bg+:#2e2e2e,spinner:#dd9922,hl:#dd9922
+#   --color=fg:#919191,fg+:#ffffff,hl+:#eeee99,info:#ff9999
+#   --color=border:#4e4e4e,prompt:#ffffff,pointer:#dd9922
+#   --color=marker:#d7d7d7,header:#919191'
 
 # FZF commands
 alias Files="fzf --color=border:-1 --preview '[[ (file --mime {}) =~ binary ]] && echo {} is a binary file ;or (highlight -O ansi -l {}) 2> /dev/null | head -500' --preview-window right:65%"

@@ -15,7 +15,7 @@
 window:
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
-  opacity: 1.0
+  opacity: 0.75
 
   # Window dimensions (changes require restart)
   #
@@ -59,7 +59,7 @@ window:
   startup_mode: Maximized
 
   # Allow terminal applications to change Alacritty's window title.
-  dynamic_title: false
+  dynamic_title: true
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -500,4 +500,5 @@ key_bindings:
   - { key: NumpadEnter,             chars: "\n"                              }
 
 import:
- - ~/.config/alacritty/themes/nord.yaml
+ - ~/.config/alacritty/themes/monotone.yaml
+
