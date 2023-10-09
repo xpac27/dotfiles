@@ -78,6 +78,14 @@ function! s:on_lsp_buffer_enabled() abort
    endif
 endfunction
 
+" Use windows clangd matching the version of clang mentioned in compile_commands.json
+if has('win64') || has('win32')
+	let g:lsp_settings = {
+	\  'clangd': {'cmd': ['D:\packages\PCClang\15.0.7_17334414\installed\bin\clangd.exe']},
+	\  'efm-langserver': {'disabled': v:false}
+	\}
+endif
+
 augroup lsp_install
     au!
     " call s:on_lsp_buffer_enabled only for languages that has the server registered.
