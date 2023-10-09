@@ -82,11 +82,11 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 #     --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b'
 
 # FZF Monochrome
-# export FZF_DEFAULT_OPTS='
-#   --color=bg:#1a1a1a,bg+:#2e2e2e,spinner:#dd9922,hl:#dd9922
-#   --color=fg:#919191,fg+:#ffffff,hl+:#eeee99,info:#ff9999
-#   --color=border:#4e4e4e,prompt:#ffffff,pointer:#dd9922
-#   --color=marker:#d7d7d7,header:#919191'
+export FZF_DEFAULT_OPTS='
+  --color=bg:#1a1a1a,bg+:#2e2e2e,spinner:#dd9922,hl:#dd9922
+  --color=fg:#919191,fg+:#ffffff,hl+:#eeee99,info:#ff9999
+  --color=border:#4e4e4e,prompt:#ffffff,pointer:#dd9922
+  --color=marker:#d7d7d7,header:#919191'
 
 # FZF commands
 alias Files="fzf --color=border:-1 --preview '[[ (file --mime {}) =~ binary ]] && echo {} is a binary file ;or (highlight -O ansi -l {}) 2> /dev/null | head -500' --preview-window right:65%"
