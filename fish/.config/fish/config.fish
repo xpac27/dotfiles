@@ -23,11 +23,11 @@ export SYSTEMD_EDITOR='vim'
 # fish_config theme choose "nord"
 
 # nnn
-alias n='nnn -QAeoda'
-alias na='nnn -QAHeoda'
+alias n='nnn -QAeodax'
+alias na='nnn -QAHeodax'
 export NNN_COLORS='3333'
 export NNN_PLUG='o:fzopen;d:fzcd;v:imgview;p:preview-tabbed'
-# export NNN_FIFO=/tmp/nnn.fifo
+export NNN_FIFO=/tmp/nnn.fifo
 
 # Rust
 set PATH $HOME/.cargo/bin $PATH
