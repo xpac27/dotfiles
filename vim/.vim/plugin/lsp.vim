@@ -13,15 +13,17 @@ let g:lsp_diagnostics_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 0 " show diags in the status line
 let g:lsp_diagnostics_float_cursor = 0 " show diags in a popup
 let g:lsp_diagnostics_virtual_text_enabled = 1 " show diags inlined
+let g:lsp_diagnostics_virtual_text_prefix = '⯈ '
 let g:lsp_diagnostics_virtual_text_wrap = 'wrap'
 let g:lsp_diagnostics_virtual_text_align = 'after' " 'after' or 'below'
+let g:lsp_diagnostics_signs_enabled = 0
 let g:lsp_diagnostics_signs_error = {'text': '🔥'}
 let g:lsp_diagnostics_signs_warning = {'text' : '🌩️'}
 let g:lsp_diagnostics_signs_information = {'text': 'ℹ️'}
 let g:lsp_diagnostics_signs_hint = {'text': '💡'}
-let g:lsp_diagnostics_signs_insert_mode_enabled = 0 " Please don't bother me while I type
+let g:lsp_diagnostics_signs_insert_mode_enabled = 1 " Please don't bother me while I type
 
-let g:lsp_document_code_action_signs_enabled = 1
+let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_document_code_action_signs_hint = {'text': '🪓'}
 
 let g:lsp_signature_help_enabled = 1
@@ -81,9 +83,12 @@ endfunction
 " Use windows clangd matching the version of clang mentioned in compile_commands.json
 if has('win64') || has('win32')
 	let g:lsp_settings = {
-	\  'clangd': {'cmd': ['D:\packages\PCClang\15.0.7_17334414\installed\bin\clangd.exe']},
-	\  'efm-langserver': {'disabled': v:false}
-	\}
+	\  'clangd': {
+	\    'cmd': ['D:\packages\PCClang\15.0.7_17334414\installed\bin\clangd.exe', '--clang-tidy'],
+	\    'allowlist': ['c', 'cpp'],
+	\  },
+	\    'efm-langserver': {'disabled': v:false},
+	\  }
 endif
 
 augroup lsp_install
