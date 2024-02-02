@@ -1,4 +1,4 @@
-let s:black = [ '#111111', '0' ]
+let s:black = [ '#191919', '0' ]
 let s:black2 = [ '#111111', '233' ]
 
 let s:gray = [ '#4e4e4e', '235' ]

@@ -13,7 +13,6 @@ let g:lsp_diagnostics_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 0 " show diags in the status line
 let g:lsp_diagnostics_float_cursor = 0 " show diags in a popup
 let g:lsp_diagnostics_virtual_text_enabled = 1 " show diags inlined
-let g:lsp_diagnostics_virtual_text_prefix = '⯈ '
 let g:lsp_diagnostics_virtual_text_wrap = 'wrap'
 let g:lsp_diagnostics_virtual_text_align = 'after' " 'after' or 'below'
 let g:lsp_diagnostics_signs_enabled = 0
@@ -84,7 +83,7 @@ endfunction
 if has('win64') || has('win32')
 	let g:lsp_settings = {
 	\  'clangd': {
-	\    'cmd': ['D:\packages\PCClang\15.0.7_17334414\installed\bin\clangd.exe', '--clang-tidy'],
+	\    'cmd': ['D:\packages\PCClang\15.0.7_17334414\installed\bin\clangd.exe', '--clang-tidy', '--header-insertion=iwyu'],
 	\    'allowlist': ['c', 'cpp'],
 	\  },
 	\    'efm-langserver': {'disabled': v:false},

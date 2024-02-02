@@ -11,13 +11,13 @@ let g:fzf_action = { 'ctrl-q': function('s:build_quickfix_list') }
 if has("unix")
 	let g:fzf_preview_window = ['right,40%,<70(up,40%)']
 	command! -bang -nargs=? Files call fzf#vim#gitfiles(<q-args>, {'options': ['--bind=ctrl-a:select-all']}, <bang>0)
-	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep '.<q-args>, 1, fzf#vim#with_preview({'options': ['--bind=ctrl-a:select-all']}), <bang>0)
-	command! -bang -nargs=* -complete=dir FindFiles call fzf#vim#grep('rg --vimgrep --max-count=1 '.<q-args>, 1, fzf#vim#with_preview({'options': ['--bind=ctrl-a:select-all']}), <bang>0)
+	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep --fixed-strings '.<q-args>, 1, fzf#vim#with_preview({'options': ['--bind=ctrl-a:select-all']}), <bang>0)
+	command! -bang -nargs=* -complete=dir FindFiles call fzf#vim#grep('rg --vimgrep --fixed-strings --max-count=1 '.<q-args>, 1, fzf#vim#with_preview({'options': ['--bind=ctrl-a:select-all']}), <bang>0)
 else
 	let g:fzf_preview_window = []
 	command! -bang -nargs=? Files call fzf#vim#files(<q-args>, {'options': ['--bind=ctrl-a:select-all']}, <bang>0)
-	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all']}, <bang>0)
-	command! -bang -nargs=* -complete=dir FindFiles call fzf#vim#grep('rg --vimgrep --max-count=1 '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all']}, <bang>0)
+	command! -bang -nargs=* -complete=dir Find call fzf#vim#grep('rg --vimgrep --fixed-strings '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all']}, <bang>0)
+	command! -bang -nargs=* -complete=dir FindFiles call fzf#vim#grep('rg --vimgrep --fixed-strings --max-count=1 '.<q-args>, 1, {'options': ['--bind=ctrl-a:select-all']}, <bang>0)
 endif
 
 nnoremap <leader>f :Files<CR>
