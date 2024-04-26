@@ -24,7 +24,8 @@ Plug 'morhetz/gruvbox'
 Plug 'sainnhe/gruvbox-material'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'nordtheme/vim', { 'as': 'nord' }
-Plug 'Lokaltog/vim-monotone'
+Plug 'xpac27/vim-monotone'
+Plug 'nikolvs/vim-sunbather'
 
 if &diff
 else
@@ -98,7 +99,7 @@ endif
 set exrc
 set autoread
 set backspace=indent,eol,start
-set cmdheight=2
+set cmdheight=1
 set complete-=i
 set completeopt=longest,menuone
 set cryptmethod=blowfish2
