@@ -10,6 +10,8 @@ if (g:colors_name == 'monotone')
 
     hi StatusLine guibg=#111111
     hi StatusLineNC guibg=#111111 guifg=#111111
+    hi Include guifg=#666666
+    hi Type guifg=#dddddd
 
     let g:lightline.colorscheme = 'monotone'
 endif
