@@ -82,12 +82,12 @@ endfunction
 " Use windows clangd matching the version of clang mentioned in compile_commands.json
 if has('win64') || has('win32')
     let g:lsp_settings = {
-    \   'clangd': {
-    \     'cmd': ['D:\packages\PCClang\15.0.7_17334414\installed\bin\clangd.exe', '--clang-tidy'],
-    \     'allowlist': ['c', 'cpp'],
-    \   },
-    \   'efm-langserver': {'disabled': v:false},
-    \}
+    \  'clangd': {
+    \    'cmd': ['D:\packages\PCClang\16.0.6_18959425\installed\bin\clangd.exe'],
+    \    'allowlist': ['c', 'cpp'],
+    \  },
+    \    'efm-langserver': {'disabled': v:false},
+    \  }
 else
     let g:lsp_settings = {
     \   'clangd': {

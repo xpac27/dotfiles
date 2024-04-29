@@ -245,6 +245,7 @@ nnoremap Q q
 nnoremap K <nop>
 nnoremap <C-s> <nop>
 nnoremap ^S <nop>
+nnoremap <C-w>o <nop>
 
 " Repurpose cursor keys
 nnoremap <silent> <Up> :cprevious<CR>
@@ -257,6 +258,9 @@ nnoremap <leader>r :%s/\<<C-R><C-W>\>//gc<left><left><left>
 
 " Copy filepath
 nnoremap cp :let @+ = expand("%")<cr>
+
+" Sort block
+nnoremap <leader>s vip:sort u<CR>
 
 " JSON
 if executable('python')
