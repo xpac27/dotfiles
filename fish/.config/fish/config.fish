@@ -83,14 +83,8 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # FZF Monochrome
 export FZF_DEFAULT_OPTS='
-  --color=bg:#1a1a1a,bg+:#2e2e2e,spinner:#dd9922,hl:#dd9922
-  --color=fg:#919191,fg+:#ffffff,hl+:#eeee99,info:#ff9999
+  --color=bg:#1a1a1a,bg+:#1a1a1a,spinner:#ffffff,hl:#dd9922,preview-bg:#111111,preview-border:#111111
+  --color=fg:#919191,fg+:#ffffff,hl+:#eeee99,info:#ffffff
   --color=border:#4e4e4e,prompt:#ffffff,pointer:#dd9922
-  --color=marker:#d7d7d7,header:#919191'
-
-# FZF commands
-alias Files="fzf --color=border:-1 --preview '[[ (file --mime {}) =~ binary ]] && echo {} is a binary file ;or (highlight -O ansi -l {}) 2> /dev/null | head -500' --preview-window right:65%"
-alias GitLog=" git log --date=short --format=\"%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)\" --graph --color=always | fzf --color=border:-1 --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
-        --header 'Press CTRL-S to toggle sort' \
-        --preview 'grep -o \"[a-f0-9]\{7,\}\" <<< {} | xargs git show --color=always | head -'$LINES"
+  --color=marker:#eeee99,header:#919191'
 
