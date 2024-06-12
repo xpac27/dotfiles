@@ -18,6 +18,7 @@ Plug 'gregsexton/MatchTag', { 'for': ['html'] }
 Plug 'tpope/vim-abolish'
 Plug 'alvan/vim-closetag'
 Plug 'godlygeek/tabular'
+Plug 'github/copilot.vim'
 
 Plug 'morhetz/gruvbox'
 Plug 'sainnhe/gruvbox-material'
