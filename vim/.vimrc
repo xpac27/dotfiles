@@ -271,9 +271,9 @@ endif
 if has("unix")
     command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 else
-    command! Compile AsyncRun ruby C:\Users\vcogne\bin\compile.rb %:p
-    command! CompileProject AsyncRun ruby C:\Users\vcogne\bin\compile.rb %:p:h
-    command! CompileSolution AsyncRun ruby C:\Users\vcogne\bin\compile.rb
+    command! Compile AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb %:p
+    command! CompileProject AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb %:p:h
+    command! CompileSolution AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb
     command! RemoveFromMaster AsyncRun -silent ruby C:\Users\vcogne\bin\compile.rb REMOVE_FROM_MASTER %:p
     nnoremap <silent> <leader>m :Compile<CR>
     nnoremap <silent> <leader>mm :CompileProject<CR>
