@@ -31,7 +31,7 @@ if &diff
 else
     Plug 'ap/vim-css-color'
     Plug 'jamessan/vim-gnupg'
-    Plug 'junegunn/fzf'
+    Plug 'junegunn/fzf', { 'tag': '0.52.1' }
     Plug 'junegunn/fzf.vim'
     Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
     Plug 'mhinz/vim-startify'
@@ -271,11 +271,19 @@ endif
 if has("unix")
     command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 else
-    command! Compile AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb %:p
-    command! CompileProject AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb %:p:h
-    command! CompileSolution AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb
+    command! Ninja AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD %:t
+    command! NinjaBO AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD_BO
+    command! NinjaAll AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD_ALL
+    command! Test AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_TEST %:p
+    command! TestAll AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_TEST
+
+    command! Compile AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb %:p
+    command! CompileProject AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb %:p:h
+    command! CompileSolution AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb
+
     command! RemoveFromMaster AsyncRun -silent ruby C:\Users\vcogne\bin\compile.rb REMOVE_FROM_MASTER %:p
-    nnoremap <silent> <leader>m :Compile<CR>
+
+    nnoremap <silent> <leader>m :Ninja<CR>
     nnoremap <silent> <leader>mm :CompileProject<CR>
     nnoremap <silent> <leader>mmm :CompileSolution<CR>
 endif

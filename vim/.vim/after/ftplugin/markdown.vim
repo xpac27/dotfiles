@@ -4,3 +4,4 @@ setlocal shiftwidth=2
 setlocal wrap
 setlocal linebreak
 setlocal textwidth=0
+set listchars=
