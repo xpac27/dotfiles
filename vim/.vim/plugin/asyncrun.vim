@@ -4,10 +4,9 @@ let g:asyncrun_exit = "if g:asyncrun_code == 0 | cclose | endif"
 let g:asyncrun_trim = 1
 let g:asyncrun_save = 1
 
-highlight QuickFixBackground guifg=#666666 guibg=#333333
+highlight QuickFixBackground guifg=#666666 guibg=#222222
 
 autocmd FileType qf setlocal wincolor=QuickFixBackground
 autocmd FileType qf setlocal nonumber
 autocmd FileType qf setlocal norelativenumber
-autocmd FileType qf setlocal nocursorline
 autocmd FileType qf setlocal fillchars=eob:\ 

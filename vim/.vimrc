@@ -284,6 +284,7 @@ else
     command! RemoveFromMaster AsyncRun -silent ruby C:\Users\vcogne\bin\compile.rb REMOVE_FROM_MASTER %:p
 
     nnoremap <silent> <leader>m :Ninja<CR>
+    nnoremap <silent> <leader>t :Test<CR>
     nnoremap <silent> <leader>mm :CompileProject<CR>
     nnoremap <silent> <leader>mmm :CompileSolution<CR>
 endif
