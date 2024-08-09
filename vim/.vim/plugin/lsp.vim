@@ -92,7 +92,7 @@ endfunction
 if has('win64') || has('win32')
     let g:lsp_settings = {
     \  'clangd': {
-    \    'cmd': ['D:\packages\PCClang\16.0.6_18959425\installed\bin\clangd.exe', '--header-insertion=never'],
+    \    'cmd': ['D:\packages\PCClang\16.0.6_18959425\installed\bin\clangd.exe', '--header-insertion=never', '--rename-file-limit=100'],
     \    'allowlist': ['c', 'cpp'],
     \  },
     \    'efm-langserver': {'disabled': v:false},
