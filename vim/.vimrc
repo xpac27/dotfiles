@@ -271,6 +271,8 @@ endif
 if has("unix")
     command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 else
+    " compiler! msbuild
+
     command! Ninja AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD %:t
     command! NinjaBO AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD_BO
     command! NinjaAll AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD_ALL
