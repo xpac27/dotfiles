@@ -19,6 +19,7 @@ Plug 'tpope/vim-abolish'
 Plug 'alvan/vim-closetag'
 Plug 'godlygeek/tabular'
 Plug 'github/copilot.vim'
+Plug 'tpope/vim-vinegar'
 
 Plug 'morhetz/gruvbox'
 Plug 'sainnhe/gruvbox-material'

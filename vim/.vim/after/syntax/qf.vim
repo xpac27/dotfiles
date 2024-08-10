@@ -1,4 +1,6 @@
-syn match TestOk "\[       OK \].\+"
-syn match TestOk "\[  PASSED  \].\+"
-" syn match TestRun "\[ RUN      \].\+"
-syn match TestFailed "\[  FAILED  \].\+"
+syn match GTestOk "\[       OK \].\+"
+syn match GTestOk "\[  PASSED  \].\+"
+syn match GTestFailed "\[  FAILED  \].\+"
+
+syn match MSBuildError "error [A-Z0-9]\+:.\+$"
+syn match MSBuildWarning "warning [A-Z0-9]\+:.\+$"
