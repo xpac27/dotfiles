@@ -23,5 +23,16 @@ if (g:colors_name == 'monotone')
     hi Include guifg=#666666
     hi Type guifg=#dddddd
 
+    " Quickfix
+    highlight QuickFixBackground guifg=#666666 guibg=#2a2a2a " Custom group
+    hi! link QuickFixLine CursorLine
+    hi TestOk guifg=#99ff99 guibg=#112211 " Custom group for gtest
+    hi TestRun guifg=#d7d7d7 guibg=#222222 " Custom group for gtest
+    hi TestFailed guifg=#ff4444 guibg=#221111 " Custom group for gtest
+    hi qfError guifg=#ff4444 guibg=#221111
+    hi qfSeparator guifg=#2a2a2a
+    hi qfLineNr guifg=#d7d7d7
+    hi qfFileName guifg=#d7d7d7
+
     let g:lightline.colorscheme = 'monotone'
 endif
