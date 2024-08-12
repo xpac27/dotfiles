@@ -9,11 +9,4 @@ augroup ASYNCRUN
     autocmd FileType qf setlocal nonumber
     autocmd FileType qf setlocal norelativenumber
     autocmd FileType qf setlocal fillchars=eob:\ 
-
-    if has("unix")
-    else
-        autocmd FileType qf setlocal compiler msbuild
-        " autocmd FileType qf setlocal compiler=msvc
-        " autocmd FileType qf setlocal compiler=msbuild
-    endif
 augroup END
