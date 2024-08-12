@@ -5,6 +5,8 @@ if (g:colors_name == 'monotone')
     hi Warning guifg=#eeee99 guibg=NONE cterm=undercurl
     hi ErrorMsg guifg=#ff4444 guibg=#221111 cterm=italic
     hi WarningMsg guifg=#dd9922 guibg=#222211 cterm=italic
+    hi SuccessMsg guifg=#99ff99 guibg=#112211 cterm=italic
+    hi InfoMsg guifg=#99eeff guibg=#112222 cterm=italic
     hi MatchParen guifg=#d7d7d7 guibg=#444444 cterm=bold
     hi CurrentWord guibg=#444444
 
@@ -30,7 +32,7 @@ if (g:colors_name == 'monotone')
     hi qfSeparator guifg=#2a2a2a
     hi qfLineNr guifg=#d7d7d7
     hi qfFileName guifg=#d7d7d7
-    hi TestOk guifg=#99ff99 guibg=#112211
+    hi link GTestOk SuccessMsg
     hi link GTestFailed ErrorMsg
     hi link MSBuildError ErrorMsg
     hi link MSBuildWarning WarningMsg

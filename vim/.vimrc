@@ -290,7 +290,6 @@ else
     nnoremap <silent> <leader>mmm :CompileSolution<CR>
 
     " MSVC error format
-    set errorformat=
     set errorformat+=%f(%l\\,%c):\ %m
     set errorformat+=%f(%l\\,%c):\ %m
 endif
