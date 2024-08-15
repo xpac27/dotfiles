@@ -77,8 +77,6 @@ function! s:on_lsp_buffer_enabled() abort
 
     nmap <buffer> K :LspHover<CR>
 
-    nmap <buffer> <leader> rn :LspRename<CR>
-
     nnoremap <buffer> <leader>h :LspDocumentSwitchSourceHeader<CR>
 
 

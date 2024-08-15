@@ -19,7 +19,7 @@ Plug 'tpope/vim-abolish'
 Plug 'alvan/vim-closetag'
 Plug 'godlygeek/tabular'
 Plug 'github/copilot.vim'
-Plug 'tpope/vim-vinegar'
+" Plug 'tpope/vim-vinegar'
 
 Plug 'morhetz/gruvbox'
 Plug 'sainnhe/gruvbox-material'
@@ -61,10 +61,10 @@ if has('win64') || has('win32')
     set pythonthreehome=~\AppData\Local\Programs\Python\Python311-32
     set pythonthreedll=~\AppData\Local\Programs\Python\Python311-32\python311.dll
 
-	" Silence the warning that's emitted first time python3 is run
-	if has('python3')
-		silent! python3 1
-	endif
+    " Silence the warning that's emitted first time python3 is run
+    if has('python3')
+        silent! python3 1
+    endif
 endif
 
 filetype on
@@ -202,17 +202,19 @@ augroup VINZ
 augroup END
 
 " typos
-ia   feild    field
-ia   flase    false
-ia   lenght   length
-ia   toogle   toggle
-ia   wiht     with
-ia   widht    width
-ia   heigth   height
-ia   retrun   return
-ia   easlt    eastl
-ia   being    begin
-ia   frist    first
+ia  feild      field
+ia  flase      false
+ia  lenght     length
+ia  toogle     toggle
+ia  wiht       with
+ia  widht      width
+ia  heigth     height
+ia  retrun     return
+ia  easlt      eastl
+ia  being      begin
+ia  frist      first
+ia  reffer     refer
+ia  repporting reporting
 
 " shortcuts
 ab   fu   function
@@ -286,11 +288,15 @@ else
 
     nnoremap <silent> <leader>m :Ninja<CR>
     nnoremap <silent> <leader>t :Test<CR>
-    nnoremap <silent> <leader>mm :CompileProject<CR>
-    nnoremap <silent> <leader>mmm :CompileSolution<CR>
+
+    " Reset error format
+    set errorformat=
 
     " MSVC error format
     set errorformat+=%f(%l\\,%c):\ %m
     set errorformat+=%f(%l\\,%c):\ %m
+
+    " Gtest error format
+    set errorformat^=%f(%l):\ %m
 endif
 
