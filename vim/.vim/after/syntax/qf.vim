@@ -5,4 +5,5 @@ syn match GTestError " error: .\+"
 
 syn match MSBuildError "error [A-Z0-9]\+:.\+$"
 syn match MSBuildWarning "warning [A-Z0-9]\+:.\+$"
+syn match MSBuildInfo "info [A-Z0-9]\+:.\+$"
 syn match MSBuildNote "note:.\+$"

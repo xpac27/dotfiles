@@ -294,9 +294,11 @@ else
 
     " MSVC error format
     set errorformat+=%f(%l\\,%c):\ %m
-    set errorformat+=%f(%l\\,%c):\ %m
+
+    " DDC error format
+    set errorformat+=%f(%l,%c):\ %m
 
     " Gtest error format
-    set errorformat^=%f(%l):\ %m
+    set errorformat+=%f(%l):\ %m
 endif
 

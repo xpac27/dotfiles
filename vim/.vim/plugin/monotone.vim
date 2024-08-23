@@ -39,6 +39,7 @@ if (g:colors_name == 'monotone')
     hi link GTestError ErrorMsg
     hi link MSBuildError ErrorMsg
     hi link MSBuildWarning WarningMsg
+    hi link MSBuildInfo InfoMsg
     hi link MSBuildNote NoteMsg
 
     " netrw
