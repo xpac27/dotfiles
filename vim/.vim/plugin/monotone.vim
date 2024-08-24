@@ -1,5 +1,9 @@
 if (g:colors_name == 'monotone')
 
+    " Overrides
+    hi Include guifg=#666666
+    hi Type guifg=#dddddd
+
     " Lsp
     hi Error guifg=#ff9999 guibg=NONE cterm=undercurl
     hi Warning guifg=#eeee99 guibg=NONE cterm=undercurl
@@ -70,5 +74,6 @@ if (g:colors_name == 'monotone')
     " hi! link LspSemanticRegexp TSStringRegex
     hi! link LspSemanticOperator Operator
 
+    " Lightline
     let g:lightline.colorscheme = 'monotone'
 endif

@@ -8,47 +8,65 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'easymotion/vim-easymotion'
-Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-commentary'
-"Plug 'sheerun/vim-polyglot'
-" Plug 'shinchu/lightline-gruvbox.vim'
+" UI
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'gregsexton/MatchTag', { 'for': ['html'] }
-Plug 'tpope/vim-abolish'
-Plug 'alvan/vim-closetag'
-Plug 'godlygeek/tabular'
-Plug 'github/copilot.vim'
-" Plug 'tpope/vim-vinegar'
+Plug 'itchyny/lightline.vim'
 
-Plug 'morhetz/gruvbox'
-Plug 'sainnhe/gruvbox-material'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'nordtheme/vim', { 'as': 'nord' }
-Plug 'xpac27/vim-monotone'
-Plug 'nikolvs/vim-sunbather'
+" Textual helpers
+Plug 'gregsexton/MatchTag', { 'for': ['html', 'xml'] }
+Plug 'alvan/vim-closetag', { 'for': ['html', 'xml'] }
+Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
+Plug 'tpope/vim-abolish', { 'on': 'Abolish' }
+Plug 'tpope/vim-commentary'
+
+" Navigation
+Plug 'easymotion/vim-easymotion'
+
+" Copilot
+Plug 'github/copilot.vim'
+
+" Themes
+Plug 'Lokaltog/vim-monotone'
+" Plug 'morhetz/gruvbox'
+" Plug 'sainnhe/gruvbox-material'
+" Plug 'shinchu/lightline-gruvbox.vim'
 
 if &diff
 else
+    " Highlights
     Plug 'ap/vim-css-color'
+
+    " Encryption
     Plug 'jamessan/vim-gnupg'
+
+    " Search
     Plug 'junegunn/fzf', { 'tag': '0.52.1' }
     Plug 'junegunn/fzf.vim'
+
+    " Undo
     Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+
+    " Startup
     Plug 'mhinz/vim-startify'
 
+    " LSP (old)
     " Plug 'neoclide/coc.nvim', { for': ['cpp', 'c'], 'branch': 'release' }
     " Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
 
+    " LSP
     Plug 'prabirshrestha/vim-lsp'
     Plug 'mattn/vim-lsp-settings'
     Plug 'prabirshrestha/asyncomplete.vim'
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
+    " Quickfix
     Plug 'Valloric/ListToggle'
     Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
+
+    " Location
     Plug 'farmergreg/vim-lastplace'
 
+    " Perforce
     if has('win64') || has('win32')
         Plug 'nfvs/vim-perforce'
         "Plug 'ngemily/vim-vp4'
