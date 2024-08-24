@@ -13,7 +13,7 @@ let g:lsp_completion_documentation_enabled = 0
 
 " Diagnostics
 let g:lsp_diagnostics_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 0 " show diags in the status line
+let g:lsp_diagnostics_echo_cursor = 1 " show diags in the status line
 let g:lsp_diagnostics_float_cursor = 0 " show diags in a popup
 let g:lsp_diagnostics_virtual_text_enabled = 1 " show diags inlined
 let g:lsp_diagnostics_virtual_text_wrap = 'wrap'
@@ -89,19 +89,20 @@ endfunction
 " Use windows clangd matching the version of clang mentioned in compile_commands.json
 if has('win64') || has('win32')
     let g:lsp_settings = {
-    \  'clangd': {
-    \    'cmd': ['D:\packages\PCClang\16.0.6_18959425\installed\bin\clangd.exe', '--header-insertion=never', '--rename-file-limit=100'],
-    \    'allowlist': ['c', 'cpp'],
-    \  },
+    \    'clangd': {
+    \      'cmd': ['D:\packages\PCClang\16.0.6_18959425\installed\bin\clangd.exe', '--header-insertion=never', '--rename-file-limit=100'],
+    \      'allowlist': ['c', 'cpp'],
+    \      'blocklist': ['json'],
+    \    },
     \    'efm-langserver': {'disabled': v:false},
     \  }
 else
     let g:lsp_settings = {
-    \   'clangd': {
-    \     'cmd': ['clangd', '--completion-style=bundled', '--all-scopes-completion=0', '--function-arg-placeholders=1', '--header-insertion-decorators']
-    \   },
-    \   'efm-langserver': {'disabled': v:false}
-    \}
+    \    'clangd': {
+    \      'cmd': ['clangd', '--completion-style=bundled', '--all-scopes-completion=0', '--function-arg-placeholders=1', '--header-insertion-decorators']
+    \    },
+    \    'efm-langserver': {'disabled': v:false}
+    \  }
 endif
 
 augroup lsp_install

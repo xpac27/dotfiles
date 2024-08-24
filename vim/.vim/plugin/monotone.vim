@@ -48,5 +48,27 @@ if (g:colors_name == 'monotone')
     hi netrwTreeBar guifg=#666666
     hi link netrwExe netrwPlain
 
+    " LSP semantic
+    hi! link LspSemanticType Type
+    hi! link LspSemanticClass Type
+    hi! link LspSemanticEnum Type
+    hi! link LspSemanticInterface Type
+    hi! link LspSemanticStruct Type
+    hi! link LspSemanticTypeParameter Type
+    " hi! link LspSemanticParameter TSParameter
+    " hi! link LspSemanticVariable TSVariable
+    " hi! link LspSemanticProperty TSProperty
+    " hi! link LspSemanticEnumMember TSProperty
+    hi! link LspSemanticEvents Label
+    hi! link LspSemanticFunction Function
+    " hi! link LspSemanticMethod TSMethod
+    hi! link LspSemanticKeyword Keyword
+    hi! link LspSemanticModifier Operator
+    hi! link LspSemanticComment Comment
+    " hi! link LspSemanticString String
+    hi! link LspSemanticNumber Number
+    " hi! link LspSemanticRegexp TSStringRegex
+    hi! link LspSemanticOperator Operator
+
     let g:lightline.colorscheme = 'monotone'
 endif
