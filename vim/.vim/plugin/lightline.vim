@@ -40,7 +40,7 @@ function! LspStatus()
       let l:msg .= printf('🔥%d ', l:errors)
   endif
   if l:warnings > 0
-      let l:msg .= printf('🦠%d ', l:warnings)
+      let l:msg .= printf('🌩️%d ', l:warnings)
   endif
   if l:hints > 0
       let l:msg .= printf('💡%d ', l:hints)
