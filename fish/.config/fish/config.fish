@@ -50,9 +50,9 @@ alias poweroff="systemctl poweroff"
 alias hibernate="systemctl hibernate"
 
 # Exa
-alias ll="exa -lh --icons --group-directories-first --git-ignore --no-permissions --no-user --git"
+alias ll="exa -lh --icons --group-directories-first --no-permissions --no-user --git"
 alias lg="exa -lhG --icons --group-directories-first --git-ignore --no-permissions --no-user --git"
-alias lt="exa -lhT --icons --group-directories-first --git-ignore --no-permissions --no-user --git"
+alias lt="exa -lhT --icons --group-directories-first --no-permissions --no-user --git"
 alias la="exa -lha --icons --group-directories-first --git"
 alias lga="exa -lhGa --icons --group-directories-first --git"
 alias lta="exa -lhTa --icons --group-directories-first --git"

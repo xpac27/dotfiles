@@ -292,6 +292,11 @@ endif
 " Others
 if has("unix")
     command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+
+    nnoremap <silent> <leader>m :Make test<CR>
+
+    " Greatest
+    set errorformat+=FAIL\ %m\ (%f:%l)
 else
     command! Ninja AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD %:t
     command! NinjaBO AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD_BO

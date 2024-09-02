@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-fill '/home/vinz/Pictures/wallpapers/ok/DALL·E 2024-06-02 19.54.59 - A magical galactic landscape in space, with a dense field of yellow broom flowers floating amidst the stars and cosmic dust. The flowers are abundant,.webp'
+feh --no-fehbg --bg-fill '/home/vinz/.fehbg.png'

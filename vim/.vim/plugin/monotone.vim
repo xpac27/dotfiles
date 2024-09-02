@@ -37,6 +37,7 @@ if (g:colors_name == 'monotone')
     hi qfSeparator guifg=#2a2a2a
     hi qfLineNr guifg=#d7d7d7
     hi qfFileName guifg=#d7d7d7
+    hi link TestFailed ErrorMsg
     hi link GTestOk SuccessMsg
     hi link GTestPassed SuccessMsg
     hi link GTestFailed ErrorMsg
