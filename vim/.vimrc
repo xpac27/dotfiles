@@ -41,7 +41,8 @@ else
     Plug 'jamessan/vim-gnupg'
 
     " Search
-    Plug 'junegunn/fzf', { 'tag': '0.52.1' }
+    " Plug 'junegunn/fzf', { 'tag': '0.52.1' }
+    Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
 
     " Undo
@@ -234,6 +235,7 @@ ia  being      begin
 ia  frist      first
 ia  reffer     refer
 ia  repporting reporting
+ia  nulltpr	   nullptr
 
 " shortcuts
 ab   fu   function
@@ -270,19 +272,18 @@ nnoremap ^S <nop>
 nnoremap <C-w>o <nop>
 
 " Repurpose cursor keys
-nnoremap <silent> <Up> :cprevious<CR>
-nnoremap <silent> <Down> :cnext<CR>
-nnoremap <silent> <Left> :lprevious<CR>
-nnoremap <silent> <Right> :lnext<CR>
+command! Cnext try | cnext | catch | cfirst | catch | endtry
+command! Cprev try | cprev | catch | clast | catch | endtry
+command! Lnext try | lnext | catch | lfirst | catch | endtry
+command! Lprev try | lprev | catch | llast | catch | endtry
+nnoremap <silent> <Up> :Cprev<CR>
+nnoremap <silent> <Down> :Cnext<CR>
 
 " Replace word under cursor
 nnoremap <leader>r :%s/\<<C-R><C-W>\>//gc<left><left><left>
 
 " Copy filepath
 nnoremap cp :let @+ = expand("%")<cr>
-
-" Sort block
-nnoremap <leader>s vip:sort u<CR>
 
 " JSON
 if executable('python')
@@ -299,10 +300,12 @@ if has("unix")
     set errorformat+=FAIL\ %m\ (%f:%l)
 else
     command! Ninja AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD %:t
-    command! NinjaBO AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD_BO
-    command! NinjaAll AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD_ALL
-    command! Test AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_TEST %:p
-    command! TestAll AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_TEST
+    command! NinjaBO AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD BattlefieldOnline
+    command! NinjaAll AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD
+
+    command! Test AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_TEST %:p line('.')
+    command! IntTest AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_INT_TEST
+    command! UnitTest AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_UNIT_TEST
 
     command! Compile AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb %:p
     command! CompileProject AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb %:p:h
@@ -313,11 +316,14 @@ else
     nnoremap <silent> <leader>m :Ninja<CR>
     nnoremap <silent> <leader>t :Test<CR>
 
+    nnoremap <leader>s :P4edit "%"<CR>:AsyncRun -silent fb sort_includes %:p<CR>
+
     " Reset error format
     set errorformat=
 
     " MSVC error format
     set errorformat+=%f(%l\\,%c):\ %m
+    set errorformat+=%f(%l)\ :\ %m
 
     " DDC error format
     set errorformat+=%f(%l,%c):\ %m

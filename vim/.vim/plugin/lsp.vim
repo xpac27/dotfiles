@@ -78,7 +78,8 @@ function! s:on_lsp_buffer_enabled() abort
     nmap <buffer> K :LspHover<CR>
 
     nnoremap <buffer> <leader>h :LspDocumentSwitchSourceHeader<CR>
-
+    nnoremap <buffer> <Left> :LspNextDiagnostic<CR>
+    nnoremap <buffer> <Right> :LspPreviousDiagnostic<CR>
 
    if has("unix") && filereadable('.clang-format')
         let g:lsp_format_sync_timeout = 1000
@@ -90,7 +91,7 @@ endfunction
 if has('win64') || has('win32')
     let g:lsp_settings = {
     \    'clangd': {
-    \      'cmd': ['D:\packages\PCClang\16.0.6_18959425\installed\bin\clangd.exe', '--header-insertion=never', '--rename-file-limit=100'],
+    \      'cmd': ['D:\packages\PCClang\17.0.6_20186251\installed\bin\clangd.exe', '--header-insertion=never', '--rename-file-limit=100'],
     \      'allowlist': ['c', 'cpp'],
     \      'blocklist': ['json'],
     \    },

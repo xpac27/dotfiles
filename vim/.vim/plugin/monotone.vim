@@ -32,7 +32,7 @@ if (g:colors_name == 'monotone')
 
     " Quickfix
     hi! link QuickFixLine CursorLine
-    hi QuickFixBackground guifg=#666666 guibg=#2a2a2a " Custom group
+    hi QuickFixBackground guifg=#666666 guibg=#333333 " Custom group
     hi qfError guifg=#ff4444 guibg=#221111
     hi qfSeparator guifg=#2a2a2a
     hi qfLineNr guifg=#d7d7d7
@@ -42,6 +42,7 @@ if (g:colors_name == 'monotone')
     hi link GTestPassed SuccessMsg
     hi link GTestFailed ErrorMsg
     hi link GTestError ErrorMsg
+    hi link GTestNote NoteMsg
     hi link MSBuildError ErrorMsg
     hi link MSBuildWarning WarningMsg
     hi link MSBuildInfo InfoMsg
