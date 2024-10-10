@@ -20,6 +20,9 @@ Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 Plug 'tpope/vim-abolish', { 'on': 'Abolish' }
 Plug 'tpope/vim-commentary'
 
+" Syntax
+Plug 'fei6409/log-highlight.nvim'
+
 " Navigation
 Plug 'easymotion/vim-easymotion'
 
@@ -279,6 +282,9 @@ command! Lprev try | lprev | catch | llast | catch | endtry
 nnoremap <silent> <Up> :Cprev<CR>
 nnoremap <silent> <Down> :Cnext<CR>
 
+" Empty quickfix window
+nnoremap <leader>qq :cex []<CR>
+
 " Replace word under cursor
 nnoremap <leader>r :%s/\<<C-R><C-W>\>//gc<left><left><left>
 
@@ -299,22 +305,19 @@ if has("unix")
     " Greatest
     set errorformat+=FAIL\ %m\ (%f:%l)
 else
-    command! Ninja AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD %:t
-    command! NinjaBO AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD BattlefieldOnline
-    command! NinjaAll AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD
+    command! Ninja AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD %:p
+    command! NinjaBO AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD Extension.BattlefieldOnline_all
+    command! NinjaAll AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD all
 
-    command! Test AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_TEST %:p line('.')
-    command! IntTest AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_INT_TEST
-    command! UnitTest AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb NINJA_UNIT_TEST
-
-    command! Compile AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb %:p
-    command! CompileProject AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb %:p:h
-    command! CompileSolution AsyncRun -strip  ruby C:\Users\vcogne\bin\compile.rb
-
-    command! RemoveFromMaster AsyncRun -silent ruby C:\Users\vcogne\bin\compile.rb REMOVE_FROM_MASTER %:p
+    command! Test let l = line('.') | execute 'AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_TEST %:p' l
+    command! TestAll let l = line('.') | execute 'AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_TEST %:p'
+    command! IntTest AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_INT_TEST
+    command! UnitTest AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_UNI_TEST
 
     nnoremap <silent> <leader>m :Ninja<CR>
+    nnoremap <silent> <leader>mm :NinjaAll<CR>
     nnoremap <silent> <leader>t :Test<CR>
+    nnoremap <silent> <leader>tt :TestAll<CR>
 
     nnoremap <leader>s :P4edit "%"<CR>:AsyncRun -silent fb sort_includes %:p<CR>
 
@@ -330,5 +333,8 @@ else
 
     " Gtest error format
     set errorformat+=%f(%l):\ %m
+
+	" Integration tests error format
+	set errorformat+=%t\ %m\ -\ %f
 endif
 

@@ -7,9 +7,10 @@ if (g:colors_name == 'monotone')
     " Lsp
     hi Error guifg=#ff9999 guibg=NONE cterm=undercurl
     hi Warning guifg=#eeee99 guibg=NONE cterm=undercurl
+    hi Success guifg=#99ff99 guibg=NONE cterm=undercurl
     hi ErrorMsg guifg=#ff4444 guibg=#221111 cterm=italic
     hi WarningMsg guifg=#dd9922 guibg=#222211 cterm=italic
-    hi SuccessMsg guifg=#99ff99 guibg=#112211 cterm=italic
+    hi SuccessMsg guifg=#22dd22 guibg=#112211 cterm=italic
     hi InfoMsg guifg=#99ffff guibg=#112222 cterm=italic
     hi NoteMsg guifg=#ffffcc guibg=#222211
     hi MatchParen guifg=#d7d7d7 guibg=#444444 cterm=bold
@@ -38,15 +39,19 @@ if (g:colors_name == 'monotone')
     hi qfLineNr guifg=#d7d7d7
     hi qfFileName guifg=#d7d7d7
     hi link TestFailed ErrorMsg
-    hi link GTestOk SuccessMsg
-    hi link GTestPassed SuccessMsg
+    hi link GTestOk Success
+    hi link GTestPassed Success
     hi link GTestFailed ErrorMsg
     hi link GTestError ErrorMsg
     hi link GTestNote NoteMsg
+    hi link ITestError Error
+    hi link ITestWarning Warning
+    hi link ITestSuccess Success
     hi link MSBuildError ErrorMsg
     hi link MSBuildWarning WarningMsg
     hi link MSBuildInfo InfoMsg
     hi link MSBuildNote NoteMsg
+    hi link LspInformationText Include
 
     " netrw
     hi netrwDir cterm=bold guifg=#666666
@@ -75,6 +80,7 @@ if (g:colors_name == 'monotone')
     hi! link LspSemanticNumber Number
     " hi! link LspSemanticRegexp TSStringRegex
     hi! link LspSemanticOperator Operator
+    hi link LspInformationHighlight NoteMsg
 
     " Lightline
     let g:lightline.colorscheme = 'monotone'

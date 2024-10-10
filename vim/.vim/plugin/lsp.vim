@@ -78,8 +78,8 @@ function! s:on_lsp_buffer_enabled() abort
     nmap <buffer> K :LspHover<CR>
 
     nnoremap <buffer> <leader>h :LspDocumentSwitchSourceHeader<CR>
-    nnoremap <buffer> <Left> :LspNextDiagnostic<CR>
-    nnoremap <buffer> <Right> :LspPreviousDiagnostic<CR>
+    nnoremap <buffer> <Right> :LspNextDiagnostic<CR>
+    nnoremap <buffer> <Left> :LspPreviousDiagnostic<CR>
 
    if has("unix") && filereadable('.clang-format')
         let g:lsp_format_sync_timeout = 1000

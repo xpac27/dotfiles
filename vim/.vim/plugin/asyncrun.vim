@@ -1,6 +1,8 @@
 let g:asyncrun_save = 2
 let g:asyncrun_trim = 1
-let g:asyncrun_save = 1
+let g:asyncrun_save = 2
+let g:asyncrun_last = 3
+let g:asyncrun_timer = 500
 
 if has("unix")
     let g:asyncrun_exit = "if g:asyncrun_code != 0 | copen | wincmd w | else | cclose | endif"
