@@ -3,17 +3,16 @@
 
 [core]
     editor = vim
-    pager = delta
+    # pager = delta
     quotepath = false
 
 [interactive]
-    diffFilter = delta --diff-highlight
+    # diffFilter = delta --color-only
 
 [delta]
     navigate = true  # use n and N to move between diff sections
     line-numbers = true
     side-by-side = true
-    true-color = always
 
 [merge]
     conflictstyle = zdiff3
