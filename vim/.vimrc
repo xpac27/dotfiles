@@ -90,7 +90,16 @@ if has('win64') || has('win32')
     endif
 endif
 
-filetype on
+if has('win64') || has('win32')
+    set listchars=lead:\:
+    set listchars+=trail:· 
+    set listchars+=tab:\ \ 
+else
+    set listchars=tab:»- 
+    set listchars+=trail:· 
+endif
+
+filetype on " runs all ftplugin files"
 syntax enable
 
 colorscheme monotone
@@ -110,15 +119,6 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " escape sequences for undercurl
 let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
-
-if has('win64') || has('win32')
-    set listchars=lead:\:
-    set listchars+=trail:· 
-    set listchars+=tab:\ \ 
-else
-    set listchars=tab:»- 
-    set listchars+=trail:· 
-endif
 
 set exrc
 set autoread
@@ -298,29 +298,11 @@ endif
 
 " Others
 if has("unix")
-    command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
-
-    nnoremap <silent> <leader>m :Make test<CR>
-
     " Greatest
     set errorformat+=FAIL\ %m\ (%f:%l)
+    set errorformat+=SKIP\ %m\ (%f:%l)
+    set errorformat+=PASS\ %m\ (%f:%l)
 else
-    command! Ninja AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD %:p
-    command! NinjaBO AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD Extension.BattlefieldOnline_all
-    command! NinjaAll AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD all
-
-    command! Test let l = line('.') | execute 'AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_TEST %:p' l
-    command! TestAll let l = line('.') | execute 'AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_TEST %:p'
-    command! IntTest AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_INT_TEST
-    command! UnitTest AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_UNI_TEST
-
-    nnoremap <silent> <leader>m :Ninja<CR>
-    nnoremap <silent> <leader>mm :NinjaAll<CR>
-    nnoremap <silent> <leader>t :Test<CR>
-    nnoremap <silent> <leader>tt :TestAll<CR>
-
-    nnoremap <leader>s :P4edit "%"<CR>:AsyncRun -silent fb sort_includes %:p<CR>
-
     " Reset error format
     set errorformat=
 

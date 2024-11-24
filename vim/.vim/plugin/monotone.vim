@@ -3,6 +3,7 @@ if (g:colors_name == 'monotone')
     " Overrides
     hi Include guifg=#666666
     hi Type guifg=#dddddd
+    hi SpecialKey guifg=#ff9999
 
     " Lsp
     hi Error guifg=#ff9999 guibg=NONE cterm=undercurl
