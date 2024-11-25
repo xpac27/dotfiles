@@ -106,6 +106,8 @@ else
     \  }
 endif
 
+" let g:lsp_settings_filetype_ruby = 'solargraph'
+
 augroup lsp_install
     au!
     " call s:on_lsp_buffer_enabled only for languages that has the server registered.

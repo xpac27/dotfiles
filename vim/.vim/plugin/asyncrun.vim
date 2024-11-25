@@ -14,14 +14,14 @@ else
     let g:asyncrun_open = 20
     let g:asyncrun_exit = "if g:asyncrun_code == 0 | cclose | endif"
 
-    command! Ninja AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD %:p
-    command! NinjaBO AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD Extension.BattlefieldOnline_all
-    command! NinjaAll AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_BUILD all
+    command! Ninja AsyncRun -strip ruby F:\vinz\Github\scripts\compile.rb NINJA_BUILD %:p
+    command! NinjaBO AsyncRun -strip ruby F:\vinz\Github\scripts\compile.rb NINJA_BUILD Extension.BattlefieldOnline_all
+    command! NinjaAll AsyncRun -strip ruby F:\vinz\Github\scripts\compile.rb NINJA_BUILD all
 
-    command! Test let l = line('.') | execute 'AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_TEST %:p' l
-    command! TestAll let l = line('.') | execute 'AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_TEST %:p'
-    command! IntTest AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_INT_TEST
-    command! UnitTest AsyncRun -strip ruby C:\Users\vcogne\bin\compile.rb NINJA_UNI_TEST
+    command! Test let l = line('.') | execute 'AsyncRun -strip ruby F:\vinz\Github\scripts\compile.rb NINJA_TEST %:p' l
+    command! TestAll let l = line('.') | execute 'AsyncRun -strip ruby F:\vinz\Github\scripts\compile.rb NINJA_TEST %:p'
+    command! IntTest AsyncRun -strip ruby F:\vinz\Github\scripts\compile.rb NINJA_INT_TEST
+    command! UnitTest AsyncRun -strip ruby F:\vinz\Github\scripts\compile.rb NINJA_UNI_TEST
 
     nnoremap <silent> <leader>m :Ninja<CR>
     nnoremap <silent> <leader>mm :NinjaAll<CR>

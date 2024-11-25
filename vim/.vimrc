@@ -27,7 +27,7 @@ Plug 'fei6409/log-highlight.nvim'
 Plug 'easymotion/vim-easymotion'
 
 " Copilot
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 
 " Themes
 Plug 'Lokaltog/vim-monotone'
@@ -238,6 +238,7 @@ ia  being      begin
 ia  frist      first
 ia  reffer     refer
 ia  repporting reporting
+ia  reccording recording
 ia  nulltpr	   nullptr
 
 " shortcuts
@@ -246,7 +247,6 @@ ab   pr   private
 ab   pt   protected
 ab   pu   public
 ab   st   static
-ab   cl   console.log
 
 " don't lose selection after indenting
 vnoremap < <gv
