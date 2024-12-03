@@ -27,7 +27,7 @@ Plug 'fei6409/log-highlight.nvim'
 Plug 'easymotion/vim-easymotion'
 
 " Copilot
-" Plug 'github/copilot.vim'
+Plug 'github/copilot.vim'
 
 " Themes
 Plug 'Lokaltog/vim-monotone'
