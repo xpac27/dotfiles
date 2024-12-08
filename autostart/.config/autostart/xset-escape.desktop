@@ -1,4 +1,0 @@
-[Desktop Entry]
-Name=Replace capslock by escape
-Exec=setxkbmap -option caps:escape
-Type=Application

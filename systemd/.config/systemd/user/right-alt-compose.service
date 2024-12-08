@@ -1,0 +1,13 @@
+[Unit]
+Description=Map right alt to compose for special characters
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/setxkbmap -option compose:ralt
+Restart=on-failure
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=%h/.Xauthority
+
+[Install]
+WantedBy=default.target
+

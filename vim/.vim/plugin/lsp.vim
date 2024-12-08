@@ -11,6 +11,12 @@ let g:lsp_semantic_enabled = 1
 " Enables floating window documentation for complete items
 let g:lsp_completion_documentation_enabled = 0
 
+" Closes the preview window on the second call to preview
+let g:lsp_preview_doubletap = [function('lsp#ui#vim#output#closepreview')]
+
+" Disables floating window documentation for complete items.
+let g:lsp_completion_documentation_enabled = 0
+
 " Diagnostics
 let g:lsp_diagnostics_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1 " show diags in the status line
@@ -73,7 +79,7 @@ function! s:on_lsp_buffer_enabled() abort
 
     nmap <buffer> gh :LspTypeHierarchy<CR>
 
-    nmap <buffer> ga :LspCodeAction<CR>
+    nmap <buffer> ga :LspCodeAction --ui=float<CR>
 
     nmap <buffer> K :LspHover<CR>
 

@@ -1,4 +1,0 @@
-[Desktop Entry]
-Name=Enable mouse acceleration
-Exec=xset m 3 200
-Type=Application
