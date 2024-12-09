@@ -1,0 +1,13 @@
+[Unit]
+Description=Set keyboard repeat rate
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/xset r rate 170 25
+Restart=on-failure
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=%h/.Xauthority
+
+[Install]
+WantedBy=default.target
+
