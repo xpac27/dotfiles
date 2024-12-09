@@ -10,32 +10,36 @@ let g:lsp_semantic_enabled = 1
 
 " Enables floating window documentation for complete items
 let g:lsp_completion_documentation_enabled = 0
+let g:lsp_completion_documentation_delay = 99999999
 
 " Closes the preview window on the second call to preview
 let g:lsp_preview_doubletap = [function('lsp#ui#vim#output#closepreview')]
 
-" Disables floating window documentation for complete items.
-let g:lsp_completion_documentation_enabled = 0
-
 " Diagnostics
-let g:lsp_diagnostics_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1 " show diags in the status line
+let g:lsp_diagnostics_enabled = 1
 let g:lsp_diagnostics_float_cursor = 0 " show diags in a popup
-let g:lsp_diagnostics_virtual_text_enabled = 1 " show diags inlined
-let g:lsp_diagnostics_virtual_text_wrap = 'wrap'
-let g:lsp_diagnostics_virtual_text_align = 'after' " 'after' or 'below'
-let g:lsp_diagnostics_virtual_text_delay = 200
-let g:lsp_diagnostics_virtual_text_insert_mode_enabled = 1
+let g:lsp_diagnostics_float_insert_mode_enabled = 0 " show diags in a popup
+let g:lsp_diagnostics_highlights_insert_mode_enabled = 0 " show diags in a popup
 let g:lsp_diagnostics_signs_enabled = 0
 let g:lsp_diagnostics_signs_error = {'text': '🔥'}
-let g:lsp_diagnostics_signs_warning = {'text' : '🌩️'}
-let g:lsp_diagnostics_signs_information = {'text': 'ℹ️'}
 let g:lsp_diagnostics_signs_hint = {'text': '💡'}
+let g:lsp_diagnostics_signs_information = {'text': 'ℹ️'}
+let g:lsp_diagnostics_signs_insert_mode_enabled = 0
 let g:lsp_diagnostics_signs_insert_mode_enabled = 1 " Please don't bother me while I type
+let g:lsp_diagnostics_signs_warning = {'text' : '🌩️'}
+let g:lsp_diagnostics_virtual_text_align = 'after' " 'after' or 'below'
+let g:lsp_diagnostics_virtual_text_delay = 200
+let g:lsp_diagnostics_virtual_text_enabled = 1 " show diags inlined
+let g:lsp_diagnostics_virtual_text_insert_mode_enabled = 0
+let g:lsp_diagnostics_virtual_text_insert_mode_enabled = 1
+let g:lsp_diagnostics_virtual_text_wrap = 'wrap'
 
+" Code actions
 let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_document_code_action_signs_hint = {'text': '🪓'}
 
+" Autocomplete signature
 let g:lsp_signature_help_enabled = 1
 
 " Should improve perfs
