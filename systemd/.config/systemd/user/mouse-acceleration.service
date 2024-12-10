@@ -3,11 +3,12 @@ Description=Set mouse acceleration
 After=graphical-session.target
 
 [Service]
+Type=oneshot
 ExecStart=/usr/bin/xset m 3 200
 Restart=on-failure
 Environment=DISPLAY=:0
 Environment=XAUTHORITY=%h/.Xauthority
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
 

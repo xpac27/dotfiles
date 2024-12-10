@@ -3,11 +3,12 @@ Description=Remap Caps Lock to Escape
 After=graphical-session.target
 
 [Service]
+Type=oneshot
 ExecStart=/usr/bin/setxkbmap -option caps:escape
 Restart=on-failure
 Environment=DISPLAY=:0
 Environment=XAUTHORITY=%h/.Xauthority
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
 
