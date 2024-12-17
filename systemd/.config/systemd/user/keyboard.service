@@ -1,0 +1,12 @@
+[Unit]
+Description=Remap caps lock to escape and right alt to compose for special characters
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/setxkbmap -option compose:ralt -option caps:escape
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+
