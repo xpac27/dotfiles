@@ -52,7 +52,6 @@ if (g:colors_name == 'monotone')
     hi link MSBuildWarning WarningMsg
     hi link MSBuildInfo InfoMsg
     hi link MSBuildNote NoteMsg
-    hi link LspInformationText Include
 
     " netrw
     hi netrwDir cterm=bold guifg=#666666
@@ -82,6 +81,7 @@ if (g:colors_name == 'monotone')
     " hi! link LspSemanticRegexp TSStringRegex
     hi! link LspSemanticOperator Operator
     hi link LspInformationHighlight NoteMsg
+    hi link LspInformationText InfoMsg
 
     " Lightline
     let g:lightline.colorscheme = 'monotone'

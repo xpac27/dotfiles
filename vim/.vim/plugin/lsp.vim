@@ -40,7 +40,11 @@ let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_document_code_action_signs_hint = {'text': '🪓'}
 
 " Autocomplete signature
-let g:lsp_signature_help_enabled = 1
+if has('win64') || has('win32')
+    let g:lsp_signature_help_enabled = 0 " causes issues in gvim on windows together with copilote
+else
+    let g:lsp_signature_help_enabled = 1
+endif
 
 " Should improve perfs
 let g:lsp_use_lua = has('nvim-0.4.0') || (has('lua') && has('patch-8.2.0775'))
@@ -101,16 +105,25 @@ endfunction
 if has('win64') || has('win32')
     let g:lsp_settings = {
     \    'clangd': {
-    \      'cmd': ['D:\packages\PCClang\17.0.6_20186251\installed\bin\clangd.exe', '--all-scopes-completion=0', '--header-insertion=never', '--rename-file-limit=100'],
+    \      'cmd': ['D:\clangd_20.1.0\bin\clangd.exe', '--header-insertion=never', '--rename-file-limit=100'],
     \      'allowlist': ['c', 'cpp'],
     \      'blocklist': ['json'],
+    \    },
+    \    'typos-lsp': {
+    \      'cmd': ['D:\typos-lsp_0.1.36\typos-lsp.exe'],
+    \      'allowlist': ['c', 'cpp', 'md'],
+    \      'blocklist': ['json'],
+    \      'disabled': v:false,
     \    },
     \    'efm-langserver': {'disabled': v:false},
     \  }
 else
     let g:lsp_settings = {
     \    'clangd': {
-    \      'cmd': ['clangd', '--completion-style=bundled', '--all-scopes-completion=0', '--function-arg-placeholders=1', '--header-insertion-decorators']
+    \      'cmd': ['clangd', '--completion-style=bundled', '--function-arg-placeholders=1', '--header-insertion-decorators']
+    \    },
+    \    'typos-lsp': {
+    \      'disabled': v:false,
     \    },
     \    'efm-langserver': {'disabled': v:false}
     \  }

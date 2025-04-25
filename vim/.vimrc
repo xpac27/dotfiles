@@ -21,7 +21,8 @@ Plug 'tpope/vim-abolish', { 'on': 'Abolish' }
 Plug 'tpope/vim-commentary'
 
 " Syntax
-Plug 'fei6409/log-highlight.nvim'
+" Plug 'fei6409/log-highlight.nvim'
+Plug 'wfxr/protobuf.vim'
 
 " Navigation
 Plug 'easymotion/vim-easymotion'
@@ -31,8 +32,10 @@ Plug 'github/copilot.vim'
 
 " Themes
 Plug 'Lokaltog/vim-monotone'
-" Plug 'morhetz/gruvbox'
-" Plug 'sainnhe/gruvbox-material'
+Plug 'zenbones-theme/zenbones.nvim'
+Plug 'morhetz/gruvbox'
+Plug 'sainnhe/gruvbox-material'
+Plug 'arthurxavierx/vim-caser'
 " Plug 'shinchu/lightline-gruvbox.vim'
 
 if &diff
@@ -225,21 +228,23 @@ augroup VINZ
 augroup END
 
 " typos
-ia  feild      field
-ia  flase      false
-ia  lenght     length
-ia  toogle     toggle
-ia  wiht       with
-ia  widht      width
-ia  heigth     height
-ia  retrun     return
-ia  easlt      eastl
-ia  being      begin
-ia  frist      first
-ia  reffer     refer
-ia  repporting reporting
-ia  reccording recording
-ia  nulltpr	   nullptr
+ia  feild        field
+ia  flase        false
+ia  lenght       length
+ia  toogle       toggle
+ia  wiht         with
+ia  widht        width
+ia  heigth       height
+ia  retrun       return
+ia  easlt        eastl
+ia  being        begin
+ia  frist        first
+ia  reffer       refer
+ia  repporting   reporting
+ia  reccording   recording
+ia  nulltpr	     nullptr
+ia  intentionaly intentionally
+ia  bellow       below
 
 " shortcuts
 ab   fu   function
