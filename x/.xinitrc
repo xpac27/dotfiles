@@ -44,7 +44,7 @@ fi
 # pulseeffects --gapplication-service &
 
 xcompmgr -f -I0.056 -O0.06 &
-dex -a -e dwm &
 slstatus &
+~/.fehbg &
 
 exec dwm

@@ -1,4 +1,0 @@
-#[Desktop Entry]
-#Name=Set the wallpaper
-#Exec=hsetroot -solid "#282828"
-#Type=Application

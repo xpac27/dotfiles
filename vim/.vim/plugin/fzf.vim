@@ -12,6 +12,12 @@ let g:fzf_vim.listproc = { list -> fzf#vim#listproc#location(list) }
 " CTRL-Q to open in quickfix list
 let g:fzf_action = { 'ctrl-q': function('s:build_quickfix_list') }
 
+" Initialize configuration dictionary
+let g:fzf_vim = {}
+
+" Use location list instead of quickfix list
+let g:fzf_vim.listproc = { list -> fzf#vim#listproc#location(list) }
+
 " CTRL-A to select all
 if has("unix")
     let g:fzf_preview_window = ['right,50%', 'ctrl-/']
