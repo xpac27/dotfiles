@@ -105,7 +105,7 @@ endfunction
 if has('win64') || has('win32')
     let g:lsp_settings = {
     \    'clangd': {
-    \      'cmd': ['D:\clangd_20.1.0\bin\clangd.exe', '--header-insertion=never', '--rename-file-limit=100'],
+    \      'cmd': ['D:\clangd_20.1.0\bin\clangd.exe', '-j=6', '--header-insertion=never', '--rename-file-limit=100'],
     \      'allowlist': ['c', 'cpp'],
     \      'blocklist': ['json'],
     \    },
