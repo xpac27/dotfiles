@@ -3,10 +3,15 @@ export LANG=en_US.UTF-8
 export EDITOR=vim
 
 # Start X at login
-if status is-login
-  if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
-    exec startx -- -keeptty
-  end
+# if status is-login
+#   if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+#     exec startx -- -keeptty
+#   end
+# end
+
+# Start Wayland session
+if uwsm check may-start
+  exec uwsm start hyprland.desktop
 end
 
 # direnv
