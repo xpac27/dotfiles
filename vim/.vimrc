@@ -237,7 +237,6 @@ ia  widht        width
 ia  heigth       height
 ia  retrun       return
 ia  easlt        eastl
-ia  being        begin
 ia  frist        first
 ia  reffer       refer
 ia  repporting   reporting

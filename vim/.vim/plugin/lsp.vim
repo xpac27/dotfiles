@@ -97,7 +97,7 @@ function! s:on_lsp_buffer_enabled() abort
 
    if has("unix") && filereadable('.clang-format')
         let g:lsp_format_sync_timeout = 1000
-        autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+        autocmd! BufWritePre *.cpp,*.h,*.hpp call execute('LspDocumentFormatSync')
    endif
 endfunction
 
@@ -111,7 +111,7 @@ if has('win64') || has('win32')
     \    },
     \    'typos-lsp': {
     \      'cmd': ['D:\typos-lsp_0.1.36\typos-lsp.exe'],
-    \      'allowlist': ['c', 'cpp', 'md'],
+    \      'allowlist': ['c', 'cpp', 'markdown'],
     \      'blocklist': ['json'],
     \      'disabled': v:false,
     \    },
@@ -122,11 +122,16 @@ else
     \    'clangd': {
     \      'cmd': ['clangd', '--completion-style=bundled', '--function-arg-placeholders=1', '--header-insertion-decorators']
     \    },
-    \    'typos-lsp': {
-    \      'disabled': v:false,
-    \    },
     \    'efm-langserver': {'disabled': v:false}
     \  }
+endif
+
+if (executable('typos-lsp'))
+    au User lsp_setup call lsp#register_server({
+                \ 'name': 'typos-lsp',
+                \ 'cmd': {server_info->['typos-lsp']},
+                \ 'allowlist': ['markdown']
+                \ })
 endif
 
 " let g:lsp_settings_filetype_ruby = 'solargraph'
