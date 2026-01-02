@@ -14,7 +14,7 @@ style = "Block"
 unfocused_hollow = true
 
 [font]
-size = 10.5
+size = 13.5
 
 [font.glyph_offset]
 x = 0
@@ -593,7 +593,7 @@ program = "/bin/fish"
 decorations = "none"
 dynamic_padding = true
 dynamic_title = true
-opacity = 0.85
+opacity = 0.70
 startup_mode = "Maximized"
 
 [window.dimensions]

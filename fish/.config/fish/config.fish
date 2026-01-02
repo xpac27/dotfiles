@@ -20,6 +20,7 @@ eval (direnv hook fish)
 # local bin
 set PATH $HOME/.local/bin $PATH
 set PYTHONPATH $HOME/.local $PYTHONPATH 
+set npm_config_prefix $HOME/.local
 
 # systemd
 export SYSTEMD_EDITOR='vim'
@@ -27,12 +28,18 @@ export SYSTEMD_EDITOR='vim'
 # dracula
 # fish_config theme choose "nord"
 
+# gpg
+alias gpg-warmup='echo warmup | gpg --clearsign >/dev/null'
 # nnn
 alias n='nnn -QAeodax'
 alias na='nnn -QAHeodax'
 export NNN_COLORS='3333'
 export NNN_PLUG='o:fzopen;d:fzcd;v:imgview;p:preview-tabbed'
 export NNN_FIFO=/tmp/nnn.fifo
+
+# Ruby
+set -x GEM_HOME (gem env user_gemhome)
+set -x PATH $PATH $GEM_HOME/bin
 
 # Rust
 set PATH $HOME/.cargo/bin $PATH
