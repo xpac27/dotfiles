@@ -194,6 +194,7 @@ set wildmode=longest,list
 set nofixendofline
 set backup
 set writebackup
+set clipboard=unnamedplus " Copy/paste to system clipboard
 
 if executable('rg')
     set grepprg=rg\ --vimgrep

@@ -14,14 +14,14 @@ style = "Block"
 unfocused_hollow = true
 
 [font]
-size = 13.5
+size = 12
 
 [font.glyph_offset]
 x = 0
 y = 0
 
 [font.normal]
-family = "Hack"
+family = "HackNerdFont"
 
 [font.offset]
 x = 0
@@ -593,7 +593,7 @@ program = "/bin/fish"
 decorations = "none"
 dynamic_padding = true
 dynamic_title = true
-opacity = 0.70
+opacity = 0.80
 startup_mode = "Maximized"
 
 [window.dimensions]

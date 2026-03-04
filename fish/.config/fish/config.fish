@@ -10,12 +10,16 @@ export EDITOR=vim
 # end
 
 # Start Wayland session
-if uwsm check may-start
-  exec uwsm start hyprland.desktop
+if status is-login
+  if uwsm check may-start
+    exec uwsm start hyprland.desktop
+  end
 end
 
 # direnv
-eval (direnv hook fish)
+if status is-interactive
+  direnv hook fish | source
+end
 
 # local bin
 set PATH $HOME/.local/bin $PATH
@@ -38,8 +42,13 @@ export NNN_PLUG='o:fzopen;d:fzcd;v:imgview;p:preview-tabbed'
 export NNN_FIFO=/tmp/nnn.fifo
 
 # Ruby
-set -x GEM_HOME (gem env user_gemhome)
-set -x PATH $PATH $GEM_HOME/bin
+if not set -q GEM_HOME # [RUN_ONCE_OPTIMIZATION] if switching Ruby versions, this can become stale
+  set -Ux GEM_HOME (command gem env user_gemhome)
+  set -x PATH $PATH $GEM_HOME/bin
+end
+
+# Pywal
+# cat ~/.cache/wal/sequences &
 
 # Rust
 set PATH $HOME/.cargo/bin $PATH

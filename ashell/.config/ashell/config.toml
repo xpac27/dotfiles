@@ -174,10 +174,10 @@ weak = "#666666" # optional default autogenarated from base color
 
 [appearance]
 # optional, default iced.rs font
-font_name = "Comic Sans MS"
+font_name = "HackNerdFont"
 # The style of the main bar, possible values are: Islands | Solid | Gradient
 # optional, default Islands
-style = "Islands"
+style = "Solid"
 scale_factor = 1.2
 # The opacity of the main bar, possible values are: 0.0 to 1.0
 # optional, default 1.0
