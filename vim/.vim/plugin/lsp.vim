@@ -101,11 +101,13 @@ function! s:on_lsp_buffer_enabled() abort
    endif
 endfunction
 
+    " \      'cmd': ['D:\clangd_20.1.8\bin\clangd.exe', '--header-insertion=never', '--rename-file-limit=100', '--all-scopes-completion=false'],
+    " \      'cmd': ['D:\packages\PCClang\17.0.6_20186251\installed\bin\clangd.exe', '--header-insertion=never', '--rename-file-limit=100', '--all-scopes-completion=false'],
 " Use windows clangd matching the version of clang mentioned in compile_commands.json
 if has('win64') || has('win32')
     let g:lsp_settings = {
     \    'clangd': {
-    \      'cmd': ['D:\clangd_20.1.0\bin\clangd.exe', '-j=6', '--header-insertion=never', '--rename-file-limit=100'],
+    \      'cmd': ['D:\packages\PCClang\17.0.6_20186251\installed\bin\clangd.exe', '--header-insertion=never', '--rename-file-limit=100', '--all-scopes-completion=false'],
     \      'allowlist': ['c', 'cpp'],
     \      'blocklist': ['json'],
     \    },
@@ -114,6 +116,9 @@ if has('win64') || has('win32')
     \      'allowlist': ['c', 'cpp', 'markdown'],
     \      'blocklist': ['json'],
     \      'disabled': v:false,
+    \    },
+    \    'JSON': {
+    \      'disabled': v:true,
     \    },
     \    'efm-langserver': {'disabled': v:false},
     \  }

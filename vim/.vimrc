@@ -27,7 +27,7 @@ Plug 'wfxr/protobuf.vim'
 Plug 'easymotion/vim-easymotion'
 
 " Copilot
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 
 " Themes
 Plug 'Lokaltog/vim-monotone'
@@ -35,6 +35,7 @@ Plug 'zenbones-theme/zenbones.nvim'
 Plug 'morhetz/gruvbox'
 Plug 'sainnhe/gruvbox-material'
 Plug 'arthurxavierx/vim-caser'
+Plug 'zenbones-theme/zenbones.nvim'
 " Plug 'shinchu/lightline-gruvbox.vim'
 
 if &diff
@@ -83,8 +84,8 @@ end
 call plug#end()
 
 if has('win64') || has('win32')
-    set pythonthreehome=~\AppData\Local\Programs\Python\Python311-32
-    set pythonthreedll=~\AppData\Local\Programs\Python\Python311-32\python311.dll
+    set pythonthreehome=~\AppData\Local\Programs\Python\Python313-32
+    set pythonthreedll=~\AppData\Local\Programs\Python\Python313-32\python313.dll
 
     " Silence the warning that's emitted first time python3 is run
     if has('python3')
@@ -247,6 +248,7 @@ ia  reccording   recording
 ia  nulltpr	     nullptr
 ia  intentionaly intentionally
 ia  bellow       below
+ia  cosnt        const
 
 " shortcuts
 ab   fu   function
@@ -288,6 +290,8 @@ command! Lnext try | lnext | catch | lfirst | catch | endtry
 command! Lprev try | lprev | catch | llast | catch | endtry
 nnoremap <silent> <Up> :Cprev<CR>
 nnoremap <silent> <Down> :Cnext<CR>
+nnoremap <silent> <S-Up> :Lprev<CR>
+nnoremap <silent> <S-Down> :Lnext<CR>
 
 " Empty quickfix window
 nnoremap <leader>qq :cex []<CR>
