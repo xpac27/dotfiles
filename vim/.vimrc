@@ -1,8 +1,7 @@
 if has("unix")
     if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall | source $MYVIMRC
+        silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        autocmd VimEnter * PlugInstall | source $MYVIMRC
     endif
 endif
 
@@ -123,13 +122,16 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
 
+if !has('nvim')
+    set cryptmethod=blowfish2
+endif
+
 set exrc
 set autoread
 set backspace=indent,eol,start
 set cmdheight=1
 set complete-=i
 set completeopt=longest,menuone
-set cryptmethod=blowfish2
 set cursorline
 set encoding=UTF-8
 set equalalways
@@ -194,7 +196,7 @@ set wildmode=longest,list
 set nofixendofline
 set backup
 set writebackup
-set clipboard=unnamedplus " Copy/paste to system clipboard
+set clipboard=unnamed,unnamedplus " Copy/paste to system clipboard
 
 if executable('rg')
     set grepprg=rg\ --vimgrep

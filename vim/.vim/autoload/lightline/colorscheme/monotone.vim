@@ -68,9 +68,9 @@ let s:p.insert.left   = [ [ s:bg1, s:mode_insert ], [ s:fg2, s:bg0 ] ]
 let s:p.visual.left   = [ [ s:bg1, s:mode_visual ], [ s:fg2, s:bg0 ] ]
 let s:p.replace.left  = [ [ s:bg1, s:mode_replace ], [ s:fg2, s:bg0 ] ]
 
-let s:p.inactive.left   = [ [ s:fg2, s:bg1 ], [ s:dim0, s:bg0 ] ]
+let s:p.inactive.left   = [ [ s:fg2, s:dim1 ], [ s:dim0, s:bg0 ] ]
 let s:p.inactive.right  = [ [ s:fg2, s:bg0 ], [ s:dim0, s:bg1 ] ]
-let s:p.inactive.middle = [ [ s:dim0, s:bg1 ] ]
+let s:p.inactive.middle = [ [ s:dim0, s:bg0 ] ]
 
 " ----------------
 " Tabline
