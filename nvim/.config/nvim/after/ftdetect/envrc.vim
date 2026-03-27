@@ -1,5 +1,5 @@
 augroup ftdetect_envrc
 	autocmd!
 
-	au BufRead *.envrc set ft=sh
+	au BufRead,BufNewFile *.envrc set ft=sh
 augroup END
