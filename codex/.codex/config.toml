@@ -24,6 +24,9 @@ trust_level = "trusted"
 [projects."/home/vinz/RP3"]
 trust_level = "trusted"
 
+[projects."/home/vinz/Github/dotfiles"]
+trust_level = "trusted"
+
 [notice]
 "hide_gpt-5.1-codex-max_migration_prompt" = true
 
@@ -36,3 +39,6 @@ set = { USER = "codex" }
 
 [tui]
 status_line = ["model-with-reasoning", "five-hour-limit"]
+
+[plugins."github@openai-curated"]
+enabled = true

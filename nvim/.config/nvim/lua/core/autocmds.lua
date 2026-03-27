@@ -21,5 +21,15 @@ if vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1 then
   })
 end
 
-autocmd('FileType', { pattern = { 'c', 'cpp', 'cs', 'ddf', 'proto' }, command = 'setlocal commentstring=//\ %s' })
-autocmd('FileType', { pattern = 'tup', command = 'setlocal commentstring=\"\ %s' })
+autocmd('FileType', {
+  pattern = { 'c', 'cpp', 'cs', 'ddf', 'proto' },
+  callback = function()
+    vim.opt_local.commentstring = '// %s'
+  end,
+})
+autocmd('FileType', {
+  pattern = 'tup',
+  callback = function()
+    vim.opt_local.commentstring = '" %s'
+  end,
+})

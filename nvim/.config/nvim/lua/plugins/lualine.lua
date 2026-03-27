@@ -5,7 +5,7 @@ end
 
 lualine.setup({
   options = {
-    theme = 'gruvbox',
+    theme = 'monotone',
     component_separators = { left = '┋', right = '│' },
     section_separators = { left = '║', right = '' },
     globalstatus = true,

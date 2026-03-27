@@ -1,10 +1,23 @@
-local ok, lspconfig = pcall(require, 'lspconfig')
-if not ok then
+if vim.fn.has('nvim-0.11') == 0 then
   return
 end
 
+local diagnostic_icons = {
+  [vim.diagnostic.severity.ERROR] = '🔥',
+  [vim.diagnostic.severity.WARN] = '🟡',
+  [vim.diagnostic.severity.INFO] = '💡',
+  [vim.diagnostic.severity.HINT] = '🧠',
+}
+
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_text = {
+    prefix = function(diagnostic)
+      return diagnostic_icons[diagnostic.severity] or '•'
+    end,
+  },
+  signs = {
+    text = diagnostic_icons,
+  },
   update_in_insert = false,
   severity_sort = true,
   float = {
@@ -32,13 +45,15 @@ local on_attach = function(_, bufnr)
   map('n', '<Left>', vim.diagnostic.goto_prev, opts)
 end
 
-lspconfig.clangd.setup({
+vim.lsp.config('clangd', {
   cmd = { 'clangd', '--completion-style=bundled', '--function-arg-placeholders=1', '--header-insertion-decorators' },
   on_attach = on_attach,
 })
+vim.lsp.enable('clangd')
 
 if vim.fn.executable('typos-lsp') == 1 then
-  lspconfig.typos_lsp.setup({
+  vim.lsp.config('typos_lsp', {
     on_attach = on_attach,
   })
+  vim.lsp.enable('typos_lsp')
 end

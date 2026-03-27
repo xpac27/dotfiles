@@ -2,6 +2,10 @@
 local fn = vim.fn
 local plug_path = fn.stdpath('data') .. '/site/autoload/plug.vim'
 
+if fn.has('cscope') == 0 then
+  vim.g.loaded_gtags_cscope = 1
+end
+
 if fn.empty(fn.glob(plug_path)) > 0 then
   if fn.has('win32') == 1 or fn.has('win64') == 1 then
     local ps_cmd = ([[iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni '%s' -Force]]):format(plug_path)
@@ -38,9 +42,6 @@ vim.cmd("Plug 'jeffkreeftmeijer/vim-numbertoggle'")
 vim.cmd("Plug 'tpope/vim-commentary'")
 vim.cmd("Plug 'wfxr/protobuf.vim'")
 vim.cmd("Plug 'farmergreg/vim-lastplace'")
-
--- Theme (temporary)
-vim.cmd("Plug 'morhetz/gruvbox'")
 
 -- Search / picker
 vim.cmd("Plug 'ibhagwan/fzf-lua'")
