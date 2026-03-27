@@ -1,0 +1,25 @@
+local iabbrev = vim.cmd.iabbrev
+local abbrev = vim.cmd.abbrev
+
+iabbrev('feild field')
+iabbrev('flase false')
+iabbrev('lenght length')
+iabbrev('toogle toggle')
+iabbrev('wiht with')
+iabbrev('widht width')
+iabbrev('heigth height')
+iabbrev('retrun return')
+iabbrev('easlt eastl')
+iabbrev('frist first')
+iabbrev('reffer refer')
+iabbrev('repporting reporting')
+iabbrev('reccording recording')
+iabbrev('nulltpr nullptr')
+iabbrev('intentionaly intentionally')
+iabbrev('bellow below')
+
+abbrev('fu function')
+abbrev('pr private')
+abbrev('pt protected')
+abbrev('pu public')
+abbrev('st static')
