@@ -61,7 +61,7 @@ let s:p = {
 " ----------------
 " left/right entries correspond to groups inside g:lightline.active.left/right
 let s:p.normal.left   = [ [ s:bg1, s:mode_normal ], [ s:fg2, s:bg0 ] ]
-let s:p.normal.right  = [ [ s:fg1, s:dim0 ], [ s:fg2, s:dim2 ], [ s:fg2, s:bg0 ] ]
+let s:p.normal.right  = [ [ s:fg1, s:dim0 ], [ s:fg2, s:dim2 ], [ s:fg2, s:bg1 ] ]
 let s:p.normal.middle = [ [ s:fg2, s:bg1 ] ]
 
 let s:p.insert.left   = [ [ s:bg1, s:mode_insert ], [ s:fg2, s:bg0 ] ]

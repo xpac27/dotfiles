@@ -9,7 +9,7 @@ let g:lightline = {
       \   'right': [
       \     [],
       \     [],
-      \     [ 'lineinfo', 'percent', 'filetype', 'fileencoding' ],
+      \     [ 'lineinfo', 'percent' ],
       \     [],
       \     []
       \  ]
