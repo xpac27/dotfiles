@@ -1,0 +1,38 @@
+model = "gpt-5.4"
+personality = "pragmatic"
+model_reasoning_effort = "medium"
+
+[projects."/home/vinz"]
+trust_level = "untrusted"
+
+[projects."/home/vinz/Github/weeecs"]
+trust_level = "trusted"
+sandbox_mode = "workspace-write"
+
+[projects."/home/vinz/Github/tablioscope"]
+trust_level = "trusted"
+
+[projects."/home/vinz/Github/my-catalogue"]
+trust_level = "trusted"
+
+[projects."/home/vinz/Downloads/KPop Demon Hunters Cast - KPop Demon Hunters (Soundtrack from the Netflix Film) (2025) [24Bit-48kHz] FLAC [PMEDIA] ⭐️"]
+trust_level = "trusted"
+
+[projects."/mnt/usb/TMP"]
+trust_level = "trusted"
+
+[projects."/home/vinz/RP3"]
+trust_level = "trusted"
+
+[notice]
+"hide_gpt-5.1-codex-max_migration_prompt" = true
+
+[notice.model_migrations]
+"gpt-5.1-codex-max" = "gpt-5.2-codex"
+"gpt-5.3-codex" = "gpt-5.4"
+
+[shell_environment_policy]
+set = { USER = "codex" }
+
+[tui]
+status_line = ["model-with-reasoning", "five-hour-limit"]
