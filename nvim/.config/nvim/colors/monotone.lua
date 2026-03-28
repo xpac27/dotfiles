@@ -6,6 +6,10 @@ end
 vim.o.background = 'dark'
 vim.g.colors_name = 'monotone'
 
+-- Monotone is a deliberately small dark palette:
+-- neutral grays do most of the work and a few soft accents are reserved for
+-- diagnostics, completion, and search. The goal is to match the old Vim setup
+-- without carrying over its runtime hue/contrast tweaking logic.
 local p = {
   bg0 = '#111111',
   bg1 = '#191919',
@@ -38,12 +42,16 @@ local function hi(group, opts)
   set(0, group, opts)
 end
 
+-- Core editor surfaces. Keep the background nearly black and let the foreground
+-- do the contrast work rather than painting every group.
 hi('Normal', { fg = p.fg0, bg = p.bg0 })
 hi('NormalFloat', { fg = p.fg0, bg = p.bg1 })
 hi('FloatBorder', { fg = p.dim0, bg = p.bg1 })
 hi('FloatTitle', { fg = p.fg0, bg = p.bg1, bold = true })
 hi('Visual', { fg = p.bg0, bg = p.fg2 })
 
+-- Cursor and window chrome. These groups shape the "frame" of the editor:
+-- line numbers, separators, folds, and the active line.
 hi('Cursor', { bg = p.err })
 hi('CursorLine', { bg = p.bg1 })
 hi('CursorColumn', { bg = p.bg1 })
@@ -60,17 +68,22 @@ hi('SpecialKey', { fg = p.err })
 hi('VertSplit', { fg = p.dim1 })
 hi('WinSeparator', { fg = p.dim1 })
 
+-- Statusline and tabline stay understated so diagnostics and code remain the
+-- brightest things on screen.
 hi('StatusLine', { fg = p.fg0, bg = p.bg0, underline = true })
 hi('StatusLineNC', { fg = p.bg0, bg = p.bg0, underline = true })
 hi('TabLine', { fg = p.dim1, bg = p.bg0 })
 hi('TabLineFill', { fg = p.dim1, bg = p.bg0 })
 hi('TabLineSel', { fg = p.fg0, bg = p.bg0, bold = true })
 
+-- Completion menu: bluish foreground/background taken from the old custom Vim
+-- overrides so the popup stands apart from the main buffer.
 hi('Pmenu', { fg = p.hint, bg = p.hint_bg })
 hi('PmenuSel', { fg = '#eeeeff', bg = p.bg3 })
 hi('PmenuSbar', { bg = p.bg3 })
 hi('PmenuThumb', { bg = p.hint })
 
+-- Utility highlights for search, parenthesis matching, and other transient UI.
 hi('Search', { fg = p.bg0, bg = p.warn, bold = true })
 hi('IncSearch', { fg = p.bg0, bg = p.warn, bold = true, reverse = true })
 hi('MatchParen', { fg = p.fg0, bg = p.bg4, bold = true })
@@ -79,6 +92,8 @@ hi('Directory', { fg = p.dim0 })
 hi('Title', { bold = true })
 hi('Underlined', { underline = true })
 
+-- Syntax stays mostly monochrome. Only comments, includes, types, and TODOs
+-- get distinct treatment, which keeps the overall look calm like the Vim theme.
 hi('Comment', { fg = p.fg2, italic = true })
 hi('String', { fg = p.fg0 })
 hi('Character', { fg = p.fg0 })
@@ -110,14 +125,18 @@ hi('SpecialComment', {})
 hi('Tag', {})
 hi('Todo', { fg = p.warn_msg_fg, bold = true, italic = true })
 
+-- Diff colors are intentionally muted: visible enough for review, but still in
+-- character with the neutral theme.
 hi('DiffAdd', { fg = '#88aa77' })
 hi('DiffDelete', { fg = '#aa7766' })
 hi('DiffChange', { fg = '#7788aa' })
 hi('DiffText', { fg = '#7788aa', underline = true })
 
-hi('Error', { fg = p.err, undercurl = true, sp = p.err_msg_fg })
-hi('Warning', { fg = p.warn, undercurl = true, sp = p.warn_msg_fg })
-hi('Success', { fg = p.ok, undercurl = true, sp = p.ok })
+-- Message and diagnostic primitives. These are the semantic accent colors the
+-- rest of the theme links back to.
+hi('Error', { fg = p.err, underline = true, undercurl = true, sp = p.err_msg_fg })
+hi('Warning', { fg = p.warn, underline = true, undercurl = true, sp = p.warn_msg_fg })
+hi('Success', { fg = p.ok, underline = true, undercurl = true, sp = p.ok })
 hi('ErrorMsg', { fg = p.err_msg_fg, bg = p.err_msg_bg, italic = true })
 hi('WarningMsg', { fg = p.warn_msg_fg, bg = p.warn_msg_bg, italic = true })
 hi('SuccessMsg', { fg = '#22dd22', bg = p.ok_bg, italic = true })
@@ -125,27 +144,31 @@ hi('MoreMsg', { fg = p.info, bold = true })
 hi('InfoMsg', { fg = p.info, bg = p.info_bg, italic = true })
 hi('Question', {})
 
-hi('DiagnosticError', { fg = p.err_msg_fg })
-hi('DiagnosticWarn', { fg = p.warn_msg_fg })
+-- Native Neovim diagnostics. Virtual text gets a tinted background while the
+-- source range itself gets both underline and undercurl for terminal fallback.
+hi('DiagnosticError', { fg = p.err })
+hi('DiagnosticWarn', { fg = p.warn })
 hi('DiagnosticInfo', { fg = p.info })
 hi('DiagnosticHint', { fg = p.hint })
 hi('DiagnosticOk', { fg = p.ok })
-hi('DiagnosticSignError', { fg = p.err_msg_fg, bg = p.bg0 })
-hi('DiagnosticSignWarn', { fg = p.warn_msg_fg, bg = p.bg0 })
+hi('DiagnosticSignError', { fg = p.err, bg = p.bg0 })
+hi('DiagnosticSignWarn', { fg = p.warn, bg = p.bg0 })
 hi('DiagnosticSignInfo', { fg = p.info, bg = p.bg0 })
 hi('DiagnosticSignHint', { fg = p.hint, bg = p.bg0 })
 hi('DiagnosticVirtualTextError', { fg = p.err_msg_fg, bg = p.err_msg_bg, italic = true })
 hi('DiagnosticVirtualTextWarn', { fg = p.warn_msg_fg, bg = p.warn_msg_bg, italic = true })
 hi('DiagnosticVirtualTextInfo', { fg = p.info, bg = p.info_bg, italic = true })
 hi('DiagnosticVirtualTextHint', { fg = p.hint, bg = p.hint_bg, italic = true })
-hi('DiagnosticUnderlineError', { undercurl = true, sp = p.err_msg_fg })
-hi('DiagnosticUnderlineWarn', { undercurl = true, sp = p.warn_msg_fg })
-hi('DiagnosticUnderlineInfo', { undercurl = true, sp = p.info })
-hi('DiagnosticUnderlineHint', { undercurl = true, sp = p.hint })
+hi('DiagnosticUnderlineError', { underline = true, undercurl = true, sp = p.err_msg_fg })
+hi('DiagnosticUnderlineWarn', { underline = true, undercurl = true, sp = p.warn_msg_fg })
+hi('DiagnosticUnderlineInfo', { underline = true, undercurl = true, sp = p.info })
+hi('DiagnosticUnderlineHint', { underline = true, undercurl = true, sp = p.hint })
 hi('LspReferenceText', { bg = p.bg4 })
 hi('LspReferenceRead', { bg = p.bg4 })
 hi('LspReferenceWrite', { bg = p.bg4 })
 
+-- Quickfix and netrw are carried over from the old Vim customizations so those
+-- buffers do not fall back to generic defaults.
 hi('QuickFixLine', { link = 'CursorLine' })
 hi('qfLineNr', { fg = p.fg0 })
 hi('qfFileName', { fg = p.fg0 })
@@ -157,6 +180,8 @@ hi('netrwPlain', { fg = p.fg0 })
 hi('netrwTreeBar', { fg = p.dim0 })
 hi('netrwExe', { link = 'netrwPlain' })
 
+-- LSP semantic tokens are intentionally collapsed back onto the classic syntax
+-- groups to preserve the monotone look instead of introducing a rainbow.
 hi('@lsp.type.type', { link = 'Type' })
 hi('@lsp.type.class', { link = 'Type' })
 hi('@lsp.type.enum', { link = 'Type' })
@@ -170,6 +195,7 @@ hi('@lsp.type.comment', { link = 'Comment' })
 hi('@lsp.type.number', { link = 'Number' })
 hi('@lsp.mod.defaultLibrary', { link = 'Include' })
 
+-- Blink completion gets aligned with the same popup palette and muted metadata.
 hi('BlinkCmpMenu', { link = 'Pmenu' })
 hi('BlinkCmpMenuSelection', { link = 'PmenuSel' })
 hi('BlinkCmpScrollBarThumb', { link = 'PmenuThumb' })
@@ -180,6 +206,8 @@ hi('BlinkCmpLabelMatch', { fg = p.hint, bold = true })
 hi('BlinkCmpKind', { fg = p.fg2 })
 hi('BlinkCmpSource', { fg = p.dim0 })
 
+-- Lualine reads its own theme file, but these groups keep a sensible fallback
+-- if anything links directly to them.
 hi('LualineNormalA', { fg = p.bg0, bg = p.fg0 })
 hi('LualineInsertA', { fg = p.bg0, bg = '#a8d7af' })
 hi('LualineVisualA', { fg = p.bg0, bg = '#ffffff' })

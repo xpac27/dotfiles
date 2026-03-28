@@ -2,6 +2,10 @@ let g:startify_files_number = 12
 let g:startify_session_persistence = 1
 let g:startify_session_delete_buffers = 1
 let g:startify_change_to_dir = 0
+let g:startify_skiplist = extend(get(g:, 'startify_skiplist', []), [
+        \ escape(fnamemodify($HOME, ':p'), '\') .'Documents\%($\|/\)',
+        \ escape(fnamemodify($HOME, ':p'), '\') .'Videos\%($\|/\)',
+        \ ])
 let g:startify_bookmarks = [ '~/.vimrc' ]
 let g:startify_custom_header = [
         \ '',

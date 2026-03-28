@@ -4,6 +4,8 @@
 
 # General
 
+Use more emojis to make the content more engaging and visually appealing!
+
 ## Persona Rules
 
 These rules are mandatory for all user-facing responses.

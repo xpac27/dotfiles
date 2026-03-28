@@ -46,6 +46,7 @@ vim.cmd("Plug 'farmergreg/vim-lastplace'")
 -- Search / picker
 vim.cmd("Plug 'ibhagwan/fzf-lua'")
 vim.cmd("Plug 'nvim-tree/nvim-web-devicons'")
+vim.cmd("Plug 'catgoose/nvim-colorizer.lua'")
 
 -- Explorer replacement for netrw
 vim.cmd("Plug 'stevearc/oil.nvim'")
@@ -65,17 +66,18 @@ vim.cmd("Plug 'goolord/alpha-nvim'")
 
 vim.call('plug#end')
 
-require('core.options')
-require('core.keymaps')
-require('core.autocmds')
-require('core.abbreviations')
-require('core.errorformat')
+require('core.options') -- editor options
+require('core.keymaps') -- keybindings
+require('core.autocmds') -- autocommands
+require('core.abbreviations') -- insert and command abbreviations
+require('core.errorformat') -- build and quickfix parsing
 
-require('plugins.gruvbox')
-require('plugins.fzf-lua')
-require('plugins.oil')
-require('plugins.lsp')
-require('plugins.blink')
-require('plugins.lualine')
-require('plugins.flash')
-require('plugins.alpha')
+require('plugins.gruvbox') -- colorscheme
+require('plugins.fzf-lua') -- fuzzy finder
+require('plugins.colorizer') -- color preview
+require('plugins.oil') -- file explorer
+require('plugins.lsp') -- lsp
+require('plugins.blink') -- completion
+require('plugins.lualine') -- statusline
+require('plugins.flash') -- motions
+require('plugins.alpha') -- startup screen

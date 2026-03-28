@@ -3,13 +3,23 @@ if vim.fn.has('nvim-0.11') == 0 then
 end
 
 local diagnostic_icons = {
-  [vim.diagnostic.severity.ERROR] = '🔥',
-  [vim.diagnostic.severity.WARN] = '🟡',
-  [vim.diagnostic.severity.INFO] = '💡',
-  [vim.diagnostic.severity.HINT] = '🧠',
+  [vim.diagnostic.severity.ERROR] = '󰈸',
+  [vim.diagnostic.severity.WARN] = '',
+  [vim.diagnostic.severity.INFO] = '',
+  [vim.diagnostic.severity.HINT] = '',
 }
 
+local diagnostic_range_highlights = {
+  [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
+  [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
+  [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
+  [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+}
+
+local diagnostic_range_ns = vim.api.nvim_create_namespace('vinz_diagnostic_ranges')
+
 vim.diagnostic.config({
+  underline = true,
   virtual_text = {
     prefix = function(diagnostic)
       return diagnostic_icons[diagnostic.severity] or '•'
@@ -25,6 +35,36 @@ vim.diagnostic.config({
     source = 'if_many',
   },
 })
+
+vim.diagnostic.handlers['vinz/range_highlight'] = {
+  show = function(_, bufnr, diagnostics)
+    vim.api.nvim_buf_clear_namespace(bufnr, diagnostic_range_ns, 0, -1)
+
+    for _, diagnostic in ipairs(diagnostics) do
+      local hl_group = diagnostic_range_highlights[diagnostic.severity]
+      if hl_group then
+        local end_lnum = diagnostic.end_lnum or diagnostic.lnum
+        local end_col = diagnostic.end_col or (diagnostic.col + 1)
+
+        if end_lnum == diagnostic.lnum and end_col <= diagnostic.col then
+          end_col = diagnostic.col + 1
+        end
+
+        vim.api.nvim_buf_set_extmark(bufnr, diagnostic_range_ns, diagnostic.lnum, diagnostic.col, {
+          end_row = end_lnum,
+          end_col = end_col,
+          hl_group = hl_group,
+          hl_mode = 'combine',
+          priority = 150,
+          strict = false,
+        })
+      end
+    end
+  end,
+  hide = function(_, bufnr)
+    vim.api.nvim_buf_clear_namespace(bufnr, diagnostic_range_ns, 0, -1)
+  end,
+}
 
 local map = vim.keymap.set
 
