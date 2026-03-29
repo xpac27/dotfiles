@@ -16,13 +16,6 @@ if status is-login
   end
 end
 
-# Get extra spacing between commands
-function add_spacing --on-event fish_postexec
-  if status is-interactive
-    echo
-  end
-end
-
 # direnv
 if status is-interactive
   direnv hook fish | source
