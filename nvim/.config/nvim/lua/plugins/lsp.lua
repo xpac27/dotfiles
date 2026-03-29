@@ -2,6 +2,7 @@ if vim.fn.has('nvim-0.11') == 0 then
   return
 end
 
+-- Diagnostic symbols are behavior/UI choices, not theme colors.
 local diagnostic_icons = {
   [vim.diagnostic.severity.ERROR] = '󰈸',
   [vim.diagnostic.severity.WARN] = '',
@@ -9,15 +10,25 @@ local diagnostic_icons = {
   [vim.diagnostic.severity.HINT] = '',
 }
 
-local diagnostic_range_highlights = {
-  [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
-  [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
-  [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
-  [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
+-- Severity names are used to derive the custom range highlight groups:
+-- DiagnosticRangeError, DiagnosticRangeWarn, DiagnosticRangeInfo, DiagnosticRangeHint.
+-- The actual colors for those groups live in colors/monotone.lua.
+local diagnostic_severity_names = {
+  [vim.diagnostic.severity.ERROR] = 'Error',
+  [vim.diagnostic.severity.WARN] = 'Warn',
+  [vim.diagnostic.severity.INFO] = 'Info',
+  [vim.diagnostic.severity.HINT] = 'Hint',
 }
 
 local diagnostic_range_ns = vim.api.nvim_create_namespace('vinz_diagnostic_ranges')
 
+local function diagnostic_highlight(severity)
+  local name = diagnostic_severity_names[severity]
+  return name and ('DiagnosticRange' .. name) or nil
+end
+
+-- Keep the builtin diagnostic features simple here and let the theme define
+-- the colors through the standard Diagnostic* highlight groups.
 vim.diagnostic.config({
   underline = true,
   virtual_text = {
@@ -36,12 +47,16 @@ vim.diagnostic.config({
   },
 })
 
+-- Neovim underlines diagnostics by default, but it does not tint the source
+-- code range in the same way the old Vim setup did. This custom handler adds a
+-- stronger extmark highlight over the diagnostic span using theme-owned
+-- DiagnosticRange* groups from the colorscheme.
 vim.diagnostic.handlers['vinz/range_highlight'] = {
   show = function(_, bufnr, diagnostics)
     vim.api.nvim_buf_clear_namespace(bufnr, diagnostic_range_ns, 0, -1)
 
     for _, diagnostic in ipairs(diagnostics) do
-      local hl_group = diagnostic_range_highlights[diagnostic.severity]
+      local hl_group = diagnostic_highlight(diagnostic.severity)
       if hl_group then
         local end_lnum = diagnostic.end_lnum or diagnostic.lnum
         local end_col = diagnostic.end_col or (diagnostic.col + 1)
@@ -54,8 +69,8 @@ vim.diagnostic.handlers['vinz/range_highlight'] = {
           end_row = end_lnum,
           end_col = end_col,
           hl_group = hl_group,
-          hl_mode = 'combine',
-          priority = 150,
+          hl_mode = 'replace',
+          priority = 250,
           strict = false,
         })
       end
