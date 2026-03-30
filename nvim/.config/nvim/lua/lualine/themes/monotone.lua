@@ -24,7 +24,7 @@ return {
   normal = {
     a = { fg = colors.bg1, bg = colors.normal },
     b = { fg = colors.fg2, bg = colors.bg0 },
-    c = { fg = colors.fg2, bg = colors.bg1 },
+    c = { fg = colors.fg2, bg = colors.bg2 },
     x = { fg = colors.fg1, bg = colors.bg3 },
     y = { fg = colors.fg2, bg = colors.bg2 },
     z = { fg = colors.fg2, bg = colors.bg1 },
@@ -54,6 +54,6 @@ return {
   inactive = {
     a = { fg = colors.fg2, bg = colors.bg3 },
     b = { fg = colors.bg3, bg = colors.bg0 },
-    c = { fg = colors.bg3, bg = colors.bg1 },
+    c = { fg = colors.bg3, bg = colors.bg2 },
   },
 }

@@ -65,13 +65,13 @@ hi('EndOfBuffer', { fg = p.bg2 })
 hi('NonText', { fg = p.dim1 })
 hi('Whitespace', { fg = p.dim2 })
 hi('SpecialKey', { fg = p.err })
-hi('VertSplit', { fg = p.dim1 })
-hi('WinSeparator', { fg = p.dim1 })
+hi('VertSplit', { fg = p.bg2 })
+hi('WinSeparator', { fg = p.bg2 })
 
 -- Statusline and tabline stay understated so diagnostics and code remain the
 -- brightest things on screen.
-hi('StatusLine', { fg = p.fg1, bg = p.bg1 })
-hi('StatusLineNC', { fg = p.bg1, bg = p.bg1 })
+hi('StatusLine', { fg = p.bg2, bg = p.bg2 })
+hi('StatusLineNC', { fg = p.bg2, bg = p.bg2 })
 hi('TabLine', { fg = p.dim1, bg = p.bg0 })
 hi('TabLineFill', { fg = p.dim1, bg = p.bg0 })
 hi('TabLineSel', { fg = p.bg0, bg = p.warn, bold = true })

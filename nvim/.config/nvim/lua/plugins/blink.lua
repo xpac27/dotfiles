@@ -26,6 +26,12 @@ blink.setup({
   sources = {
     default = { 'lsp', 'path', 'snippets', 'buffer' },
     providers = {
+      path = {
+        opts = {
+          trailing_slash = false,
+          label_trailing_slash = false,
+        },
+      },
       cmdline = {
         min_keyword_length = 0,
       },
@@ -37,7 +43,7 @@ blink.setup({
       preset = 'cmdline',
       ['<Tab>'] = { 'insert_next', 'fallback' },
       ['<S-Tab>'] = { 'insert_prev', 'fallback' },
-      ['<CR>'] = { 'accept_and_enter', 'fallback' },
+      ['<CR>'] = { 'accept', 'fallback' },
     },
     completion = {
       menu = {
