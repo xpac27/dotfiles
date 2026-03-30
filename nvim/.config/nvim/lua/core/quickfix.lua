@@ -3,6 +3,56 @@ local M = {}
 local qf_height = 20
 local qf_cursor_ns = vim.api.nvim_create_namespace('vinz_quickfix_cursorline')
 
+local function list_items(info)
+  if info.quickfix == 1 then
+    return vim.fn.getqflist({ id = info.id, items = 1 }).items
+  end
+  return vim.fn.getloclist(info.winid, { id = info.id, items = 1 }).items
+end
+
+local function item_path(item)
+  if item.bufnr and item.bufnr > 0 then
+    local name = vim.api.nvim_buf_get_name(item.bufnr)
+    if name ~= '' then
+      return vim.fn.fnamemodify(name, ':p:.')
+    end
+  end
+
+  if item.filename and item.filename ~= '' then
+    return vim.fn.fnamemodify(item.filename, ':p:.')
+  end
+
+  return ''
+end
+
+function M.quickfixtextfunc(info)
+  local items = list_items(info)
+  local lines = {}
+
+  for idx = info.start_idx, info.end_idx do
+    local item = items[idx]
+    local path = item_path(item)
+    local pos = ''
+
+    if item.lnum and item.lnum > 0 then
+      pos = ':' .. item.lnum
+      if item.col and item.col > 0 then
+        pos = pos .. ':' .. item.col
+      end
+    end
+
+    local text = (item.text or ''):gsub('\r$', '')
+
+    if path ~= '' then
+      table.insert(lines, string.format('%s%s | %s', path, pos, text))
+    else
+      table.insert(lines, text)
+    end
+  end
+
+  return lines
+end
+
 local function set_qf_lines(lines, title)
   vim.fn.setqflist({}, 'r', {
     title = title,
@@ -95,6 +145,8 @@ function M.run_to_qf(cmd, opts)
 end
 
 function M.setup()
+  vim.o.quickfixtextfunc = "v:lua.require'core.quickfix'.quickfixtextfunc"
+
   local function update_qf_cursorline(bufnr)
     if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].filetype ~= 'qf' then
       return
