@@ -131,6 +131,15 @@ hi('DiffAdd', { fg = '#88aa77' })
 hi('DiffDelete', { fg = '#aa7766' })
 hi('DiffChange', { fg = '#7788aa' })
 hi('DiffText', { fg = '#7788aa', underline = true })
+hi('MiniDiffSignAdd', { fg = '#88aa77' })
+hi('MiniDiffSignChange', { fg = '#7788aa' })
+hi('MiniDiffSignDelete', { fg = '#aa7766' })
+hi('MiniDiffOverAdd', { fg = '#88aa77' })
+hi('MiniDiffOverChange', { fg = '#7788aa' })
+hi('MiniDiffOverDelete', { fg = '#aa7766' })
+hi('MiniDiffOverChangeBuf', { fg = '#7788aa' })
+hi('MiniDiffOverContext', { fg = p.dim0 })
+hi('MiniDiffOverContextBuf', { fg = p.dim0 })
 
 -- Message and diagnostic primitives. These are the semantic accent colors the
 -- rest of the theme links back to.
