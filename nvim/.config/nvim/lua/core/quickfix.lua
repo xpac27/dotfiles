@@ -54,6 +54,8 @@ function M.run_to_qf(cmd, opts)
     title = title,
     items = {},
   })
+  vim.cmd(qf_height .. 'copen')
+  vim.cmd('wincmd w')
 
   local function refresh()
     set_qf_lines(lines, title)
