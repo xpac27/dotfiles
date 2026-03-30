@@ -1,6 +1,7 @@
 local M = {}
 
 local qf_height = 20
+local qf_cursor_ns = vim.api.nvim_create_namespace('vinz_quickfix_cursorline')
 
 local function set_qf_lines(lines, title)
   vim.fn.setqflist({}, 'r', {
@@ -94,6 +95,25 @@ function M.run_to_qf(cmd, opts)
 end
 
 function M.setup()
+  local function update_qf_cursorline(bufnr)
+    if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].filetype ~= 'qf' then
+      return
+    end
+
+    vim.api.nvim_buf_clear_namespace(bufnr, qf_cursor_ns, 0, -1)
+
+    local line = vim.api.nvim_win_get_cursor(0)[1] - 1
+    local text = vim.api.nvim_buf_get_lines(bufnr, line, line + 1, false)[1] or ''
+    vim.api.nvim_buf_set_extmark(bufnr, qf_cursor_ns, line, 0, {
+      end_row = line,
+      end_col = #text,
+      hl_group = 'QFCursorLine',
+      hl_mode = 'combine',
+      hl_eol = true,
+      priority = 10,
+    })
+  end
+
   if vim.fn.has('unix') == 1 then
     vim.api.nvim_create_user_command('Make', function(opts)
       local cmd = { 'make' }
@@ -204,9 +224,17 @@ function M.setup()
       vim.opt_local.number = false
       vim.opt_local.relativenumber = false
       vim.opt_local.list = false
-      vim.opt_local.cursorline = true
+      vim.opt_local.cursorline = false
       vim.opt_local.fillchars = 'eob: '
       vim.wo.winhighlight = 'Normal:QuickFixBackground,EndOfBuffer:QFEndOfBuffer'
+      update_qf_cursorline(vim.api.nvim_get_current_buf())
+    end,
+  })
+
+  vim.api.nvim_create_autocmd({ 'CursorMoved', 'BufWinEnter', 'WinEnter' }, {
+    group = qf,
+    callback = function(args)
+      update_qf_cursorline(args.buf)
     end,
   })
 

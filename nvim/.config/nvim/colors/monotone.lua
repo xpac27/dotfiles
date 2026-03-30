@@ -175,6 +175,7 @@ hi('LspReferenceWrite', { bg = p.bg4 })
 -- buffers do not fall back to generic defaults.
 hi('QuickFixLine', { link = 'Normal' })
 hi('QuickFixBackground', { fg = p.dim0, bg = p.bg3 })
+hi('QFCursorLine', { bg = p.bg1 })
 hi('QFNormal', { bg = p.bg2 })
 hi('QFEndOfBuffer', { fg = p.bg2 })
 hi('qfLineNr', { fg = p.fg0 })
