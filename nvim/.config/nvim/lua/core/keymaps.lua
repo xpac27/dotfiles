@@ -28,7 +28,10 @@ vim.api.nvim_create_user_command('Lprev', 'try | lprev | catch | llast | catch |
 map('n', '<Up>', ':Cprev<CR>', { silent = true })
 map('n', '<Down>', ':Cnext<CR>', { silent = true })
 map('n', '<leader>q', function()
-  require('core.quickfix').toggle_quickfix()
+  local ok, quickfix = pcall(require, 'core.quickfix')
+  if ok then
+    quickfix.toggle_quickfix()
+  end
 end, { silent = true })
 map('n', '<leader>qq', ':cex []<CR>')
 map('n', '<leader>m', ':Make test NO_COLOR=1<CR>', { silent = true })

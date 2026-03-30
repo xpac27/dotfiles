@@ -58,7 +58,11 @@ require('core.keymaps') -- keybindings
 require('core.autocmds') -- autocommands
 require('core.abbreviations') -- insert and command abbreviations
 require('core.errorformat') -- build and quickfix parsing
-require('core.quickfix').setup() -- async make and quickfix helpers
+
+local ok_quickfix, quickfix = pcall(require, 'core.quickfix')
+if ok_quickfix then
+  quickfix.setup() -- async make and quickfix helpers
+end
 
 require('plugins.gruvbox') -- colorscheme
 require('plugins.fzf-lua') -- fuzzy finder
