@@ -12,19 +12,19 @@ local function diagnostic_count(severity, icon)
 end
 
 local function lsp_error_count()
-  return diagnostic_count(vim.diagnostic.severity.ERROR, '󰈸')
+  return diagnostic_count(vim.diagnostic.severity.ERROR, '🩸')
 end
 
 local function lsp_warn_count()
-  return diagnostic_count(vim.diagnostic.severity.WARN, '')
+  return diagnostic_count(vim.diagnostic.severity.WARN, '🎃')
 end
 
 local function lsp_hint_count()
-  return diagnostic_count(vim.diagnostic.severity.HINT, '')
+  return diagnostic_count(vim.diagnostic.severity.HINT, '🕯️')
 end
 
 local function lsp_info_count()
-  return diagnostic_count(vim.diagnostic.severity.INFO, '')
+  return diagnostic_count(vim.diagnostic.severity.INFO, '👁️')
 end
 
 local function paste_status()
