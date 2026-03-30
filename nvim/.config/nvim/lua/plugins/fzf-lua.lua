@@ -34,7 +34,7 @@ fzf.setup({
   },
   fzf_colors = true,
   files = {
-    cmd = [[rg --files --hidden --follow -g '!/.git']],
+    cmd = [[rg --files --hidden --follow]],
   },
   grep = {
     rg_opts = [[--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --vimgrep]],
