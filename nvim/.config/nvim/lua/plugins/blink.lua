@@ -25,6 +25,11 @@ blink.setup({
   },
   sources = {
     default = { 'lsp', 'path', 'snippets', 'buffer' },
+    providers = {
+      cmdline = {
+        min_keyword_length = 0,
+      },
+    },
   },
   cmdline = {
     enabled = true,
@@ -35,6 +40,9 @@ blink.setup({
       ['<CR>'] = { 'accept_and_enter', 'fallback' },
     },
     completion = {
+      menu = {
+        auto_show = true,
+      },
       list = {
         selection = {
           preselect = false,
