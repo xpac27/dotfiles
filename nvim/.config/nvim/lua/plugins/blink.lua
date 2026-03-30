@@ -20,6 +20,15 @@ blink.setup({
   sources = {
     default = { 'lsp', 'path', 'snippets', 'buffer' },
   },
+  cmdline = {
+    keymap = {
+      preset = 'cmdline',
+      ['<Tab>'] = { 'accept', 'fallback' },
+      ['<S-Tab>'] = { 'select_prev', 'fallback' },
+      ['<CR>'] = { 'accept_and_enter', 'fallback' },
+    },
+    sources = { 'buffer', 'cmdline' },
+  },
   fuzzy = {
     implementation = 'prefer_rust_with_warning',
   },
