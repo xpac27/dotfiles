@@ -74,7 +74,7 @@ hi('StatusLine', { fg = p.fg0, bg = p.bg0, underline = true })
 hi('StatusLineNC', { fg = p.bg0, bg = p.bg0, underline = true })
 hi('TabLine', { fg = p.dim1, bg = p.bg0 })
 hi('TabLineFill', { fg = p.dim1, bg = p.bg0 })
-hi('TabLineSel', { fg = p.fg0, bg = p.bg0, bold = true })
+hi('TabLineSel', { fg = p.bg0, bg = p.warn, bold = true })
 
 -- Completion menu: bluish foreground/background taken from the old custom Vim
 -- overrides so the popup stands apart from the main buffer.

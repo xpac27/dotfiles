@@ -44,6 +44,7 @@ vim.cmd("Plug 'saghen/blink.cmp', { 'tag': 'v1.*' }")
 
 -- Statusline
 vim.cmd("Plug 'nvim-lualine/lualine.nvim'")
+vim.cmd("Plug 'nanozuki/tabby.nvim'")
 
 -- Motions
 vim.cmd("Plug 'folke/flash.nvim'")
@@ -76,6 +77,7 @@ require('plugins.oil') -- file explorer
 require('plugins.lsp') -- lsp
 require('plugins.blink') -- completion
 require('plugins.lualine') -- statusline
+require('plugins.tabby') -- tabline
 require('plugins.flash') -- motions
 require('plugins.alpha') -- startup screen
 
