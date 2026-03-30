@@ -1,5 +1,5 @@
 setlocal shiftwidth=2
-nnoremap <buffer> <leader>m :AsyncRun ponyc -d<CR>
+nnoremap <buffer> <leader>m :Run ponyc -d<CR>
 
 augroup VINZ_pony
     autocmd!

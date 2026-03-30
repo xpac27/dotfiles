@@ -1,9 +1,7 @@
 if vim.fn.has('unix') == 1 then
-  vim.opt.errorformat:append({
-    'FAIL %m (%f:%l)',
-    'SKIP %m (%f:%l)',
-    'PASS %m (%f:%l)',
-  })
+  vim.cmd([[set errorformat+=FAIL\ %m\ (%f:%l)]])
+  vim.cmd([[set errorformat+=SKIP\ %m\ (%f:%l)]])
+  vim.cmd([[set errorformat+=PASS\ %m\ (%f:%l)]])
 else
   vim.opt.errorformat = {
     '%f(%l\\,%c): %m',
