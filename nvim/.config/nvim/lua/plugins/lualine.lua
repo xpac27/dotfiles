@@ -31,6 +31,22 @@ local function paste_status()
   return vim.o.paste and 'PASTE' or ''
 end
 
+local function status_filename()
+  if vim.bo.buftype == 'quickfix' then
+    local info = vim.fn.getwininfo(vim.api.nvim_get_current_win())[1]
+    if info and info.loclist == 1 then
+      return '[Location List]'
+    end
+    return '[Quickfix List]'
+  end
+
+  local path = vim.fn.expand('%')
+  if path == '' then
+    return '[No Name]'
+  end
+  return path
+end
+
 lualine.setup({
   options = {
     theme = 'monotone',
@@ -41,8 +57,7 @@ lualine.setup({
   sections = {
     lualine_a = {
       {
-        'filename',
-        path = 1,
+        status_filename,
         color = { fg = '#111111', bg = '#d7d7d7' },
       },
     },
@@ -81,8 +96,7 @@ lualine.setup({
     lualine_a = {},
     lualine_b = {
       {
-        'filename',
-        path = 1,
+        status_filename,
         color = { fg = '#9e9e9e', bg = '#333333' },
       },
       {

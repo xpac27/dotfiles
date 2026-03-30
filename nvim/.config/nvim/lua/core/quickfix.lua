@@ -64,6 +64,7 @@ function M.run_to_qf(cmd, opts)
       return
     end
     for _, line in ipairs(data) do
+      line = line:gsub('\r$', '')
       if line ~= '' then
         table.insert(lines, line)
       end
@@ -199,6 +200,8 @@ function M.setup()
     callback = function()
       vim.opt_local.number = false
       vim.opt_local.relativenumber = false
+      vim.opt_local.list = false
+      vim.opt_local.cursorline = true
       vim.opt_local.fillchars = 'eob: '
       vim.wo.winhighlight = 'Normal:QuickFixBackground,EndOfBuffer:QFEndOfBuffer'
     end,
