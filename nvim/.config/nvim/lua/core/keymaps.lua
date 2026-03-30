@@ -35,6 +35,13 @@ map('n', '<leader>m', ':Make test NO_COLOR=1<CR>', { silent = true })
 map('n', '<leader>r', [[:%s/\<<C-R><C-W>\>//gc<left><left><left>]])
 map('n', 'cp', [[:let @+ = expand('%')<CR>]])
 
+if vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1 then
+  map('n', '<leader>m', ':Ninja<CR>', { silent = true })
+  map('n', '<leader>mm', ':NinjaAll<CR>', { silent = true })
+  map('n', '<leader>t', ':Test<CR>', { silent = true })
+  map('n', '<leader>tt', ':TestAll<CR>', { silent = true })
+end
+
 if vim.fn.executable('python') == 1 then
   vim.api.nvim_create_user_command('JSON', '%!python -m json.tool', {})
 end
