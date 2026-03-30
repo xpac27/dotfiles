@@ -10,8 +10,8 @@ syn match GTestNote "	.\+$"
 
 " Quickfix entry structure: path on the left, parsed output on the right.
 syn match qfPath "^[^|]\+" contains=qfError
-syn match qfSeparator "|\s*" contains=NONE
-syn match qfTestName "|\s*\zs.\{-}\ze\s\+\(PASSED\|FAILED\|SKIPPED\)\>" contains=NONE
+syn match qfSeparator "||\s*" contains=NONE
+syn match qfTestName "||\s*\zs.\{-}\ze\s\+\(PASSED\|FAILED\|SKIPPED\)\>" contains=NONE
 syn match qfTiming "took .*$" contains=NONE
 
 " Semantic test result keywords inside the parsed output.
