@@ -21,9 +21,17 @@ blink.setup({
     default = { 'lsp', 'path', 'snippets', 'buffer' },
   },
   cmdline = {
+    enabled = true,
     keymap = {
       preset = 'cmdline',
-      ['<Tab>'] = { 'accept', 'fallback' },
+      ['<Tab>'] = {
+        function(cmp)
+          if cmp.is_visible() then
+            return cmp.accept()
+          end
+          return cmp.show_and_insert_or_accept_single()
+        end,
+      },
       ['<S-Tab>'] = { 'select_prev', 'fallback' },
       ['<CR>'] = { 'accept_and_enter', 'fallback' },
     },

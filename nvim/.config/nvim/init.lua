@@ -52,6 +52,7 @@ vim.cmd("Plug 'folke/flash.nvim'")
 vim.cmd("Plug 'goolord/alpha-nvim'")
 
 vim.call('plug#end')
+vim.cmd('syntax enable')
 
 require('core.options') -- editor options
 require('core.keymaps') -- keybindings
