@@ -103,13 +103,8 @@ function M.setup()
     vim.api.nvim_buf_clear_namespace(bufnr, qf_cursor_ns, 0, -1)
 
     local line = vim.api.nvim_win_get_cursor(0)[1] - 1
-    local text = vim.api.nvim_buf_get_lines(bufnr, line, line + 1, false)[1] or ''
     vim.api.nvim_buf_set_extmark(bufnr, qf_cursor_ns, line, 0, {
-      end_row = line,
-      end_col = #text,
-      hl_group = 'QFCursorLine',
-      hl_mode = 'combine',
-      hl_eol = true,
+      line_hl_group = 'QFCursorLine',
       priority = 10,
     })
   end
