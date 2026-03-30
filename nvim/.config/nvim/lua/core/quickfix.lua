@@ -144,6 +144,7 @@ function M.setup()
         [[E:\Gitlab\scripts\compile.rb]],
         'NINJA_TEST',
         vim.fn.expand('%:p'),
+        tostring(vim.fn.line('.')),
       }, {
         title = 'Test',
       })
