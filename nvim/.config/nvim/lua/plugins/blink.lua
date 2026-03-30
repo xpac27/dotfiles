@@ -6,7 +6,15 @@ end
 blink.setup({
   keymap = {
     preset = 'default',
-    ['<Tab>'] = { 'show_and_insert_or_accept_single', 'select_next' },
+    ['<Tab>'] = {
+      function(cmp)
+        if cmp.is_visible() then
+          return cmp.select_next()
+        end
+        return cmp.show_and_insert()
+      end,
+      'fallback',
+    },
     ['<S-Tab>'] = { 'select_prev', 'fallback' },
     ['<CR>'] = { 'accept', 'fallback' },
     ['<C-Space>'] = { 'show', 'show_documentation', 'hide_documentation' },
@@ -30,7 +38,15 @@ blink.setup({
     enabled = true,
     keymap = {
       preset = 'cmdline',
-      ['<Tab>'] = { 'show_and_insert_or_accept_single', 'select_next' },
+      ['<Tab>'] = {
+        function(cmp)
+          if cmp.is_visible() then
+            return cmp.select_next()
+          end
+          return cmp.show_and_insert()
+        end,
+        'fallback',
+      },
       ['<S-Tab>'] = { 'select_prev', 'fallback' },
       ['<CR>'] = { 'accept_and_enter', 'fallback' },
     },
