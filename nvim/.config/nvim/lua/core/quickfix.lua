@@ -2,7 +2,6 @@ local M = {}
 
 local qf_height = 20
 local qf_cursor_ns = vim.api.nvim_create_namespace('vinz_quickfix_cursorline')
-local qf_cursor_tokens_ns = vim.api.nvim_create_namespace('vinz_quickfix_cursor_tokens')
 
 local function list_items(info)
   if info.quickfix == 1 then
@@ -52,19 +51,6 @@ function M.quickfixtextfunc(info)
   end
 
   return lines
-end
-
-local function add_selected_token(bufnr, line, text, pattern, group)
-  local start_col, end_col = text:find(pattern)
-  if not start_col then
-    return
-  end
-
-  vim.api.nvim_buf_set_extmark(bufnr, qf_cursor_tokens_ns, line, start_col - 1, {
-    end_col = end_col,
-    hl_group = group,
-    priority = 30,
-  })
 end
 
 local function set_qf_lines(lines, title)
@@ -167,24 +153,12 @@ function M.setup()
     end
 
     vim.api.nvim_buf_clear_namespace(bufnr, qf_cursor_ns, 0, -1)
-    vim.api.nvim_buf_clear_namespace(bufnr, qf_cursor_tokens_ns, 0, -1)
 
     local line = vim.api.nvim_win_get_cursor(0)[1] - 1
     vim.api.nvim_buf_set_extmark(bufnr, qf_cursor_ns, line, 0, {
       line_hl_group = 'QFCursorLine',
       priority = 10,
     })
-
-    local text = vim.api.nvim_buf_get_lines(bufnr, line, line + 1, false)[1] or ''
-    add_selected_token(bufnr, line, text, '^[^|]+', 'qfFileNameSelected')
-    add_selected_token(bufnr, line, text, '%s|%s', 'qfSeparatorSelected')
-    add_selected_token(bufnr, line, text, '%S+()%s+PASSED%f[%W]', 'qfTestNameSuccessSelected')
-    add_selected_token(bufnr, line, text, '%S+()%s+FAILED%f[%W]', 'qfTestNameErrorSelected')
-    add_selected_token(bufnr, line, text, '%S+()%s+SKIPPED%f[%W]', 'qfTestNameWarningSelected')
-    add_selected_token(bufnr, line, text, '%f[%w]PASSED%f[%W]', 'ITestSuccessSelected')
-    add_selected_token(bufnr, line, text, '%f[%w]FAILED%f[%W]', 'ITestErrorSelected')
-    add_selected_token(bufnr, line, text, '%f[%w]SKIPPED%f[%W]', 'ITestWarningSelected')
-    add_selected_token(bufnr, line, text, 'took .*$', 'qfTimingSelected')
   end
 
   if vim.fn.has('unix') == 1 then
