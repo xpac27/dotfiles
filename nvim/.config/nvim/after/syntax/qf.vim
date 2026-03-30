@@ -19,9 +19,9 @@ syn clear qfText
 " Quickfix entry structure: path on the left, parsed output on the right.
 syn match qfFileName "^[^|]\+\ze\s|\s" contains=qfError
 syn match qfSeparator "\s|\s" contains=NONE
-syn match qfTestNameSuccess "\s|\s\zs\S\+\ze\s\+PASSED\>" contains=NONE
-syn match qfTestNameError "\s|\s\zs\S\+\ze\s\+FAILED\>" contains=NONE
-syn match qfTestNameWarning "\s|\s\zs\S\+\ze\s\+SKIPPED\>" contains=NONE
+syn match qfTestNameSuccess "\S\+\ze\s\+PASSED\>" containedin=ALL contains=NONE
+syn match qfTestNameError "\S\+\ze\s\+FAILED\>" containedin=ALL contains=NONE
+syn match qfTestNameWarning "\S\+\ze\s\+SKIPPED\>" containedin=ALL contains=NONE
 syn match qfTiming "took .*$" contains=NONE
 
 " Semantic test result keywords inside the parsed output.
