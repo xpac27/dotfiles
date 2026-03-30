@@ -70,8 +70,8 @@ hi('WinSeparator', { fg = p.dim1 })
 
 -- Statusline and tabline stay understated so diagnostics and code remain the
 -- brightest things on screen.
-hi('StatusLine', { fg = p.fg0, bg = p.bg0, underline = true })
-hi('StatusLineNC', { fg = p.bg0, bg = p.bg0, underline = true })
+hi('StatusLine', { fg = p.fg1, bg = p.bg1 })
+hi('StatusLineNC', { fg = p.bg1, bg = p.bg1 })
 hi('TabLine', { fg = p.dim1, bg = p.bg0 })
 hi('TabLineFill', { fg = p.dim1, bg = p.bg0 })
 hi('TabLineSel', { fg = p.bg0, bg = p.warn, bold = true })
