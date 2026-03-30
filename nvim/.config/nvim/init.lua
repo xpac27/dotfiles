@@ -51,6 +51,10 @@ vim.cmd("Plug 'folke/flash.nvim'")
 -- Startup
 vim.cmd("Plug 'goolord/alpha-nvim'")
 
+-- Changes highlight
+vim.cmd("Plug 'nvim-mini/mini.diff'")
+vim.cmd("Plug 'ofwinterpassed/perfnvim'")
+
 vim.call('plug#end')
 vim.cmd('syntax enable')
 
@@ -74,3 +78,12 @@ require('plugins.blink') -- completion
 require('plugins.lualine') -- statusline
 require('plugins.flash') -- motions
 require('plugins.alpha') -- startup screen
+
+local Diff = require('mini.diff')
+Diff.setup({
+  source = {
+    require('perfnvim').gen_source_p4(),
+    Diff.gen_source.git(),
+    Diff.gen_source.save(),
+  },
+})
