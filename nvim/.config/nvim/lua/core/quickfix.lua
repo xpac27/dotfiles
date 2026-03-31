@@ -10,6 +10,7 @@ local qf_ai_state = {
   bufnr = nil,
   winid = nil,
 }
+local qf_ai_sidebar_width = 60
 
 local function list_items(info)
   if info.quickfix == 1 then
@@ -101,11 +102,87 @@ local function explanation_marker(entry)
   return '[AI?]', 'Comment'
 end
 
-local function close_explain_float()
+local function close_explain_sidebar()
   if qf_ai_state.winid and vim.api.nvim_win_is_valid(qf_ai_state.winid) then
     vim.api.nvim_win_close(qf_ai_state.winid, true)
   end
   qf_ai_state.winid = nil
+end
+
+local function parse_file_target(text)
+  local token = (text or ''):gsub('^[`%[(<"\']+', ''):gsub('[`%])>,;"\']+$', '')
+  local path, lnum, col = token:match('^(.-):(%d+):(%d+)$')
+
+  if not path then
+    path, lnum = token:match('^(.-):(%d+)$')
+  end
+
+  if not path or path == '' then
+    return nil
+  end
+
+  local found = vim.fn.findfile(path, vim.o.path)
+  local resolved = found ~= '' and found or path
+  if vim.fn.filereadable(resolved) == 0 then
+    return nil
+  end
+
+  return {
+    path = resolved,
+    lnum = tonumber(lnum),
+    col = tonumber(col),
+  }
+end
+
+local function find_non_sidebar_window()
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    if win ~= qf_ai_state.winid and vim.api.nvim_win_is_valid(win) then
+      local cfg = vim.api.nvim_win_get_config(win)
+      if cfg.relative == '' and vim.api.nvim_win_get_buf(win) ~= qf_ai_state.bufnr then
+        return win
+      end
+    end
+  end
+
+  return nil
+end
+
+local function ensure_target_window()
+  local target = find_non_sidebar_window()
+  if target then
+    return target
+  end
+
+  if not (qf_ai_state.winid and vim.api.nvim_win_is_valid(qf_ai_state.winid)) then
+    return vim.api.nvim_get_current_win()
+  end
+
+  vim.api.nvim_set_current_win(qf_ai_state.winid)
+  vim.cmd('leftabove vsplit')
+  local new_win = vim.api.nvim_get_current_win()
+  if qf_ai_state.winid and vim.api.nvim_win_is_valid(qf_ai_state.winid) then
+    vim.api.nvim_win_set_width(qf_ai_state.winid, qf_ai_sidebar_width)
+  end
+  return new_win
+end
+
+local function open_target_from_sidebar()
+  local target = parse_file_target(vim.api.nvim_get_current_line())
+  if not target then
+    vim.notify('No file target found on this line.', vim.log.levels.WARN)
+    return
+  end
+
+  local win = ensure_target_window()
+  vim.api.nvim_set_current_win(win)
+  vim.cmd('edit ' .. vim.fn.fnameescape(target.path))
+
+  if target.lnum then
+    vim.api.nvim_win_set_cursor(win, {
+      target.lnum,
+      math.max((target.col or 1) - 1, 0),
+    })
+  end
 end
 
 local function ensure_explain_buf()
@@ -121,8 +198,9 @@ local function ensure_explain_buf()
   qf_ai_state.bufnr = bufnr
 
   vim.keymap.set('n', 'q', function()
-    close_explain_float()
+    close_explain_sidebar()
   end, { buffer = bufnr, silent = true })
+  vim.keymap.set('n', '<CR>', open_target_from_sidebar, { buffer = bufnr, silent = true })
 
   return bufnr
 end
@@ -137,7 +215,7 @@ local function render_explain_buf(hash)
   elseif entry.status == 'pending' then
     table.insert(lines, 'Asking the machine to inspect the current quickfix list...')
     table.insert(lines, '')
-    table.insert(lines, 'Close with `q`. Reopening this float will keep showing the same pending request.')
+    table.insert(lines, 'Close with `q`. Reopening this sidebar will keep showing the same pending request.')
   elseif entry.status == 'error' then
     table.insert(lines, entry.content or 'No error output was captured.')
   else
@@ -181,42 +259,37 @@ local function ensure_explain_highlights()
   })
 end
 
-local function open_explain_float(hash)
+local function apply_explain_sidebar_window(winid)
+  vim.wo[winid].winhighlight = 'Normal:QfExplainNormal,NormalNC:QfExplainNormal,EndOfBuffer:QfExplainEndOfBuffer,WinSeparator:QfExplainBorderSide'
+  vim.wo[winid].wrap = true
+  vim.wo[winid].linebreak = true
+  vim.wo[winid].cursorline = false
+  vim.wo[winid].number = false
+  vim.wo[winid].relativenumber = false
+  vim.wo[winid].list = false
+  vim.wo[winid].signcolumn = 'no'
+  vim.wo[winid].foldcolumn = '0'
+  vim.wo[winid].colorcolumn = ''
+  vim.wo[winid].winfixwidth = true
+end
+
+local function open_explain_sidebar(hash)
   render_explain_buf(hash)
   ensure_explain_highlights()
 
   local bufnr = ensure_explain_buf()
   if qf_ai_state.winid and vim.api.nvim_win_is_valid(qf_ai_state.winid) then
+    vim.api.nvim_win_set_buf(qf_ai_state.winid, bufnr)
+    apply_explain_sidebar_window(qf_ai_state.winid)
     vim.api.nvim_set_current_win(qf_ai_state.winid)
     return
   end
 
-  local width = math.min(math.max(math.floor(vim.o.columns * 0.38), 48), 72)
-  local height = math.min(math.max(math.floor(vim.o.lines * 0.72), 18), vim.o.lines - 2)
-
-  qf_ai_state.winid = vim.api.nvim_open_win(bufnr, true, {
-    relative = 'editor',
-    row = math.max(vim.o.lines - height - 3, 0),
-    col = math.max(vim.o.columns - width - 2, 0),
-    width = width,
-    height = height,
-    border = {
-      { '╭', 'QfExplainBorderTop' },
-      { '─', 'QfExplainBorderTop' },
-      { '╮', 'QfExplainBorderTop' },
-      { '│', 'QfExplainBorderSide' },
-      { ' ', 'QfExplainBorderBlend' },
-      { ' ', 'QfExplainBorderSide' },
-      { ' ', 'QfExplainBorderSide' },
-      { '│', 'QfExplainBorderBlend' },
-    },
-    style = 'minimal',
-  })
-
-  vim.wo[qf_ai_state.winid].winhighlight = 'Normal:QfExplainNormal,NormalFloat:QfExplainNormal,EndOfBuffer:QfExplainEndOfBuffer'
-  vim.wo[qf_ai_state.winid].wrap = true
-  vim.wo[qf_ai_state.winid].linebreak = true
-  vim.wo[qf_ai_state.winid].cursorline = false
+  vim.cmd('botright vertical sbuffer ' .. bufnr)
+  qf_ai_state.winid = vim.api.nvim_get_current_win()
+  vim.cmd('wincmd L')
+  vim.api.nvim_win_set_width(qf_ai_state.winid, qf_ai_sidebar_width)
+  apply_explain_sidebar_window(qf_ai_state.winid)
 end
 
 local function refresh_qf_ai_marks(bufnr)
@@ -312,7 +385,7 @@ local function start_explain_job(qf, hash)
   qf_ai_state.cache[hash] = entry
   qf_ai_state.prompt_hash = hash
   refresh_qf_ai_marks(qf.qfbufnr)
-  open_explain_float(hash)
+  open_explain_sidebar(hash)
 
   local stdout = {}
   local stderr = {}
@@ -394,7 +467,7 @@ function M.explain_quickfix(opts)
   end
 
   if cached then
-    open_explain_float(qf.hash)
+    open_explain_sidebar(qf.hash)
     refresh_qf_ai_marks(qf.qfbufnr)
     return
   end
@@ -407,12 +480,12 @@ function M.toggle_explain_float()
   qf_ai_state.current_hash = qf.hash
 
   if qf_ai_state.winid and vim.api.nvim_win_is_valid(qf_ai_state.winid) then
-    close_explain_float()
+    close_explain_sidebar()
     return
   end
 
   if qf_ai_state.cache[qf.hash] then
-    open_explain_float(qf.hash)
+    open_explain_sidebar(qf.hash)
     refresh_qf_ai_marks(qf.qfbufnr)
     return
   end
