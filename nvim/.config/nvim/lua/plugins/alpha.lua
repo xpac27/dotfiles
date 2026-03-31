@@ -16,6 +16,19 @@ local function section_title(title)
   }
 end
 
+local function header_banner()
+  local project = vim.fn.fnamemodify(vim.fn.getcwd(), ':t'):upper()
+  local text = '💀  ' .. project .. '  💀'
+  local width = vim.fn.strdisplaywidth(text)
+  local border = string.rep('─', math.max(width - 2, 0))
+
+  return {
+    '╭' .. border .. '╮',
+    text,
+    '╰' .. border .. '╯',
+  }
+end
+
 local function bookmarks_section()
   local bookmarks = {
     vim.fn.expand('~/.config/nvim/init.lua'),
@@ -93,7 +106,7 @@ local function sessions_section()
   }
 end
 
-startify.section.header.val = {}
+startify.section.header.val = header_banner()
 startify.section.top_buttons.val = {
   startify.button('e', 'New file', '<cmd>ene <CR>'),
 }
@@ -112,7 +125,9 @@ local layout = {
   startify.section.top_buttons,
   { type = 'padding', val = 1 },
   startify.section.mru_cwd,
+  { type = 'padding', val = 1 },
   bookmarks,
+  { type = 'padding', val = 1 },
   sessions,
   { type = 'padding', val = 2 },
   startify.section.bottom_buttons,
