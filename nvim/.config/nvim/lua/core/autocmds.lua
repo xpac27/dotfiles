@@ -4,13 +4,29 @@ local autocmd = vim.api.nvim_create_autocmd
 local vinz = augroup('VINZ', { clear = true })
 local p4_state = {}
 
-local function read_file_bytes(path)
+local function read_file_hash(path)
   if path == '' or vim.fn.filereadable(path) ~= 1 then
     return nil
   end
 
-  local lines = vim.fn.readfile(path, 'b')
-  return table.concat(lines, '\n')
+  local stat = vim.uv.fs_stat(path)
+  if not stat or stat.type ~= 'file' then
+    return nil
+  end
+
+  local fd = vim.uv.fs_open(path, 'r', 438)
+  if not fd then
+    return nil
+  end
+
+  local ok, data = pcall(vim.uv.fs_read, fd, stat.size, 0)
+  vim.uv.fs_close(fd)
+
+  if not ok or type(data) ~= 'string' then
+    return nil
+  end
+
+  return vim.fn.sha256(data)
 end
 
 local function capture_p4_baseline(bufnr)
@@ -22,7 +38,7 @@ local function capture_p4_baseline(bufnr)
 
   local baseline = {
     path = path,
-    bytes = read_file_bytes(path),
+    hash = read_file_hash(path),
   }
 
   p4_state[bufnr] = baseline
@@ -79,12 +95,12 @@ if vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1 then
       local file = vim.api.nvim_buf_get_name(args.buf)
       local writable = file ~= '' and vim.fn.filewritable(file) == 1
       local same_file = file ~= '' and file == state.path
-      local same_bytes = same_file and read_file_bytes(file) == state.bytes
+      local same_hash = same_file and read_file_hash(file) == state.hash
 
       -- If the file became writable and the on-disk contents still match the
       -- pre-checkout snapshot, this is the expected Perforce checkout side
       -- effect. Suppress the prompt while keeping real content changes visible.
-      if writable and same_bytes then
+      if writable and same_hash then
         vim.bo[args.buf].readonly = false
         vim.v.fcs_choice = vim.bo[args.buf].modified and '' or 'reload'
         clear_p4_state(args.buf)
