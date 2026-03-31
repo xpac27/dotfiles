@@ -184,7 +184,7 @@ hi('LspReferenceWrite', { bg = p.bg4 })
 
 -- Quickfix and netrw are carried over from the old Vim customizations so those
 -- buffers do not fall back to generic defaults.
-hi('QuickFixLine', { bg = p.warn_msg_bg })
+hi('QuickFixLine', { bg = p.bg4 })
 hi('QuickFixBackground', { fg = p.dim0, bg = p.bg3 })
 hi('QFCursorLine', { bg = p.bg1 })
 hi('QFNormal', { bg = p.bg2 })

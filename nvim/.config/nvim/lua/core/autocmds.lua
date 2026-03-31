@@ -1,8 +1,38 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
-local now = vim.uv and vim.uv.now or vim.loop.now
 
 local vinz = augroup('VINZ', { clear = true })
+local p4_state = {}
+
+local function read_file_bytes(path)
+  if path == '' or vim.fn.filereadable(path) ~= 1 then
+    return nil
+  end
+
+  local lines = vim.fn.readfile(path, 'b')
+  return table.concat(lines, '\n')
+end
+
+local function capture_p4_baseline(bufnr)
+  local path = vim.api.nvim_buf_get_name(bufnr)
+  if path == '' then
+    p4_state[bufnr] = nil
+    return nil
+  end
+
+  local baseline = {
+    path = path,
+    bytes = read_file_bytes(path),
+  }
+
+  p4_state[bufnr] = baseline
+  return baseline
+end
+
+local function clear_p4_state(bufnr)
+  p4_state[bufnr] = nil
+end
+
 autocmd('CursorHold', {
   group = vinz,
   pattern = '*',
@@ -14,10 +44,25 @@ if vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1 then
     group = vinz,
     pattern = '*',
     callback = function(args)
-      -- vim-perforce handles the actual checkout via its own FileChangedRO
-      -- autocmd. We only mark a short window so the follow-up file attribute
-      -- change from `p4 edit` can be treated as expected, not as a conflict.
-      vim.b[args.buf].p4_checkout_pending_until = now() + 2000
+      -- Capture the pre-checkout disk contents so FileChangedShell can later
+      -- tell whether Neovim only observed the expected `p4 edit` metadata
+      -- update or a real external content change.
+      capture_p4_baseline(args.buf)
+
+      vim.cmd('silent! P4edit')
+
+      local file = vim.api.nvim_buf_get_name(args.buf)
+      if file ~= '' and vim.fn.filewritable(file) == 1 then
+        vim.bo[args.buf].readonly = false
+
+        -- Force Neovim to acknowledge the post-checkout file state
+        -- immediately, before the buffer becomes modified.
+        vim.api.nvim_buf_call(args.buf, function()
+          vim.cmd('silent! checktime')
+        end)
+      else
+        clear_p4_state(args.buf)
+      end
     end,
   })
 
@@ -25,42 +70,36 @@ if vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1 then
     group = vinz,
     pattern = '*',
     callback = function(args)
+      local state = p4_state[args.buf]
+      if not state then
+        vim.v.fcs_choice = 'ask'
+        return
+      end
+
       local file = vim.api.nvim_buf_get_name(args.buf)
       local writable = file ~= '' and vim.fn.filewritable(file) == 1
-      local reason = vim.v.fcs_reason
-      local pending_until = vim.b[args.buf].p4_checkout_pending_until or 0
-      local from_p4_checkout = pending_until > now()
+      local same_file = file ~= '' and file == state.path
+      local same_bytes = same_file and read_file_bytes(file) == state.bytes
 
-      -- Perforce checkout often flips file mode/timestamp under Neovim. If the
-      -- file is now writable, clear the buffer's readonly flag and suppress the
-      -- built-in prompt for these metadata-only changes.
-      if writable and (reason == 'mode' or reason == 'time') then
+      -- If the file became writable and the on-disk contents still match the
+      -- pre-checkout snapshot, this is the expected Perforce checkout side
+      -- effect. Suppress the prompt while keeping real content changes visible.
+      if writable and same_bytes then
         vim.bo[args.buf].readonly = false
-        vim.v.fcs_choice = ''
+        vim.v.fcs_choice = vim.bo[args.buf].modified and '' or 'reload'
+        clear_p4_state(args.buf)
         return
       end
 
-      -- Some setups report the checkout as a content/conflict change even
-      -- though it is just the immediate `p4 edit` side effect. Suppress that
-      -- prompt only inside the short checkout window above.
-      if from_p4_checkout and writable and (reason == 'changed' or reason == 'conflict') then
-        vim.bo[args.buf].readonly = false
-        vim.v.fcs_choice = ''
-        return
-      end
-
-      -- Anything else could be a real external edit, so keep Neovim's prompt.
       vim.v.fcs_choice = 'ask'
     end,
   })
 
-  autocmd('FileChangedShellPost', {
+  autocmd({ 'FileChangedShellPost', 'BufReadPost', 'BufWritePost', 'BufUnload', 'BufWipeout' }, {
     group = vinz,
     pattern = '*',
     callback = function(args)
-      -- Clear the temporary marker once Neovim finishes handling the external
-      -- change notification.
-      vim.b[args.buf].p4_checkout_pending_until = nil
+      clear_p4_state(args.buf)
     end,
   })
 end

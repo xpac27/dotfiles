@@ -161,6 +161,14 @@ function M.setup()
     })
   end
 
+  local function clear_qf_cursorline(bufnr)
+    if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].filetype ~= 'qf' then
+      return
+    end
+
+    vim.api.nvim_buf_clear_namespace(bufnr, qf_cursor_ns, 0, -1)
+  end
+
   if vim.fn.has('unix') == 1 then
     vim.api.nvim_create_user_command('Make', function(opts)
       local cmd = { 'make' }
@@ -282,6 +290,13 @@ function M.setup()
     group = qf,
     callback = function(args)
       update_qf_cursorline(args.buf)
+    end,
+  })
+
+  vim.api.nvim_create_autocmd('WinLeave', {
+    group = qf,
+    callback = function(args)
+      clear_qf_cursorline(args.buf)
     end,
   })
 

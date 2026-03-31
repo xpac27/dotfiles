@@ -39,11 +39,6 @@ fzf.setup({
   grep = {
     rg_opts = [[--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --vimgrep]],
   },
-  keymap = {
-    builtin = {
-      ['<C-a>'] = 'toggle-all',
-    },
-  },
 })
 
 vim.keymap.set('n', '<leader>f', fzf.files, { desc = 'Files' })
