@@ -38,7 +38,7 @@ blink.setup({
     },
   },
   cmdline = {
-    enabled = true,
+    enabled = false,
     keymap = {
       preset = 'cmdline',
       ['<Tab>'] = { 'insert_next', 'fallback' },

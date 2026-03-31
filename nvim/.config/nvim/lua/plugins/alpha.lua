@@ -119,7 +119,7 @@ local bookmarks = bookmarks_section()
 local sessions = sessions_section()
 
 local layout = {
-  { type = 'padding', val = 1 },
+  { type = 'padding', val = 2 },
   startify.section.header,
   { type = 'padding', val = 2 },
   startify.section.top_buttons,
