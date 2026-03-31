@@ -31,6 +31,10 @@ local function paste_status()
   return vim.o.paste and 'PASTE' or ''
 end
 
+local function readonly_status()
+  return vim.bo.readonly and 'RO' or ''
+end
+
 local function status_filename()
   if vim.bo.buftype == 'quickfix' then
     local info = vim.fn.getwininfo(vim.api.nvim_get_current_win())[1]
@@ -79,12 +83,13 @@ lualine.setup({
         color = { fg = '#99ffff', bg = '#112222' },
       },
       {
-        'readonly',
+        readonly_status,
+        color = { fg = '#d7d7d7', bg = '#112222' },
       },
       paste_status,
       {
         'modified',
-        symbols = { modified = '+', readonly = '-', unnamed = '' },
+        symbols = { modified = '+', unnamed = '' },
       },
     },
     lualine_c = {},
@@ -100,8 +105,12 @@ lualine.setup({
         color = { fg = '#9e9e9e', bg = '#333333' },
       },
       {
+        readonly_status,
+        color = { fg = '#9e9e9e', bg = '#333333' },
+      },
+      {
         'modified',
-        symbols = { modified = '+', readonly = '-', unnamed = '' },
+        symbols = { modified = '+', unnamed = '' },
         color = { fg = '#9e9e9e', bg = '#333333' },
       },
     },

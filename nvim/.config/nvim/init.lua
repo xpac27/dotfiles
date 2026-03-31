@@ -56,6 +56,12 @@ vim.cmd("Plug 'goolord/alpha-nvim'")
 vim.cmd("Plug 'nvim-mini/mini.diff'")
 vim.cmd("Plug 'ofwinterpassed/perfnvim'")
 
+if fn.has('win32') == 1 or fn.has('win64') == 1 then
+  vim.g.perforce_open_on_change = 1
+  vim.g.perforce_prompt_on_open = 0
+  vim.cmd("Plug 'nfvs/vim-perforce'")
+end
+
 vim.call('plug#end')
 vim.cmd('syntax enable')
 
