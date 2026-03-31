@@ -2,6 +2,14 @@ local M = {}
 
 local qf_height = 20
 local qf_cursor_ns = vim.api.nvim_create_namespace('vinz_quickfix_cursorline')
+local qf_ai_ns = vim.api.nvim_create_namespace('vinz_quickfix_ai')
+local qf_ai_state = {
+  cache = {},
+  current_hash = nil,
+  prompt_hash = nil,
+  bufnr = nil,
+  winid = nil,
+}
 
 local function list_items(info)
   if info.quickfix == 1 then
@@ -25,32 +33,391 @@ local function item_path(item)
   return ''
 end
 
+local function format_item_line(item)
+  local path = item_path(item)
+  local pos = ''
+
+  if item.lnum and item.lnum > 0 then
+    pos = ':' .. item.lnum
+    if item.col and item.col > 0 then
+      pos = pos .. ':' .. item.col
+    end
+  end
+
+  local text = (item.text or ''):gsub('\r$', '')
+
+  if path ~= '' then
+    return string.format('%s%s | %s', path, pos, text)
+  end
+
+  return text
+end
+
 function M.quickfixtextfunc(info)
   local items = list_items(info)
   local lines = {}
 
   for idx = info.start_idx, info.end_idx do
-    local item = items[idx]
-    local path = item_path(item)
-    local pos = ''
-
-    if item.lnum and item.lnum > 0 then
-      pos = ':' .. item.lnum
-      if item.col and item.col > 0 then
-        pos = pos .. ':' .. item.col
-      end
-    end
-
-    local text = (item.text or ''):gsub('\r$', '')
-
-    if path ~= '' then
-      table.insert(lines, string.format('%s%s | %s', path, pos, text))
-    else
-      table.insert(lines, text)
-    end
+    table.insert(lines, format_item_line(items[idx]))
   end
 
   return lines
+end
+
+local function current_qf_state()
+  local qf = vim.fn.getqflist({ id = 0, title = 1, items = 1, idx = 1, qfbufnr = 1 })
+  qf.items = qf.items or {}
+  qf.title = qf.title or 'Quickfix'
+  qf.rendered = {}
+
+  for _, item in ipairs(qf.items) do
+    table.insert(qf.rendered, format_item_line(item))
+  end
+
+  local parts = { qf.title }
+  vim.list_extend(parts, qf.rendered)
+  qf.hash = vim.fn.sha256(table.concat(parts, '\n'))
+
+  return qf
+end
+
+local function explanation_marker(entry)
+  if not entry then
+    return '[AI?]', 'Comment'
+  end
+
+  if entry.status == 'pending' then
+    return '[AI...]', 'QfExplainMarkerPending'
+  end
+
+  if entry.status == 'ready' then
+    return '[AI]', 'QfExplainMarkerReady'
+  end
+
+  if entry.status == 'error' then
+    return '[AI!]', 'QfExplainMarkerError'
+  end
+
+  return '[AI?]', 'Comment'
+end
+
+local function close_explain_float()
+  if qf_ai_state.winid and vim.api.nvim_win_is_valid(qf_ai_state.winid) then
+    vim.api.nvim_win_close(qf_ai_state.winid, true)
+  end
+  qf_ai_state.winid = nil
+end
+
+local function ensure_explain_buf()
+  if qf_ai_state.bufnr and vim.api.nvim_buf_is_valid(qf_ai_state.bufnr) then
+    return qf_ai_state.bufnr
+  end
+
+  local bufnr = vim.api.nvim_create_buf(false, true)
+  vim.bo[bufnr].bufhidden = 'hide'
+  vim.bo[bufnr].buftype = 'nofile'
+  vim.bo[bufnr].swapfile = false
+  vim.bo[bufnr].filetype = 'markdown'
+  qf_ai_state.bufnr = bufnr
+
+  vim.keymap.set('n', 'q', function()
+    close_explain_float()
+  end, { buffer = bufnr, silent = true })
+
+  return bufnr
+end
+
+local function render_explain_buf(hash)
+  local bufnr = ensure_explain_buf()
+  local entry = qf_ai_state.cache[hash]
+  local lines = { '', '' }
+
+  if not entry then
+    table.insert(lines, 'No cached explanation for this quickfix list.')
+  elseif entry.status == 'pending' then
+    table.insert(lines, 'Asking the machine to inspect the current quickfix list...')
+    table.insert(lines, '')
+    table.insert(lines, 'Close with `q`. Reopening this float will keep showing the same pending request.')
+  elseif entry.status == 'error' then
+    table.insert(lines, entry.content or 'No error output was captured.')
+  else
+    for _, line in ipairs(vim.split(entry.content or '', '\n', { plain = true })) do
+      table.insert(lines, line)
+    end
+  end
+
+  vim.bo[bufnr].modifiable = true
+  vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+  vim.bo[bufnr].modifiable = false
+end
+
+local function ensure_explain_highlights()
+  local explain = vim.api.nvim_get_hl(0, { name = 'QfExplainNormal', link = false })
+  if explain and explain.bg then
+    return
+  end
+
+  local pmenu = vim.api.nvim_get_hl(0, { name = 'Pmenu', link = false })
+  local normal = vim.api.nvim_get_hl(0, { name = 'Normal', link = false })
+  local float_border = vim.api.nvim_get_hl(0, { name = 'FloatBorder', link = false })
+  local bg = pmenu.bg or normal.bg
+  local fg = pmenu.fg or normal.fg
+
+  vim.api.nvim_set_hl(0, 'QfExplainNormal', {
+    fg = fg,
+    bg = bg,
+  })
+  vim.api.nvim_set_hl(0, 'QfExplainEndOfBuffer', {
+    fg = bg,
+    bg = bg,
+  })
+  vim.api.nvim_set_hl(0, 'QfExplainBorderTop', {
+    fg = float_border.fg or fg,
+    bg = bg,
+  })
+  vim.api.nvim_set_hl(0, 'QfExplainBorderBlend', {
+    fg = bg,
+    bg = bg,
+  })
+end
+
+local function open_explain_float(hash)
+  render_explain_buf(hash)
+  ensure_explain_highlights()
+
+  local bufnr = ensure_explain_buf()
+  if qf_ai_state.winid and vim.api.nvim_win_is_valid(qf_ai_state.winid) then
+    vim.api.nvim_set_current_win(qf_ai_state.winid)
+    return
+  end
+
+  local width = math.min(math.max(math.floor(vim.o.columns * 0.38), 48), 72)
+  local height = math.min(math.max(math.floor(vim.o.lines * 0.72), 18), vim.o.lines - 2)
+
+  qf_ai_state.winid = vim.api.nvim_open_win(bufnr, true, {
+    relative = 'editor',
+    row = math.max(vim.o.lines - height - 3, 0),
+    col = math.max(vim.o.columns - width - 2, 0),
+    width = width,
+    height = height,
+    border = {
+      { '╭', 'QfExplainBorderTop' },
+      { '─', 'QfExplainBorderTop' },
+      { '╮', 'QfExplainBorderTop' },
+      { '│', 'QfExplainBorderSide' },
+      { ' ', 'QfExplainBorderBlend' },
+      { ' ', 'QfExplainBorderSide' },
+      { ' ', 'QfExplainBorderSide' },
+      { '│', 'QfExplainBorderBlend' },
+    },
+    style = 'minimal',
+  })
+
+  vim.wo[qf_ai_state.winid].winhighlight = 'Normal:QfExplainNormal,NormalFloat:QfExplainNormal,EndOfBuffer:QfExplainEndOfBuffer'
+  vim.wo[qf_ai_state.winid].wrap = true
+  vim.wo[qf_ai_state.winid].linebreak = true
+  vim.wo[qf_ai_state.winid].cursorline = false
+end
+
+local function refresh_qf_ai_marks(bufnr)
+  bufnr = bufnr or vim.fn.getqflist({ qfbufnr = 1 }).qfbufnr
+  if not bufnr or bufnr == 0 or not vim.api.nvim_buf_is_valid(bufnr) then
+    return
+  end
+
+  vim.api.nvim_buf_clear_namespace(bufnr, qf_ai_ns, 0, -1)
+
+  local qf = current_qf_state()
+  qf_ai_state.current_hash = qf.hash
+  local entry = qf_ai_state.cache[qf.hash]
+  local marker, hl = explanation_marker(entry)
+
+  for idx, item in ipairs(qf.items) do
+    if item.valid == 1 then
+      vim.api.nvim_buf_set_extmark(bufnr, qf_ai_ns, idx - 1, 0, {
+        virt_text = { { marker, hl } },
+        virt_text_pos = 'right_align',
+        priority = 20,
+      })
+    end
+  end
+end
+
+local function explain_command()
+  if vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1 then
+    return { 'opencode', 'run' }
+  end
+
+  return {
+    'codex',
+    'exec',
+    '--skip-git-repo-check',
+    '--sandbox',
+    'read-only',
+    '--color',
+    'never',
+    '-C',
+    vim.fn.getcwd(),
+  }
+end
+
+local function build_explain_prompt(qf)
+  local lines = {
+    'You are helping with build or compiler failures from a Neovim quickfix list.',
+    'Explain the likely root cause and suggest a concrete fix.',
+    'Keep the answer concise and practical.',
+    'Format the answer with short paragraphs.',
+    'Do not use Markdown links or file:// URLs.',
+    'When mentioning files, use plain relative paths like `src/main.c:14`.',
+    'Do not use ``` for code snippets.',
+    'When mentionning code use 4 spaces indentation.',
+    'Do not make follow-up suggestion in the end, this conversation ends immediatly after your reply.',
+    '',
+    'Quickfix title:',
+    qf.title,
+    '',
+    'Quickfix entries:',
+  }
+
+  for _, line in ipairs(qf.rendered) do
+    table.insert(lines, '- ' .. line)
+  end
+
+  return table.concat(lines, '\n')
+end
+
+local function format_explain_output(text)
+  text = (text or ''):gsub('\r', '')
+  local input_lines = vim.split(text, '\n', { plain = true })
+  local output_lines = {}
+
+  for idx, line in ipairs(input_lines) do
+    table.insert(output_lines, line)
+    if idx < #input_lines then
+      table.insert(output_lines, '')
+    end
+  end
+
+  return table.concat(output_lines, '\n')
+end
+
+local function start_explain_job(qf, hash)
+  local prompt = build_explain_prompt(qf)
+  local entry = {
+    status = 'pending',
+    content = '',
+    qfbufnr = qf.qfbufnr,
+  }
+
+  qf_ai_state.cache[hash] = entry
+  qf_ai_state.prompt_hash = hash
+  refresh_qf_ai_marks(qf.qfbufnr)
+  open_explain_float(hash)
+
+  local stdout = {}
+  local stderr = {}
+  local job = vim.fn.jobstart(explain_command(), {
+    stdin = 'pipe',
+    stdout_buffered = true,
+    stderr_buffered = true,
+    on_stdout = function(_, data)
+      if not data then
+        return
+      end
+      for _, line in ipairs(data) do
+        if line ~= '' then
+          table.insert(stdout, line)
+        end
+      end
+    end,
+    on_stderr = function(_, data)
+      if not data then
+        return
+      end
+      for _, line in ipairs(data) do
+        if line ~= '' then
+          table.insert(stderr, line)
+        end
+      end
+    end,
+    on_exit = function(_, code)
+      vim.schedule(function()
+        local combined = table.concat(stdout, '\n')
+        local err_text = table.concat(stderr, '\n')
+
+        if code == 0 and combined ~= '' then
+          entry.status = 'ready'
+          entry.content = format_explain_output(combined)
+        else
+          entry.status = 'error'
+          entry.content = format_explain_output(err_text ~= '' and err_text or combined)
+          if entry.content == '' then
+            entry.content = 'The explainer command exited without producing output.'
+          end
+        end
+
+        refresh_qf_ai_marks(entry.qfbufnr)
+        if qf_ai_state.winid and vim.api.nvim_win_is_valid(qf_ai_state.winid) then
+          render_explain_buf(hash)
+        end
+      end)
+    end,
+  })
+
+  if job <= 0 then
+    entry.status = 'error'
+    entry.content = 'Failed to start the explainer command.'
+    refresh_qf_ai_marks(entry.qfbufnr)
+    render_explain_buf(hash)
+    return
+  end
+
+  vim.fn.chansend(job, prompt)
+  vim.fn.chanclose(job, 'stdin')
+end
+
+function M.explain_quickfix(opts)
+  opts = opts or {}
+  local qf = current_qf_state()
+
+  if #qf.items == 0 then
+    vim.notify('Quickfix is empty. Nothing for Power to explain.', vim.log.levels.WARN)
+    return
+  end
+
+  qf_ai_state.current_hash = qf.hash
+  local cached = qf_ai_state.cache[qf.hash]
+
+  if opts.force then
+    qf_ai_state.cache[qf.hash] = nil
+    cached = nil
+  end
+
+  if cached then
+    open_explain_float(qf.hash)
+    refresh_qf_ai_marks(qf.qfbufnr)
+    return
+  end
+
+  start_explain_job(qf, qf.hash)
+end
+
+function M.toggle_explain_float()
+  local qf = current_qf_state()
+  qf_ai_state.current_hash = qf.hash
+
+  if qf_ai_state.winid and vim.api.nvim_win_is_valid(qf_ai_state.winid) then
+    close_explain_float()
+    return
+  end
+
+  if qf_ai_state.cache[qf.hash] then
+    open_explain_float(qf.hash)
+    refresh_qf_ai_marks(qf.qfbufnr)
+    return
+  end
+
+  M.explain_quickfix()
 end
 
 local function set_qf_lines(lines, title)
@@ -271,6 +638,16 @@ function M.setup()
     complete = 'file',
   })
 
+  vim.api.nvim_create_user_command('QfExplain', function(opts)
+    M.explain_quickfix({ force = opts.bang })
+  end, {
+    bang = true,
+  })
+
+  vim.api.nvim_create_user_command('QfExplainToggle', function()
+    M.toggle_explain_float()
+  end, {})
+
   local qf = vim.api.nvim_create_augroup('VINZ_quickfix', { clear = true })
   vim.api.nvim_create_autocmd('FileType', {
     group = qf,
@@ -282,7 +659,11 @@ function M.setup()
       vim.opt_local.cursorline = false
       vim.opt_local.fillchars = 'eob: '
       vim.wo.winhighlight = 'Normal:QuickFixBackground,EndOfBuffer:QFEndOfBuffer'
+      vim.keymap.set('n', 'ga', function()
+        M.toggle_explain_float()
+      end, { buffer = 0, silent = true, desc = 'Toggle quickfix AI explanation' })
       update_qf_cursorline(vim.api.nvim_get_current_buf())
+      refresh_qf_ai_marks(vim.api.nvim_get_current_buf())
     end,
   })
 
@@ -290,6 +671,7 @@ function M.setup()
     group = qf,
     callback = function(args)
       update_qf_cursorline(args.buf)
+      refresh_qf_ai_marks(args.buf)
     end,
   })
 

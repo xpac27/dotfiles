@@ -1,10 +1,56 @@
 local map = vim.keymap.set
 
+local function token_under_cursor()
+  local line = vim.api.nvim_get_current_line()
+  local col = vim.api.nvim_win_get_cursor(0)[2] + 1
+  local left = col
+  local right = col
+
+  while left > 1 and not line:sub(left - 1, left - 1):match('%s') do
+    left = left - 1
+  end
+
+  while right <= #line and not line:sub(right, right):match('%s') do
+    right = right + 1
+  end
+
+  return line:sub(left, right - 1)
+end
+
+local function gf_with_line_col()
+  local token = token_under_cursor():gsub('^[`%[(<"\']+', ''):gsub('[`%])>,;"\']+$', '')
+  local path, lnum, col = token:match('^(.-):(%d+):(%d+)$')
+
+  if not path then
+    path, lnum = token:match('^(.-):(%d+)$')
+  end
+
+  if not path or path == '' then
+    vim.cmd.normal({ 'gf', bang = true })
+    return
+  end
+
+  local escaped = vim.fn.fnameescape(path)
+  local found = vim.fn.findfile(path, vim.o.path)
+
+  if found == '' and vim.fn.filereadable(path) == 0 then
+    vim.cmd.normal({ 'gf', bang = true })
+    return
+  end
+
+  vim.cmd('edit ' .. vim.fn.fnameescape(found ~= '' and found or path))
+
+  if lnum then
+    vim.api.nvim_win_set_cursor(0, { tonumber(lnum), math.max((tonumber(col) or 1) - 1, 0) })
+  end
+end
+
 map('v', '<', '<gv')
 map('v', '>', '>gv')
 
 map('n', '_', ':nohl<CR>', { silent = true })
 map('n', '#', [[:let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>]])
+map('n', 'gf', gf_with_line_col, { silent = true })
 
 map('n', '<leader>op', ':set paste!<CR>', { silent = true })
 map('n', '<leader>on', ':set number!<CR>', { silent = true })
@@ -31,6 +77,12 @@ map('n', '<leader>q', function()
   local ok, quickfix = pcall(require, 'core.quickfix')
   if ok then
     quickfix.toggle_quickfix()
+  end
+end, { silent = true })
+map('n', '<leader>qa', function()
+  local ok, quickfix = pcall(require, 'core.quickfix')
+  if ok then
+    quickfix.toggle_explain_float()
   end
 end, { silent = true })
 map('n', '<leader>qq', ':cex []<CR>')
