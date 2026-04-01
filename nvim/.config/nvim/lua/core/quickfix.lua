@@ -603,6 +603,12 @@ end
 function M.run_to_qf(cmd, opts)
   opts = opts or {}
 
+  local ok, err = pcall(vim.cmd, 'wall')
+  if not ok then
+    vim.notify('Failed to save all files before running command: ' .. tostring(err), vim.log.levels.ERROR)
+    return
+  end
+
   local lines = {}
   local title = opts.title or table.concat(cmd, ' ')
 

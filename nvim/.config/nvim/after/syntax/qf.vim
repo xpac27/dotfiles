@@ -39,10 +39,11 @@ syn match ClangSummaryError "\<\d\+\s\+error\%[s]\?\s\+generated\.\>"
 syn match ClangSummaryWarning "\<\d\+\s\+warning\%[s]\?\s\+\%(and\s\+\d\+\s\+error\%[s]\?\s\+\)\?generated\.\>"
 syn match NinjaBuildStep "^\[\d\+/\d\+\].*$"
 syn match NinjaFailure "^FAILED:.*$"
-syn match NinjaStopped "^ninja:.*$"
+syn match NinjaInfo "^ninja: Entering directory .*$"
+syn match NinjaStopped "^ninja:\s\+build stopped:.*$"
 
-syn match MSBuildError ".*\\cerror [A-Z0-9]\\+:.*$"
-syn match MSBuildWarning ".*\\cwarning [A-Z0-9]\\+:.*$"
-syn match MSBuildInfo ".*\\cinfo [A-Z0-9]\\+:.*$"
-syn match MSBuildNone "    Creating library.\+$"
-syn match MSBuildNote ".*\\cnote:.*$"
+syn match MSBuildError '\c\<error [A-Z0-9]\+:.*$' containedin=ALL contains=NONE
+syn match MSBuildWarning '\c\<warning [A-Z0-9]\+:.*$' containedin=ALL contains=NONE
+syn match MSBuildInfo '\c\<info [A-Z0-9]\+:.*$' containedin=ALL contains=NONE
+syn match MSBuildNone '    Creating library.\+$' containedin=ALL contains=NONE
+syn match MSBuildNote '\c\<note:.*$' containedin=ALL contains=NONE
