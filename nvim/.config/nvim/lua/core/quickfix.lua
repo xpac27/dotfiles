@@ -71,8 +71,16 @@ local function current_qf_state()
   qf.title = qf.title or 'Quickfix'
   qf.rendered = {}
 
-  for _, item in ipairs(qf.items) do
-    table.insert(qf.rendered, format_item_line(item))
+  if qf.qfbufnr and qf.qfbufnr > 0 and vim.api.nvim_buf_is_valid(qf.qfbufnr) then
+    for _, line in ipairs(vim.api.nvim_buf_get_lines(qf.qfbufnr, 0, -1, false)) do
+      table.insert(qf.rendered, (line:gsub('\r$', '')))
+    end
+  end
+
+  if #qf.rendered == 0 then
+    for _, item in ipairs(qf.items) do
+      table.insert(qf.rendered, format_item_line(item))
+    end
   end
 
   local parts = { qf.title }
@@ -210,6 +218,18 @@ local function render_explain_buf(hash)
   local entry = qf_ai_state.cache[hash]
   local lines = { '', '' }
 
+  local function append_text(text, fallback)
+    local content = text or fallback
+    if not content or content == '' then
+      table.insert(lines, fallback)
+      return
+    end
+
+    for _, line in ipairs(vim.split(content, '\n', { plain = true })) do
+      table.insert(lines, line)
+    end
+  end
+
   if not entry then
     table.insert(lines, 'No cached explanation for this quickfix list.')
   elseif entry.status == 'pending' then
@@ -217,11 +237,9 @@ local function render_explain_buf(hash)
     table.insert(lines, '')
     table.insert(lines, 'Close with `q`. Reopening this sidebar will keep showing the same pending request.')
   elseif entry.status == 'error' then
-    table.insert(lines, entry.content or 'No error output was captured.')
+    append_text(entry.content, 'No error output was captured.')
   else
-    for _, line in ipairs(vim.split(entry.content or '', '\n', { plain = true })) do
-      table.insert(lines, line)
-    end
+    append_text(entry.content, '')
   end
 
   vim.bo[bufnr].modifiable = true
@@ -305,33 +323,55 @@ local function refresh_qf_ai_marks(bufnr)
   local entry = qf_ai_state.cache[qf.hash]
   local marker, hl = explanation_marker(entry)
 
-  for idx, item in ipairs(qf.items) do
-    if item.valid == 1 then
-      vim.api.nvim_buf_set_extmark(bufnr, qf_ai_ns, idx - 1, 0, {
-        virt_text = { { marker, hl } },
-        virt_text_pos = 'right_align',
-        priority = 20,
-      })
-    end
+  for idx = 1, #qf.items do
+    vim.api.nvim_buf_set_extmark(bufnr, qf_ai_ns, idx - 1, 0, {
+      virt_text = { { marker, hl } },
+      virt_text_pos = 'right_align',
+      priority = 20,
+    })
   end
 end
 
-local function explain_command()
+local function explain_command(prompt)
   if vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1 then
-    return { 'opencode', 'run' }
+    local copilot = vim.fn.exepath('copilot')
+    if copilot ~= '' then
+      local uv = vim.uv or vim.loop
+      local resolved = vim.fn.resolve(copilot)
+      copilot = uv.fs_realpath(resolved) or resolved
+
+      return {
+        copilot,
+        '--model',
+        'gpt-5.4',
+        '-s',
+        '-p',
+        prompt,
+      }, false, 'copilot:' .. copilot
+    end
+
+    return {
+      'opencode',
+      'run',
+      '--model',
+      'github-copilot/gpt-5.4-mini',
+      prompt,
+    }, false, 'opencode'
   end
 
   return {
     'codex',
     'exec',
     '--skip-git-repo-check',
+    '--model',
+    'gpt-5.4-mini',
     '--sandbox',
     'read-only',
     '--color',
     'never',
     '-C',
     vim.fn.getcwd(),
-  }
+  }, true, 'codex'
 end
 
 local function build_explain_prompt(qf)
@@ -374,12 +414,13 @@ local function format_explain_output(text)
   return table.concat(output_lines, '\n')
 end
 
-local function start_explain_job(qf, hash)
-  local prompt = build_explain_prompt(qf)
+local function start_explain_job(qf, hash, prompt, cmd, use_stdin, request_key)
   local entry = {
     status = 'pending',
     content = '',
     qfbufnr = qf.qfbufnr,
+    jobid = nil,
+    request_key = request_key,
   }
 
   qf_ai_state.cache[hash] = entry
@@ -389,8 +430,8 @@ local function start_explain_job(qf, hash)
 
   local stdout = {}
   local stderr = {}
-  local job = vim.fn.jobstart(explain_command(), {
-    stdin = 'pipe',
+  local job = vim.fn.jobstart(cmd, {
+    stdin = use_stdin and 'pipe' or 'null',
     stdout_buffered = true,
     stderr_buffered = true,
     on_stdout = function(_, data)
@@ -445,13 +486,20 @@ local function start_explain_job(qf, hash)
     return
   end
 
-  vim.fn.chansend(job, prompt)
-  vim.fn.chanclose(job, 'stdin')
+  entry.jobid = job
+
+  if use_stdin then
+    vim.fn.chansend(job, prompt)
+    vim.fn.chanclose(job, 'stdin')
+  end
 end
 
 function M.explain_quickfix(opts)
   opts = opts or {}
   local qf = current_qf_state()
+  local prompt = build_explain_prompt(qf)
+  local cmd, use_stdin, backend_id = explain_command(prompt)
+  local request_key = vim.fn.sha256(backend_id .. '\n' .. prompt)
 
   if #qf.items == 0 then
     vim.notify('Quickfix is empty. Nothing for Power to explain.', vim.log.levels.WARN)
@@ -466,13 +514,30 @@ function M.explain_quickfix(opts)
     cached = nil
   end
 
+  if cached and cached.request_key ~= request_key then
+    qf_ai_state.cache[qf.hash] = nil
+    cached = nil
+  end
+
+  if cached and cached.status == 'pending' then
+    local running = false
+    if cached.jobid and cached.jobid > 0 then
+      running = vim.fn.jobwait({ cached.jobid }, 0)[1] == -1
+    end
+
+    if not running then
+      qf_ai_state.cache[qf.hash] = nil
+      cached = nil
+    end
+  end
+
   if cached then
     open_explain_sidebar(qf.hash)
     refresh_qf_ai_marks(qf.qfbufnr)
     return
   end
 
-  start_explain_job(qf, qf.hash)
+  start_explain_job(qf, qf.hash, prompt, cmd, use_stdin, request_key)
 end
 
 function M.toggle_explain_float()
