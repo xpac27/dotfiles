@@ -81,6 +81,43 @@ vim.diagnostic.handlers['vinz/range_highlight'] = {
   end,
 }
 
+local function style_hover_float(winid)
+  if not (winid and vim.api.nvim_win_is_valid(winid)) then
+    return false
+  end
+
+  vim.wo[winid].winhighlight = table.concat({
+    'Normal:HoverNormal',
+    'NormalNC:HoverNormal',
+    'NormalFloat:HoverNormal',
+    'FloatBorder:HoverBorder',
+    'FloatTitle:HoverTitle',
+  }, ',')
+
+  return true
+end
+
+local function hover()
+  local bufnr = vim.api.nvim_get_current_buf()
+  vim.lsp.buf.hover({ border = 'rounded' })
+
+  local attempts = 0
+  local function apply()
+    attempts = attempts + 1
+
+    local winid = vim.b[bufnr].lsp_floating_preview
+    if style_hover_float(winid) then
+      return
+    end
+
+    if attempts < 20 then
+      vim.defer_fn(apply, 20)
+    end
+  end
+
+  apply()
+end
+
 local map = vim.keymap.set
 
 local on_attach = function(_, bufnr)
@@ -92,7 +129,7 @@ local on_attach = function(_, bufnr)
   map('n', 'gS', vim.lsp.buf.document_symbol, opts)
   map('n', 'gs', vim.lsp.buf.workspace_symbol, opts)
   map('n', 'ga', vim.lsp.buf.code_action, opts)
-  map('n', 'K', vim.lsp.buf.hover, opts)
+  map('n', 'K', hover, opts)
 
   map('n', '[g', vim.diagnostic.goto_prev, opts)
   map('n', ']g', vim.diagnostic.goto_next, opts)

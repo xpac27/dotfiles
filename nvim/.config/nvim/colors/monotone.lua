@@ -34,6 +34,8 @@ local p = {
   info_bg = '#112222',
   hint = '#9999ff',
   hint_bg = '#111122',
+  hover_bg = '#0f1b2d',
+  hover_border = '#38506d',
 }
 
 local set = vim.api.nvim_set_hl
@@ -48,6 +50,9 @@ hi('Normal', { fg = p.fg0, bg = p.bg0 })
 hi('NormalFloat', { fg = p.fg0, bg = p.bg1 })
 hi('FloatBorder', { fg = p.dim0, bg = p.bg1 })
 hi('FloatTitle', { fg = p.fg0, bg = p.bg1, bold = true })
+hi('HoverNormal', { fg = p.fg0, bg = p.hover_bg })
+hi('HoverBorder', { fg = p.hover_border, bg = p.hover_bg })
+hi('HoverTitle', { fg = p.fg0, bg = p.hover_bg, bold = true })
 hi('QfExplainNormal', { fg = p.fg0, bg = p.hint_bg })
 hi('QfExplainEndOfBuffer', { fg = p.hint_bg, bg = p.hint_bg })
 hi('QfExplainBorderTop', { fg = p.hint, bg = p.hint_bg })
