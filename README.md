@@ -19,7 +19,7 @@ Start Neovim and install/update plugins and parsers:
 ```vim
 :PlugInstall
 :TSUpdate
-:TSInstall markdown markdown_inline html yaml
+:TSInstall markdown markdown_inline html yaml lua vim cpp c ruby
 ```
 
 If something still looks broken, check:
