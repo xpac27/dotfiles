@@ -44,6 +44,7 @@ vim.cmd("Plug 'stevearc/oil.nvim'")
 -- LSP / completion
 vim.cmd("Plug 'neovim/nvim-lspconfig'")
 vim.cmd("Plug 'saghen/blink.cmp', { 'tag': 'v1.*' }")
+vim.cmd("Plug 'carlos-algms/agentic.nvim'")
 
 -- Statusline
 vim.cmd("Plug 'nvim-lualine/lualine.nvim'")
@@ -87,6 +88,7 @@ require('plugins.render-markdown') -- markdown rendering
 require('plugins.oil') -- file explorer
 require('plugins.lsp') -- lsp
 require('plugins.blink') -- completion
+require('plugins.agentic') -- ai chat
 require('plugins.lualine') -- statusline
 require('plugins.tabby') -- tabline
 require('plugins.flash') -- motions

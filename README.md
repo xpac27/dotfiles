@@ -14,6 +14,12 @@ Install the required Arch packages:
 sudo pacman -S neovim ripgrep wl-clipboard clang tree-sitter-cli
 ```
 
+Install Codex ACP for `agentic.nvim`:
+
+```sh
+npm i -g @zed-industries/codex-acp
+```
+
 Start Neovim and install/update plugins and parsers:
 
 ```vim
