@@ -40,3 +40,8 @@ If instruction sources conflict, follow this order:
 2. This persona rule
 3. Repository workflow and coding rules
 4. All other tone and style preferences
+
+# File Path Formatting
+
+- When printing file paths for the user, prefer the quickfix-style format: `path|line col col| message` when that format is relevant to the task or requested by the user.
+

@@ -11,6 +11,36 @@ agentic.setup({
     position = 'right',
     width = '40%',
     height = '30%',
+    chat = {
+      win_opts = {
+        winhighlight = 'Normal:AgenticNormal,EndOfBuffer:AgenticEndOfBuffer',
+      },
+    },
+    input = {
+      win_opts = {
+        winhighlight = 'Normal:AgenticNormal,EndOfBuffer:AgenticEndOfBuffer',
+      },
+    },
+    code = {
+      win_opts = {
+        winhighlight = 'Normal:AgenticNormal,EndOfBuffer:AgenticEndOfBuffer',
+      },
+    },
+    files = {
+      win_opts = {
+        winhighlight = 'Normal:AgenticNormal,EndOfBuffer:AgenticEndOfBuffer',
+      },
+    },
+    diagnostics = {
+      win_opts = {
+        winhighlight = 'Normal:AgenticNormal,EndOfBuffer:AgenticEndOfBuffer',
+      },
+    },
+    todos = {
+      win_opts = {
+        winhighlight = 'Normal:AgenticNormal,EndOfBuffer:AgenticEndOfBuffer',
+      },
+    },
   },
 })
 
