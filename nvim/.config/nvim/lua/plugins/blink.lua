@@ -6,8 +6,8 @@ end
 blink.setup({
   keymap = {
     preset = 'default',
-    ['<Tab>'] = { 'insert_next', 'fallback' },
-    ['<S-Tab>'] = { 'insert_prev', 'fallback' },
+    ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
+    ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
     ['<CR>'] = { 'accept', 'fallback' },
     ['<C-Space>'] = { 'show', 'show_documentation', 'hide_documentation' },
   },
