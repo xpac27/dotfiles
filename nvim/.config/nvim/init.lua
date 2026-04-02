@@ -1,6 +1,7 @@
 -- Bootstrap vim-plug
 local fn = vim.fn
 local plug_path = fn.stdpath('data') .. '/site/autoload/plug.vim'
+vim.opt.runtimepath:append(fn.stdpath('data') .. '/site/')
 
 if fn.has('cscope') == 0 then
   vim.g.loaded_gtags_cscope = 1
@@ -34,6 +35,8 @@ vim.cmd("Plug 'farmergreg/vim-lastplace'")
 vim.cmd("Plug 'ibhagwan/fzf-lua'")
 vim.cmd("Plug 'nvim-tree/nvim-web-devicons'")
 vim.cmd("Plug 'catgoose/nvim-colorizer.lua'")
+vim.cmd("Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'master', 'do': ':TSUpdate' }")
+vim.cmd("Plug 'MeanderingProgrammer/render-markdown.nvim'")
 
 -- Explorer replacement for netrw
 vim.cmd("Plug 'stevearc/oil.nvim'")
@@ -79,6 +82,8 @@ end
 require('plugins.gruvbox') -- colorscheme
 require('plugins.fzf-lua') -- fuzzy finder
 require('plugins.colorizer') -- color preview
+require('plugins.treesitter') -- treesitter
+require('plugins.render-markdown') -- markdown rendering
 require('plugins.oil') -- file explorer
 require('plugins.lsp') -- lsp
 require('plugins.blink') -- completion
