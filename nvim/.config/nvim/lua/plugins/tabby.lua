@@ -13,6 +13,15 @@ local theme = {
   current_win = 'TabbyWinSel',
 }
 
+local hidden_win_filetypes = {
+  AgenticChat = true,
+  AgenticInput = true,
+  AgenticCode = true,
+  AgenticFiles = true,
+  AgenticDiagnostics = true,
+  AgenticTodos = true,
+}
+
 tabby.setup({
   line = function(line)
     return {
@@ -26,7 +35,11 @@ tabby.setup({
           hl = hl,
         }
       end),
-      line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
+      line.wins_in_tab(line.api.get_current_tab()).filter(function(win)
+        local bufnr = vim.api.nvim_win_get_buf(win.id)
+        local filetype = vim.bo[bufnr].filetype
+        return not hidden_win_filetypes[filetype]
+      end).foreach(function(win)
         local hl = win.is_current() and theme.current_win or theme.win
         return {
           ' ',
