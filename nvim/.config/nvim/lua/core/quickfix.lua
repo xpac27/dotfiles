@@ -588,7 +588,7 @@ function M.toggle_quickfix()
   if qf_is_open() then
     vim.cmd('cclose')
   else
-    vim.cmd(qf_height .. 'copen')
+    vim.cmd('botright ' .. qf_height .. 'copen')
   end
 end
 
@@ -616,7 +616,7 @@ function M.run_to_qf(cmd, opts)
     title = title,
     items = {},
   })
-  vim.cmd(qf_height .. 'copen')
+  vim.cmd('botright ' .. qf_height .. 'copen')
   vim.cmd('wincmd w')
 
   local function refresh()
@@ -647,7 +647,7 @@ function M.run_to_qf(cmd, opts)
         if code == 0 then
           vim.cmd('cclose')
         else
-          vim.cmd(qf_height .. 'copen')
+          vim.cmd('botright ' .. qf_height .. 'copen')
           vim.cmd('wincmd w')
         end
       end)
