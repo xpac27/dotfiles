@@ -79,12 +79,6 @@ map('n', '<leader>q', function()
     quickfix.toggle_quickfix()
   end
 end, { silent = true })
-map('n', '<leader>qa', function()
-  local ok, quickfix = pcall(require, 'core.quickfix')
-  if ok then
-    quickfix.toggle_explain_float()
-  end
-end, { silent = true })
 map('n', '<leader>qq', ':cex []<CR>')
 map('n', '<leader>m', ':Make test NO_COLOR=1<CR>', { silent = true })
 map('n', '<leader>d', function()
