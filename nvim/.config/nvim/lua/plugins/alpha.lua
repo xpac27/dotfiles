@@ -59,39 +59,57 @@ local function bookmarks_section()
 end
 
 local function sessions_section()
-  local session_paths = {}
-  local cwd_session = vim.fn.getcwd() .. '/Session.vim'
-  local session_dir = vim.fn.stdpath('data') .. '/session'
-
-  if vim.fn.filereadable(cwd_session) == 1 then
-    session_paths[#session_paths + 1] = cwd_session
+  local ok_auto_session, auto_session = pcall(require, 'auto-session')
+  local ok_lib, auto_session_lib = pcall(require, 'auto-session.lib')
+  if not ok_auto_session or not ok_lib then
+    return nil
   end
 
-  if vim.fn.isdirectory(session_dir) == 1 then
-    for _, path in ipairs(vim.fn.globpath(session_dir, '*.vim', false, true)) do
-      if path ~= cwd_session and vim.fn.filereadable(path) == 1 then
-        session_paths[#session_paths + 1] = path
+  local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':p')
+  local escaped_cwd = auto_session_lib.escape_string_for_vim(cwd)
+  local sessions = {}
+
+  local function session_belongs_to_cwd(entry)
+    if entry.session_name == cwd then
+      return true
+    end
+
+    if vim.fn.filereadable(entry.path) ~= 1 then
+      return false
+    end
+
+    for _, line in ipairs(vim.fn.readfile(entry.path)) do
+      if line:match('^cd%s+' .. escaped_cwd .. '$') or line:match('^lcd%s+' .. escaped_cwd .. '$') then
+        return true
       end
-      if #session_paths >= 6 then
-        break
-      end
+    end
+
+    return false
+  end
+
+  for _, entry in ipairs(auto_session_lib.get_session_list(auto_session.get_root_dir())) do
+    if session_belongs_to_cwd(entry) then
+      sessions[#sessions + 1] = entry
+    end
+    if #sessions >= 6 then
+      break
     end
   end
 
-  if #session_paths == 0 then
+  if #sessions == 0 then
     return nil
   end
 
   local buttons = {}
-  for i, path in ipairs(session_paths) do
-    local label = vim.fn.fnamemodify(path, ':t:r')
-    if path == cwd_session then
+  for i, entry in ipairs(sessions) do
+    local label = entry.display_name
+    if entry.session_name == cwd then
       label = '[cwd] ' .. label
     end
     buttons[#buttons + 1] = startify.button(
       tostring(i),
       label,
-      '<cmd>silent! source ' .. vim.fn.fnameescape(path) .. ' <CR>'
+      '<cmd>SOpen ' .. vim.fn.fnameescape(entry.session_name) .. '<CR>'
     )
   end
 
