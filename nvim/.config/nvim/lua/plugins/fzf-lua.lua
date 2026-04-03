@@ -44,6 +44,7 @@ fzf.setup({
 vim.keymap.set('n', '<leader>f', fzf.files, { desc = 'Files' })
 vim.keymap.set('n', '<leader>b', fzf.buffers, { desc = 'Buffers' })
 vim.keymap.set('n', '<leader>l', fzf.blines, { desc = 'Buffer lines' })
+vim.keymap.set('n', '<leader>s', fzf.lsp_workspace_symbols, { desc = 'Workspace symbols' })
 vim.keymap.set('n', '<leader>g', function()
   fzf.live_grep({ no_esc = true, multiprocess = true })
 end, { desc = 'Live grep' })

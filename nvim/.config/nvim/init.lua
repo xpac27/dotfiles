@@ -52,6 +52,7 @@ vim.cmd("Plug 'folke/flash.nvim'")
 
 -- Startup
 vim.cmd("Plug 'goolord/alpha-nvim'")
+vim.cmd("Plug 'rmagatti/auto-session'")
 
 -- Changes highlight
 vim.cmd("Plug 'nvim-mini/mini.diff'")
@@ -89,6 +90,7 @@ require('plugins.lualine') -- statusline
 require('plugins.tabby') -- tabline
 require('plugins.flash') -- motions
 require('plugins.alpha') -- startup screen
+require('plugins.auto-session') -- sessions
 
 local Diff = require('mini.diff')
 Diff.setup({
