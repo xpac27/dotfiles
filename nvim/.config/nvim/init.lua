@@ -38,9 +38,6 @@ vim.cmd("Plug 'catgoose/nvim-colorizer.lua'")
 vim.cmd("Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'master', 'do': ':TSUpdate' }")
 vim.cmd("Plug 'MeanderingProgrammer/render-markdown.nvim'")
 
--- Explorer replacement for netrw
-vim.cmd("Plug 'stevearc/oil.nvim'")
-
 -- LSP / completion
 vim.cmd("Plug 'neovim/nvim-lspconfig'")
 vim.cmd("Plug 'saghen/blink.cmp', { 'tag': 'v1.*' }")
@@ -85,7 +82,6 @@ require('plugins.fzf-lua') -- fuzzy finder
 require('plugins.colorizer') -- color preview
 require('plugins.treesitter') -- treesitter
 require('plugins.render-markdown') -- markdown rendering
-require('plugins.oil') -- file explorer
 require('plugins.lsp') -- lsp
 require('plugins.blink') -- completion
 require('plugins.agentic') -- ai chat
