@@ -7,7 +7,7 @@ render_markdown.setup({
   heading = {
     sign = false,
     position = 'inline',
-    icons = { '🔶 ', '🔸 ', '◆ ', '◇ ', '• ', '◦ ' },
+    icons = { '══ ', '━━ ', '── ', '╌╌ ', '┈┈ ', '·· ' },
   },
   bullet = {
     icons = { '◆', '▸', '•', '◦' },
