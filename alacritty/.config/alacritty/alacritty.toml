@@ -603,3 +603,11 @@ lines = 0
 [window.padding]
 x = 0
 y = 0
+
+[effects.shader_animation]
+enabled = true
+background_only = false
+fragment_shader = "shaders/my_effect.glsl"
+live_reload = true
+intensity = 0.95
+speed = 1.0
