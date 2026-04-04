@@ -593,7 +593,7 @@ program = "/bin/fish"
 decorations = "none"
 dynamic_padding = true
 dynamic_title = true
-opacity = 0.80
+opacity = 0.85
 startup_mode = "Maximized"
 
 [window.dimensions]
@@ -604,11 +604,11 @@ lines = 0
 x = 0
 y = 0
 
-[effects.shader_animation]
-enabled = true
-background_only = false
-fragment_shader = "shaders/blood_cloud.glsl"
-live_reload = true
-intensity = 1.0
-speed = 4.5
-target_fps = 30
+# [effects.shader_animation]
+# enabled = true
+# background_only = false
+# fragment_shader = "shaders/blood_cloud-pink.glsl"
+# live_reload = false
+# intensity = 0.8
+# speed = 1.0
+# target_fps = 12
