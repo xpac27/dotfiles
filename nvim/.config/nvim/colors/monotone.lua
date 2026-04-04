@@ -34,8 +34,8 @@ local p = {
   info_bg = '#112222',
   hint = '#9999ff',
   hint_bg = '#111122',
-  hover_bg = '#0f1b2d',
-  hover_border = '#38506d',
+  hover_bg = '#111122',
+  hover_border = '#9999ff',
 }
 
 local set = vim.api.nvim_set_hl
@@ -46,7 +46,7 @@ end
 
 -- Core editor surfaces. Keep the background nearly black and let the foreground
 -- do the contrast work rather than painting every group.
-hi('Normal', { fg = p.fg0, bg = p.bg0 })
+hi('Normal', { fg = p.fg0, bg = 'NONE' })
 hi('NormalFloat', { fg = p.fg0, bg = p.bg1 })
 hi('FloatBorder', { fg = p.dim0, bg = p.bg1 })
 hi('FloatTitle', { fg = p.fg0, bg = p.bg1, bold = true })
@@ -63,10 +63,10 @@ hi('CursorColumn', { bg = p.bg1 })
 hi('CursorLineNr', { fg = p.fg0, bg = p.bg1 })
 hi('ColorColumn', { bg = p.bg2 })
 hi('LineNr', { fg = p.dim1 })
-hi('SignColumn', { bg = p.bg0 })
-hi('FoldColumn', { bg = p.bg0 })
+hi('SignColumn', { bg = 'NONE' })
+hi('FoldColumn', { bg = 'NONE' })
 hi('Folded', { fg = p.fg1, bg = p.bg1, italic = true })
-hi('EndOfBuffer', { fg = p.bg2 })
+hi('EndOfBuffer', { fg = p.bg2, bg = 'NONE' })
 hi('NonText', { fg = p.dim1 })
 hi('Whitespace', { fg = p.dim2 })
 hi('SpecialKey', { fg = p.err })

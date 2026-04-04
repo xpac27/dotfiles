@@ -607,7 +607,8 @@ y = 0
 [effects.shader_animation]
 enabled = true
 background_only = false
-fragment_shader = "shaders/my_effect.glsl"
+fragment_shader = "shaders/blood_cloud.glsl"
 live_reload = true
-intensity = 0.95
-speed = 1.0
+intensity = 1.0
+speed = 4.5
+target_fps = 30

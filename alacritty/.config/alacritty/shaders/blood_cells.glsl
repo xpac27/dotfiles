@@ -20,7 +20,7 @@ vec2 random2(vec2 p)
     return fract(sin(vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)))) * 43758.5453);
 }
 
-float sm_vr(vec2 st, float t)
+float sm_vr(vec2 st)
 {
     vec2 i_st = floor(st);
     vec2 f_st = fract(st);
@@ -30,43 +30,41 @@ float sm_vr(vec2 st, float t)
         for (int i = -1; i <= 1; i++) {
             vec2 neighbor = vec2(float(i), float(j));
             vec2 point = random2(i_st + neighbor);
-            point = 0.5 + 0.5 * sin(t + 6.2831 * point);
+            point = 0.5 + 0.5 * sin(time + 6.2831 * point);
             vec2 diff = neighbor + point - f_st;
-            float wobble = sin(t * (0.85 + dot(point, vec2(0.65, 0.65)))) * 0.18 + 0.22;
+            float wobble = sin(time * length(random2(i_st + neighbor))) * 0.25 + 0.25;
             float dist = length(diff) + wobble;
-            c += exp(-15.0 * dist);
+            c += exp(-16.0 * dist);
         }
     }
 
-    return -(1.0 / 15.0) * log(c);
+    return -(1.0 / 16.0) * log(c);
 }
 
 void main()
 {
-    float t = time;
     vec2 st = v_tex_coord;
     st.x *= resolution.x / max(resolution.y, 1.0);
-    st *= 4.6;
 
-    float shift = sin(t) + t;
+    vec3 base = vec3(0.135, 0.077, 0.095);
+    st *= 5.0;
+
     float c = 0.0;
-
-    for (int layer = 2; layer >= 0; layer--) {
+    for (int layer = 3; layer >= 0; layer--) {
         float fi = float(layer);
         float scale = exp2(fi);
-        float vr = sm_vr(st * scale + vec2(shift, 0.0), t);
-        vr = smoothstep(0.0, 1.45, vr * (sin(t + fi) + 4.0) * 0.25);
-        c = mix(c, vr, 1.0 - smoothstep(0.42, 0.52, vr));
-        c = (c + 0.28) * (1.0 - fi * 0.22);
+        float vr = sm_vr(st * scale + vec2(sin(time) + time, 0.0));
+        vr = smoothstep(0.0, 1.5, vr * (sin(time + fi) + 4.25) * 0.25);
+        c = mix(c, vr, 1.0 - smoothstep(0.4, 0.5, vr));
+        c = (c + 0.325) * (1.0 - fi * 0.25);
     }
 
-    vec3 base = vec3(0.11, 0.055, 0.07);
     vec3 blood = vec3(0.425, 0.110, 0.103) * c;
-    vec3 col = mix(base, blood, clamp(c * 1.4, 0.0, 1.0));
+    vec3 col = mix(base, blood, clamp(c * 1.35, 0.0, 1.0));
 
     float mask = TEXTURE(text_mask, v_tex_coord).r;
     float text_pixel = step(0.05, mask);
-    float alpha = intensity * clamp(0.16 + c * 0.38, 0.0, 1.0) * (1.0 - text_pixel);
+    float alpha = intensity * clamp(0.18 + c * 0.42, 0.0, 1.0) * (1.0 - text_pixel);
 
     FRAG_COLOR = vec4(col, alpha);
 }
