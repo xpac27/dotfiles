@@ -42,13 +42,13 @@ function! WindowNumber()
   return tabpagewinnr(tabpagenr())
 endfunction
 
-" ---------------------------
-" vim-lsp diagnostics helpers
-" ---------------------------
+" -----------------------
+" Coc diagnostics helpers
+" -----------------------
 
 function! s:lsp_counts() abort
-  if exists('*lsp#get_buffer_diagnostics_counts') && get(g:, 'lsp_diagnostics_enabled', 1)
-    let l:counts = lsp#get_buffer_diagnostics_counts()
+  if exists('b:coc_diagnostic_info')
+    let l:counts = b:coc_diagnostic_info
     return {
           \ 'error': get(l:counts, 'error', 0),
           \ 'warning': get(l:counts, 'warning', 0),
@@ -88,6 +88,5 @@ endfunction
 " Use auocmd to force lightline update.
 augroup LIGHTLINE
     autocmd!
-    au User lsp_diagnostics_updated call lightline#update()
+    au User CocDiagnosticChange call lightline#update()
 augroup END
-

@@ -7,6 +7,13 @@
     "diagnostic.infoSign": "💡",
     "diagnostic.errorSign": "🔥",
     "diagnostic.warningSign": "🔔",
+    "clangd.arguments": [
+        "--completion-style=bundled",
+        "--function-arg-placeholders=1",
+        "--header-insertion-decorators",
+        "--all-scopes-completion=false"
+    ],
+    "suggest.localityBonus": true,
     "suggest.snippetIndicator": " ⚡",
     "suggest.noselect": true,
     "git.addedSign.hlGroup": "GitGutterAdd",
