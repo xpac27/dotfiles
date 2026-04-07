@@ -4,6 +4,24 @@
     "diagnostic.locationlistUpdate": true,
     "diagnostic.enable": true,
     "diagnostic.enableMessage": "always",
+    "diagnostic.messageTarget": "float",
+    "diagnostic.floatConfig": {
+        "border": true,
+        "rounded": false,
+        "highlight": "CocFloating",
+        "borderhighlight": "CocFloatBorder"
+    },
+    "hover.floatConfig": {
+        "border": true,
+        "rounded": false,
+        "highlight": "CocFloating",
+        "borderhighlight": "CocFloatBorder"
+    },
+    "diagnostic.enableSign": false,
+    "diagnostic.virtualText": true,
+    "diagnostic.virtualTextAlign": "after",
+    "diagnostic.virtualTextCurrentLineOnly": false,
+    "diagnostic.refreshOnInsertMode": true,
     "diagnostic.infoSign": "💡",
     "diagnostic.errorSign": "🔥",
     "diagnostic.warningSign": "🔔",
@@ -13,6 +31,9 @@
         "--header-insertion-decorators",
         "--all-scopes-completion=false"
     ],
+    "inlayHint.enable": false,
+    "inlayHint.enableParameter": false,
+    "semanticTokens.enable": true,
     "suggest.localityBonus": true,
     "suggest.snippetIndicator": " ⚡",
     "suggest.noselect": true,

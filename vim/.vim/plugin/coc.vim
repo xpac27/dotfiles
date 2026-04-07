@@ -44,11 +44,14 @@ augroup VINZ_COC
     autocmd!
     autocmd FileType c,cpp nmap <silent><buffer> [g <Plug>(coc-diagnostic-prev)
     autocmd FileType c,cpp nmap <silent><buffer> ]g <Plug>(coc-diagnostic-next)
+    autocmd FileType c,cpp nmap <silent><buffer> <Left> <Plug>(coc-diagnostic-prev)
+    autocmd FileType c,cpp nmap <silent><buffer> <Right> <Plug>(coc-diagnostic-next)
     autocmd FileType c,cpp nmap <silent><buffer> gd <Plug>(coc-definition)
     autocmd FileType c,cpp nmap <silent><buffer> gD <Plug>(coc-type-definition)
     autocmd FileType c,cpp nmap <silent><buffer> gr <Plug>(coc-references)
     autocmd FileType c,cpp nmap <silent><buffer> gS :<C-u>CocList outline<CR>
     autocmd FileType c,cpp nmap <silent><buffer> gs :<C-u>CocList symbols<CR>
+    autocmd FileType c,cpp nmap <silent><buffer> gh :<C-u>call CocActionAsync('showSuperTypes')<CR>
     autocmd FileType c,cpp nmap <silent><buffer> ga <Plug>(coc-codeaction)
     autocmd FileType c,cpp nnoremap <silent><buffer> K :call <SID>show_documentation()<CR>
     autocmd FileType c,cpp nmap <silent><buffer> gR <Plug>(coc-rename)
