@@ -88,6 +88,12 @@ map('n', '<leader>r', [[:%s/\<<C-R><C-W>\>//gc<left><left><left>]])
 map('n', 'cp', [[:let @+ = expand('%')<CR>]])
 
 if vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1 then
+  -- Windows Terminal sends the same keycode for <Tab> and <C-I>, which breaks
+  -- Neovim's default jumplist-forward on <C-I> when <Tab> is mapped elsewhere.
+  -- Work around it by mapping ctrl+i in WT to send <M-I> via sendInput, e.g.:
+  -- { "keys": "ctrl+i", "id": "User.sendInput.B502FD5" }
+  -- { "command": { "action": "sendInput", "input": "\u001b[73;3u" }, "id": "User.sendInput.B502FD5" }
+  map('n', '<M-I>', '<C-I>', { silent = true, desc = 'Jump forward' })
   map('n', '<leader>m', ':Ninja<CR>', { silent = true })
   map('n', '<leader>mm', ':NinjaAll<CR>', { silent = true })
   map('n', '<leader>t', ':Test<CR>', { silent = true })
