@@ -16,10 +16,10 @@ if (g:colors_name == 'dracula')
   hi CocWarningVirtualText guifg=#f1fa8c guibg=#3a351f
   hi CocInfoVirtualText guifg=#8be9fd guibg=#1f3440
   hi CocHintVirtualText guifg=#50fa7b guibg=#1f3a2a
-  hi CocErrorFloat guifg=#ff5555 guibg=#282a36
-  hi CocWarningFloat guifg=#f1fa8c guibg=#282a36
-  hi CocInfoFloat guifg=#8be9fd guibg=#282a36
-  hi CocHintFloat guifg=#50fa7b guibg=#282a36
+  hi CocErrorFloat guifg=#f8f8f2 guibg=#282a36
+  hi CocWarningFloat guifg=#f8f8f2 guibg=#282a36
+  hi CocInfoFloat guifg=#f8f8f2 guibg=#282a36
+  hi CocHintFloat guifg=#f8f8f2 guibg=#282a36
   hi CocFloatBorder guifg=#6272a4 guibg=#282a36
 
   let g:lightline.colorscheme = 'dracula'

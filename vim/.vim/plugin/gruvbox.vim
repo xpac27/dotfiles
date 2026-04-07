@@ -25,10 +25,10 @@ if (g:colors_name == 'gruvbox')
   hi CocWarningVirtualText guifg=#fabd2f guibg=#3c321f
   hi CocInfoVirtualText guifg=#83a598 guibg=#25363a
   hi CocHintVirtualText guifg=#b8bb26 guibg=#34381f
-  hi CocErrorFloat guifg=#fb4934 guibg=#282828
-  hi CocWarningFloat guifg=#fabd2f guibg=#282828
-  hi CocInfoFloat guifg=#83a598 guibg=#282828
-  hi CocHintFloat guifg=#b8bb26 guibg=#282828
+  hi CocErrorFloat guifg=#ebdbb2 guibg=#282828
+  hi CocWarningFloat guifg=#ebdbb2 guibg=#282828
+  hi CocInfoFloat guifg=#ebdbb2 guibg=#282828
+  hi CocHintFloat guifg=#ebdbb2 guibg=#282828
   hi CocFloatBorder guifg=#928374 guibg=#282828
   hi StatusLine guibg=#504945
   hi StatusLineNC guibg=#504945

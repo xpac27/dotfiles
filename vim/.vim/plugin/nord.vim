@@ -25,10 +25,10 @@ if (g:colors_name == 'nord')
     hi SignColumn guifg=#3B4252 guibg=#1D2330
     hi VertSplit guifg=#434C5E guibg=#1D2330
     hi CocFloating guifg=#D8DEE9 guibg=#1D2330
-    hi CocErrorFloat guifg=#bf616a guibg=#1D2330
-    hi CocWarningFloat guifg=#ebcb8b guibg=#1D2330
-    hi CocInfoFloat guifg=#88c0d0 guibg=#1D2330
-    hi CocHintFloat guifg=#a3be8c guibg=#1D2330
+    hi CocErrorFloat guifg=#D8DEE9 guibg=#1D2330
+    hi CocWarningFloat guifg=#D8DEE9 guibg=#1D2330
+    hi CocInfoFloat guifg=#D8DEE9 guibg=#1D2330
+    hi CocHintFloat guifg=#D8DEE9 guibg=#1D2330
     hi CocFloatBorder guifg=#4C566A guibg=#1D2330
 
     let g:lightline.colorscheme = 'nord'

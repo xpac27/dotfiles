@@ -25,7 +25,7 @@ if (g:colors_name == 'monotone')
     hi PmenuSel guifg=#eeeeff guibg=#333344
     hi PmenuSbar guibg=#333344
     hi PmenuThumb guibg=#9999ff
-    hi CocFloating guifg=#d7d7d7 guibg=#111122
+    hi CocFloating guifg=#9999ff guibg=#111122
 
     " Copilot
     hi CopilotSuggestion guifg=#9999ff guibg=#111122
@@ -94,11 +94,11 @@ if (g:colors_name == 'monotone')
     hi CocWarningVirtualText guifg=#dd9922 guibg=#222211 cterm=italic
     hi CocInfoVirtualText guifg=#99ffff guibg=#112222 cterm=italic
     hi CocHintVirtualText guifg=#ffffcc guibg=#222211 cterm=italic
-    hi CocErrorFloat guifg=#ff4444 guibg=#111122 cterm=italic
-    hi CocWarningFloat guifg=#dd9922 guibg=#111122 cterm=italic
-    hi CocInfoFloat guifg=#99ffff guibg=#111122 cterm=italic
-    hi CocHintFloat guifg=#ffffcc guibg=#111122 cterm=italic
-    hi CocFloatBorder guifg=#666666 guibg=#111122
+    hi CocErrorFloat guifg=#9999ff guibg=#111122 cterm=italic
+    hi CocWarningFloat guifg=#9999ff guibg=#111122 cterm=italic
+    hi CocInfoFloat guifg=#9999ff guibg=#111122 cterm=italic
+    hi CocHintFloat guifg=#9999ff guibg=#111122 cterm=italic
+    hi CocFloatBorder guifg=#9999ff guibg=#111122
 
     " Lightline
     let g:lightline.colorscheme = 'monotone'
