@@ -89,8 +89,8 @@ require('plugins.agentic') -- ai chat
 require('plugins.lualine') -- statusline
 require('plugins.tabby') -- tabline
 require('plugins.flash') -- motions
-require('plugins.alpha') -- startup screen
 require('plugins.auto-session') -- sessions
+require('plugins.alpha') -- startup screen
 
 local Diff = require('mini.diff')
 Diff.setup({

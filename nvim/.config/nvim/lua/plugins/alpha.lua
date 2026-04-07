@@ -65,6 +65,11 @@ local function sessions_section()
     return nil
   end
 
+  local ok_root_dir, root_dir = pcall(auto_session.get_root_dir)
+  if not ok_root_dir or type(root_dir) ~= 'string' or root_dir == '' then
+    return nil
+  end
+
   local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':p')
   local escaped_cwd = auto_session_lib.escape_string_for_vim(cwd)
   local sessions = {}
@@ -87,7 +92,7 @@ local function sessions_section()
     return false
   end
 
-  for _, entry in ipairs(auto_session_lib.get_session_list(auto_session.get_root_dir())) do
+  for _, entry in ipairs(auto_session_lib.get_session_list(root_dir)) do
     if session_belongs_to_cwd(entry) then
       sessions[#sessions + 1] = entry
     end
