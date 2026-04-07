@@ -121,6 +121,18 @@ if vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1 then
 end
 
 autocmd('FileType', {
+  pattern = 'qf',
+  callback = function(args)
+    for _, win in ipairs(vim.fn.win_findbuf(args.buf)) do
+      local info = vim.fn.getwininfo(win)[1]
+      if info and info.quickfix == 1 and info.loclist == 1 then
+        vim.wo[win].syntax = 'loclist'
+      end
+    end
+  end,
+})
+
+autocmd('FileType', {
   pattern = { 'c', 'cpp', 'cs', 'ddf', 'proto' },
   callback = function()
     vim.opt_local.commentstring = '// %s'

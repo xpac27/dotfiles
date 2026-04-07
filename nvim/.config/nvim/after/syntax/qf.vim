@@ -6,19 +6,10 @@ syn match GTestNote "   Actual:.\+$"
 syn match GTestNote " Expected:.\+$"
 syn match GTestNote "     Which is:.\+$"
 syn match GTestNote "   .\+$"
-syn match GTestNote "	.\+$"
+syn match GTestNote "\t.\+$"
 
-" Neovim's built-in qf syntax expects "file|line|text". Our formatter emits
-" "file | text", so clear the default groups before defining the custom shape.
-syn clear qfFileName
-syn clear qfSeparator1
-syn clear qfLineNr
-syn clear qfSeparator2
-syn clear qfText
+runtime syntax/qf-common.vim
 
-" Quickfix entry structure: path on the left, parsed output on the right.
-syn match qfFileName "^[^|]\+\ze\s|\s" contains=qfError
-syn match qfSeparator "\s|\s" contains=NONE
 syn match qfTestNameSuccess "\S\+\ze\s\+PASSED\>" containedin=ALL contains=NONE
 syn match qfTestNameError "\S\+\ze\s\+FAILED\>" containedin=ALL contains=NONE
 syn match qfTestNameWarning "\S\+\ze\s\+SKIPPED\>" containedin=ALL contains=NONE
