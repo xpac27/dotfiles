@@ -82,6 +82,19 @@ local function loc_is_open()
   return false
 end
 
+local function quickfix_windows()
+  local wins = {}
+
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local info = vim.fn.getwininfo(win)[1]
+    if info and info.quickfix == 1 and info.loclist == 0 then
+      wins[#wins + 1] = win
+    end
+  end
+
+  return wins
+end
+
 function M.toggle_quickfix()
   if qf_is_open() then
     vim.cmd('cclose')
@@ -117,21 +130,57 @@ function M.run_to_qf(cmd, opts)
   vim.cmd('botright ' .. qf_height .. 'copen')
   vim.cmd('wincmd w')
 
-  local function refresh()
+  local function quickfix_is_at_bottom()
+    local qf_list = vim.fn.getqflist({ size = 1 })
+    local size = qf_list.size or 0
+    if size == 0 then
+      return true
+    end
+
+    for _, win in ipairs(quickfix_windows()) do
+      local cursor = vim.api.nvim_win_get_cursor(win)
+      if cursor[1] < size then
+        return false
+      end
+    end
+
+    return true
+  end
+
+  local function scroll_quickfix_to_bottom()
+    local qf_list = vim.fn.getqflist({ size = 1 })
+    local size = qf_list.size or 0
+    if size == 0 then
+      return
+    end
+
+    for _, win in ipairs(quickfix_windows()) do
+      if vim.api.nvim_win_is_valid(win) then
+        pcall(vim.api.nvim_win_set_cursor, win, { size, 0 })
+      end
+    end
+  end
+
+  local function refresh(follow)
     set_qf_lines(lines, title)
+
+    if follow then
+      vim.schedule(scroll_quickfix_to_bottom)
+    end
   end
 
   local function on_output(_, data)
     if not data then
       return
     end
+    local follow = quickfix_is_at_bottom()
     for _, line in ipairs(data) do
       line = line:gsub('\r$', '')
       if line ~= '' then
         table.insert(lines, line)
       end
     end
-    refresh()
+    refresh(follow)
   end
 
   vim.fn.jobstart(cmd, {
@@ -140,7 +189,7 @@ function M.run_to_qf(cmd, opts)
     on_stdout = on_output,
     on_stderr = on_output,
     on_exit = function(_, code)
-      refresh()
+      refresh(quickfix_is_at_bottom())
       vim.schedule(function()
         if code == 0 then
           vim.cmd('cclose')
