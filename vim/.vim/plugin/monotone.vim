@@ -38,8 +38,9 @@ if (g:colors_name == 'monotone')
     hi FzfMarker guifg=#eeee99 guibg=NONE
 
     " Status line
-    hi StatusLine guibg=#111111
-    hi StatusLineNC guibg=#111111 guifg=#111111
+    hi StatusLine guibg=#2a2a2a guifg=#2a2a2a
+    hi StatusLineNC guibg=#2a2a2a guifg=#2a2a2a
+    hi VertSplit guifg=#2a2a2a guibg=NONE
     hi Include guifg=#666666
     hi Type guifg=#dddddd
 
