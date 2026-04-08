@@ -30,6 +30,13 @@ if (g:colors_name == 'monotone')
     " Copilot
     hi CopilotSuggestion guifg=#9999ff guibg=#111122
 
+    " Fzf
+    hi FzfBackground guifg=#d7d7d7 guibg=#111122
+    hi FzfSelected guifg=#dddddd guibg=#222211
+    hi FzfMatch guifg=#dd9922 guibg=NONE gui=bold cterm=bold
+    hi FzfMatchSelected guifg=#eeee99 guibg=#222211 gui=bold cterm=bold
+    hi FzfMarker guifg=#eeee99 guibg=NONE
+
     " Status line
     hi StatusLine guibg=#111111
     hi StatusLineNC guibg=#111111 guifg=#111111
