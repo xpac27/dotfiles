@@ -6,6 +6,9 @@ let g:coc_global_extensions = [
 " Do not show ins-completion-menu messages.
 set shortmess+=c
 
+let g:coc_borderchars = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+let g:coc_border_joinchars = [' ', ' ', ' ', ' ']
+
 function! s:check_backspace() abort
     let l:col = col('.') - 1
     return !l:col || getline('.')[l:col - 1] =~# '\s'
