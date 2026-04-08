@@ -122,13 +122,21 @@ function M.run_to_qf(cmd, opts)
 
   local lines = {}
   local title = opts.title or table.concat(cmd, ' ')
+  local origin_win = vim.api.nvim_get_current_win()
 
   vim.fn.setqflist({}, ' ', {
     title = title,
     items = {},
   })
   vim.cmd('botright ' .. qf_height .. 'copen')
-  vim.cmd('wincmd w')
+
+  local function restore_origin_window()
+    if vim.api.nvim_win_is_valid(origin_win) then
+      pcall(vim.api.nvim_set_current_win, origin_win)
+    end
+  end
+
+  restore_origin_window()
 
   local function quickfix_is_at_bottom()
     local qf_list = vim.fn.getqflist({ size = 1 })
@@ -195,7 +203,7 @@ function M.run_to_qf(cmd, opts)
           vim.cmd('cclose')
         else
           vim.cmd('botright ' .. qf_height .. 'copen')
-          vim.cmd('wincmd w')
+          restore_origin_window()
         end
       end)
     end,
