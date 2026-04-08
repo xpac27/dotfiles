@@ -16,19 +16,31 @@ if (g:colors_name == 'monotone')
     hi NoteMsg guifg=#ffffcc guibg=#222211
     hi MatchParen guifg=#d7d7d7 guibg=#444444 cterm=bold
     hi CurrentWord guibg=#444444
+    hi CocHighlightText guibg=#444444
+    hi CocHighlightRead guibg=#444444
+    hi CocHighlightWrite guibg=#444444
 
     " Autocompletion menu
     hi Pmenu guifg=#9999ff guibg=#111122
     hi PmenuSel guifg=#eeeeff guibg=#333344
     hi PmenuSbar guibg=#333344
     hi PmenuThumb guibg=#9999ff
+    hi CocFloating guifg=#9999ff guibg=#111122
 
     " Copilot
     hi CopilotSuggestion guifg=#9999ff guibg=#111122
 
+    " Fzf
+    hi FzfBackground guifg=#d7d7d7 guibg=#111122
+    hi FzfSelected guifg=#dddddd guibg=#222211
+    hi FzfMatch guifg=#dd9922 guibg=NONE gui=bold cterm=bold
+    hi FzfMatchSelected guifg=#eeee99 guibg=#222211 gui=bold cterm=bold
+    hi FzfMarker guifg=#eeee99 guibg=NONE
+
     " Status line
-    hi StatusLine guibg=#111111
-    hi StatusLineNC guibg=#111111 guifg=#111111
+    hi StatusLine guibg=#2a2a2a guifg=#2a2a2a
+    hi StatusLineNC guibg=#2a2a2a guifg=#2a2a2a
+    hi VertSplit guifg=#2a2a2a guibg=NONE
     hi Include guifg=#666666
     hi Type guifg=#dddddd
 
@@ -82,6 +94,19 @@ if (g:colors_name == 'monotone')
     hi! link LspSemanticOperator Operator
     hi link LspInformationHighlight NoteMsg
     hi link LspInformationText InfoMsg
+    hi CocErrorHighlight guifg=#ff9999 guibg=#221111 cterm=undercurl
+    hi CocWarningHighlight guifg=#eeee99 guibg=#222211 cterm=undercurl
+    hi CocInfoHighlight guifg=#99ffff guibg=#112222 cterm=undercurl
+    hi CocHintHighlight guifg=#ffffcc guibg=#222211 cterm=undercurl
+    hi CocErrorVirtualText guifg=#ff4444 guibg=#221111 cterm=italic
+    hi CocWarningVirtualText guifg=#dd9922 guibg=#222211 cterm=italic
+    hi CocInfoVirtualText guifg=#99ffff guibg=#112222 cterm=italic
+    hi CocHintVirtualText guifg=#ffffcc guibg=#222211 cterm=italic
+    hi CocErrorFloat guifg=#9999ff guibg=#111122 cterm=italic
+    hi CocWarningFloat guifg=#9999ff guibg=#111122 cterm=italic
+    hi CocInfoFloat guifg=#9999ff guibg=#111122 cterm=italic
+    hi CocHintFloat guifg=#9999ff guibg=#111122 cterm=italic
+    hi CocFloatBorder guifg=#9999ff guibg=#111122
 
     " Lightline
     let g:lightline.colorscheme = 'monotone'

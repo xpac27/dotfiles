@@ -58,15 +58,10 @@ else
     Plug 'mhinz/vim-startify'
 
     " LSP (old)
-    " Plug 'neoclide/coc.nvim', { for': ['cpp', 'c'], 'branch': 'release' }
     " Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
 
     " LSP
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'mattn/vim-lsp-settings'
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    Plug 'prabirshrestha/asyncomplete-buffer.vim'
+    Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
     " Quickfix
     Plug 'Valloric/ListToggle'
@@ -331,4 +326,3 @@ else
 	" Integration tests error format
 	set errorformat+=%t\ %m\ -\ %f
 endif
-

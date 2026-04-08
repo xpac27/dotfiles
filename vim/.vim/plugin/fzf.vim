@@ -40,5 +40,23 @@ nnoremap <leader>l :BLines<CR>
 
 let g:fzf_layout = { 'down': '~60%' }
 
+let g:fzf_colors = {
+    \ 'fg':         ['fg', 'Normal'],
+    \ 'bg':         ['bg', 'FzfBackground', 'Normal'],
+    \ 'preview-fg': ['fg', 'FzfBackground', 'Normal'],
+    \ 'preview-bg': ['bg', 'FzfBackground', 'Normal'],
+    \ 'fg+':        ['fg', 'FzfSelected', 'Normal'],
+    \ 'bg+':        ['bg', 'FzfSelected', 'CursorLine'],
+    \ 'hl':         ['fg', 'FzfMatch', 'Pmenu'],
+    \ 'hl+':        ['fg', 'FzfMatchSelected', 'FzfSelected'],
+    \ 'gutter':     ['bg', 'StatusLine'],
+    \ 'info':       ['fg', 'Comment'],
+    \ 'border':     ['fg', 'Pmenu'],
+    \ 'prompt':     ['fg', 'Pmenu'],
+    \ 'pointer':    ['fg', 'PmenuSel'],
+    \ 'marker':     ['fg', 'FzfMarker', 'WarningMsg'],
+    \ 'spinner':    ['fg', 'InfoMsg'],
+    \ 'header':     ['fg', 'Comment'] }
+
 autocmd! FileType fzf set laststatus=0 noshowmode noruler
 	\| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
