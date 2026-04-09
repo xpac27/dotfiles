@@ -2,17 +2,14 @@
 function! s:focus_cursorline() abort
   let l:current = win_getid()
 
-  for l:win in range(1, winnr('$'))
-    execute l:win . 'wincmd w'
-    setlocal nocursorline
+  for l:info in getwininfo()
+    call setwinvar(l:info.winid, '&cursorline', 0)
   endfor
 
-  call win_gotoid(l:current)
-  setlocal cursorline
+  call setwinvar(l:current, '&cursorline', 1)
 endfunction
 
 augroup active_split_cursorline
   autocmd!
   autocmd VimEnter,WinEnter,BufWinEnter * call s:focus_cursorline()
-  autocmd WinLeave * setlocal nocursorline
 augroup END
