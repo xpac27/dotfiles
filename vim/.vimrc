@@ -111,6 +111,43 @@ let g:vim_markdown_math = 1
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_toml_frontmatter = 1
 let g:vim_markdown_json_frontmatter = 1
+let g:vim_markdown_fenced_languages = [
+    \ 'bash=sh',
+    \ 'c=cpp',
+    \ 'cmake=cmake',
+    \ 'cpp=cpp',
+    \ 'csharp=cs',
+    \ 'css=css',
+    \ 'diff=diff',
+    \ 'dockerfile=dockerfile',
+    \ 'html=html',
+    \ 'ini=dosini',
+    \ 'javascript=javascript',
+    \ 'js=javascript',
+    \ 'json=json',
+    \ 'jsonc=json',
+    \ 'lua=lua',
+    \ 'markdown=markdown',
+    \ 'md=markdown',
+    \ 'powershell=ps1',
+    \ 'ps1=ps1',
+    \ 'python=python',
+    \ 'py=python',
+    \ 'rust=rust',
+    \ 'sh=sh',
+    \ 'shell=sh',
+    \ 'toml=toml',
+    \ 'ts=typescript',
+    \ 'typescript=typescript',
+    \ 'tsx=typescriptreact',
+    \ 'vim=vim',
+    \ 'viml=vim',
+    \ 'xml=xml',
+    \ 'yaml=yaml',
+    \ 'yml=yaml',
+    \ 'zsh=sh',
+\ ]
+let g:markdown_fenced_languages = copy(g:vim_markdown_fenced_languages)
 
 colorscheme monotone
 

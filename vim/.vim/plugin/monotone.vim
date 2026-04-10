@@ -37,6 +37,47 @@ if (g:colors_name == 'monotone')
     hi FzfMatchSelected guifg=#eeee99 guibg=#222211 gui=bold cterm=bold
     hi FzfMarker guifg=#eeee99 guibg=NONE
 
+    " Markdown
+    hi mkdHeading guifg=#eeee99 gui=bold cterm=bold
+    hi htmlH1 guifg=#eeee99 gui=bold cterm=bold
+    hi htmlH2 guifg=#dddddd gui=bold cterm=bold
+    hi htmlH3 guifg=#99ffff gui=bold cterm=bold
+    hi htmlH4 guifg=#99ccff gui=bold cterm=bold
+    hi htmlH5 guifg=#cccccc gui=bold cterm=bold
+    hi htmlH6 guifg=#999999 gui=bold cterm=bold
+    hi mkdCode guifg=#99ff99 guibg=#1a1a1a
+    hi mkdCodeDelimiter guifg=#666666 guibg=#1a1a1a
+    hi mkdLink guifg=#99ccff gui=underline cterm=underline
+    hi mkdInlineURL guifg=#99ffff gui=underline cterm=underline
+    hi mkdURL guifg=#99ffff
+    hi mkdLinkDefTarget guifg=#99ffff
+    hi mkdDelimiter guifg=#666666
+    hi mkdBlockquote guifg=#999999 gui=italic cterm=italic
+    hi mkdListItem guifg=#dd9922 gui=bold cterm=bold
+    hi mkdListItemCheckbox guifg=#eeee99 gui=bold cterm=bold
+    hi mkdRule guifg=#444444
+    hi mkdMath guifg=#ffcc99
+    hi mkdStrike guifg=#777777 gui=strikethrough cterm=strikethrough
+    hi mkdFootnote guifg=#cccccc
+    hi mkdFootnotes guifg=#cccccc
+    hi markdownHeadingDelimiter guifg=#666666
+    hi markdownCode guifg=#99ff99 guibg=#1a1a1a
+    hi markdownCodeDelimiter guifg=#666666 guibg=#1a1a1a
+    hi markdownLinkText guifg=#99ccff gui=underline cterm=underline
+    hi markdownAutomaticLink guifg=#99ffff gui=underline cterm=underline
+    hi markdownUrl guifg=#99ffff
+    hi markdownUrlDelimiter guifg=#666666
+    hi markdownUrlTitle guifg=#cccccc
+    hi markdownBlockquote guifg=#999999 gui=italic cterm=italic
+    hi markdownListMarker guifg=#dd9922 gui=bold cterm=bold
+    hi markdownRule guifg=#444444
+    hi markdownFootnote guifg=#cccccc
+    hi markdownFootnoteDefinition guifg=#cccccc
+    hi markdownItalic gui=italic cterm=italic
+    hi markdownBold gui=bold cterm=bold
+    hi markdownBoldItalic gui=bold,italic cterm=bold,italic
+    hi markdownStrike guifg=#777777 gui=strikethrough cterm=strikethrough
+
     " Status line
     hi StatusLine guibg=#2a2a2a guifg=#2a2a2a
     hi StatusLineNC guibg=#2a2a2a guifg=#2a2a2a
