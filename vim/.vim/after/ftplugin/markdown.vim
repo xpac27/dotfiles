@@ -5,3 +5,7 @@ setlocal wrap
 setlocal linebreak
 setlocal textwidth=0
 setlocal listchars=
+setlocal conceallevel=3
+setlocal concealcursor=
+setlocal foldmethod=manual
+setlocal nofoldenable

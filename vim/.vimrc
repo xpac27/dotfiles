@@ -18,6 +18,7 @@ Plug 'alvan/vim-closetag', { 'for': ['html', 'xml'] }
 Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 Plug 'tpope/vim-abolish', { 'on': 'Abolish' }
 Plug 'tpope/vim-commentary'
+Plug 'preservim/vim-markdown'
 
 " Syntax
 " Plug 'fei6409/log-highlight.nvim'
@@ -100,6 +101,16 @@ endif
 
 filetype on " runs all ftplugin files"
 syntax enable
+
+let g:markdown_syntax_conceal = 1
+let g:vim_markdown_conceal = 1
+let g:vim_markdown_conceal_code_blocks = 1
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_math = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_toml_frontmatter = 1
+let g:vim_markdown_json_frontmatter = 1
 
 colorscheme monotone
 
