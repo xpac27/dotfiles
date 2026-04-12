@@ -31,7 +31,6 @@ Plug 'easymotion/vim-easymotion'
 " Plug 'github/copilot.vim'
 
 " Themes
-Plug 'Lokaltog/vim-monotone'
 Plug 'zenbones-theme/zenbones.nvim'
 Plug 'morhetz/gruvbox'
 Plug 'sainnhe/gruvbox-material'
@@ -149,8 +148,6 @@ let g:vim_markdown_fenced_languages = [
 \ ]
 let g:markdown_fenced_languages = copy(g:vim_markdown_fenced_languages)
 
-colorscheme monotone
-
 " hide files in explore mode
 let g:netrw_list_hide = '\.o$,\.d$,\.a$,\.so$,\.swp$,\.orig$,\.pyc$'
 let g:netrw_liststyle = 3
@@ -253,6 +250,8 @@ if exists('theme') && theme == 'light'
 else
     set background=dark
 endif
+
+colorscheme humdrum
 
 if &diff
     set diffopt+=algorithm:patience
