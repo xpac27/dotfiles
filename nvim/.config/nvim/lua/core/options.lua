@@ -81,7 +81,14 @@ if vim.fn.executable('rg') == 1 then
   vim.o.grepformat = '%f:%l:%c:%m'
 end
 
-opt.background = (vim.g.theme == 'light') and 'light' or 'dark'
+local theme_mode = vim.g.theme
+local theme_mode_file = vim.fn.expand('~/.config/theme/mode')
+if theme_mode == nil and vim.fn.filereadable(theme_mode_file) == 1 then
+  theme_mode = vim.trim(vim.fn.readfile(theme_mode_file)[1] or '')
+end
+theme_mode = (theme_mode == 'light') and 'light' or 'dark'
+vim.g.theme = theme_mode
+opt.background = theme_mode
 
 if vim.wo.diff then
   opt.diffopt:append({ 'algorithm:patience', 'indent-heuristic' })

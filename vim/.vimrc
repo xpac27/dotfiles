@@ -245,7 +245,14 @@ if executable('rg')
     set grepformat=%f:%l:%c:%m
 endif
 
-if exists('theme') && theme == 'light'
+let s:theme_mode = exists('theme') ? theme : ''
+let s:theme_mode_file = expand('~/.config/theme/mode')
+if empty(s:theme_mode) && filereadable(s:theme_mode_file)
+    let s:theme_mode = trim(get(readfile(s:theme_mode_file), 0, ''))
+endif
+let theme = s:theme_mode ==# 'light' ? 'light' : 'dark'
+
+if theme ==# 'light'
     set background=light
 else
     set background=dark

@@ -1,5 +1,4 @@
-" Humdrum: vim-monotone's default look plus local overrides, flattened.
-" Base highlight choices derive from Lokaltog/vim-monotone (MIT).
+" Humdrum: a compact local palette with light and dark variants.
 
 hi clear
 if exists('syntax_on')

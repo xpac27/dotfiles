@@ -1,4 +1,4 @@
-general.import = ["/home/vinz/.config/alacritty/themes/monotone.toml"]
+general.import = ["/home/vinz/.config/alacritty/themes/humdrum.toml"]
 general.live_config_reload = true
 
 [bell]

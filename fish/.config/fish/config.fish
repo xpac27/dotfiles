@@ -29,8 +29,15 @@ set npm_config_prefix $HOME/.local
 # systemd
 export SYSTEMD_EDITOR='vim'
 
-# dracula
-# fish_config theme choose "nord"
+# theme
+set -gx theme dark
+set -l theme_file $HOME/.config/theme/mode
+if test -f $theme_file
+  set -l theme_value (string trim -- (cat $theme_file))
+  if test "$theme_value" = light -o "$theme_value" = dark
+    set -gx theme $theme_value
+  end
+end
 
 # gpg
 alias gpg-warmup='echo warmup | gpg --clearsign >/dev/null'
@@ -102,10 +109,17 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 #     --color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac
 #     --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b'
 
-# FZF Monochrome
-export FZF_DEFAULT_OPTS='
-  --color=bg:#1a1a1a,bg+:#1a1a1a,spinner:#ffffff,hl:#dd9922,preview-bg:#111111,preview-border:#111111
-  --color=fg:#919191,fg+:#ffffff,hl+:#eeee99,info:#ffffff
-  --color=border:#4e4e4e,prompt:#ffffff,pointer:#dd9922
-  --color=marker:#eeee99,header:#919191'
-
+# FZF Humdrum
+if test "$theme" = light
+  export FZF_DEFAULT_OPTS='
+    --color=bg:#f7f6f6,bg+:#eeeeee,spinner:#393636,hl:#9b6b35,preview-bg:#f0f0f0,preview-border:#d8d5d5
+    --color=fg:#5f5958,fg+:#393636,hl+:#8c842f,info:#393636
+    --color=border:#b8b1b1,prompt:#393636,pointer:#9b6b35
+    --color=marker:#8c842f,header:#817a79'
+else
+  export FZF_DEFAULT_OPTS='
+    --color=bg:#1a1a1a,bg+:#1a1a1a,spinner:#ffffff,hl:#dd9922,preview-bg:#111111,preview-border:#111111
+    --color=fg:#919191,fg+:#ffffff,hl+:#eeee99,info:#ffffff
+    --color=border:#4e4e4e,prompt:#ffffff,pointer:#dd9922
+    --color=marker:#eeee99,header:#919191'
+end

@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+set -eu
+
+mode="${1:-}"
+case "$mode" in
+  light|dark) ;;
+  *)
+    printf 'usage: theme light|dark\n' >&2
+    exit 2
+    ;;
+esac
+
+config_home="${XDG_CONFIG_HOME:-"$HOME/.config"}"
+theme_dir="$config_home/theme"
+
+mkdir -p "$theme_dir"
+printf '%s\n' "$mode" > "$theme_dir/mode"
+
+if [ -f "$theme_dir/alacritty-humdrum-$mode.toml" ]; then
+  cp "$theme_dir/alacritty-humdrum-$mode.toml" "$HOME/.config/alacritty/themes/humdrum.toml"
+elif [ -f "$HOME/.config/alacritty/themes/humdrum-$mode.toml" ]; then
+  cp "$HOME/.config/alacritty/themes/humdrum-$mode.toml" "$HOME/.config/alacritty/themes/humdrum.toml"
+fi
+
+if command -v fish >/dev/null 2>&1; then
+  fish -lc "fish_config theme save humdrum-$mode >/dev/null 2>&1 || true"
+fi
+
+printf 'theme=%s\n' "$mode"

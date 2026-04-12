@@ -78,7 +78,7 @@ if ok_quickfix then
   quickfix.setup() -- async make and quickfix helpers
 end
 
-require('plugins.gruvbox') -- colorscheme
+pcall(vim.cmd.colorscheme, 'monotone') -- colorscheme
 require('plugins.fzf-lua') -- fuzzy finder
 require('plugins.colorizer') -- color preview
 require('plugins.treesitter') -- treesitter
