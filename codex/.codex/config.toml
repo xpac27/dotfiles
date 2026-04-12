@@ -42,6 +42,7 @@ set = { USER = "codex" }
 
 [tui]
 status_line = ["model-with-reasoning", "five-hour-limit"]
+theme = "zenburn"
 
 [plugins."github@openai-curated"]
 enabled = true
