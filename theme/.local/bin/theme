@@ -22,8 +22,4 @@ elif [ -f "$HOME/.config/alacritty/themes/humdrum-$mode.toml" ]; then
   cp "$HOME/.config/alacritty/themes/humdrum-$mode.toml" "$HOME/.config/alacritty/themes/humdrum.toml"
 fi
 
-if command -v fish >/dev/null 2>&1; then
-  fish -lc "fish_config theme save humdrum-$mode >/dev/null 2>&1 || true"
-fi
-
 printf 'theme=%s\n' "$mode"

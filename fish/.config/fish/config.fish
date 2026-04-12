@@ -38,6 +38,9 @@ if test -f $theme_file
     set -gx theme $theme_value
   end
 end
+if status is-interactive
+  fish_config theme choose humdrum-$theme --color-theme=$theme >/dev/null 2>&1
+end
 
 # gpg
 alias gpg-warmup='echo warmup | gpg --clearsign >/dev/null'
