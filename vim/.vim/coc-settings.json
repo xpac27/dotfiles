@@ -32,6 +32,14 @@
         "--header-insertion-decorators",
         "--all-scopes-completion=false"
     ],
+    "languageserver": {
+        "typos": {
+            "command": "typos-lsp",
+            "filetypes": [
+                "*"
+            ]
+        }
+    },
     "inlayHint.enable": false,
     "inlayHint.enableParameter": false,
     "semanticTokens.enable": true,
