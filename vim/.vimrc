@@ -31,6 +31,7 @@ Plug 'easymotion/vim-easymotion'
 " Plug 'github/copilot.vim'
 
 " Themes
+Plug 'xpac27/humdrum.vim'
 Plug 'zenbones-theme/zenbones.nvim'
 Plug 'morhetz/gruvbox'
 Plug 'sainnhe/gruvbox-material'
