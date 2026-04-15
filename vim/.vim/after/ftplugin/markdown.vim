@@ -4,7 +4,7 @@ setlocal shiftwidth=2
 setlocal wrap
 setlocal linebreak
 setlocal textwidth=0
-setlocal listchars=
+setlocal listchars=trail:·
 setlocal conceallevel=3
 setlocal concealcursor=
 setlocal foldmethod=manual
