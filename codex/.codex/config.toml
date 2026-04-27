@@ -1,9 +1,9 @@
-model = "gpt-5.4"
+model = "gpt-5.5"
 personality = "pragmatic"
-model_reasoning_effort = "medium"
+model_reasoning_effort = "high"
 
 [projects."/home/vinz"]
-trust_level = "untrusted"
+trust_level = "trusted"
 
 [projects."/home/vinz/Github/weeecs"]
 trust_level = "trusted"
@@ -44,5 +44,18 @@ set = { USER = "codex" }
 status_line = ["model-with-reasoning", "five-hour-limit"]
 theme = "zenburn"
 
+[tui.model_availability_nux]
+"gpt-5.5" = 3
+
 [plugins."github@openai-curated"]
 enabled = true
+
+[mcp_servers.playwright]
+command = "npx"
+args = [
+  "-y",
+  "@playwright/mcp@latest",
+  "--browser", "firefox",
+  "--user-data-dir", "/home/vinz/.cache/codex-firefox-profile",
+  "--viewport-size", "1400x900"
+]
