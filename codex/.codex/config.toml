@@ -1,6 +1,6 @@
 model = "gpt-5.5"
 personality = "pragmatic"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 
 [projects."/home/vinz"]
 trust_level = "trusted"
@@ -45,17 +45,17 @@ status_line = ["model-with-reasoning", "five-hour-limit"]
 theme = "zenburn"
 
 [tui.model_availability_nux]
-"gpt-5.5" = 3
+"gpt-5.5" = 4
 
 [plugins."github@openai-curated"]
 enabled = true
 
-[mcp_servers.playwright]
-command = "npx"
-args = [
-  "-y",
-  "@playwright/mcp@latest",
-  "--browser", "firefox",
-  "--user-data-dir", "/home/vinz/.cache/codex-firefox-profile",
-  "--viewport-size", "1400x900"
-]
+# [mcp_servers.playwright]
+# command = "npx"
+# args = [
+#   "-y",
+#   "@playwright/mcp@latest",
+#   "--browser", "firefox",
+#   "--user-data-dir", "/home/vinz/.cache/codex-firefox-profile",
+#   "--viewport-size", "1400x900"
+# ]

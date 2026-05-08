@@ -107,7 +107,15 @@ Also expect `libpulse` to remain installed because many desktop apps link agains
 sudo pacman -Syu
 ```
 
-### 2. Install the PipeWire replacement stack
+### 2. Remove PulseAudio add-ons that block replacement
+
+These packages depend on the exact `pulseaudio` package, so remove them before replacing the PulseAudio server with `pipewire-pulse`:
+
+```sh
+sudo pacman -Rns pulseaudio-bluetooth pulseaudio-jack pulseaudio-alsa
+```
+
+### 3. Install the PipeWire replacement stack
 
 ```sh
 sudo pacman -S wireplumber pipewire-pulse pipewire-jack pipewire-alsa lib32-pipewire-jack
@@ -121,14 +129,6 @@ Expected package conflicts/replacements:
 - `lib32-pipewire-jack` conflicts with/replaces `lib32-jack2`.
 
 Accept those replacements if pacman asks.
-
-### 3. Remove leftover PulseAudio add-ons if needed
-
-If pacman does not remove these automatically, remove them after installing the PipeWire stack:
-
-```sh
-sudo pacman -Rns pulseaudio-alsa pulseaudio-bluetooth pulseaudio-jack
-```
 
 ### 4. Enable the PipeWire user services
 
@@ -231,17 +231,30 @@ sudo pacman -S helvum
 
 ## Optional Dotfiles Follow-Up
 
-Do not add PipeWire config immediately. First migrate using package defaults.
+Added after the migration was verified:
 
-After the migration is stable, consider adding stowed config for:
+- `pipewire/.config/pipewire/pipewire.conf.d/10-low-latency.conf`
+- `pipewire/.config/pipewire/pipewire-pulse.conf.d/10-low-latency.conf`
+- `pipewire/.local/bin/guitarix-low-latency`
 
-- WirePlumber device rules.
-- PipeWire low-latency defaults.
-- Fish aliases/functions:
-  - `wpctl status`
-  - `wpctl set-volume`
-  - `pw-jack guitarix`
-- A guitar launcher with a chosen `PIPEWIRE_LATENCY`.
+Install them with:
+
+```sh
+stow -v pipewire -t ~/
+```
+
+Then restart the user audio services or log out/in:
+
+```sh
+systemctl --user restart pipewire pipewire-pulse wireplumber
+```
+
+The default PipeWire quantum is set to `256/48000`. The guitar launcher requests `128/48000` unless `PIPEWIRE_LATENCY` is already set:
+
+```sh
+guitarix-low-latency
+PIPEWIRE_LATENCY="256/48000" guitarix-low-latency
+```
 
 ## Rollback Notes
 
