@@ -1,0 +1,3 @@
+#!/bin/sh
+export PIPEWIRE_LATENCY="${PIPEWIRE_LATENCY:-128/48000}"
+exec pw-jack guitarix "$@"
