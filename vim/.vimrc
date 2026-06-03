@@ -9,7 +9,7 @@ call plug#begin('~/.vim/plugged')
 
 " UI
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-" Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 " Plug 'airblade/vim-gitgutter'
 
 " Textual helpers

@@ -30,19 +30,30 @@ trust_level = "trusted"
 [projects."/home/vinz/Github/alacritty"]
 trust_level = "trusted"
 
+[projects."/home/vinz/Github/reviewboard"]
+trust_level = "trusted"
+
+[projects."/home/vinz/Github/review-land"]
+trust_level = "trusted"
+
+[projects."/home/vinz/Github/include-tidy"]
+trust_level = "trusted"
+
 [notice]
 "hide_gpt-5.1-codex-max_migration_prompt" = true
 
 [notice.model_migrations]
 "gpt-5.1-codex-max" = "gpt-5.2-codex"
 "gpt-5.3-codex" = "gpt-5.4"
+"gpt-5.4" = "gpt-5.5"
 
 [shell_environment_policy]
 set = { USER = "codex" }
 
 [tui]
-status_line = ["model-with-reasoning", "five-hour-limit"]
+status_line = ["current-dir", "project-name", "run-state", "task-progress", "context-remaining", "five-hour-limit", "weekly-limit", "model-with-reasoning"]
 theme = "zenburn"
+status_line_use_colors = true
 
 [tui.model_availability_nux]
 "gpt-5.5" = 4

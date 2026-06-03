@@ -64,3 +64,13 @@
 
 [init]
     defaultBranch = master
+[gpg "ssh"]
+	allowedSignersFile = /home/vinz/.ssh/allowed_signers
+[gpg]
+	format = ssh
+[user]
+	signingkey = /home/vinz/.ssh/id_rsa.pub
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
