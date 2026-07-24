@@ -1,6 +1,8 @@
-model = "gpt-5.5"
+model = "gpt-5.6-sol"
 personality = "pragmatic"
-model_reasoning_effort = "medium"
+model_reasoning_effort = "high"
+plan_mode_reasoning_effort = "high"
+approvals_reviewer = "auto_review"
 
 [projects."/home/vinz"]
 trust_level = "trusted"
@@ -39,6 +41,18 @@ trust_level = "trusted"
 [projects."/home/vinz/Github/include-tidy"]
 trust_level = "trusted"
 
+[projects."/home/vinz/Desktop"]
+trust_level = "trusted"
+
+[projects."/home/vinz/Github/ci"]
+trust_level = "trusted"
+
+[projects."/home/vinz/Desktop/Tyra"]
+trust_level = "trusted"
+
+[projects."/home/vinz/Github/boardgame"]
+trust_level = "trusted"
+
 [notice]
 "hide_gpt-5.1-codex-max_migration_prompt" = true
 
@@ -46,20 +60,25 @@ trust_level = "trusted"
 "gpt-5.1-codex-max" = "gpt-5.2-codex"
 "gpt-5.3-codex" = "gpt-5.4"
 "gpt-5.4" = "gpt-5.5"
+"gpt-5.4-mini" = "gpt-5.6-luna"
 
 [shell_environment_policy]
 set = { USER = "codex" }
 
 [tui]
-status_line = ["current-dir", "project-name", "run-state", "task-progress", "context-remaining", "five-hour-limit", "weekly-limit", "model-with-reasoning"]
+status_line = ["current-dir", "project-name", "run-state", "task-progress", "context-remaining", "weekly-limit", "model-with-reasoning", "five-hour-limit"]
 theme = "zenburn"
 status_line_use_colors = true
 
 [tui.model_availability_nux]
 "gpt-5.5" = 4
+"gpt-5.6-sol" = 4
 
 [plugins."github@openai-curated"]
 enabled = true
+
+[features]
+memories = true
 
 # [mcp_servers.playwright]
 # command = "npx"
