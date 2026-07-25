@@ -18,6 +18,7 @@ Plug 'alvan/vim-closetag', { 'for': ['html', 'xml'] }
 Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 Plug 'tpope/vim-abolish', { 'on': 'Abolish' }
 Plug 'tpope/vim-commentary'
+Plug 'preservim/vim-markdown'
 
 " Syntax
 " Plug 'fei6409/log-highlight.nvim'
@@ -30,7 +31,7 @@ Plug 'easymotion/vim-easymotion'
 " Plug 'github/copilot.vim'
 
 " Themes
-Plug 'Lokaltog/vim-monotone'
+Plug 'xpac27/humdrum.vim'
 Plug 'zenbones-theme/zenbones.nvim'
 Plug 'morhetz/gruvbox'
 Plug 'sainnhe/gruvbox-material'
@@ -106,7 +107,54 @@ endif
 filetype on " runs all ftplugin files"
 syntax enable
 
-colorscheme monotone
+let g:markdown_syntax_conceal = 1
+let g:vim_markdown_conceal = 1
+let g:vim_markdown_conceal_code_blocks = 1
+let g:vim_markdown_auto_insert_bullets = 0
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_math = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_toml_frontmatter = 1
+let g:vim_markdown_json_frontmatter = 1
+let g:vim_markdown_fenced_languages = [
+    \ 'bash=sh',
+    \ 'c=cpp',
+    \ 'cmake=cmake',
+    \ 'cpp=cpp',
+    \ 'csharp=cs',
+    \ 'css=css',
+    \ 'diff=diff',
+    \ 'dockerfile=dockerfile',
+    \ 'html=html',
+    \ 'ini=dosini',
+    \ 'javascript=javascript',
+    \ 'js=javascript',
+    \ 'json=json',
+    \ 'jsonc=json',
+    \ 'lua=lua',
+    \ 'markdown=markdown',
+    \ 'md=markdown',
+    \ 'powershell=ps1',
+    \ 'ps1=ps1',
+    \ 'python=python',
+    \ 'py=python',
+    \ 'rust=rust',
+    \ 'sh=sh',
+    \ 'shell=sh',
+    \ 'toml=toml',
+    \ 'ts=typescript',
+    \ 'typescript=typescript',
+    \ 'tsx=typescriptreact',
+    \ 'vim=vim',
+    \ 'viml=vim',
+    \ 'xml=xml',
+    \ 'yaml=yaml',
+    \ 'yml=yaml',
+    \ 'zsh=sh',
+\ ]
+let g:markdown_fenced_languages = copy(g:vim_markdown_fenced_languages)
 
 " hide files in explore mode
 let g:netrw_list_hide = '\.o$,\.d$,\.a$,\.so$,\.swp$,\.orig$,\.pyc$'
@@ -205,11 +253,20 @@ if executable('rg')
     set grepformat=%f:%l:%c:%m
 endif
 
-if exists('theme') && theme == 'light'
+let s:theme_mode = exists('theme') ? theme : ''
+let s:theme_mode_file = expand('~/.config/theme/mode')
+if empty(s:theme_mode) && filereadable(s:theme_mode_file)
+    let s:theme_mode = trim(get(readfile(s:theme_mode_file), 0, ''))
+endif
+let theme = s:theme_mode ==# 'light' ? 'light' : 'dark'
+
+if theme ==# 'light'
     set background=light
 else
     set background=dark
 endif
+
+colorscheme humdrum
 
 if &diff
     set diffopt+=algorithm:patience
