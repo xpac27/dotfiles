@@ -1,4 +1,5 @@
 let g:lightline = {
+      \ 'colorscheme': 'humdrum',
       \ 'separator': { 'left': '║', 'right': '' },
       \ 'subseparator': { 'left': '┋', 'right': '│' },
       \ 'active': {
