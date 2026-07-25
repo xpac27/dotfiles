@@ -127,9 +127,16 @@ else
     let g:lsp_settings = {
     \    'clangd': {
     \      'cmd': ['clangd', '--completion-style=bundled', '--function-arg-placeholders=1', '--header-insertion-decorators', '--all-scopes-completion=false'],
-    \      'config': {'sort': {'max': 200}},
-    \    },
-    \    'efm-langserver': {'disabled': v:false}
+    \      'config': {
+    \        'filter': { 'name': 'fuzzy' },
+    \        'sort': {
+    \          'name': 'relevance',
+    \          'max': 2000,
+    \          'locality': v:true,
+    \        },
+    \      },
+    \      'efm-langserver': {'disabled': v:false}
+    \    }
     \  }
 endif
 

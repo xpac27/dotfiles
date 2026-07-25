@@ -53,6 +53,9 @@ trust_level = "trusted"
 [projects."/home/vinz/Github/boardgame"]
 trust_level = "trusted"
 
+[projects."/home/vinz/.vim/plugged/vim-lsp"]
+trust_level = "trusted"
+
 [notice]
 "hide_gpt-5.1-codex-max_migration_prompt" = true
 
