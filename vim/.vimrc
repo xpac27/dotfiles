@@ -63,7 +63,7 @@ else
     " Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
 
     " LSP
-    Plug 'xpac27/vim-lsp'
+    Plug 'xpac27/vim-lsp', { 'branch': 'coc-style-completion-ranking', 'dir': '~/Github/vim-lsp' }
     Plug 'mattn/vim-lsp-settings'
     Plug 'prabirshrestha/asyncomplete.vim'
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
