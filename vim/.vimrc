@@ -59,10 +59,15 @@ else
     Plug 'mhinz/vim-startify'
 
     " LSP (old)
+    " Plug 'neoclide/coc.nvim', { for': ['cpp', 'c'], 'branch': 'release' }
     " Plug 'ycm-core/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python install.py --clangd-completer' }
 
     " LSP
-    Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+    Plug 'xpac27/vim-lsp', { 'branch': 'coc-style-completion-ranking', 'dir': '~/Github/vim-lsp' }
+    Plug 'mattn/vim-lsp-settings'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    Plug 'prabirshrestha/asyncomplete-buffer.vim'
 
     " Quickfix
     Plug 'Valloric/ListToggle'
