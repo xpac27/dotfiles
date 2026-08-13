@@ -5,19 +5,6 @@ if has("unix")
     endif
 endif
 
-let s:repo_vim_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h') . '/.vim'
-if isdirectory(s:repo_vim_dir)
-    let s:repo_after_dir = s:repo_vim_dir . '/after'
-    let s:home_plugin_dir = expand('~/.vim/plugin')
-    let s:home_qf_syntax = expand('~/.vim/after/syntax/qf.vim')
-    if !isdirectory(s:home_plugin_dir) || !filereadable(s:home_qf_syntax)
-        execute 'set runtimepath^=' . fnameescape(s:repo_vim_dir)
-        if isdirectory(s:repo_after_dir)
-            execute 'set runtimepath+=' . fnameescape(s:repo_after_dir)
-        endif
-    endif
-endif
-
 call plug#begin('~/.vim/plugged')
 
 " UI
