@@ -22,6 +22,7 @@ else
     command! TestAll let l = line('.') | execute 'AsyncRun -strip ruby E:\Gitlab\scripts\compile.rb NINJA_TEST %:p'
     command! IntTest AsyncRun -strip ruby E:\Gitlab\scripts\compile.rb NINJA_INT_TEST
     command! UnitTest AsyncRun -strip ruby E:\Gitlab\scripts\compile.rb NINJA_UNI_TEST
+    command! UnitTestFast AsyncRun -strip ruby E:\Gitlab\scripts\compile.rb NINJA_UNI_TEST_FAST
 
     nnoremap <silent> <leader>m :Ninja<CR>
     nnoremap <silent> <leader>mm :NinjaAll<CR>

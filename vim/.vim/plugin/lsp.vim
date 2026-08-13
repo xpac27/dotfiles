@@ -107,7 +107,7 @@ endfunction
 if has('win64') || has('win32')
     let g:lsp_settings = {
     \    'clangd': {
-    \      'cmd': ['D:\packages\PCClang\17.0.6_20186251\installed\bin\clangd.exe', '--header-insertion=never', '--rename-file-limit=100', '--all-scopes-completion=false'],
+    \      'cmd': ['D:\packages\PCClang\17.0.6_20186251\installed\bin\clangd.exe', '--header-insertion=never', '--rename-file-limit=500', '--all-scopes-completion=false'],
     \      'config': {'sort': {'max': 200}},
     \      'allowlist': ['c', 'cpp'],
     \      'blocklist': ['json'],
