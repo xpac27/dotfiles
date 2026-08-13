@@ -1,22 +1,8 @@
-function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-  cc
-endfunction
-
-" Initialize configuration dictionary
-let g:fzf_vim = {}
-" Use location list instead of quickfix list
-let g:fzf_vim.listproc = { list -> fzf#vim#listproc#location(list) }
-
-" CTRL-Q to open in quickfix list
-let g:fzf_action = { 'ctrl-q': function('s:build_quickfix_list') }
-
 " Initialize configuration dictionary
 let g:fzf_vim = {}
 
-" Use location list instead of quickfix list
-let g:fzf_vim.listproc = { list -> fzf#vim#listproc#location(list) }
+" Use quickfix list for multiple selections
+let g:fzf_vim.listproc = { list -> fzf#vim#listproc#quickfix(list) }
 
 " CTRL-A to select all
 if has("unix")
