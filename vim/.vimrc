@@ -251,8 +251,8 @@ set clipboard=unnamed,unnamedplus " Copy/paste to system clipboard
 " Work around Vim's native Wayland PRIMARY-selection path: on this Hyprland
 " session, Vim 9.2.849 yanks reached CLIPBOARD but not PRIMARY (confirmed with
 " wl-paste --primary), while Alacritty Shift+Insert reads PRIMARY.  wl-copy
-" --primary works, so mirror yanks through it.  Related Vim report:
-" https://github.com/vim/vim/issues/17732
+" --primary works, so mirror yanks through it.  This follows Vim's documented
+" external-provider fallback: https://vimhelp.org/wayland.txt.html#wayland-primary-selection
 " Remove this after Vim's * register again publishes PRIMARY reliably.
 function! s:mirror_yank_to_primary() abort
     if v:event.operator ==# 'y' && executable('wl-copy')
