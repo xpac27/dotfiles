@@ -53,8 +53,9 @@ let g:lsp_use_native_client = 1
 " Text
 hi link LspWarningHighlight Warning
 hi link LspErrorHighlight Error
-hi link LspInformationHighlight Visual
-hi link LspHintHighlight Visual
+" Match Humdrum's diagnostic palette while keeping Error/Warning's transparent background.
+hi LspInformationHighlight guifg=#99ffff guibg=NONE gui=undercurl guisp=#00afff ctermfg=153 ctermbg=NONE cterm=undercurl
+hi LspHintHighlight guifg=#ffffcc guibg=NONE gui=undercurl guisp=#00afff ctermfg=153 ctermbg=NONE cterm=undercurl
 
 " Message
 hi link LspWarningVirtualText WarningMsg
