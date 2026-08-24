@@ -50,12 +50,6 @@ endif
 let g:lsp_use_lua = has('nvim-0.4.0') || (has('lua') && has('patch-8.2.0775'))
 let g:lsp_use_native_client = 1
 
-" Signs
-hi LspWarningText guibg=NONE
-hi LspErrorText guibg=NONE
-hi LspInformationText guibg=NONE
-hi LspHintText guibg=NONE
-
 " Text
 hi link LspWarningHighlight Warning
 hi link LspErrorHighlight Error
@@ -65,7 +59,7 @@ hi link LspHintHighlight Visual
 " Message
 hi link LspWarningVirtualText WarningMsg
 hi link LspErrorVirtualText ErrorMsg
-hi link LspInformationTextVirtualText Visual
+hi link LspInformationVirtualText LspInformationText
 hi link LspHintVirtualText Visual
 
 highlight link lspReference CurrentWord
@@ -144,7 +138,7 @@ if (executable('typos-lsp'))
     au User lsp_setup call lsp#register_server({
                 \ 'name': 'typos-lsp',
                 \ 'cmd': {server_info->['typos-lsp']},
-                \ 'allowlist': ['markdown']
+                \ 'allowlist': ['c', 'cpp', 'markdown', 'ruby']
                 \ })
 endif
 
