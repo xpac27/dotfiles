@@ -30,7 +30,12 @@ let g:lsp_diagnostics_signs_insert_mode_enabled = 1 " Please don't bother me whi
 let g:lsp_diagnostics_signs_warning = {'text' : ''}
 let g:lsp_diagnostics_virtual_text_align = 'after' " 'after' or 'below'
 let g:lsp_diagnostics_virtual_text_delay = 200
-let g:lsp_diagnostics_virtual_text_enabled = 1 " show diags inlined
+
+" Hide all diagnostics to not mess with autoflip
+" ideally we'd like to hide modernize diags only but we can't
+" because vim-lsp doesn't support that level of fine tuning
+let g:lsp_diagnostics_virtual_text_enabled = 0 " show/hide diags inlined
+
 let g:lsp_diagnostics_virtual_text_insert_mode_enabled = 0
 let g:lsp_diagnostics_virtual_text_insert_mode_enabled = 1
 let g:lsp_diagnostics_virtual_text_wrap = 'wrap'

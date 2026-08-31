@@ -69,6 +69,9 @@ else
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
     Plug 'prabirshrestha/asyncomplete-buffer.vim'
 
+    " C++
+    Plug 'xpac27/vim-autoflip'
+
     " Quickfix
     Plug 'Valloric/ListToggle'
     Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }

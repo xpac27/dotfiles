@@ -1,4 +1,4 @@
-model = "gpt-5.6-sol"
+model = "gpt-5.6-terra"
 personality = "pragmatic"
 model_reasoning_effort = "high"
 plan_mode_reasoning_effort = "high"
@@ -56,6 +56,21 @@ trust_level = "trusted"
 [projects."/home/vinz/.vim/plugged/vim-lsp"]
 trust_level = "trusted"
 
+[projects."/home/vinz/Github/autoinvestor"]
+trust_level = "trusted"
+
+[projects."/home/vinz/Github/vim"]
+trust_level = "trusted"
+
+[projects."/home/vinz/Github/vim-autoauto"]
+trust_level = "trusted"
+
+[projects."/home/vinz/Github/autocrypto"]
+trust_level = "trusted"
+
+[projects."/home/vinz/Downloads"]
+trust_level = "trusted"
+
 [notice]
 "hide_gpt-5.1-codex-max_migration_prompt" = true
 
@@ -69,7 +84,7 @@ trust_level = "trusted"
 set = { USER = "codex" }
 
 [tui]
-status_line = ["current-dir", "project-name", "run-state", "task-progress", "context-remaining", "weekly-limit", "model-with-reasoning", "five-hour-limit"]
+status_line = ["current-dir", "project-name", "git-branch", "task-progress", "context-remaining", "estimated-thread-cost", "model-with-reasoning", "run-state", "five-hour-limit", "weekly-limit", "thread-title"]
 theme = "zenburn"
 status_line_use_colors = true
 
