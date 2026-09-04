@@ -51,7 +51,7 @@ key = "C"
 mods = "Control|Shift"
 
 [[keyboard.bindings]]
-action = "PasteSelection"
+action = "Paste"
 key = "Insert"
 mods = "Shift"
 

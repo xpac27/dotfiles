@@ -182,12 +182,7 @@ hl.bind("ALT + SHIFT + P", hl.dsp.exec_cmd(parsec))
 
 hl.bind("ALT + F", hl.dsp.window.float({ action = "toggle" }))
 
--- Preserve hover focus while making primary-selection paste work after cycling.
-hl.bind("ALT + j", function()
-    hl.config({ input = { follow_mouse = 0 } })
-    hl.dispatch(hl.dsp.layout("cyclenext"))
-    hl.config({ input = { follow_mouse = 1 } })
-end)
+hl.bind("ALT + j", hl.dsp.layout("cyclenext"))
 hl.bind("ALT + h", hl.dsp.window.resize({ x = -80, y = 0, relative = true }))
 hl.bind("ALT + l", hl.dsp.window.resize({ x = 80, y = 0, relative = true }))
 hl.bind("ALT + SHIFT + l", hl.dsp.window.resize({ x = 50, y = 0, relative = true }))
