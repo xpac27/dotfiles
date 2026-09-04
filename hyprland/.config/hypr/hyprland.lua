@@ -210,7 +210,6 @@ for workspace = 11, 19 do
 end
 
 hl.bind("ALT + Comma", hl.dsp.focus({ monitor = "+1" }))
-hl.bind("ALT + SHIFT + Comma", hl.dsp.window.move({ monitor = "+1" }))
 
 local function workspace_on_active_monitor(workspace)
     local monitor = hl.get_active_monitor()
@@ -326,6 +325,19 @@ local function toggle_dropdown()
 end
 
 hl.bind("ALT + Backspace", toggle_dropdown)
+
+hl.bind("ALT + SHIFT + Comma", function()
+    local window = hl.get_active_window()
+    if window ~= nil and window.class == "dropdown-term" then
+        -- Keep the terminal in special:dropdown instead of promoting it to a
+        -- normal floating window on the next monitor.
+        hl.dispatch(hl.dsp.focus({ monitor = "+1" }))
+        toggle_dropdown()
+        return
+    end
+
+    hl.dispatch(hl.dsp.window.move({ monitor = "+1" }))
+end)
 
 hl.window_rule({
     name = "dropdown-terminal",
