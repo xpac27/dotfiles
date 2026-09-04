@@ -296,35 +296,33 @@ hl.workspace_rule({
     on_created_empty = "alacritty --class dropdown-term",
 })
 
--- Window rules size and position the terminal only when it is created. Reapply
--- the same monitor-relative geometry after each toggle so one persistent
--- dropdown adapts when shown on displays with different resolutions.
+-- Window rules size and position the terminal only when it is created. When
+-- showing the persistent terminal on a new monitor, place it while hidden so
+-- it gets that monitor's size and position before the special workspace opens.
 local dropdown_window = "class:^(dropdown-term)$"
 
-local function place_dropdown()
-    local monitor = hl.get_active_monitor()
-    if monitor == nil then
-        return
-    end
-
+local function place_dropdown(monitor)
     hl.dispatch(hl.dsp.window.resize({
         window = dropdown_window,
         x = math.floor(monitor.width * 0.70),
         y = math.floor(monitor.height * 0.40),
         relative = false,
     }))
-    hl.dispatch(hl.dsp.window.center({ window = dropdown_window }))
     hl.dispatch(hl.dsp.window.move({
         window = dropdown_window,
-        x = 0,
-        y = math.floor(monitor.height * 0.25),
-        relative = true,
+        x = math.floor(monitor.x + (monitor.width * 0.15)),
+        y = math.floor(monitor.y + (monitor.height * 0.55)),
+        relative = false,
     }))
 end
 
 local function toggle_dropdown()
+    local target = hl.get_active_monitor()
+    if target ~= nil and target.active_special_workspace == nil then
+        place_dropdown(target)
+    end
+
     hl.dispatch(hl.dsp.workspace.toggle_special("dropdown"))
-    hl.timer(place_dropdown, { timeout = 1, type = "oneshot" })
 end
 
 hl.bind("ALT + Backspace", toggle_dropdown)
