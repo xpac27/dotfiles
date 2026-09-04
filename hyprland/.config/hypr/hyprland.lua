@@ -296,7 +296,38 @@ hl.workspace_rule({
     on_created_empty = "alacritty --class dropdown-term",
 })
 
-hl.bind("ALT + Backspace", hl.dsp.workspace.toggle_special("dropdown"))
+-- Window rules size and position the terminal only when it is created. Reapply
+-- the same monitor-relative geometry after each toggle so one persistent
+-- dropdown adapts when shown on displays with different resolutions.
+local dropdown_window = "class:^(dropdown-term)$"
+
+local function place_dropdown()
+    local monitor = hl.get_active_monitor()
+    if monitor == nil then
+        return
+    end
+
+    hl.dispatch(hl.dsp.window.resize({
+        window = dropdown_window,
+        x = math.floor(monitor.width * 0.70),
+        y = math.floor(monitor.height * 0.40),
+        relative = false,
+    }))
+    hl.dispatch(hl.dsp.window.center({ window = dropdown_window }))
+    hl.dispatch(hl.dsp.window.move({
+        window = dropdown_window,
+        x = 0,
+        y = math.floor(monitor.height * 0.25),
+        relative = true,
+    }))
+end
+
+local function toggle_dropdown()
+    hl.dispatch(hl.dsp.workspace.toggle_special("dropdown"))
+    hl.timer(place_dropdown, { timeout = 1, type = "oneshot" })
+end
+
+hl.bind("ALT + Backspace", toggle_dropdown)
 
 hl.window_rule({
     name = "dropdown-terminal",
