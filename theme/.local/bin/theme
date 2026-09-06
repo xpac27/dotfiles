@@ -3,7 +3,8 @@ set -eu
 
 mode="${1:-}"
 case "$mode" in
-  light|dark) ;;
+  light) codex_theme="catppuccin-latte" ;;
+  dark) codex_theme="zenburn" ;;
   *)
     printf 'usage: theme light|dark\n' >&2
     exit 2
@@ -22,4 +23,9 @@ elif [ -f "$HOME/.config/alacritty/themes/humdrum-$mode.toml" ]; then
   cp "$HOME/.config/alacritty/themes/humdrum-$mode.toml" "$HOME/.config/alacritty/themes/humdrum.toml"
 fi
 
-printf 'theme=%s\n' "$mode"
+codex_config="${CODEX_HOME:-"$HOME/.codex"}/config.toml"
+if [ -f "$codex_config" ]; then
+  sed -i "/^\[tui\]/,/^\[/s/^theme = \".*\"$/theme = \"$codex_theme\"/" "$codex_config"
+fi
+
+printf 'theme=%s codex_theme=%s\n' "$mode" "$codex_theme"

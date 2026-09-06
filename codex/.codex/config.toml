@@ -85,7 +85,7 @@ set = { USER = "codex" }
 
 [tui]
 status_line = ["current-dir", "project-name", "git-branch", "task-progress", "context-remaining", "estimated-thread-cost", "model-with-reasoning", "run-state", "five-hour-limit", "weekly-limit", "thread-title"]
-theme = "zenburn"
+theme = "catppuccin-latte"
 status_line_use_colors = true
 
 [tui.model_availability_nux]
