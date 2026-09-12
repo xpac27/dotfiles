@@ -1,0 +1,11 @@
+[Unit]
+Description=Restore Dell battery charge limit
+ConditionPathExists=/sys/class/power_supply/BAT0/charge_types
+After=systemd-modules-load.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash /usr/local/libexec/dell-battery-charge-limit
+
+[Install]
+WantedBy=multi-user.target

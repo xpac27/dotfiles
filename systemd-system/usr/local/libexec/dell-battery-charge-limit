@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+set -euo pipefail
+
+battery=/sys/class/power_supply/BAT0
+
+printf '50\n' > "$battery/charge_control_start_threshold"
+printf '90\n' > "$battery/charge_control_end_threshold"
+printf 'Custom\n' > "$battery/charge_types"
+
+test "$(<"$battery/charge_control_start_threshold")" = 50
+test "$(<"$battery/charge_control_end_threshold")" = 90
+grep -Fq '[Custom]' "$battery/charge_types"
