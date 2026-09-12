@@ -49,6 +49,9 @@ stow -v systemd -t ~/
 mkdir -p ~/mnt/ssh/Documents ~/mnt/ssh/Videos
 systemctl --user daemon-reload
 systemctl --user enable --now rp3-documents-sshfs.service rp3-videos-sshfs.service
+mkdir -p ~/Remote
+ln -sT ~/mnt/ssh/Documents ~/Remote/Documents
+ln -sT ~/mnt/ssh/Videos ~/Remote/Videos
 ```
 
 The services retry failed connections after 15 seconds. To inspect them:
