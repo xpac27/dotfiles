@@ -32,7 +32,7 @@ local screenshot = 'grim -g "$(slurp)" "$(xdg-user-dir DESKTOP)"/"$(date +%F_%T.
 -------------------
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd("wlsunset -l 59.3 -l 18.0") -- Stockholm, Sweden
+    hl.exec_cmd("wlsunset -l 59.3 -L 18.0") -- Stockholm, Sweden
     hl.exec_cmd("hypridle")
     hl.exec_cmd("hyprpaper")
 end)
