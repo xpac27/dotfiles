@@ -107,7 +107,7 @@ endfunction
 if has('win64') || has('win32')
     let g:lsp_settings = {
     \    'clangd': {
-    \      'cmd': ['D:\packages\PCClang\17.0.6_20186251\installed\bin\clangd.exe', '--header-insertion=never', '--rename-file-limit=500', '--all-scopes-completion=false'],
+    \      'cmd': ['E:\packages\PCClang\20.1.3_23462449\installed\bin\clangd.exe', '--clang-tidy', '--header-insertion=never', '--rename-file-limit=500', '--all-scopes-completion=false'],
     \      'config': {'sort': {'max': 200}},
     \      'allowlist': ['c', 'cpp'],
     \      'blocklist': ['json'],
@@ -126,7 +126,7 @@ if has('win64') || has('win32')
 else
     let g:lsp_settings = {
     \    'clangd': {
-    \      'cmd': ['clangd', '--completion-style=bundled', '--function-arg-placeholders=1', '--header-insertion-decorators', '--all-scopes-completion=false'],
+    \      'cmd': ['clangd', '--clang-tidy', '--completion-style=bundled', '--function-arg-placeholders=1', '--header-insertion-decorators', '--all-scopes-completion=false'],
     \      'config': {
     \        'filter': { 'name': 'fuzzy' },
     \        'sort': {
