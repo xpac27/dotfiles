@@ -2,7 +2,7 @@
 let g:fzf_vim = {}
 
 " Use quickfix list for multiple selections
-let g:fzf_vim.listproc = { list -> fzf#vim#listproc#quickfix(list) }
+let g:fzf_vim.listproc = { list -> fzf#vim#listproc#location(list) }
 
 " CTRL-A to select all
 if has("unix")
