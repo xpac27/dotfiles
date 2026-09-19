@@ -2,11 +2,22 @@
 set -euo pipefail
 
 battery=/sys/class/power_supply/BAT0
+charge_types="$battery/charge_types"
+
+for _ in {1..30}; do
+  [[ -e "$charge_types" ]] && break
+  /usr/bin/sleep 1
+done
+
+if [[ ! -e "$charge_types" ]]; then
+  echo "Dell battery charge controls did not appear within 30 seconds" >&2
+  exit 1
+fi
 
 printf '50\n' > "$battery/charge_control_start_threshold"
 printf '90\n' > "$battery/charge_control_end_threshold"
-printf 'Custom\n' > "$battery/charge_types"
+printf 'Custom\n' > "$charge_types"
 
 test "$(<"$battery/charge_control_start_threshold")" = 50
 test "$(<"$battery/charge_control_end_threshold")" = 90
-grep -Fq '[Custom]' "$battery/charge_types"
+grep -Fq '[Custom]' "$charge_types"
