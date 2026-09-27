@@ -14,8 +14,8 @@ blue = "0x686868"
 cyan = "0x868686"
 green = "0xeeee99"
 magenta = "0x747474"
-red = "0xff9999"
-white = "0xb9b9b9"
+red = "0xb33b3b"
+white = "0xf1e8e8"
 yellow = "0xa0a0a0"
 
 [colors.primary]
