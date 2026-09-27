@@ -14,10 +14,7 @@ if [[ ! -e "$charge_types" ]]; then
   exit 1
 fi
 
-printf '50\n' > "$battery/charge_control_start_threshold"
-printf '90\n' > "$battery/charge_control_end_threshold"
-printf 'Custom\n' > "$charge_types"
+# Dell calls the Primarily AC Use preset "Trickle" in Linux's power-supply API.
+printf 'Trickle\n' > "$charge_types"
 
-test "$(<"$battery/charge_control_start_threshold")" = 50
-test "$(<"$battery/charge_control_end_threshold")" = 90
-grep -Fq '[Custom]' "$charge_types"
+grep -Fq '[Trickle]' "$charge_types"

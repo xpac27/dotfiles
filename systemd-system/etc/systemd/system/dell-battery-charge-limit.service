@@ -1,5 +1,5 @@
 [Unit]
-Description=Restore Dell battery charge limit
+Description=Restore Dell primarily-AC battery policy
 After=systemd-modules-load.service
 
 [Service]
