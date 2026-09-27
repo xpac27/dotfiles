@@ -148,6 +148,14 @@ if (executable('typos-lsp'))
                 \ })
 endif
 
+if (executable('yaml-language-server'))
+    au User lsp_setup call lsp#register_server({
+                \ 'name': 'yaml-language-server',
+                \ 'cmd': {server_info->['yaml-language-server', '--stdio']},
+                \ 'allowlist': ['yaml']
+                \ })
+endif
+
 " let g:lsp_settings_filetype_ruby = 'solargraph'
 
 augroup lsp_install
