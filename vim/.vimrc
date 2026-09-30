@@ -67,7 +67,6 @@ else
     Plug 'mattn/vim-lsp-settings'
     Plug 'prabirshrestha/asyncomplete.vim'
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    Plug 'prabirshrestha/asyncomplete-buffer.vim'
 
     " C++
     Plug 'xpac27/vim-autoflip'
@@ -184,7 +183,6 @@ set autoread
 set backspace=indent,eol,start
 set cmdheight=1
 set complete-=i
-set completeopt=longest,menuone
 set cursorline
 set encoding=UTF-8
 set equalalways

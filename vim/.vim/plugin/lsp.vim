@@ -1,59 +1,31 @@
-" Show variable types
+" Keep inlay hints and completion documentation hidden; K still opens hover help.
 let g:lsp_inlay_hints_enabled = 0
+let g:lsp_completion_documentation_enabled = 0
 
-" Highlight the word under cursor
+" Highlight references to the symbol under the cursor and enable semantic colors.
 let g:lsp_document_highlight_enabled = 1
 let g:lsp_document_highlight_delay = 150
-
-" Improve syntax higlight
 let g:lsp_semantic_enabled = 1
 
-" Enables floating window documentation for complete items
-let g:lsp_completion_documentation_enabled = 0
-let g:lsp_completion_documentation_delay = 99999999
-
-" Closes the preview window on the second call to preview
+" A second preview request closes the preview window.
 let g:lsp_preview_doubletap = [function('lsp#ui#vim#output#closepreview')]
 
-" Diagnostics
-let g:lsp_diagnostics_echo_cursor = 1 " show diags in the status line
+" Keep diagnostic highlights and messages, but avoid signs and inline text
+" interfering with Autoflip. Hide diagnostic highlights while typing.
 let g:lsp_diagnostics_enabled = 1
-let g:lsp_diagnostics_float_cursor = 0 " show diags in a popup
-let g:lsp_diagnostics_float_insert_mode_enabled = 0 " show diags in a popup
-let g:lsp_diagnostics_highlights_insert_mode_enabled = 0 " show diags in a popup
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_diagnostics_highlights_insert_mode_enabled = 0
+let g:lsp_diagnostics_float_cursor = 0
 let g:lsp_diagnostics_signs_enabled = 0
-let g:lsp_diagnostics_signs_error = {'text': '󰈸'}
-let g:lsp_diagnostics_signs_hint = {'text': ''}
-let g:lsp_diagnostics_signs_information = {'text': 'ℹ️'}
-let g:lsp_diagnostics_signs_insert_mode_enabled = 0
-let g:lsp_diagnostics_signs_insert_mode_enabled = 1 " Please don't bother me while I type
-let g:lsp_diagnostics_signs_warning = {'text' : ''}
-let g:lsp_diagnostics_virtual_text_align = 'after' " 'after' or 'below'
-let g:lsp_diagnostics_virtual_text_delay = 200
-
-" Hide all diagnostics to not mess with autoflip
-" ideally we'd like to hide modernize diags only but we can't
-" because vim-lsp doesn't support that level of fine tuning
-let g:lsp_diagnostics_virtual_text_enabled = 0 " show/hide diags inlined
-
-let g:lsp_diagnostics_virtual_text_insert_mode_enabled = 0
-let g:lsp_diagnostics_virtual_text_insert_mode_enabled = 1
-let g:lsp_diagnostics_virtual_text_wrap = 'wrap'
-
-" Code actions
+let g:lsp_diagnostics_virtual_text_enabled = 0
 let g:lsp_document_code_action_signs_enabled = 0
-let g:lsp_document_code_action_signs_hint = {'text': '󰣈'}
 
-" Autocomplete signature
-if has('win64') || has('win32')
-    let g:lsp_signature_help_enabled = 0 " causes issues in gvim on windows together with copilote
-else
-    let g:lsp_signature_help_enabled = 1
-endif
+" Signature help conflicts with Copilot in Windows gVim.
+let g:lsp_signature_help_enabled = !(has('win32') || has('win64'))
 
-" Should improve perfs
-let g:lsp_use_lua = has('nvim-0.4.0') || (has('lua') && has('patch-8.2.0775'))
+" Use Vim's native LSP transport; Lua support already defaults to autodetection.
 let g:lsp_use_native_client = 1
+let g:lsp_format_sync_timeout = 1000
 
 " Text
 hi link LspWarningHighlight Warning
@@ -62,13 +34,19 @@ hi link LspErrorHighlight Error
 hi LspInformationHighlight guifg=#99ffff guibg=NONE gui=undercurl guisp=#00afff ctermfg=153 ctermbg=NONE cterm=undercurl
 hi LspHintHighlight guifg=#ffffcc guibg=NONE gui=undercurl guisp=#00afff ctermfg=153 ctermbg=NONE cterm=undercurl
 
-" Message
-hi link LspWarningVirtualText WarningMsg
-hi link LspErrorVirtualText ErrorMsg
-hi link LspInformationVirtualText LspInformationText
-hi link LspHintVirtualText Visual
-
 highlight link lspReference CurrentWord
+
+function! s:format_on_save() abort
+    if &l:buftype !=# '' || empty(expand('%')) || index(['c', 'cpp'], &l:filetype) < 0
+        return
+    endif
+    " Search from this file, not Vim's working directory. Recheck on each save
+    " so renaming a buffer or adding/removing .clang-format takes effect.
+    let l:search_path = escape(expand('%:p:h'), ' ,;') . ';'
+    if !empty(findfile('.clang-format', l:search_path))
+        LspDocumentFormatSync
+    endif
+endfunction
 
 function! s:on_lsp_buffer_enabled() abort
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
@@ -95,71 +73,46 @@ function! s:on_lsp_buffer_enabled() abort
     nnoremap <buffer> <Right> :LspNextDiagnostic<CR>
     nnoremap <buffer> <Left> :LspPreviousDiagnostic<CR>
 
-   if has("unix") && filereadable('.clang-format')
-        let g:lsp_format_sync_timeout = 1000
-        autocmd! BufWritePre *.cpp,*.h,*.hpp call execute('LspDocumentFormatSync')
-   endif
+    if has('unix') && index(['c', 'cpp'], &l:filetype) >= 0
+        " Clear only our hook for this buffer when another server attaches.
+        augroup user_lsp_format_on_save
+            autocmd! BufWritePre <buffer>
+            autocmd BufWritePre <buffer> call <SID>format_on_save()
+        augroup END
+    endif
 endfunction
 
-    " \      'cmd': ['D:\clangd_20.1.8\bin\clangd.exe', '--header-insertion=never', '--rename-file-limit=100', '--all-scopes-completion=false'],
-    " \      'cmd': ['D:\packages\PCClang\17.0.6_20186251\installed\bin\clangd.exe', '--header-insertion=never', '--rename-file-limit=100', '--all-scopes-completion=false'],
-" Use windows clangd matching the version of clang mentioned in compile_commands.json
+" vim-lsp-settings owns registration, including YAML roots, schemas and
+" formatting defaults. Customize servers here instead of registering them again.
+" Share matching/ranking across platforms; keep platform overrides below.
+let g:lsp_settings = {
+\    'clangd': {
+\        'config': {
+\            'filter': {'name': 'fuzzy'},
+\            'sort': {'name': 'relevance', 'max': 2000, 'locality': v:true},
+\        },
+\    },
+\    'typos-lsp': {
+\        'disabled': v:false,
+\        'allowlist': ['c', 'cpp', 'markdown', 'ruby'],
+\    },
+\ }
+
 if has('win64') || has('win32')
-    let g:lsp_settings = {
-    \    'clangd': {
-    \      'cmd': ['E:\packages\PCClang\20.1.3_23462449\installed\bin\clangd.exe', '--clang-tidy', '--header-insertion=never', '--rename-file-limit=500', '--all-scopes-completion=false'],
-    \      'config': {'sort': {'max': 200}},
-    \      'allowlist': ['c', 'cpp'],
-    \      'blocklist': ['json'],
-    \    },
-    \    'typos-lsp': {
-    \      'cmd': ['D:\typos-lsp_0.1.36\typos-lsp.exe'],
-    \      'allowlist': ['c', 'cpp', 'markdown'],
-    \      'blocklist': ['json'],
-    \      'disabled': v:false,
-    \    },
-    \    'JSON': {
-    \      'disabled': v:true,
-    \    },
-    \    'efm-langserver': {'disabled': v:false},
-    \  }
+    " Match the Windows clangd version to compile_commands.json's compiler.
+    let g:lsp_settings['clangd']['cmd'] = ['E:\packages\PCClang\20.1.3_23462449\installed\bin\clangd.exe', '--clang-tidy', '--header-insertion=never', '--rename-file-limit=500', '--all-scopes-completion=false']
+    let g:lsp_settings['clangd']['allowlist'] = ['c', 'cpp']
+    let g:lsp_settings['typos-lsp']['cmd'] = ['D:\typos-lsp_0.1.36\typos-lsp.exe']
+    let g:lsp_settings['typos-lsp']['allowlist'] = ['c', 'cpp', 'markdown']
+    " These are server IDs; 'JSON' is not a vim-lsp-settings server name.
+    let g:lsp_settings['vscode-json-language-server'] = {'disabled': v:true}
+    let g:lsp_settings['json-languageserver'] = {'disabled': v:true}
 else
-    let g:lsp_settings = {
-    \    'clangd': {
-    \      'cmd': ['clangd', '--clang-tidy', '--completion-style=bundled', '--function-arg-placeholders=1', '--header-insertion-decorators', '--all-scopes-completion=false'],
-    \      'config': {
-    \        'filter': { 'name': 'fuzzy' },
-    \        'sort': {
-    \          'name': 'relevance',
-    \          'max': 2000,
-    \          'locality': v:true,
-    \        },
-    \      },
-    \      'efm-langserver': {'disabled': v:false}
-    \    }
-    \  }
+    let g:lsp_settings['clangd']['cmd'] = ['clangd', '--clang-tidy', '--completion-style=bundled', '--function-arg-placeholders=1', '--header-insertion-decorators', '--all-scopes-completion=false']
 endif
-
-if (executable('typos-lsp'))
-    au User lsp_setup call lsp#register_server({
-                \ 'name': 'typos-lsp',
-                \ 'cmd': {server_info->['typos-lsp']},
-                \ 'allowlist': ['c', 'cpp', 'markdown', 'ruby']
-                \ })
-endif
-
-if (executable('yaml-language-server'))
-    au User lsp_setup call lsp#register_server({
-                \ 'name': 'yaml-language-server',
-                \ 'cmd': {server_info->['yaml-language-server', '--stdio']},
-                \ 'allowlist': ['yaml']
-                \ })
-endif
-
-" let g:lsp_settings_filetype_ruby = 'solargraph'
 
 augroup lsp_install
-    au!
-    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd!
+    " Apply navigation and save hooks when an LSP server attaches to this buffer.
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
