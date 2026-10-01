@@ -14,20 +14,20 @@ else
     let g:asyncrun_open = 20
     let g:asyncrun_exit = "if g:asyncrun_code == 0 | cclose | endif"
 
-    command! Ninja AsyncRun -strip ruby E:\Gitlab\scripts\compile.rb NINJA_BUILD %:p
-    command! NinjaBO AsyncRun -strip ruby E:\Gitlab\scripts\compile.rb NINJA_BUILD Extension.BattlefieldOnline_all
-    command! NinjaAll AsyncRun -strip ruby E:\Gitlab\scripts\compile.rb NINJA_BUILD all
+    command! Ninja execute 'AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb build ' . shellescape(expand('%:p'))
+    command! NinjaBO AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb build Extension.BattlefieldOnline_all
+    command! NinjaAll AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb build all
 
-    command! Test let l = line('.') | execute 'AsyncRun -strip ruby E:\Gitlab\scripts\compile.rb NINJA_TEST %:p' l
-    command! TestAll let l = line('.') | execute 'AsyncRun -strip ruby E:\Gitlab\scripts\compile.rb NINJA_TEST %:p'
-    command! IntTest AsyncRun -strip ruby E:\Gitlab\scripts\compile.rb NINJA_INT_TEST
-    command! UnitTest AsyncRun -strip ruby E:\Gitlab\scripts\compile.rb NINJA_UNI_TEST
-    command! UnitTestFast AsyncRun -strip ruby E:\Gitlab\scripts\compile.rb NINJA_UNI_TEST_FAST
+    command! Test execute 'AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test ' . shellescape(expand('%:p') . ':' . line('.')) . ' --include-slow'
+    command! TestAll execute 'AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test ' . shellescape(expand('%:p'))
+    command! IntTest AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test integration
+    command! UnitTest AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test unit --record-timings
+    command! UnitTestFast AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test unit
 
-    nnoremap <silent> <leader>m :Ninja<CR>
-    nnoremap <silent> <leader>mm :NinjaAll<CR>
-    nnoremap <silent> <leader>t :Test<CR>
-    nnoremap <silent> <leader>tt :TestAll<CR>
+    nnoremap <silent> <leader>m  <cmd>Ninja<CR>
+    nnoremap <silent> <leader>mm <cmd>NinjaAll<CR>
+    nnoremap <silent> <leader>t  <cmd>Test<CR>
+    nnoremap <silent> <leader>tt <cmd>TestAll<CR>
 
     nnoremap <leader>s :P4edit "%"<CR>:AsyncRun -silent fb sort_includes %:p<CR>
 endif
