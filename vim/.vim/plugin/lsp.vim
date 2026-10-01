@@ -82,6 +82,22 @@ function! s:on_lsp_buffer_enabled() abort
     endif
 endfunction
 
+function! s:hide_clangd_hover_linebreaks() abort
+    if index(['c', 'cpp'], &filetype) < 0
+        return
+    endif
+
+    let l:hover_servers = filter(lsp#get_allowed_servers(), 'lsp#capabilities#has_hover_provider(v:val)')
+    if l:hover_servers !=# ['clangd']
+        return
+    endif
+
+    let l:winid = lsp#internal#document_hover#under_cursor#getpreviewwinid()
+    if type(l:winid) == v:t_number && winbufnr(l:winid) > 0
+        call matchadd('Pmenu', '  \+$', 20, -1, {'window': l:winid})
+    endif
+endfunction
+
 " vim-lsp-settings owns registration, including YAML roots, schemas and
 " formatting defaults. Customize servers here instead of registering them again.
 " Share matching/ranking across platforms; keep platform overrides below.
@@ -115,4 +131,5 @@ augroup lsp_install
     autocmd!
     " Apply navigation and save hooks when an LSP server attaches to this buffer.
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+    autocmd User lsp_float_opened call s:hide_clangd_hover_linebreaks()
 augroup END
