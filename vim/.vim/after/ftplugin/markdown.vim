@@ -14,6 +14,12 @@ setlocal concealcursor=
 setlocal foldmethod=manual
 setlocal nofoldenable
 
+" The base mkdCode region handles every fence, including language-tagged ones.
+" Disable vim-markdown's per-language syntax and folding refresh callbacks.
+augroup Mkd
+  autocmd! * <buffer>
+augroup END
+
 " Align the displayed cells of pipe tables without changing their Markdown.
 if has('textprop') && exists('*prop_add')
   let s:table_padding_type = 'markdown_table_padding'
