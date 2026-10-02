@@ -9,6 +9,7 @@ let g:lsp_semantic_enabled = 1
 
 " A second preview request closes the preview window.
 let g:lsp_preview_doubletap = [function('lsp#ui#vim#output#closepreview')]
+let g:lsp_popup_borderchars = ['-', '|', '-', '|', '●', '●', '●', '●']
 
 " Keep diagnostic highlights and messages, but avoid signs and inline text
 " interfering with Autoflip. Hide diagnostic highlights while typing.
