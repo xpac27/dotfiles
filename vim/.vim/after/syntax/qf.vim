@@ -23,5 +23,7 @@ syn match ITestError "\<FAILED\>"
 syn match ITestError "\<FAILED\>" contained containedin=qfLineNr,qfText
 syn match ITestWarning "\<SKIPPED\>"
 syn match ITestWarning "\<SKIPPED\>" contained containedin=qfLineNr,qfText
+syn match ITestWarning "\<FLACKY\>"
+syn match ITestWarning "\<FLACKY\>" contained containedin=qfLineNr,qfText
 syn match ITestSuccess "\<PASSED\>"
 syn match ITestSuccess "\<PASSED\>" contained containedin=qfLineNr,qfText
