@@ -593,7 +593,7 @@ program = "/bin/fish"
 decorations = "none"
 dynamic_padding = true
 dynamic_title = true
-opacity = 0.85
+opacity = 0.95
 startup_mode = "Maximized"
 
 [window.dimensions]
