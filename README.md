@@ -1,5 +1,30 @@
 # Dotfiles
 
+## Vim on Wayland
+
+Vim uses its clipboard-provider API with `wl-copy` and `wl-paste` when those
+tools, `timeout`, and a Wayland session are available. `wl-copy` owns copied
+text in a separate process, so pasting keeps working while Vim is suspended
+with Ctrl+Z and after Vim exits. Both CLIPBOARD (`+`) and PRIMARY (`*`) are
+supported. Clipboard commands time out after three seconds instead of hanging.
+
+New Vim sessions load the provider automatically. For an existing session:
+
+```vim
+:runtime plugin/wayland-clipboard.vim
+```
+
+Run the live regression checks from this repository inside a Wayland session:
+
+```sh
+python vim/tests/test_wayland_clipboard.py
+```
+
+The checks launch a temporary Vim under fish, exercise Ctrl+Z and `fg`, and
+temporarily replace both clipboard selections. They restore the previous text
+afterward. A suspended native Vim that still owns the clipboard must be resumed
+before running the checks.
+
 ## Neovim on Arch
 
 Symlink the config:
