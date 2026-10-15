@@ -183,14 +183,59 @@ hl.bind("ALT + SHIFT + P", hl.dsp.exec_cmd(parsec))
 
 hl.bind("ALT + F", hl.dsp.window.float({ action = "toggle" }))
 
-hl.bind("ALT + j", hl.dsp.layout("cyclenext"))
+-- Hyprland 0.56.2 cannot wrap cyclenext or swap the first master when every
+-- tiled window is a master. Handle that case until upstream fixes both commands.
+local function master_action(command)
+    local active = hl.get_active_window()
+    local masters = {}
+
+    if active and active.workspace and active.layout and active.layout.is_master then
+        for _, window in ipairs(hl.get_workspace_windows(active.workspace)) do
+            if not window.hidden and not window.floating then
+                if not window.layout or not window.layout.is_master then
+                    hl.dispatch(hl.dsp.layout(command))
+                    return
+                end
+                masters[#masters + 1] = window
+            end
+        end
+    end
+
+    if #masters < 2 then
+        hl.dispatch(hl.dsp.layout(command))
+        return
+    end
+
+    -- Masters form a single row or column; use their target positions so
+    -- repeated keypresses also work while window animations are running.
+    table.sort(masters, function(a, b)
+        if a.at.y == b.at.y then
+            return a.at.x < b.at.x
+        end
+        return a.at.y < b.at.y
+    end)
+
+    for index, window in ipairs(masters) do
+        if window.address == active.address then
+            if command == "cyclenext" then
+                hl.dispatch(hl.dsp.focus({ window = "address:" .. masters[index % #masters + 1].address }))
+            else
+                local target = masters[index == 1 and 2 or 1]
+                hl.dispatch(hl.dsp.window.swap({ target = "address:" .. target.address }))
+            end
+            return
+        end
+    end
+end
+
+hl.bind("ALT + j", function() master_action("cyclenext") end)
 hl.bind("ALT + i", hl.dsp.layout("addmaster"))
 hl.bind("ALT + d", hl.dsp.layout("removemaster"))
 hl.bind("ALT + h", hl.dsp.window.resize({ x = -80, y = 0, relative = true }))
 hl.bind("ALT + l", hl.dsp.window.resize({ x = 80, y = 0, relative = true }))
 hl.bind("ALT + SHIFT + l", hl.dsp.window.resize({ x = 50, y = 0, relative = true }))
 hl.bind("ALT + SHIFT + h", hl.dsp.window.resize({ x = -50, y = 0, relative = true }))
-hl.bind("ALT + SHIFT + j", hl.dsp.layout("swapwithmaster auto"))
+hl.bind("ALT + SHIFT + j", function() master_action("swapwithmaster auto") end)
 
 hl.bind("ALT + mouse:272", hl.dsp.window.drag(), { mouse = true })
 
