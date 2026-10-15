@@ -128,6 +128,7 @@ hl.config({
     master = {
         new_status = "master",
         mfact = 0.60,
+        allow_small_split = true,
     },
     misc = {
         force_default_wallpaper = 0,
@@ -183,6 +184,8 @@ hl.bind("ALT + SHIFT + P", hl.dsp.exec_cmd(parsec))
 hl.bind("ALT + F", hl.dsp.window.float({ action = "toggle" }))
 
 hl.bind("ALT + j", hl.dsp.layout("cyclenext"))
+hl.bind("ALT + i", hl.dsp.layout("addmaster"))
+hl.bind("ALT + d", hl.dsp.layout("removemaster"))
 hl.bind("ALT + h", hl.dsp.window.resize({ x = -80, y = 0, relative = true }))
 hl.bind("ALT + l", hl.dsp.window.resize({ x = 80, y = 0, relative = true }))
 hl.bind("ALT + SHIFT + l", hl.dsp.window.resize({ x = 50, y = 0, relative = true }))
