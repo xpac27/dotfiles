@@ -5,11 +5,12 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/sshfs -f -o BatchMode=yes,IdentitiesOnly=yes,IdentityFile=%h/.ssh/id_rsa,idmap=user,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 vinz@rp3:/mnt/data/vinz/Docs %h/mnt/ssh/Documents
-ExecStop=/usr/bin/fusermount3 -u %h/mnt/ssh/Documents
-Restart=on-failure
+# Let a broken connection exit; systemd retries without holding FUSE requests.
+ExecStart=/usr/bin/sshfs -f -o BatchMode=yes,IdentitiesOnly=yes,IdentityFile=%h/.ssh/id_rsa,idmap=user,auto_unmount,ConnectTimeout=5,ConnectionAttempts=1,ServerAliveInterval=5,ServerAliveCountMax=2 vinz@rp3:/mnt/data/vinz/Docs %h/mnt/ssh/Documents
+ExecStopPost=-/usr/bin/fusermount3 -u %h/mnt/ssh/Documents
+Restart=always
 RestartSec=15
-TimeoutStopSec=15
+TimeoutStopSec=5
 
 [Install]
 WantedBy=default.target

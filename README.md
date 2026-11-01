@@ -64,7 +64,7 @@ If something still looks broken, check:
 
 The rp3 Documents and Videos mounts run in the `vinz` user systemd manager;
 they therefore mount beneath `~/mnt/ssh` and never need root access. User
-managers cannot create kernel autofs mounts, so these reconnecting SSHFS
+managers cannot create kernel autofs mounts, so these SSHFS
 services mount when the user manager starts rather than on first access.
 Install the required Arch packages, then stow the units and activate them:
 
@@ -79,7 +79,29 @@ ln -sT ~/mnt/ssh/Documents ~/Remote/Documents
 ln -sT ~/mnt/ssh/Videos ~/Remote/Videos
 ```
 
-The services retry failed connections after 15 seconds. To inspect them:
+SSHFS does not reconnect inside a live mount: a lost connection exits and
+`auto_unmount` removes the mount, releasing waiting filesystem operations.
+SSH connection attempts time out after five seconds; keepalives detect a
+silent network failure in about 10–15 seconds (five-second interval, two
+unanswered probes; the simulated packet-loss check released a waiting stat
+in 14.7 seconds). The user manager retries after 15 seconds, including when
+SSHFS exits cleanly. Stopping a
+service allows five seconds before killing it, then attempts unmount cleanup.
+These are network failure limits, not a deadline for every filesystem request:
+a responsive SSH server with a stalled SFTP/storage operation can still wait.
+Interrupted transfers may fail; reopen files after a remount.
+
+After changing the units, apply them with:
+
+```fish
+systemctl --user daemon-reload
+systemctl --user restart rp3-documents-sshfs.service rp3-videos-sshfs.service
+```
+
+When the Pi is unavailable, `~/Remote/{Documents,Videos}` resolves to the
+empty local mountpoint directories; avoid writing there while unmounted.
+Check `findmnt -t fuse.sshfs` to confirm a remote mount before transferring files.
+To inspect the services:
 
 ```sh
 systemctl --user status rp3-documents-sshfs.service rp3-videos-sshfs.service
