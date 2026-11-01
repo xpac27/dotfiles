@@ -48,8 +48,6 @@ alias gpg-warmup='echo warmup | gpg --clearsign >/dev/null'
 alias n='nnn -QAeodax'
 alias na='nnn -QAHeodax'
 export NNN_COLORS='3333'
-export NNN_PLUG='o:fzopen;d:fzcd;v:imgview;p:preview-tabbed'
-export NNN_FIFO=/tmp/nnn.fifo
 
 # Ruby
 if not set -q GEM_HOME # [RUN_ONCE_OPTIMIZATION] if switching Ruby versions, this can become stale
