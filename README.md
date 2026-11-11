@@ -1,5 +1,13 @@
 # Dotfiles
 
+## NordVPN
+
+The stowed fish command provides `vpn` (Sweden), `vpn se|fr|uk|us|pl`,
+`vpn off` and `vpn status`, using Arch's OpenVPN package. See
+[the setup guide](docs/nordvpn.md) for profile downloads, root-owned system
+installation, stored service credentials and connection checks. Profiles and
+credentials stay outside Git; system changes are explicit manual steps.
+
 ## Vim on Wayland
 
 Vim uses its clipboard-provider API with `wl-copy` and `wl-paste` when those
