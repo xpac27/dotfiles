@@ -22,7 +22,17 @@ function vpn --description 'Connect to NordVPN: se (default), fr, uk, us, pl; of
             echo 'vpn off               Disconnect'
             echo 'vpn status            Show service state (not a public-IP check)'
         case off
-            command systemctl stop $units
+            # Batched stops use broader authorization on newer systemd.
+            # Keep each request within our per-unit Polkit permissions.
+            set -l result 0
+            for unit in $units
+                command systemctl stop $unit
+                set -l stop_status $status
+                if test $result -eq 0; and test $stop_status -ne 0
+                    set result $stop_status
+                end
+            end
+            return $result
         case status
             command systemctl --no-pager --plain list-units --all $units
         case '*'

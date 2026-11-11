@@ -24,6 +24,8 @@ selection. systemd stops the previous country before starting the new one,
 including when using `systemctl start openvpn-client@nordvpn-fr.service` directly.
 Starting the already-active country is a no-op. `vpn status` reports systemd
 state; it does not independently verify your public IP or country.
+`vpn off` stops each service individually so the per-unit Polkit rule applies
+on newer systemd versions too; it reports failure if any stop fails.
 
 The Polkit rule permits only `vinz` (or the user passed to the installer) in an
 active local session to start/stop these five services without a password. It

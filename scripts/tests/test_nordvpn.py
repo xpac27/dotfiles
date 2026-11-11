@@ -157,14 +157,24 @@ assert.equal(check({}, {local: false}), undefined);
 
     def test_fish_commands_and_failure_propagation_without_real_systemctl(self):
         mock = self.root / "systemctl"
-        mock.write_text("#!/usr/bin/env python3\nimport json, os, sys\nprint(json.dumps(sys.argv[1:]))\nsys.exit(int(os.environ.get('MOCK_EXIT', '0')))\n")
+        mock.write_text("""#!/usr/bin/env python3
+import json, os, sys
+print(json.dumps(sys.argv[1:]))
+# Model systemd's broader authorization for batched stop requests.
+if sys.argv[1:2] == ['stop'] and len(sys.argv) != 3:
+    sys.exit(77)
+failure = int(os.environ.get('MOCK_EXIT', '0'))
+fail_unit = os.environ.get('MOCK_FAIL_UNIT')
+sys.exit(failure if not fail_unit or fail_unit in sys.argv else 0)
+""")
         mock.chmod(0o755)
         environment = dict(os.environ, PATH=str(self.root) + ":" + os.environ["PATH"])
         function = REPO / "fish/.config/fish/functions/vpn.fish"
 
-        def run(arguments, failure="0"):
+        def run(arguments, failure="0", fail_unit=""):
             return subprocess.run(["fish", "--no-config", "-c", f"source {function}; vpn {arguments}"],
-                                  env=dict(environment, MOCK_EXIT=failure), text=True, capture_output=True)
+                                  env=dict(environment, MOCK_EXIT=failure, MOCK_FAIL_UNIT=fail_unit),
+                                  text=True, capture_output=True)
 
         for arguments, country in [("", "se"), ("fr", "fr"), ("pl", "pl")]:
             result = run(arguments)
@@ -172,8 +182,16 @@ assert.equal(check({}, {local: false}), undefined);
             self.assertEqual(json.loads(result.stdout), ["start", f"openvpn-client@nordvpn-{country}.service"])
         self.assertEqual(run("uk", "7").returncode, 7)
         self.assertEqual(run("off", "8").returncode, 8)
-        off = json.loads(run("off").stdout)
-        self.assertEqual(off, ["stop"] + [f"openvpn-client@nordvpn-{c}.service" for c in installer.COUNTRIES])
+        expected_stops = [["stop", f"openvpn-client@nordvpn-{c}.service"] for c in installer.COUNTRIES]
+        off = run("off")
+        self.assertEqual(off.returncode, 0, off.stderr)
+        self.assertEqual([json.loads(line) for line in off.stdout.splitlines()], expected_stops)
+        # A failed stop must neither skip later countries nor be hidden by success.
+        for country in installer.COUNTRIES:
+            with self.subTest(failed_stop=country):
+                off = run("off", "8", f"openvpn-client@nordvpn-{country}.service")
+                self.assertEqual(off.returncode, 8)
+                self.assertEqual([json.loads(line) for line in off.stdout.splitlines()], expected_stops)
         self.assertEqual(json.loads(run("status").stdout)[:4], ["--no-pager", "--plain", "list-units", "--all"])
         for invalid in ["xx", "se fr", "--install"]:
             self.assertEqual(run(invalid).returncode, 2)
