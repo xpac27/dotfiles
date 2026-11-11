@@ -21,6 +21,7 @@ else
     command! Test execute 'AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test ' . shellescape(expand('%:p') . ':' . line('.')) . ' --include-slow'
     command! TestAll execute 'AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test ' . shellescape(expand('%:p'))
     command! IntTest AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test integration
+    command! IntTestOnce AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test integration --record-timings --no-rerun
     command! UnitTest AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test unit --record-timings
     command! UnitTestFast AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test unit
 
