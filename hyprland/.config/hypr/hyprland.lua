@@ -323,6 +323,25 @@ hl.window_rule({
     no_focus = true,
 })
 
+-- Practice apps keep their compact native layouts when opened.
+hl.window_rule({
+    name = "float-guitar-rig",
+    match = {
+        class = "^(Guitar Amp)$",
+        initial_title = "^(Guitar Amp)$",
+    },
+    float = true,
+})
+
+hl.window_rule({
+    name = "float-drum-kit",
+    match = {
+        class = "^(Drums)$",
+        initial_title = "^(Drums)$",
+    },
+    float = true,
+})
+
 hl.window_rule({
     name = "float-zoom-popups",
     match = {
