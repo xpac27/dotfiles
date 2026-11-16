@@ -1,0 +1,3 @@
+#!/bin/sh
+# The mount is system-managed; SSH still uses vinz's identity and known_hosts.
+exec /usr/bin/runuser -u vinz -- /usr/bin/ssh "$@"

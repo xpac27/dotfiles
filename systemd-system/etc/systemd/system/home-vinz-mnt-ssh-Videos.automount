@@ -1,0 +1,13 @@
+[Unit]
+Description=Mount rp3 Videos on access
+# Start with the unlocked home, not at boot before systemd-homed unlocks it.
+BindsTo=home-vinz.mount
+After=home-vinz.mount
+
+[Automount]
+Where=/home/vinz/mnt/ssh/Videos
+TimeoutIdleSec=5min
+DirectoryMode=0755
+
+[Install]
+WantedBy=home-vinz.mount

@@ -68,58 +68,42 @@ If something still looks broken, check:
 :checkhealth provider
 ```
 
-## SSHFS mounts for rp3
+## SSHFS automounts for rp3
 
-The rp3 Documents and Videos mounts run in the `vinz` user systemd manager;
-they therefore mount beneath `~/mnt/ssh` and never need root access. User
-managers cannot create kernel autofs mounts, so these SSHFS
-services mount when the user manager starts rather than on first access.
-Install the required Arch packages, then stow the units and activate them:
+Systemd mounts `~/Remote/Documents` and `~/Remote/Videos` on access and
+attempts to unmount them after five idle minutes. SSH uses vinz's existing key
+and known-hosts file; there are no periodic connection retries while unused.
 
-```sh
-sudo pacman -S --needed openssh sshfs stow
-stow -v systemd -t ~/
-mkdir -p ~/mnt/ssh/Documents ~/mnt/ssh/Videos
-systemctl --user daemon-reload
-systemctl --user enable --now rp3-documents-sshfs.service rp3-videos-sshfs.service
-mkdir -p ~/Remote
-ln -sT ~/mnt/ssh/Documents ~/Remote/Documents
-ln -sT ~/mnt/ssh/Videos ~/Remote/Videos
-```
-
-SSHFS does not reconnect inside a live mount: a lost connection exits and
-`auto_unmount` removes the mount, releasing waiting filesystem operations.
-SSH connection attempts time out after five seconds; keepalives detect a
-silent network failure in about 10–15 seconds (five-second interval, two
-unanswered probes; the simulated packet-loss check released a waiting stat
-in 14.7 seconds). The user manager retries after 15 seconds, including when
-SSHFS exits cleanly. Stopping a
-service allows five seconds before killing it, then attempts unmount cleanup.
-These are network failure limits, not a deadline for every filesystem request:
-a responsive SSH server with a stalled SFTP/storage operation can still wait.
-Interrupted transfers may fail; reopen files after a remount.
-
-After changing the units, apply them with:
+From this repository, with the home unlocked and the old user SSHFS services
+removed, install the four units and SSH helper:
 
 ```fish
-systemctl --user daemon-reload
-systemctl --user restart rp3-documents-sshfs.service rp3-videos-sshfs.service
-```
-
-When the Pi is unavailable, `~/Remote/{Documents,Videos}` resolves to the
-empty local mountpoint directories; avoid writing there while unmounted.
-Check `findmnt -t fuse.sshfs` to confirm a remote mount before transferring files.
-To inspect the services:
-
-```sh
-systemctl --user status rp3-documents-sshfs.service rp3-videos-sshfs.service
-```
-
-After confirming the new mounts work, remove the obsolete root automounts
-once. This requires an interactive `sudo` prompt:
-
-```sh
-sudo systemctl disable --now mnt-ssh-Documents.automount mnt-ssh-Videos.automount
-sudo rm /etc/systemd/system/mnt-ssh-Documents.mount /etc/systemd/system/mnt-ssh-Documents.automount /etc/systemd/system/mnt-ssh-Videos.mount /etc/systemd/system/mnt-ssh-Videos.automount
+sudo install -m 0644 systemd-system/etc/systemd/system/home-vinz-mnt-ssh-* /etc/systemd/system/
+sudo install -Dm 0755 systemd-system/usr/local/libexec/rp3-ssh-as-vinz /usr/local/libexec/rp3-ssh-as-vinz
 sudo systemctl daemon-reload
+sudo systemctl enable --now home-vinz-mnt-ssh-{Documents,Videos}.automount
 ```
+
+Systemd automounts require system privileges. Copy these files rather than
+Stowing them into `/etc`: the encrypted home containing this repository is
+unavailable before login. The triggers start with `home-vinz.mount`; only the
+`.automount` units are enabled, so the shares connect on access. These units
+are specific to vinz (UID/GID 60001) and preserve the existing `~/Remote`
+shortcuts to `~/mnt/ssh/{Documents,Videos}`.
+
+Use `cd ~/Remote/Documents` normally, then leave the directory when finished
+so the mount can expire. A file picker displaying `~/Remote` can also trigger
+mounting; our dummy test left the mounts idle when opening Home or Downloads.
+Connection attempts time out after five seconds; this does not bound every
+remote disk operation.
+
+Check the triggers without accessing the shares:
+
+```fish
+systemctl status home-vinz-mnt-ssh-{Documents,Videos}.automount
+```
+
+Before updating active mounts, finish transfers and stop both their `.automount`
+and `.mount` units, then repeat the installation commands above. If the triggers
+are stopped, the mountpoint directories are local: do not write there expecting
+files to reach rp3.

@@ -1,0 +1,11 @@
+[Unit]
+Description=SSHFS mount of rp3 Videos
+# Retry on a later access instead of entering a background restart loop.
+StartLimitIntervalSec=0
+
+[Mount]
+What=vinz@rp3:/mnt/data/vinz/Videos
+Where=/home/vinz/mnt/ssh/Videos
+Type=fuse.sshfs
+Options=_netdev,nosuid,nodev,allow_other,default_permissions,uid=60001,gid=60001,umask=0077,auto_unmount,ssh_command=/usr/local/libexec/rp3-ssh-as-vinz,BatchMode=yes,IdentitiesOnly=yes,IdentityFile=/home/vinz/.ssh/id_rsa,StrictHostKeyChecking=yes,ConnectTimeout=5,ConnectionAttempts=1,ServerAliveInterval=5,ServerAliveCountMax=2
+TimeoutSec=15s
