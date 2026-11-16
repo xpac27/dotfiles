@@ -31,7 +31,7 @@ Plug 'easymotion/vim-easymotion'
 " Plug 'github/copilot.vim'
 
 " Themes
-Plug 'xpac27/humdrum.vim'
+Plug 'xpac27/humdrum.vim', { 'branch': 'master', 'dir': '~/Github/humdrum.vim' }
 Plug 'zenbones-theme/zenbones.nvim'
 Plug 'morhetz/gruvbox'
 Plug 'sainnhe/gruvbox-material'
@@ -229,7 +229,8 @@ else
     set background=dark
 endif
 
-colorscheme humdrum
+colorscheme humdrum-soft
+let g:humdrum_brighter_comments = 0
 
 if &diff
     set diffopt+=algorithm:patience
