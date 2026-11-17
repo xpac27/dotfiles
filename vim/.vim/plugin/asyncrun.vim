@@ -18,9 +18,9 @@ else
     command! NinjaBO AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb build Extension.BattlefieldOnline_all
     command! NinjaAll AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb build all
 
-    command! Test execute 'AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test ' . shellescape(expand('%:p') . ':' . line('.')) . ' --include-slow'
+    command! Test execute 'AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test ' . shellescape(expand('%:p') . ':' . line('.')) . ' --include-slow --diagnostic --no-rerun'
     command! TestAll execute 'AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test ' . shellescape(expand('%:p'))
-    command! IntTest AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test integration
+    command! IntTest AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test integration --record-timings
     command! IntTestOnce AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test integration --record-timings --no-rerun
     command! UnitTest AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test unit --record-timings
     command! UnitTestFast AsyncRun -strip ruby E:\Gitlab\scripts\compile_v2.rb test unit

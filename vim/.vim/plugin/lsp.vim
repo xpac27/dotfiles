@@ -117,7 +117,7 @@ let g:lsp_settings = {
 
 if has('win64') || has('win32')
     " Match the Windows clangd version to compile_commands.json's compiler.
-    let g:lsp_settings['clangd']['cmd'] = ['E:\packages\PCClang\20.1.3_23462449\installed\bin\clangd.exe', '--clang-tidy', '--header-insertion=never', '--rename-file-limit=500', '--all-scopes-completion=false']
+    let g:lsp_settings['clangd']['cmd'] = ['D:\packages\PCClang\20.1.3_23462449\installed\bin\clangd.exe', '--clang-tidy', '--header-insertion=never', '--rename-file-limit=500', '--all-scopes-completion=false']
     let g:lsp_settings['clangd']['allowlist'] = ['c', 'cpp']
     let g:lsp_settings['typos-lsp']['cmd'] = ['D:\typos-lsp_0.1.36\typos-lsp.exe']
     let g:lsp_settings['typos-lsp']['allowlist'] = ['c', 'cpp', 'markdown']
