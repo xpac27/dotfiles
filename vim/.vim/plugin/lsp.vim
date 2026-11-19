@@ -112,6 +112,9 @@ let g:lsp_settings = {
 \    'typos-lsp': {
 \        'disabled': v:false,
 \        'allowlist': ['c', 'cpp', 'markdown', 'ruby'],
+\        'initialization_options': {
+\            'diagnosticSeverity': 'Info',
+\        },
 \    },
 \ }
 
