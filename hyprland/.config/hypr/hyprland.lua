@@ -359,8 +359,13 @@ hl.workspace_rule({
     workspace = "special:dropdown",
     border_size = 3,
     gaps_out = 80,
-    on_created_empty = "alacritty --class dropdown-term",
 })
+
+hl.on("workspace.created", function(workspace)
+    if workspace.addressable_name == "special:dropdown" and workspace.is_empty then
+        hl.exec_cmd("alacritty --class dropdown-term", { workspace = "special:dropdown silent" })
+    end
+end)
 
 -- Window rules size and position the terminal only when it is created. When
 -- showing the persistent terminal on a new monitor, place it while hidden so
